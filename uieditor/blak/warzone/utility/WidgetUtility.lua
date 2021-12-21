@@ -123,10 +123,15 @@ Wzu.SubscribeToImage = function(self, controller, modelName)
     end)
 end
 
-Wzu.ScriptNotify = function(InstanceRef, Widget, NotifyName, Callback)
-    Widget:subscribeToGlobalModel(InstanceRef, "PerController", "scriptNotify", function(ModelRef)
-        if IsParamModelEqualToString(ModelRef, NotifyName) then
-            Callback(CoD.GetScriptNotifyData(ModelRef))
+--- Subscribes a widget to a Script Notify event.
+---@param controller number The controller index of the client
+---@param self userdata Widget to link the notify to
+---@param notifyName string The name of the script notify
+---@param callback function A callback function that will receive notify data.
+Wzu.ScriptNotify = function(controller, self, notifyName, callback)
+    self:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function(ModelRef)
+        if IsParamModelEqualToString(ModelRef, notifyName) then
+            callback(CoD.GetScriptNotifyData(ModelRef))
         end
     end)
 end

@@ -42,7 +42,7 @@ local CheckForPowerupChanges = function (self, controller)
 		local modelValue = Engine.GetModelValue(Engine.GetModel(powerupsModel, cf_name))
 		if modelValue ~= nil and 0 < modelValue then
             -- Add powerup to powerup list if it doesn't exist already
-			if not PowerupInList(self.powerupsList, cf_name, modelValue) then
+			if not PowerupInList(self.powerupsList, cf_name) then
 				table.insert(self.powerupsList, {models = {image = shader, status = 1, timeLeft = modelValue, newPowerup = false}, properties = {key = cf_name}})
 				listSizeChanged = true
 			end
