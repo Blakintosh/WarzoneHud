@@ -131,7 +131,7 @@ function Warzone.OutOfBounds.new(menu, controller)
             end
         }
     })
-    Wzu.SubState(self, menu, controller, "karelia.outOfBoundsTime")
+    Wzu.SubState(controller, menu, self, "karelia.outOfBoundsTime")
 
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)
