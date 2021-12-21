@@ -3,8 +3,8 @@ require("ui.uieditor.blak.warzone.widgets.hud.oob.ReturnAO")
 Warzone.OutOfBounds = InheritFrom(LUI.UIElement)
 
 local function PreLoadFunc(menu, controller)
-    TimerModel = Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "karelia"), "outOfBoundsTime")
-    Engine.SetModelValue(TimerModel, 101)
+    --[[TimerModel = Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "karelia"), "outOfBoundsTime")
+    Engine.SetModelValue(TimerModel, 101)]]
 end
 
 function Warzone.OutOfBounds.new(menu, controller)
@@ -104,11 +104,11 @@ function Warzone.OutOfBounds.new(menu, controller)
 
     self:addElement(self.prompt)
 
-    SubscribeToScriptNotify(controller, self, "karelia_outOfBoundsTime", function(NotifyData)
+    --[[SubscribeToScriptNotify(controller, self, "karelia_outOfBoundsTime", function(NotifyData)
         if NotifyData[1] then
             Engine.SetModelValue(Engine.GetModel(Engine.GetModelForController(controller), "karelia.outOfBoundsTime"), NotifyData[1])
         end
-    end)
+    end)]]
 
     self.clipsPerState = {
         DefaultState = {
