@@ -72,7 +72,7 @@ function Warzone.ReturnAO.new(menu, controller)
             end
         }
     })
-    Wzu.Subscribe(self, controller, "karelia.outOfBoundsTime")
+    Wzu.SubState(self, controller, "karelia.outOfBoundsTime")
 
     if PostLoadFunc then
         PostLoadFunc(menu, controller)

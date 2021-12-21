@@ -106,7 +106,7 @@ function Warzone.OutOfBounds.new(menu, controller)
 
     SubscribeToScriptNotify(controller, self, "karelia_outOfBoundsTime", function(NotifyData)
         if NotifyData[1] then
-            Engine.SetModelValue(Engine.GetModel(Engine.GetModelForController(InstanceRef), "karelia.outOfBoundsTime"), NotifyData[1])
+            Engine.SetModelValue(Engine.GetModel(Engine.GetModelForController(controller), "karelia.outOfBoundsTime"), NotifyData[1])
         end
     end)
 
@@ -131,6 +131,7 @@ function Warzone.OutOfBounds.new(menu, controller)
             end
         }
     })
+    Wzu.SubState(self, controller, "karelia.outOfBoundsTime")
 
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)
