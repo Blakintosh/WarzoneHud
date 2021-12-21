@@ -25,6 +25,19 @@ function Warzone.ReturnAO.new(menu, controller)
     self.label:setScaledTopBottom(true, false, 56, 90)
     self.label:setText("DANGER AHEAD")
 
+    Wzu.ClipSequence(self, self.label, "DefaultState", {
+        {
+            duration = 0,
+            setText = "DANGER AHEAD"
+        }
+    })
+    Wzu.ClipSequence(self, self.label, "Urgent", {
+        {
+            duration = 0,
+            setText = "DANGER IMMINENT"
+        }
+    })
+
     Wzu.AddShadowedElement(self, self.label)
 
     self.timeLeft = Wzu.TextElement(Wzu.Fonts.KillstreakRegular, Wzu.Swatches.HUDMain, true)
@@ -32,10 +45,37 @@ function Warzone.ReturnAO.new(menu, controller)
     self.timeLeft:setScaledTopBottom(true, false, 100, 123)
     self.timeLeft:setText("63.5")
 
+    Wzu.Subscribe(self.timeLeft, controller, "karelia.outOfBoundsTime", function(modelValue)
+        self.timeLeft:setText(modelValue .. tostring(math.random(0, 9)))
+    end)
+
     Wzu.AddShadowedElement(self, self.timeLeft)
 
+    self.clipsPerState = {
+        DefaultState = {
+            DefaultClip = function()
+                Wzu.AnimateSequence(self, "DefaultState")
+            end
+        },
+        Urgent = {
+            DefaultClip = function()
+                Wzu.AnimateSequence(self, "Urgent")
+            end
+        }
+    }
+
+    self:mergeStateConditions({
+        {
+            stateName = "Urgent",
+            condition = function(self, menu, event)
+                return IsModelValueLessThan(controller, "karelia.outOfBoundsTime", 50)
+            end
+        }
+    })
+    Wzu.Subscribe(self, controller, "karelia.outOfBoundsTime")
+
     if PostLoadFunc then
-        PostLoadFunc(HudRef, InstanceRef)
+        PostLoadFunc(menu, controller)
     end
     
     return self

@@ -2,6 +2,11 @@ require("ui.uieditor.blak.warzone.widgets.hud.oob.ReturnAO")
 
 Warzone.OutOfBounds = InheritFrom(LUI.UIElement)
 
+local function PreLoadFunc(menu, controller)
+    TimerModel = Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "karelia"), "outOfBoundsTime")
+    Engine.SetModelValue(TimerModel, 101)
+end
+
 function Warzone.OutOfBounds.new(menu, controller)
     local self = LUI.UIElement.new()
     if PreLoadFunc then
@@ -99,6 +104,12 @@ function Warzone.OutOfBounds.new(menu, controller)
 
     self:addElement(self.prompt)
 
+    SubscribeToScriptNotify(controller, self, "karelia_outOfBoundsTime", function(NotifyData)
+        if NotifyData[1] then
+            Engine.SetModelValue(Engine.GetModel(Engine.GetModelForController(InstanceRef), "karelia.outOfBoundsTime"), NotifyData[1])
+        end
+    end)
+
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
@@ -111,6 +122,15 @@ function Warzone.OutOfBounds.new(menu, controller)
             end
         }
     }
+
+    self:mergeStateConditions({
+        {
+            stateName = "Show",
+            condition = function(self, menu, event)
+                return IsModelValueLessThan(controller, "karelia.outOfBoundsTime", 101)
+            end
+        }
+    })
 
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)
