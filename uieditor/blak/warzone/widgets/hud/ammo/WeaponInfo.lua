@@ -1,5 +1,9 @@
 Warzone.WeaponInfo = InheritFrom(LUI.UIElement)
 
+local function PreLoadFunc(menu, controller)
+    Engine.SetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "currentWeapon"), "weaponOverclockName"), "")
+end
+
 function Warzone.WeaponInfo.new(menu, controller)
     local self = LUI.UIElement.new()
     if PreLoadFunc then
@@ -30,7 +34,7 @@ function Warzone.WeaponInfo.new(menu, controller)
             setAlpha = 1
         },
         {
-            duration = 2000,
+            duration = 5000,
             setAlpha = 1
         },
         {
@@ -46,7 +50,7 @@ function Warzone.WeaponInfo.new(menu, controller)
     self.ammoName:setScaledTopBottom(true, false, 16, 29)
     self.ammoName:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_LEFT)
 
-    --Wzu.SubscribeToText(self.ammoName, controller, "currentWeapon.ammoTypeString")
+    Wzu.SubscribeToText(self.ammoName, controller, "currentWeapon.weaponOverclockName")
 
     Wzu.ClipSequence(self, self.ammoName, "DefaultClip", {
         {
@@ -60,7 +64,7 @@ function Warzone.WeaponInfo.new(menu, controller)
             setAlpha = 1
         },
         {
-            duration = 2000,
+            duration = 5000,
             setAlpha = 1
         },
         {

@@ -1,5 +1,11 @@
 Warzone.WeaponIconAndRarity = InheritFrom(LUI.UIElement)
 
+local function PreLoadFunc(menu, controller)
+    Engine.SetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "currentWeapon"), "weaponIcon"), "blacktransparent")
+    Engine.SetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "currentWeapon"), "weaponOverclockName"), "")
+    Engine.SetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "currentWeapon"), "weaponRarity"), 0)
+end
+
 function Warzone.WeaponIconAndRarity.new(menu, controller)
     local self = LUI.UIElement.new()
     if PreLoadFunc then
@@ -18,7 +24,15 @@ function Warzone.WeaponIconAndRarity.new(menu, controller)
 
     self.weaponRarity:setImage(RegisterImage("wdg_ellipse_glow"))
     self.weaponRarity:setAlpha(0.4)
-    Wzu.SetRGBFromTable(self.weaponRarity, Wzu.Colors.Rarities.Epic)
+    Wzu.SetRGBFromTable(self.weaponRarity, Wzu.Colors.Rarities[1])
+
+    Wzu.Subscribe(self.weaponRarity, controller, "currentWeapon.weaponRarity", function(modelValue)
+        if Wzu.Colors.Rarities[modelValue + 1] then
+            Wzu.SetRGBFromTable(self.weaponRarity, Wzu.Colors.Rarities[modelValue + 1])
+        else
+            Wzu.SetRGBFromTable(self.weaponRarity, Wzu.Colors.Rarities[1])
+        end
+    end)
 
     self:addElement(self.weaponRarity)
 
@@ -27,12 +41,7 @@ function Warzone.WeaponIconAndRarity.new(menu, controller)
     self.weaponIcon:setScaledTopBottom(true, false, 2, 66)
 
     self.weaponIcon:setImage(RegisterImage("blacktransparent"))
-    Wzu.Subscribe(self, controller, "currentWeapon.equippedWeaponReference", function(modelValue)
-        modelValue = modelValue:gsub("_iw8_zm", "")
-        modelValue = modelValue:gsub("_kar_zm", "")
-
-        self.weaponIcon:setImage(RegisterImage("icon_weapon_" .. modelValue))
-    end)
+    Wzu.SubscribeToImage(self.weaponIcon, controller, "currentWeapon.weaponIcon")
 
     self:addElement(self.weaponIcon)
 
