@@ -50,7 +50,7 @@ function Warzone.WeaponInfo.new(menu, controller)
     self.ammoName:setScaledTopBottom(true, false, 16, 29)
     self.ammoName:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_LEFT)
 
-    Wzu.SubscribeToText(self.ammoName, controller, "currentWeapon.weaponOverclockName")
+    Wzu.SubscribeToText(self.ammoName, controller, "currentWeapon.weaponTierName")
 
     Wzu.ClipSequence(self, self.ammoName, "DefaultClip", {
         {

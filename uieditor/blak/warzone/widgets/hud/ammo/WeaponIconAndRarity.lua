@@ -24,13 +24,13 @@ function Warzone.WeaponIconAndRarity.new(menu, controller)
 
     self.weaponRarity:setImage(RegisterImage("wdg_ellipse_glow"))
     self.weaponRarity:setAlpha(0.4)
-    Wzu.SetRGBFromTable(self.weaponRarity, Wzu.Colors.Rarities[1])
+    Wzu.SetRGBFromTable(self.weaponRarity, Wzu.Swatches.Rarities[1])
 
     Wzu.Subscribe(self.weaponRarity, controller, "currentWeapon.weaponRarity", function(modelValue)
-        if Wzu.Colors.Rarities[modelValue + 1] then
-            Wzu.SetRGBFromTable(self.weaponRarity, Wzu.Colors.Rarities[modelValue + 1])
+        if Wzu.Swatches.Rarities[modelValue + 1] then
+            Wzu.SetRGBFromTable(self.weaponRarity, Wzu.Swatches.Rarities[modelValue + 1])
         else
-            Wzu.SetRGBFromTable(self.weaponRarity, Wzu.Colors.Rarities[1])
+            Wzu.SetRGBFromTable(self.weaponRarity, Wzu.Swatches.Rarities[1])
         end
     end)
 

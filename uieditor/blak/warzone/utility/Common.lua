@@ -10,22 +10,20 @@ Wzu.Colors = {
     BRPlunderGreen = { r = 0.7686, g = 0.8118, b = 0.7137 },
     Grey191 = { r = 0.7490, g = 0.7490, b = 0.7490 },
     AlertOrange = { r = 0.7451, g = 0.3137, b = 0.1647 },
-    Rarities = {
-        { r = 0.4549, g = 0.4549, b = 0.4549 }, -- Misc
-        { r = 0.9490, g = 0.0784, b = 0.0784 }, -- Common
-        { r = 0.9490, g = 0.5922, b = 0.0784 }, -- Uncommon
-        { r = 0.1412, g = 0.9098, b = 0.1961 }, -- Epic
-        { r = 0.3098, g = 0.6118, b = 0.8941 }, -- Legendary
-        { r = 0.1882, g = 0.2980, b = 0.9608 }, -- Ultra
-        { r = 0.7451, g = 0.1686, b = 0.9608 } -- Packed
-    },
     Asphalt = { r = 0.1333, g = 0.1451, b = 0.1569},
     CodeLightBlue = { r = 0.3372, g = 0.6902, b = 0.9294 },
     ArenaRedDark = { r = 0.5294, g = 0.2549, b = 0.2549 },
     ArenaRedLight = { r = 0.7373, g = 0.3608, b = 0.3608 },
     Watermelon = { r = 1, g = 0.3412, b = 0.3412 },
     lightBlue = { r = 0.1059, g = 0.8627, b = 1},
-    PowerupOrange = { r = 0.9961, g = 0.7608, b = 0.0902}
+    PowerupOrange = { r = 0.9961, g = 0.7608, b = 0.0902},
+    BlakintoshPurple = { r = 0.3059, g = 0, b = 1 },
+    MustardGreen = { r = 0.6588, g = 0.7098, b = 0.0157 },
+    ChelseaCucumber = { r = 0.4824, g = 0.6588, b = 0.3098 },
+    PictonBlue = { r = 0.4039, g = 0.5804, b = 0.8078 },
+    Deluge = { r = 0.7569, g = 0.4118, b = 0.9490 },
+    EpicOrange = { r = 0.9569, g = 0.4824, b = 0.07059 },
+    VibrantRed = { r = 0.93333, g = 0.2471, b = 0.1373 }
 }
 
 Wzu.Swatches = {
@@ -40,6 +38,16 @@ Wzu.Swatches = {
     EnemyTeam = Wzu.Colors.Watermelon,
     FriendlyTeam = Wzu.Colors.CodeLightBlue,
     FriendlyTeamTextHighlight = Wzu.Colors.lightBlue,
+    Rarities = {
+        Wzu.Colors.Grey63, --Misc
+        Wzu.Colors.MustardGreen, --Common
+        Wzu.Colors.ChelseaCucumber, --Uncommon
+        Wzu.Colors.PictonBlue, --Rare
+        Wzu.Colors.Deluge, --Epic
+        Wzu.Colors.EpicOrange, --Legendary
+        Wzu.Colors.VibrantRed, --Ultra
+        Wzu.Colors.BlakintoshPurple, --Packed
+    }
 }
 
 Wzu.Fonts = {

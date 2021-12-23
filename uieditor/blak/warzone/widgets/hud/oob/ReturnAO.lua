@@ -46,7 +46,7 @@ function Warzone.ReturnAO.new(menu, controller)
     self.timeLeft:setText("63.5")
 
     Wzu.Subscribe(self.timeLeft, controller, "karelia.outOfBoundsTime", function(modelValue)
-        self.timeLeft:setText(modelValue .. tostring(math.random(0, 9)))
+        self.timeLeft:setText(modelValue .. "." .. tostring(math.random(0, 9)))
     end)
 
     Wzu.AddShadowedElement(self, self.timeLeft)
