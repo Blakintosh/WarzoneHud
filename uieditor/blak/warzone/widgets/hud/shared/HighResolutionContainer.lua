@@ -1,6 +1,6 @@
 Warzone.HighResolutionContainer = InheritFrom(LUI.UIElement)
 
-function Warzone.HighResolutionContainer.new(menu, controller, contentWidget)
+function Warzone.HighResolutionContainer.new(menu, controller)
     local self = LUI.UIElement.new()
     if PreLoadFunc then
         PreLoadFunc(menu, controller)
@@ -68,7 +68,7 @@ function Warzone.HighResolutionContainer.new(menu, controller, contentWidget)
     end)
     
     if PostLoadFunc then
-        PostLoadFunc(menu, controller)
+        PostLoadFunc(self, controller, menu)
     end
     
     return self
