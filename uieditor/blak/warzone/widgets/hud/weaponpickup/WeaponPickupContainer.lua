@@ -82,31 +82,40 @@ Warzone.WeaponPickupContainer.new = function (menu, controller)
 	self.Waypoint = Warzone.WeaponPickup.new(menu, controller)
 	self.Waypoint:setLeftRight(false, false, -160, 160)
 	self.Waypoint:setTopBottom(false, false, -135, 135)
+
+    Wzu.ClipSequence(self, self.Waypoint, "DefaultState", {
+        {
+            duration = 0,
+            setAlpha = 0
+        }
+    })
+    Wzu.ClipSequence(self, self.Waypoint, "Visible", {
+        {
+            duration = 0,
+            setAlpha = 1
+        }
+    })
 	self:addElement(self.Waypoint)
 	
-	--[[self.clipsPerState = {DefaultState = {DefaultClip = function ()
-		self:setupElementClipCounter(1)
-		waypoint:completeAnimation()
-		self.Waypoint:setAlpha(1)
-		self.clipFinished(waypoint, {})
-	end}, Done = {DefaultClip = function ()
-		self:setupElementClipCounter(1)
-		waypoint:completeAnimation()
-		self.Waypoint:setAlpha(1)
-		local f7_local0 = function (f9_arg0, f9_arg1)
-			if not f9_arg1.interrupted then
-				f9_arg0:beginAnimation("keyframe", 1000, false, false, CoD.TweenType.Linear)
-			end
-			f9_arg0:setAlpha(0)
-			if f9_arg1.interrupted then
-				self.clipFinished(f9_arg0, f9_arg1)
-			else
-				f9_arg0:registerEventHandler("transition_complete_keyframe", self.clipFinished)
-			end
-		end
+	self.clipsPerState = {DefaultState = {DefaultClip = function ()
+		Wzu.AnimateSequence(self, "DefaultState")
+	end}, Visible = {DefaultClip = function ()
+		Wzu.AnimateSequence(self, "Visible")
+	end}}
 
-		f7_local0(waypoint, {})
-	end}}]]
+    self:mergeStateConditions({
+        {
+            stateName = "Visible",
+            condition = function(menu, self, event)
+                if IsModelValueTrue(controller, "hudItems.showCursorHint") then
+                    return not IsModelValueEqualTo(controller, "hudItems.cursorHintText", "")
+                end
+                return false
+            end
+        }
+    })
+    Wzu.SubState(controller, menu, self, "hudItems.showCursorHint")
+    Wzu.SubState(controller, menu, self, "hudItems.cursorHintText")
 
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", function (self)
 		self.Waypoint:close()

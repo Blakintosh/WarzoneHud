@@ -10,11 +10,11 @@ local function PostLoadFunc(self, controller, menu)
             {
                 stateName = "Negative",
                 condition = function(menu, self, event)
-                    return IsModelValueLessThan(controller, modelName .. ".comparisonValue", 1.0)
+                    return IsModelValueEqualTo(controller, modelName .. ".comparisonBetter", 0)
                 end
             }
         })
-        Wzu.SubState(controller, menu, self.comparison, modelName .. ".comparisonValue")
+        Wzu.SubState(controller, menu, self, modelName .. ".comparisonBetter")
     end
 end
 
@@ -42,20 +42,20 @@ function Warzone.WeaponPickupCompRow.new(menu, controller)
 
     Wzu.AddShadowedElement(self, self.metric)
 
-    self.comparison = Wzu.TextElement(Wzu.Fonts.KillstreakRegular, Wzu.Swatches.HUDWarning, true)
+    self.comparison = Wzu.TextElement(Wzu.Fonts.KillstreakRegular, Wzu.Swatches.WeaponMeterBetter, true)
     self.comparison:setScaledLeftRight(true, false, 240, 300)
     self.comparison:setScaledTopBottom(true, false, 2, 12)
 
     Wzu.ClipSequence(self, self.comparison, "Positive", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.Cash) -- TEMP
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.WeaponMeterBetter) -- TEMP
         }
     })
     Wzu.ClipSequence(self, self.comparison, "Negative", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDWarning) -- TEMP
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.WeaponMeterWorse) -- TEMP
         }
     })
     

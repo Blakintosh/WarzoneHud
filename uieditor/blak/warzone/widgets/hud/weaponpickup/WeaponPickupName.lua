@@ -14,7 +14,7 @@ function Warzone.WeaponPickupName.new(menu, controller)
 
     self.weaponName = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, true)
     self.weaponName:setScaledLeftRight(true, false, 0, 300)
-    self.weaponName:setScaledTopBottom(true, false, -6, 16)
+    self.weaponName:setScaledTopBottom(true, false, -4, 18)
 
     Wzu.SubscribeToText(self.weaponName, controller, "prospectiveWeapon.attributes.weaponName")
 

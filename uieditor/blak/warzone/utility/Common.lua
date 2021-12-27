@@ -23,7 +23,9 @@ Wzu.Colors = {
     PictonBlue = { r = 0.4039, g = 0.5804, b = 0.8078 },
     Deluge = { r = 0.7569, g = 0.4118, b = 0.9490 },
     EpicOrange = { r = 0.9569, g = 0.4824, b = 0.07059 },
-    VibrantRed = { r = 0.93333, g = 0.2471, b = 0.1373 }
+    VibrantRed = { r = 0.93333, g = 0.2471, b = 0.1373 },
+    RocketRedDark = { r = 0.6627, g = 0.2471, b = 0.1725 },
+    ModernGreen = { r = 0.5490, g = 0.7745, b = 0.4275 }
 }
 
 Wzu.Swatches = {
@@ -47,7 +49,9 @@ Wzu.Swatches = {
         Wzu.Colors.EpicOrange, --Legendary
         Wzu.Colors.VibrantRed, --Ultra
         Wzu.Colors.BlakintoshPurple, --Packed
-    }
+    },
+    WeaponMeterWorse = Wzu.Colors.RocketRedDark,
+    WeaponMeterBetter = Wzu.Colors.ModernGreen
 }
 
 Wzu.Fonts = {

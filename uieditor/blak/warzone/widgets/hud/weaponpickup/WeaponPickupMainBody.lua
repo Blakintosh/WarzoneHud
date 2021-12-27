@@ -11,7 +11,7 @@ local function PreLoadFunc(menu, controller)
     end
 
     for k, v in ipairs({"damage", "ammo", "dps"}) do
-        for ke, va in ipairs({"label", "metric", "comparisonText", "comparisonValue"}) do
+        for ke, va in ipairs({"label", "metric", "comparisonText", "comparisonBetter"}) do
             Engine.CreateModel(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "prospectiveWeapon"), v), va)
         end
     end
