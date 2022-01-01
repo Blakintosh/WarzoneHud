@@ -3,7 +3,7 @@ require("ui.uieditor.blak.warzone.widgets.userinterface.button.ButtonBackground"
 Warzone.PreGameMenuButton = InheritFrom(LUI.UIElement)
 
 function Warzone.PreGameMenuButton.new(menu, controller)
-    local self = LUI.UIButton.new()
+    local self = LUI.UIElement.new()
     if PreLoadFunc then
         PreLoadFunc(menu, controller)
     end
@@ -11,9 +11,11 @@ function Warzone.PreGameMenuButton.new(menu, controller)
     self:setUseStencil(false)
     self:setClass(Warzone.PreGameMenuButton)
     self.id = "PreGameMenuButton"
+    self.soundSet = "default"
+    self:setLeftRight(true, false, 0, 335)
+    self:setTopBottom(true, false, 0, 32)
     self:makeFocusable()
 	self:setHandleMouse(true)
-    self.soundSet = "default"
     self.anyChildUsesUpdateState = true
 
     self.background = Warzone.ButtonBackground.new(menu, controller)
@@ -23,8 +25,8 @@ function Warzone.PreGameMenuButton.new(menu, controller)
     self:addElement(self.background)
 
     self.label = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.ButtonTextDefault, false)
-    self.label:setScaledLeftRight(true, false, 14, 100)
-    self.label:setScaledTopBottom(true, false, 3, 17)
+    self.label:setLeftRight(true, false, 14, 100)
+    self.label:setTopBottom(true, false, 8, 23)
 
     LUI.OverrideFunction_CallOriginalFirst(self.label, "setText", function(sender, text)
         Wzu.ScaleWidgetToLabel.WithMinimum(self, self.label, 10, 335)
@@ -73,13 +75,13 @@ function Warzone.PreGameMenuButton.new(menu, controller)
             DefaultClip = function()
                 Wzu.AnimateSequence(self, "DefaultUp")
             end,
-            Over = function()
+            Focus = function()
                 Wzu.AnimateSequence(self, "DefaultOver")
             end
         }
     }
 
-    self:registerEventHandler("mouseenter", function(self, event)
+    --[[self:registerEventHandler("mouseenter", function(self, event)
         self:dispatchEventToChildren(event)
         return LUI.UIElement.mouseEnter(self, event)
     end)
@@ -87,7 +89,7 @@ function Warzone.PreGameMenuButton.new(menu, controller)
     self:registerEventHandler("mouseleave", function(self, event)
         self:dispatchEventToChildren(event)
         return LUI.UIElement.mouseLeave(self, event)
-    end)
+    end)]]
 
     self:registerEventHandler("gain_focus", function(self, event)
         self:dispatchEventToChildren(event)

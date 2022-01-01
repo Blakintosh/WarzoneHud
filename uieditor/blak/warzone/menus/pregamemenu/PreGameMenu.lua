@@ -1,5 +1,7 @@
 require("ui.uieditor.blak.warzone.widgets.pregamemenu.pregamemenubutton")
 
+require("ui.uieditor.widgets.blak.mwr.menu.mwrstartlistbutton")
+
 DataSources.PreGameHost = DataSourceHelpers.ListSetup("PreGameHost", function(controller)
     local returnTable = {}
 
@@ -97,9 +99,10 @@ function LUI.createMenu.PreGameMenu(controller)
     menu.buttonList = LUI.UIList.new(menu, controller, 1, 0, nil, false, false, 0, 0, false, false)
     menu.buttonList:makeFocusable()
     menu.buttonList.id = "buttonList"
-    menu.buttonList:setLeftRight(true, false, 145, 445)
-    menu.buttonList:setTopBottom(true, false, 220, 600)
+    menu.buttonList:setLeftRight(true, false, 122, 422)
+    menu.buttonList:setTopBottom(true, false, 215, 595)
     menu.buttonList:setWidgetType(Warzone.PreGameMenuButton)
+    --menu.buttonList:setWidgetType(CoD.MWRStartListButton)
     menu.buttonList:setVerticalCount(7)
     menu.buttonList:setSpacing(8)
     menu.buttonList:setDataSource("PreGameHost")

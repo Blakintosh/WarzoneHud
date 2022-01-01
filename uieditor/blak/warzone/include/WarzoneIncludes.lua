@@ -22,6 +22,7 @@ require("ui.uieditor.blak.warzone.widgets.hud.weaponpickup.WeaponPickupContainer
 
 -- Associated Menus
 require("ui.uieditor.blak.warzone.menus.overclockmenu.OverclockMenu")
+require("ui.uieditor.blak.warzone.menus.pregamemenu.PreGameMenu")
 
 -- Interface elements
 require("ui.uieditor.blak.warzone.widgets.userinterface.cursor.MouseCursor")
