@@ -7,7 +7,7 @@ end
 -- Utility
 require("ui.uieditor.blak.warzone.utility.UtilityIncludes")
 
--- Widgets
+-- HUD Widgets
 require("ui.uieditor.blak.warzone.widgets.hud.shared.HighResolutionContainer")
 require("ui.uieditor.blak.warzone.widgets.hud.shared.Container")
 require("ui.uieditor.blak.warzone.widgets.hud.shared.ButtonPrompt")
@@ -19,6 +19,13 @@ require("ui.uieditor.blak.warzone.widgets.hud.cursorhint.CursorHint")
 require("ui.uieditor.blak.warzone.widgets.hud.oob.OutOfBounds")
 require("ui.uieditor.blak.warzone.widgets.hud.powerups.PowerupsList")
 require("ui.uieditor.blak.warzone.widgets.hud.weaponpickup.WeaponPickupContainer")
+
+-- Associated Menus
+require("ui.uieditor.blak.warzone.menus.overclockmenu.OverclockMenu")
+
+-- Interface elements
+require("ui.uieditor.blak.warzone.widgets.userinterface.cursor.MouseCursor")
+
 -- Not part of the Warzone HUD, but necessary for function
 require("ui.uieditor.widgets.HUD.Waypoint.GenericWaypointContainer")
 require("ui.uieditor.widgets.MPHudWidgets.WaypointBase")

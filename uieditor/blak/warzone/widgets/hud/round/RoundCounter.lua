@@ -120,7 +120,7 @@ function Warzone.RoundCounter.new(menu, controller)
         },
         {
             repeat_start = true,
-            repeat_count = 12
+            repeat_count = 10
         },
         {
             duration = 1000,
@@ -180,7 +180,7 @@ function Warzone.RoundCounter.new(menu, controller)
         },
         {
             repeat_start = true,
-            repeat_count = 6
+            repeat_count = 5
         },
         {
             duration = 0,
@@ -255,13 +255,13 @@ function Warzone.RoundCounter.new(menu, controller)
             duration = 200,
             setScale = 0,
             setText = function()
-                roundTimer = 13
+                roundTimer = 11
                 return Engine.Localize(roundTimer)
             end
         },
         {
             repeat_start = true,
-            repeat_count = 12
+            repeat_count = 10
         },
         {
             duration = 0,
@@ -343,7 +343,7 @@ function Warzone.RoundCounter.new(menu, controller)
         },
         {
             repeat_start = true,
-            repeat_count = 12
+            repeat_count = 10
         },
         {
             duration = 0,

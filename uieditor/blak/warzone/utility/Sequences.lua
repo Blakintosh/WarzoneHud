@@ -70,9 +70,9 @@ Wzu.AnimateNextSegment = function(parent, self, event, sequenceData, lastSequenc
                         elseif type(value) == "table" then
                             local progressTable = {}
                             -- iterate thru the table and get progress by sending it to a working table
-                            for key,val in ipairs(progressTable) do
+                            for key,val in ipairs(lastValue) do
                                 -- apparently I can't just copy the table as it's passed by reference, so let's do this?
-                                progressTable[key] = Wzu.GetTweenedProgress(progress, lastValue[key], val)
+                                progressTable[key] = Wzu.GetTweenedProgress(progress, lastValue[key], value[key])
                             end
                             self[k](self, unpack(progressTable))
                         end

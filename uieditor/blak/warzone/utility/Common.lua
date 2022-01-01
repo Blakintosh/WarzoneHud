@@ -25,7 +25,13 @@ Wzu.Colors = {
     EpicOrange = { r = 0.9569, g = 0.4824, b = 0.07059 },
     VibrantRed = { r = 0.93333, g = 0.2471, b = 0.1373 },
     RocketRedDark = { r = 0.6627, g = 0.2471, b = 0.1725 },
-    ModernGreen = { r = 0.5490, g = 0.7745, b = 0.4275 }
+    ModernGreen = { r = 0.5490, g = 0.7745, b = 0.4275 },
+    TidePool = { r = 0.3490, g = 0.4745, b = 0.5216 },
+    CodeBlueSelected = { r = 0.4745, g = 0.8510, b = 1 },
+    Ash = { r = 0.2824, g = 0.3294, b = 0.3333 },
+    Grey17 = { r = 0.0667, g = 0.0667, b = 0.0667 },
+    SmoothBlue = { r = 0.6078, g = 0.6667, b = 0.7020 },
+    Grey56 = { r = 0.2196, g = 0.2196, b = 0.2196 }
 }
 
 Wzu.Swatches = {
@@ -51,12 +57,22 @@ Wzu.Swatches = {
         Wzu.Colors.BlakintoshPurple, --Packed
     },
     WeaponMeterWorse = Wzu.Colors.RocketRedDark,
-    WeaponMeterBetter = Wzu.Colors.ModernGreen
+    WeaponMeterBetter = Wzu.Colors.ModernGreen,
+    MenuTitle = Wzu.Colors.TidePool,
+    MenuFrame = Wzu.Colors.CodeLightBlue,
+    MenuBorder = Wzu.Colors.Ash,
+    ButtonTextDefault = Wzu.Colors.TidePool,
+    ButtonTextFocus = Wzu.Colors.CodeLightBlue, --CodeBlueSelected
+    ButtonBackground = Wzu.Colors.Grey17, 
+    ButtonBackgroundFocus = Wzu.Colors.CodeLightBlue,
+    ButtonBorder = Wzu.Colors.Grey56,
+    TextPrimaryText = Wzu.Colors.WeatheredSlate
 }
 
 Wzu.Fonts = {
     MainRegular = "fonts/main_regular.ttf",
     MainBold = "fonts/main_bold.ttf",
+    MainLight = "fonts/main_light.ttf",
     KillstreakRegular = "fonts/killstreak_regular.ttf",
     BattlenetBold = "fonts/notosans_semicondensedbold.ttf"
 }
@@ -78,6 +94,15 @@ Wzu.Sounds = {
         RestockLethal = "iw8_ui_restock_lethals",
         RestockTactical = "iw8_ui_restock_tacticals"
     }
+}
+
+Wzu.CursorTypes = {
+    Normal = RegisterImage("ui_cursor_arrow_normal"),
+    Active = RegisterImage("ui_cursor_arrow_active"),
+    Input = RegisterImage("ui_cursor_i_beam"),
+    Rotate = RegisterImage("ui_cursor_arrow_rotation"),
+    Translate = RegisterImage("ui_cursor_arrow_panfourways"),
+    Contextual = RegisterImage("ui_cursor_arrow_contextual")
 }
 
 Wzu.SetRGBFromTable = function(self, color)

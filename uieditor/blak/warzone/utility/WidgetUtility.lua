@@ -54,6 +54,12 @@ Wzu.SetElementModel = function(self, controller, modelPt1, modelPt2)
     end)
 end
 
+Wzu.SetElementModel_Create = function(self, controller, modelPt1, modelPt2)
+    self:subscribeToModel(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), modelPt1), modelPt2), function(model)
+        self:setModel(model, controller)
+    end)
+end
+
 Wzu.Subscribe = function(self, controller, modelName, callback)
     self:subscribeToModel(Wzu.GetModel(controller, modelName), function(model)
         local modelValue = Engine.GetModelValue(model)
@@ -72,9 +78,9 @@ Wzu.LinkToWidget = function(self, parent, modelName, callback)
     end)
 end
 
-Wzu.SubVisBit = function(InstanceRef, HudRef, Widget, VisiblityBit)
-    Widget:subscribeToModel(Engine.GetModel(Engine.GetModelForController(InstanceRef), "UIVisibilityBit." .. VisiblityBit), function(ModelRef)
-        HudRef:updateElementState(Widget, {
+Wzu.SubVisBit = function(InstanceRef, HudRef, parent, VisiblityBit)
+    parent:subscribeToModel(Engine.GetModel(Engine.GetModelForController(InstanceRef), "UIVisibilityBit." .. VisiblityBit), function(ModelRef)
+        HudRef:updateElementState(parent, {
         name = "model_validation",
         menu = HudRef,
         modelValue = Engine.GetModelValue(ModelRef),
@@ -83,9 +89,9 @@ Wzu.SubVisBit = function(InstanceRef, HudRef, Widget, VisiblityBit)
     end)
 end
 
-Wzu.SubState = function(InstanceRef, HudRef, Widget, ModelName)
-    Widget:subscribeToModel(Engine.GetModel(Engine.GetModelForController(InstanceRef), ModelName), function(ModelRef)
-        HudRef:updateElementState(Widget, {
+Wzu.SubState = function(InstanceRef, HudRef, parent, ModelName)
+    parent:subscribeToModel(Engine.GetModel(Engine.GetModelForController(InstanceRef), ModelName), function(ModelRef)
+        HudRef:updateElementState(parent, {
         name = "model_validation",
         menu = HudRef,
         modelValue = Engine.GetModelValue(ModelRef),
@@ -111,6 +117,12 @@ Wzu.SubscribeToText = function(self, controller, modelName)
     end)
 end
 
+Wzu.SubscribeToText_ToUpper = function(self, controller, modelName)
+    Wzu.Subscribe(self, controller, modelName, function(modelValue)
+        self:setText(LocalizeToUpperString(modelValue))
+    end)
+end
+
 Wzu.LinkToWidgetText = function(self, parent, modelName)
     Wzu.LinkToWidget(self, parent, modelName, function(modelValue)
         self:setText(Engine.Localize(modelValue))
@@ -123,9 +135,9 @@ Wzu.SubscribeToImage = function(self, controller, modelName)
     end)
 end
 
---- Subscribes a widget to a Script Notify event.
+--- Subscribes a parent to a Script Notify event.
 ---@param controller number The controller index of the client
----@param self userdata Widget to link the notify to
+---@param self userdata parent to link the notify to
 ---@param notifyName string The name of the script notify
 ---@param callback function A callback function that will receive notify data.
 Wzu.ScriptNotify = function(controller, self, notifyName, callback)
@@ -134,4 +146,65 @@ Wzu.ScriptNotify = function(controller, self, notifyName, callback)
             callback(CoD.GetScriptNotifyData(ModelRef))
         end
     end)
+end
+
+Wzu.ScaleWidgetToLabel = {}
+
+Wzu.ScaleWidgetToLabel.Centered = function(parent, label, padding)
+    if label == nil then
+		return 
+	else
+		local parent_leftAnchor, parent_rightAnchor, parent_startPos, parent_endPos = parent:getLocalLeftRight()
+
+		local centerPosition = (parent_endPos + parent_startPos) / 2
+		local widgetWidth = label:getTextWidth() + padding * 2 * _ResolutionScalar
+
+		parent:setLeftRight(parent_leftAnchor, parent_rightAnchor, centerPosition - widgetWidth / 2, centerPosition + widgetWidth / 2)
+	end
+end
+
+Wzu.ScaleWidgetToLabel.WithMinimum = function(parent, label, padding, minimum)
+    if label == nil then
+        return 
+    end
+
+    local LeftAnchor, RightAnchor, LeftRightStart, LeftRightEnd = parent:getLocalLeftRight()
+    local TextWidth = label:getTextWidth()
+
+    if Engine.IsCurrentLanguageReversed() then
+        if 0 < TextWidth then
+            local ElemLeftAnchor, ElemRightAnchor, ElemLeftRightStart, ElemLeftRightEnd = label:getLocalLeftRight()
+            parent.savedWidth = TextWidth + 2 * ElemLeftRightStart + padding
+
+            if parent.savedWidth < minimum then --like seriously?
+                parent.savedWidth = minimum
+            end
+
+            if not parent.widthOverridden then
+                parent:setLeftRight(LeftAnchor, RightAnchor, LeftRightEnd - parent.savedWidth, LeftRightEnd)
+                if ElemLeftAnchor + ElemRightAnchor == 0 then
+                    label:setLeftRight(ElemLeftAnchor, ElemRightAnchor, ElemLeftRightStart, ElemLeftRightStart + TextWidth)
+                elseif ElemLeftAnchor == 0 and ElemRightAnchor == 1 then
+                    label:setLeftRight(ElemLeftAnchor, ElemRightAnchor, ElemLeftRightStart, ElemLeftRightEnd)
+                end
+            end
+        else
+            parent:setLeftRight(LeftAnchor, RightAnchor, LeftRightEnd, LeftRightEnd)
+        end
+        return 
+    end
+    local ElemLeftAnchor, ElemRightAnchor, ElemLeftRightStart, ElemLeftRightEnd = label:getLocalLeftRight()
+    if 0 < TextWidth then
+        parent.savedWidth = TextWidth + 2 * ElemLeftRightStart + padding
+
+        if parent.savedWidth < minimum then --like seriously?
+            parent.savedWidth = minimum
+        end
+        
+        if not parent.widthOverridden then
+            parent:setLeftRight(LeftAnchor, RightAnchor, LeftRightStart, LeftRightStart + parent.savedWidth)
+        end
+    else
+        parent:setLeftRight(LeftAnchor, RightAnchor, LeftRightStart, LeftRightStart)
+    end
 end

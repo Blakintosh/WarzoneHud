@@ -51,10 +51,7 @@ local function NextInterpolationStep(self, startClock, timeElapsed, duration, tw
     local outOfSync = (timeStep - timeElapsed)
     local iterationsToDo = math.floor(outOfSync / dur) + 1
     if iterationsToDo < 4 and iterationsToDo > 1 then
-        Blak.DebugUtils.Log(currentStepClock.." OUT OF SYNC: "..outOfSync.." correcting...")
         amendedDur = dur * iterationsToDo
-    else
-        Blak.DebugUtils.Log(currentStepClock.." IN SYNC")
     end
 
     self:beginAnimation("keyframe", dur, false, false, CoD.TweenType.Linear)
