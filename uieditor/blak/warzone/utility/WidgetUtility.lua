@@ -182,6 +182,20 @@ Wzu.ScaleWidgetToLabel.CenteredDownscale = function(parent, label, padding)
 	end
 end
 
+Wzu.ScaleWidgetToLabel.CenteredWithMinimum = function(parent, label, padding, minimum)
+    if label == nil then
+		return 
+	else
+		local parent_leftAnchor, parent_rightAnchor, parent_startPos, parent_endPos = parent:getLocalLeftRight()
+
+		local centerPosition = (parent_endPos + parent_startPos) / 2
+        local textWidth = math.max(label:getTextWidth(), minimum)
+		local widgetWidth = textWidth + padding * 2 * _ResolutionScalar
+
+		parent:setLeftRight(parent_leftAnchor, parent_rightAnchor, centerPosition - widgetWidth / 2, centerPosition + widgetWidth / 2)
+	end
+end
+
 Wzu.ScaleWidgetToLabel.WithMinimum = function(parent, label, padding, minimum)
     if label == nil then
         return 
@@ -189,6 +203,52 @@ Wzu.ScaleWidgetToLabel.WithMinimum = function(parent, label, padding, minimum)
 
     local LeftAnchor, RightAnchor, LeftRightStart, LeftRightEnd = parent:getLocalLeftRight()
     local TextWidth = label:getTextWidth()
+
+    if Engine.IsCurrentLanguageReversed() then
+        if 0 < TextWidth then
+            local ElemLeftAnchor, ElemRightAnchor, ElemLeftRightStart, ElemLeftRightEnd = label:getLocalLeftRight()
+            parent.savedWidth = TextWidth + 2 * ElemLeftRightStart + padding
+
+            if parent.savedWidth < minimum then --like seriously?
+                parent.savedWidth = minimum
+            end
+
+            if not parent.widthOverridden then
+                parent:setLeftRight(LeftAnchor, RightAnchor, LeftRightEnd - parent.savedWidth, LeftRightEnd)
+                if ElemLeftAnchor + ElemRightAnchor == 0 then
+                    label:setLeftRight(ElemLeftAnchor, ElemRightAnchor, ElemLeftRightStart, ElemLeftRightStart + TextWidth)
+                elseif ElemLeftAnchor == 0 and ElemRightAnchor == 1 then
+                    label:setLeftRight(ElemLeftAnchor, ElemRightAnchor, ElemLeftRightStart, ElemLeftRightEnd)
+                end
+            end
+        else
+            parent:setLeftRight(LeftAnchor, RightAnchor, LeftRightEnd, LeftRightEnd)
+        end
+        return 
+    end
+    local ElemLeftAnchor, ElemRightAnchor, ElemLeftRightStart, ElemLeftRightEnd = label:getLocalLeftRight()
+    if 0 < TextWidth then
+        parent.savedWidth = TextWidth + 2 * ElemLeftRightStart + padding
+
+        if parent.savedWidth < minimum then --like seriously?
+            parent.savedWidth = minimum
+        end
+        
+        if not parent.widthOverridden then
+            parent:setLeftRight(LeftAnchor, RightAnchor, LeftRightStart, LeftRightStart + parent.savedWidth)
+        end
+    else
+        parent:setLeftRight(LeftAnchor, RightAnchor, LeftRightStart, LeftRightStart)
+    end
+end
+
+Wzu.ScaleWidgetToLabel.DownscaleWithMinimum = function(parent, label, padding, minimum)
+    if label == nil then
+        return 
+    end
+
+    local LeftAnchor, RightAnchor, LeftRightStart, LeftRightEnd = parent:getLocalLeftRight()
+    local TextWidth = (label:getTextWidth() / _ResolutionScalar)
 
     if Engine.IsCurrentLanguageReversed() then
         if 0 < TextWidth then

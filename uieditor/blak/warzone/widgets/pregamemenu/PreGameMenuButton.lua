@@ -1,4 +1,4 @@
-require("ui.uieditor.blak.warzone.widgets.userinterface.button.ButtonBackground")
+require("ui.uieditor.blak.warzone.widgets.pregamemenu.PreGameMenuButtonLabel")
 
 Warzone.PreGameMenuButton = InheritFrom(LUI.UIElement)
 
@@ -24,36 +24,11 @@ function Warzone.PreGameMenuButton.new(menu, controller)
 
     self:addElement(self.background)
 
-    self.label = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.ButtonTextDefault, false)
-    self.label:setLeftRight(true, false, 14, 100)
-    self.label:setTopBottom(true, false, 8, 23)
+    self.labelContainer = Warzone.PreGameMenuButtonLabel.new(menu, controller)
+    self.labelContainer:setScaledLeftRight(false, false, -50, 50)
+    self.labelContainer:setScaledTopBottom(false, false, -16, 16)
 
-    LUI.OverrideFunction_CallOriginalFirst(self.label, "setText", function(sender, text)
-        Wzu.ScaleWidgetToLabel.WithMinimum(self, self.label, 10, 335)
-    end)
-
-    Wzu.LinkToWidget(self.label, self, "name", function(modelValue)
-        self.label:setText(Engine.Localize(Engine.GetIString(modelValue, "CS_LOCALIZED_STRINGS")))
-    end)
-
-    Wzu.ClipSequence(self, self.label, "DefaultUp", {
-        {
-            duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault)
-        }
-    })
-    Wzu.ClipSequence(self, self.label, "DefaultOver", {
-        {
-            duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault)
-        },
-        {
-            duration = 100,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextFocus)
-        }
-    })
-    
-    self:addElement(self.label)
+    self:addElement(self.labelContainer)
 
     --[[menu:AddButtonCallbackFunction(self, controller, Enum.LUIButton.LUI_KEY_XBA_PSCROSS, "ENTER", function(ItemRef, menu, controller, ParentRef)
         Blak.DebugUtils.Log("amongus")
