@@ -26,9 +26,14 @@ Wzu.GetTweenedProgress = function(progress, startv, endv)
     return (startv + ((endv - startv) * progress))
 end
 
-Wzu.AnimateNextSegment = function(parent, self, event, sequenceData, lastSequence, sequenceTable, index, repeatCount)
+Wzu.AnimateNextSegment = function(parent, self, event, sequenceData, lastSequence, sequenceTable, index, repeatCount, extraData)
     if event.interrupted or not sequenceTable[index] then
         sequenceData.clipsRemaining = sequenceData.clipsRemaining - 1
+
+        if sequenceData.clipsRemaining == 0 and extraData.looping then
+            parent.nextClip = extraData.clipName or "DefaultClip"
+        end
+
         parent.clipFinished(self, {})
         return
     end
@@ -36,7 +41,7 @@ Wzu.AnimateNextSegment = function(parent, self, event, sequenceData, lastSequenc
     local sequence = sequenceTable[index]
 
     if sequence.repeat_start == true then
-        Wzu.AnimateNextSegment(parent, self, {}, sequenceData, lastSequence, sequenceTable, index + 1, sequence.repeat_count)
+        Wzu.AnimateNextSegment(parent, self, {}, sequenceData, lastSequence, sequenceTable, index + 1, sequence.repeat_count, extraData)
     elseif sequence.repeat_end == true then
         repeatCount = repeatCount - 1
         local goingTo = index
@@ -48,7 +53,7 @@ Wzu.AnimateNextSegment = function(parent, self, event, sequenceData, lastSequenc
                 end
             end
         end
-        Wzu.AnimateNextSegment(parent, self, {}, sequenceData, lastSequence, sequenceTable, goingTo + 1, repeatCount)
+        Wzu.AnimateNextSegment(parent, self, {}, sequenceData, lastSequence, sequenceTable, goingTo + 1, repeatCount, extraData)
     else
         if sequence.duration > 0 then
             local tweenType = Wzu.TweenGraphs.linear
@@ -104,18 +109,20 @@ Wzu.AnimateNextSegment = function(parent, self, event, sequenceData, lastSequenc
 
         if sequence.duration > 0 then
             self:registerEventHandler("tween_complete", function(self, event)
-                Wzu.AnimateNextSegment(parent, self, event, sequenceData, sequence, sequenceTable, index + 1, repeatCount)
+                Wzu.AnimateNextSegment(parent, self, event, sequenceData, sequence, sequenceTable, index + 1, repeatCount, extraData)
             end)
         else
-            Wzu.AnimateNextSegment(parent, self, {}, sequenceData, sequence, sequenceTable, index + 1, repeatCount)
+            Wzu.AnimateNextSegment(parent, self, {}, sequenceData, sequence, sequenceTable, index + 1, repeatCount, extraData)
         end
     end
 end
 
-Wzu.AnimateSequence = function(self, identifier)
+Wzu.AnimateSequence = function(self, identifier, extraData)
     if not self.__sequences or not self.__sequences[identifier] then
         return
     end
+
+    extraData = extraData or {}
 
     local SequenceData = {
         clipsTotal = #self.__sequences[identifier],
@@ -130,7 +137,7 @@ Wzu.AnimateSequence = function(self, identifier)
 
         local sequence = v.sequences[1]
         if sequence.repeat_start == true then
-            Wzu.AnimateNextSegment(self, v.widget, {}, SequenceData, {}, v.sequences, 2, sequence.repeat_count)
+            Wzu.AnimateNextSegment(self, v.widget, {}, SequenceData, {}, v.sequences, 2, sequence.repeat_count, extraData)
         else
             if sequence.duration > 0 then
                 error("Bad Sequence code. Script needs a 0 duration initial clip to get start values.")
@@ -153,10 +160,10 @@ Wzu.AnimateSequence = function(self, identifier)
             if sequence.duration > 0 then
                 error("Bad Sequence Code.")
                 v.widget:registerEventHandler("tween_complete", function(widget, event)
-                    Wzu.AnimateNextSegment(self, v.widget, event, SequenceData, sequence, v.sequences, 2, 0)
+                    Wzu.AnimateNextSegment(self, v.widget, event, SequenceData, sequence, v.sequences, 2, 0, extraData)
                 end)
             else
-                Wzu.AnimateNextSegment(self, v.widget, {}, SequenceData, sequence, v.sequences, 2, 0)
+                Wzu.AnimateNextSegment(self, v.widget, {}, SequenceData, sequence, v.sequences, 2, 0, extraData)
             end
         end
     end

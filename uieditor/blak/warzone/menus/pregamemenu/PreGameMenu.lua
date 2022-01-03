@@ -1,4 +1,5 @@
 require("ui.uieditor.blak.warzone.widgets.pregamemenu.pregamemenubutton")
+require("ui.uieditor.blak.warzone.widgets.pregamemenu.pregamemenulogo")
 
 DataSources.PreGameHost = DataSourceHelpers.ListSetup("PreGameHost", function(controller)
     local returnTable = {}
@@ -83,10 +84,33 @@ function LUI.createMenu.PreGameMenu(controller)
 	menu.anyChildUsesUpdateState = true
     menu:setForceMouseEventDispatch(true)
 
-    menu.logo = LUI.UIImage.new()
+    menu.logo = Warzone.PreGameMenuLogo.new(menu, controller)
     menu.logo:setLeftRight(true, false, 95, 481)
     menu.logo:setTopBottom(true, false, -24, 362)
     menu.logo:setImage(RegisterImage("cust_hud_zm_karelia_logo"))
+    menu.logo:setRFTMaterial(LUI.UIImage.GetCachedMaterial("uie_aberration"))
+	menu.logo:setShaderVector(0, 0.1, 1, 0, 0)
+	menu.logo:setShaderVector(1, 0, 0, 0, 0)
+	menu.logo:setShaderVector(2, 0, 0, 0, 0)
+	menu.logo:setShaderVector(3, 0, 0, 0, 0)
+	menu.logo:setShaderVector(4, 0, 0, 0, 0)
+
+    Wzu.ClipSequence(menu, menu.logo, "Default", {
+        {
+            duration = 0,
+            setShaderVector = {0, 0, 1, 0, 0}
+        },
+        {
+            duration = 12000,
+            interpolation = Wzu.TweenGraphs.inOutSine,
+            setShaderVector = {0, 0.4, 1, 0, 0}
+        },
+        {
+            duration = 12000,
+            interpolation = Wzu.TweenGraphs.inOutSine,
+            setShaderVector = {0, 0, 1, 0, 0}
+        }
+    })
 
     menu:addElement(menu.logo)
 
@@ -161,6 +185,17 @@ function LUI.createMenu.PreGameMenu(controller)
     end, function(ItemRef, menu, controller)
         return nil
     end, false)]]
+
+    menu.clipsPerState = {
+        DefaultState = {
+            DefaultClip = function()
+                Wzu.AnimateSequence(menu, "Default", {
+                    looping = true,
+                    clipName = "DefaultClip"
+                })
+            end
+        }
+    }
 	
 	menu:processEvent({
         name = "menu_loaded",

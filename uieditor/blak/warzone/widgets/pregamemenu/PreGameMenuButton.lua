@@ -1,3 +1,4 @@
+require("ui.uieditor.blak.warzone.widgets.userinterface.button.ButtonBackground")
 require("ui.uieditor.blak.warzone.widgets.pregamemenu.PreGameMenuButtonLabel")
 
 Warzone.PreGameMenuButton = InheritFrom(LUI.UIElement)
@@ -25,8 +26,11 @@ function Warzone.PreGameMenuButton.new(menu, controller)
     self:addElement(self.background)
 
     self.labelContainer = Warzone.PreGameMenuButtonLabel.new(menu, controller)
-    self.labelContainer:setScaledLeftRight(false, false, -50, 50)
+    self.labelContainer:setScaledLeftRight(false, false, -167.5, 167.5)
     self.labelContainer:setScaledTopBottom(false, false, -16, 16)
+    self.labelContainer:setScale(1 / _ResolutionScalar)
+
+    Wzu.LinkWidgetToElementModel(self.labelContainer, self, controller)
 
     self:addElement(self.labelContainer)
 
@@ -48,10 +52,10 @@ function Warzone.PreGameMenuButton.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultUp")
+                self:setupElementClipCounter(0)
             end,
             Focus = function()
-                Wzu.AnimateSequence(self, "DefaultOver")
+                self:setupElementClipCounter(0)
             end
         }
     }
@@ -67,12 +71,14 @@ function Warzone.PreGameMenuButton.new(menu, controller)
     end)]]
 
     self:registerEventHandler("gain_focus", function(self, event)
-        self:dispatchEventToChildren(event)
+        self.background:processEvent(event)
+        self.labelContainer:processEvent(event)
         return LUI.UIElement.gainFocus(self, event)
     end)
 
     self:registerEventHandler("lose_focus", function(self, event)
-        self:dispatchEventToChildren(event)
+        self.background:processEvent(event)
+        self.labelContainer:processEvent(event)
         return LUI.UIElement.loseFocus(self, event)
     end)
 

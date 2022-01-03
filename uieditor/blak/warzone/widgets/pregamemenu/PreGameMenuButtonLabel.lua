@@ -14,13 +14,15 @@ function Warzone.PreGameMenuButtonLabel.new(menu, controller)
     self.anyChildUsesUpdateState = true
 
     self.label = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.ButtonTextDefault, false)
-    self.label:setLeftRight(true, false, 14, 100)
-    self.label:setTopBottom(true, false, 8, 23)
+    self.label:setScaledLeftRight(true, false, 14, 100)
+    self.label:setScaledTopBottom(true, false, 8, 23)
 
-    LUI.OverrideFunction_CallOriginalFirst(self.label, "setText", function(sender, text)
+    --[[LUI.OverrideFunction_CallOriginalFirst(self.label, "setText", function(sender, text)
+        Blak.DebugUtils.SafeRunFunction(function()
         Wzu.ScaleWidgetToLabel.DownscaleWithMinimum(self:getParent(), self.label, 10, 335)
         Wzu.ScaleWidgetToLabel.CenteredWithMinimum(self, self.label, 10, 335)
-    end)
+        end)
+    end)]]
 
     Wzu.LinkToWidget(self.label, self, "displayText", function(modelValue)
         self.label:setText(Engine.Localize(modelValue))
