@@ -1,7 +1,5 @@
 require("ui.uieditor.blak.warzone.widgets.pregamemenu.pregamemenubutton")
 
-require("ui.uieditor.widgets.blak.mwr.menu.mwrstartlistbutton")
-
 DataSources.PreGameHost = DataSourceHelpers.ListSetup("PreGameHost", function(controller)
     local returnTable = {}
 

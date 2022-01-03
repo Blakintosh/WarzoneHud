@@ -15,8 +15,8 @@ function Warzone.OverclockMenuHighResContainer.new(menu, controller)
     self.id = "OverclockMenuHighResContainer"
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
-    self:makeFocusable()
-    self.onlyChildrenFocusable = true
+    --[[self:makeFocusable()
+    self.onlyChildrenFocusable = true]]
     
     -- ===============================================================
     -- Warzone HUD
@@ -41,13 +41,11 @@ function Warzone.OverclockMenuHighResContainer.new(menu, controller)
     self.upgrades:setScaledTopBottom(true, false, 205, 400)
 
     self:addElement(self.upgrades)
-    
-    menu:AddButtonCallbackFunction(self, controller, Enum.LUIButton.LUI_KEY_XBA_PSCROSS, "ENTER", function(ItemRef, menu, controller, ParentRef)
-        Engine.SendMenuResponse(controller, "OverclockMenu", "closed")
-        Close(menu, controller)
-    end, function(ItemRef, menu, controller)
-        return nil
-    end, false)
+
+    self:registerEventHandler("record_curr_focused_elem_id", function(self, event)
+        Blak.DebugUtils.Log("Curr focus: "..self.id)
+        return LUI.UIElement.RecordCurrFocusedElemID(self, event)
+    end)
     
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(self)
         self.title:close()

@@ -1,5 +1,6 @@
 require("ui.uieditor.blak.warzone.widgets.overclockmenu.overclockmenubackground")
 require("ui.uieditor.blak.warzone.widgets.overclockmenu.overclockmenuhighrescontainer")
+require("ui.uieditor.blak.warzone.widgets.overclockmenu.overclockmenubutton")
 
 local function PreLoadFunc(menu, controller)
     menu.disablePopupOpenCloseAnim = true
@@ -63,11 +64,13 @@ function LUI.createMenu.OverclockMenu(controller)
 	menu.soundSet = "HUD"
     menu.id = "OverclockMenu"
 	menu:setOwner(controller)
+    menu:makeFocusable()
     menu:setLeftRight(false, false, -373, 373)
 	menu:setTopBottom(true, false, 236, 575)
 	menu:playSound("menu_open", controller)
 	menu.buttonModel = Engine.CreateModel(Engine.GetModelForController(controller), "OverclockMenu.buttonPrompts")
 	menu.anyChildUsesUpdateState = true
+    menu:setForceMouseEventDispatch(true)
     
     menu.background = Warzone.OverclockMenuBackground.new(menu, controller)
     menu.background:setLeftRight(true, true, 0, 0)
@@ -84,6 +87,47 @@ function LUI.createMenu.OverclockMenu(controller)
 	end)
 
     menu:addElement(menu.container)
+
+    menu.overclockButton1 = Warzone.OverclockMenuButton.new(menu, controller)
+    menu.overclockButton1:setLeftRight(false, false, -228.5, -188.5)
+    menu.overclockButton1:setTopBottom(true, false, 281, 303)
+    menu.overclockButton1.index = 1
+
+    Wzu.SetElementModel_Create(menu.overclockButton1, controller, "overclockTree", "1")
+
+    menu:addElement(menu.overclockButton1)
+
+    menu.overclockButton2 = Warzone.OverclockMenuButton.new(menu, controller)
+    menu.overclockButton2:setLeftRight(false, false, -20, 20)
+    menu.overclockButton2:setTopBottom(true, false, 281, 303)
+    menu.overclockButton2.index = 2
+
+    Wzu.SetElementModel_Create(menu.overclockButton2, controller, "overclockTree", "2")
+
+    menu:addElement(menu.overclockButton2)
+
+    menu.overclockButton3 = Warzone.OverclockMenuButton.new(menu, controller)
+    menu.overclockButton3:setLeftRight(false, true, -80, -40)
+    menu.overclockButton3:setTopBottom(true, false, 281, 303)
+    menu.overclockButton3.index = 3
+
+    Wzu.SetElementModel_Create(menu.overclockButton3, controller, "overclockTree", "3")
+
+    menu:addElement(menu.overclockButton3)
+
+    menu.overclockButton1.navigation = {right = menu.overclockButton2}
+    menu.overclockButton2.navigation = {left = menu.overclockButton1, right = menu.overclockButton3}
+    menu.overclockButton3.navigation = {left = menu.overclockButton2}
+
+    CoD.Menu.AddNavigationHandler(menu, menu, controller)
+
+    menu.overclockButton1.id = "overclockButton1"
+    menu.overclockButton2.id = "overclockButton2"
+    menu.overclockButton3.id = "overclockButton3"
+    
+    if not menu:restoreState() then
+		menu.overclockButton1:processEvent({name = "gain_focus", controller = controller})
+	end
 
     --[[menu.frame = CoD.MWRGenericFrame.new(menu, controller)
     menu.frame:setLeftRight(true, true, -4, 4)
@@ -154,6 +198,10 @@ function LUI.createMenu.OverclockMenu(controller)
         return Sender:dispatchEventToChildren(Event)
     end)
 
+    --[[if not menu:restoreState() then
+        menu.container:processEvent({name = "gain_focus", controller = controller})
+    end]]
+
     --[[menu.overclock1.id = "overclock1"
     menu.overclock1.index = 1
     menu.overclock2.id = "overclock2"
@@ -164,9 +212,13 @@ function LUI.createMenu.OverclockMenu(controller)
     if not menu:restoreState() then
 		menu.overclock1:processEvent({name = "gain_focus", controller = controller})
 	end]]
-    if not menu:restoreState() then
-        menu.container:processEvent({name = "gain_focus", controller = controller})
-    end
+
+    --[[menu:AddButtonCallbackFunction(menu, controller, Enum.LUIButton.LUI_KEY_XBB_PSCIRCLE, "MENU_BACK", function(ItemRef, menu, controller, ParentRef)
+        Engine.SendMenuResponse(controller, "OverclockMenu", "closed")
+        Close(menu, controller)
+    end, function(ItemRef, menu, controller)
+        return nil
+    end, false)]]
 
     menu:AddButtonCallbackFunction(menu, controller, Enum.LUIButton.LUI_KEY_XBB_PSCIRCLE, "MENU_BACK", function(ItemRef, menu, controller, ParentRef)
         Engine.SendMenuResponse(controller, "OverclockMenu", "closed")

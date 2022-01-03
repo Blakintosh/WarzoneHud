@@ -8,14 +8,14 @@ function Warzone.SmallButtonBackground.new(menu, controller)
     
     self:setUseStencil(false)
     self:setClass(Warzone.SmallButtonBackground)
-    self:makeFocusable()
     self.id = "SmallButtonBackground"
     self.soundSet = "default"
+    self:makeFocusable()
     self.anyChildUsesUpdateState = true
 
     self.buttonBg = LUI.UIImage.new()
-    self.buttonBg:setScaledLeftRight(true, true, 0, 0)
-    self.buttonBg:setScaledTopBottom(true, true, 0, 0)
+    self.buttonBg:setLeftRight(true, true, 0, 0)
+    self.buttonBg:setTopBottom(true, true, 0, 0)
     Wzu.SetRGBFromTable(self.buttonBg, Wzu.Swatches.ButtonBorder)
     self.buttonBg:setAlpha(0.45)
 
@@ -37,8 +37,8 @@ function Warzone.SmallButtonBackground.new(menu, controller)
     self:addElement(self.buttonBg)
 
     self.textureLayer = LUI.UIImage.new()
-    self.textureLayer:setScaledLeftRight(true, true, 0, 0)
-    self.textureLayer:setScaledTopBottom(true, true, 0, 0)
+    self.textureLayer:setLeftRight(true, true, 0, 0)
+    self.textureLayer:setTopBottom(true, true, 0, 0)
     Wzu.SetRGBFromTable(self.textureLayer, Wzu.Colors.White)
     self.textureLayer:setAlpha(0.05)
     self.textureLayer:setImage(RegisterImage("button_gradient"))
@@ -71,8 +71,8 @@ function Warzone.SmallButtonBackground.new(menu, controller)
     self:addElement(self.textureLayer)
 
     self.bottomLine = LUI.UIImage.new()
-    self.bottomLine:setScaledLeftRight(true, true, 0, 0)
-    self.bottomLine:setScaledTopBottom(false, true, 0, 1)
+    self.bottomLine:setLeftRight(true, true, 0, 0)
+    self.bottomLine:setTopBottom(false, true, 0, 1)
     self.bottomLine:setAlpha(0)
     Wzu.SetRGBFromTable(self.bottomLine, Wzu.Swatches.ButtonTextDefault)
 
@@ -94,14 +94,14 @@ function Warzone.SmallButtonBackground.new(menu, controller)
     self:addElement(self.bottomLine)
 
     self.glow = LUI.UIImage.new()
-    self.glow:setScaledLeftRight(true, true, -2, 2)
-    self.glow:setScaledTopBottom(true, true, -2, 2)
+    self.glow:setLeftRight(true, true, -2, 2)
+    self.glow:setTopBottom(true, true, -2, 2)
     Wzu.SetRGBFromTable(self.glow, Wzu.Swatches.ButtonBackgroundFocus)
     self.glow:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_normal"))
     self.glow:setImage(RegisterImage("button_glow"))
     self.glow:setAlpha(0)
     self.glow:setShaderVector(0, 0.04, 0.5, 0, 0)
-    self.glow:setupNineSliceShader(12, 12)
+    self.glow:setupNineSliceShader(6, 6)
     
     self:addElement(self.glow)
 
@@ -123,7 +123,7 @@ function Warzone.SmallButtonBackground.new(menu, controller)
             DefaultClip = function()
                 Wzu.AnimateSequence(self, "DefaultUp")
             end,
-            Over = function()
+            Focus = function()
                 Wzu.AnimateSequence(self, "DefaultOver")
             end
         }

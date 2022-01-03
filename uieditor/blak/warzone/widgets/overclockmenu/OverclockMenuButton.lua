@@ -1,9 +1,10 @@
 require("ui.uieditor.blak.warzone.widgets.userinterface.button.SmallButtonBackground")
+require("ui.uieditor.blak.warzone.widgets.overclockmenu.overclockmenubuttonlabel")
 
 Warzone.OverclockMenuButton = InheritFrom(LUI.UIElement)
 
 function Warzone.OverclockMenuButton.new(menu, controller)
-    local self = LUI.UIButton.new()
+    local self = LUI.UIElement.new()
     if PreLoadFunc then
         PreLoadFunc(menu, controller)
     end
@@ -17,43 +18,21 @@ function Warzone.OverclockMenuButton.new(menu, controller)
     self.anyChildUsesUpdateState = true
 
     self.background = Warzone.SmallButtonBackground.new(menu, controller)
-    self.background:setScaledLeftRight(true, true, 0, 0)
-    self.background:setScaledTopBottom(true, true, 0, 0)
+    self.background:setLeftRight(true, true, 0, 0)
+    self.background:setTopBottom(true, true, 0, 0)
 
     self:addElement(self.background)
 
-    self.label = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.ButtonTextDefault, false)
-    self.label:setScaledLeftRight(false, false, -50, 50)
-    self.label:setScaledTopBottom(true, false, 3, 17)
+    self.labelContainer = Warzone.OverclockMenuButtonLabel.new(menu, controller)
+    self.labelContainer:setScaledLeftRight(false, false, -50, 50)
+    self.labelContainer:setScaledTopBottom(false, false, -11, 11)
+    self.labelContainer:setScale(1 / _ResolutionScalar)
 
-    LUI.OverrideFunction_CallOriginalFirst(self.label, "setText", function(sender, text)
-        Wzu.ScaleWidgetToLabel.Centered(self, self.label, 10)
-    end)
+    Wzu.LinkWidgetToElementModel(self.labelContainer, self, controller)
 
-    Wzu.LinkToWidget(self.label, self, "name", function(modelValue)
-        self.label:setText(Engine.Localize(Engine.GetIString(modelValue, "CS_LOCALIZED_STRINGS")))
-    end)
+    self:addElement(self.labelContainer)
 
-    Wzu.ClipSequence(self, self.label, "DefaultUp", {
-        {
-            duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault)
-        }
-    })
-    Wzu.ClipSequence(self, self.label, "DefaultOver", {
-        {
-            duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault)
-        },
-        {
-            duration = 100,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextFocus)
-        }
-    })
-    
-    self:addElement(self.label)
-
-    --[[menu:AddButtonCallbackFunction(self, controller, Enum.LUIButton.LUI_KEY_XBA_PSCROSS, "ENTER", function(ItemRef, menu, controller, ParentRef)
+    menu:AddButtonCallbackFunction(self, controller, Enum.LUIButton.LUI_KEY_XBA_PSCROSS, "ENTER", function(ItemRef, menu, controller, ParentRef)
         Blak.DebugUtils.Log("amongus")
         if self.currentState ~= "Disabled" then
             Engine.SendMenuResponse(controller, "OverclockMenu", self.index) -- This is really ghetto but the more lua i do the more i realise i dont care
@@ -66,36 +45,33 @@ function Warzone.OverclockMenuButton.new(menu, controller)
             return true
         end
         return false
-    end, false)]]
+    end, false)
 
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultUp")
+                self:setupElementClipCounter(0)
             end,
-            Over = function()
-                Wzu.AnimateSequence(self, "DefaultOver")
+            Focus = function()
+                self:setupElementClipCounter(0)
             end
         }
     }
 
-    self:registerEventHandler("mouseenter", function(self, event)
-        self:dispatchEventToChildren(event)
-        return LUI.UIElement.mouseEnter(self, event)
-    end)
-
-    self:registerEventHandler("mouseleave", function(self, event)
-        self:dispatchEventToChildren(event)
-        return LUI.UIElement.mouseLeave(self, event)
-    end)
+    --[[LUI.OverrideFunction_CallOriginalFirst(self, "playClip", function(self, clip)
+        self.background:playClip(clip)
+        self.labelContainer:playClip(clip)
+    end)]]
 
     self:registerEventHandler("gain_focus", function(self, event)
-        self:dispatchEventToChildren(event)
+        self.background:processEvent(event)
+        self.labelContainer:processEvent(event)
         return LUI.UIElement.gainFocus(self, event)
     end)
 
     self:registerEventHandler("lose_focus", function(self, event)
-        self:dispatchEventToChildren(event)
+        self.background:processEvent(event)
+        self.labelContainer:processEvent(event)
         return LUI.UIElement.loseFocus(self, event)
     end)
 

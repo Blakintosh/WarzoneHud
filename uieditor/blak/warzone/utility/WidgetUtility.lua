@@ -78,6 +78,12 @@ Wzu.LinkToWidget = function(self, parent, modelName, callback)
     end)
 end
 
+Wzu.LinkWidgetToElementModel = function(self, parent, controller)
+    self:linkToElementModel(parent, nil, false, function(model)
+        self:setModel(model, controller)
+    end)
+end
+
 Wzu.SubVisBit = function(InstanceRef, HudRef, parent, VisiblityBit)
     parent:subscribeToModel(Engine.GetModel(Engine.GetModelForController(InstanceRef), "UIVisibilityBit." .. VisiblityBit), function(ModelRef)
         HudRef:updateElementState(parent, {
@@ -158,6 +164,19 @@ Wzu.ScaleWidgetToLabel.Centered = function(parent, label, padding)
 
 		local centerPosition = (parent_endPos + parent_startPos) / 2
 		local widgetWidth = label:getTextWidth() + padding * 2 * _ResolutionScalar
+
+		parent:setLeftRight(parent_leftAnchor, parent_rightAnchor, centerPosition - widgetWidth / 2, centerPosition + widgetWidth / 2)
+	end
+end
+
+Wzu.ScaleWidgetToLabel.CenteredDownscale = function(parent, label, padding)
+    if label == nil then
+		return 
+	else
+		local parent_leftAnchor, parent_rightAnchor, parent_startPos, parent_endPos = parent:getLocalLeftRight()
+
+		local centerPosition = (parent_endPos + parent_startPos) / 2
+		local widgetWidth = (label:getTextWidth() / _ResolutionScalar) + padding * 2
 
 		parent:setLeftRight(parent_leftAnchor, parent_rightAnchor, centerPosition - widgetWidth / 2, centerPosition + widgetWidth / 2)
 	end

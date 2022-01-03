@@ -14,8 +14,8 @@ function Warzone.OverclockMenuUpgrades.new(menu, controller)
     self.id = "OverclockMenuUpgrades"
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
-    self:makeFocusable()
-    self.onlyChildrenFocusable = true
+    --[[self:makeFocusable()
+    self.onlyChildrenFocusable = true]]
 
     self.title = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, false)
     self.title:setScaledLeftRight(true, false, 100, 300)
@@ -35,6 +35,19 @@ function Warzone.OverclockMenuUpgrades.new(menu, controller)
     self.upgradeButtons:setScaledTopBottom(true, false, 56, 138)
 
     self:addElement(self.upgradeButtons)
+
+    self:registerEventHandler("record_curr_focused_elem_id", function(self, event)
+        Blak.DebugUtils.Log("Curr focus: "..self.id)
+        return LUI.UIElement.RecordCurrFocusedElemID(self, event)
+    end)
+
+    LUI.UIElement.RecordCurrFocusedElemID = function (f120_arg0, f120_arg1)
+        if not f120_arg1.idStack then
+            error("LUI Error: " .. f120_arg1.name .. " processed without event.idStack ")
+        end
+        table.insert(f120_arg1.idStack, 1, f120_arg0.id)
+        return f120_arg0:dispatchEventToParent(f120_arg1)
+    end
 
     if PostLoadFunc then
         PostLoadFunc(self, controller)
