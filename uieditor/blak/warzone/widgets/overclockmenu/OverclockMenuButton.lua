@@ -21,6 +21,18 @@ function Warzone.OverclockMenuButton.new(menu, controller)
     self.background:setLeftRight(true, true, 0, 0)
     self.background:setTopBottom(true, true, 0, 0)
 
+    Wzu.LinkWidgetToElementModel(self.background, self, controller)
+
+    self.background:mergeStateConditions({{stateName = "Disabled", condition = function (menu, widget, event)
+		if not IsDisabled(self.background, controller) then
+            return IsSelfModelValueEqualTo(self.background, controller, "available", 0)
+        end
+        return true
+	end}})
+
+    Wzu.LinkWidgetToState(self.background, self, menu, "disabled")
+    Wzu.LinkWidgetToState(self.background, self, menu, "available")
+
     self:addElement(self.background)
 
     self.labelContainer = Warzone.OverclockMenuButtonLabel.new(menu, controller)
@@ -29,6 +41,16 @@ function Warzone.OverclockMenuButton.new(menu, controller)
     self.labelContainer:setScale(1 / _ResolutionScalar)
 
     Wzu.LinkWidgetToElementModel(self.labelContainer, self, controller)
+
+    self.labelContainer:mergeStateConditions({{stateName = "Disabled", condition = function (menu, widget, event)
+		if not IsDisabled(self.labelContainer, controller) then
+            return IsSelfModelValueEqualTo(self.labelContainer, controller, "available", 0)
+        end
+        return true
+	end}})
+
+    Wzu.LinkWidgetToState(self.labelContainer, self, menu, "disabled")
+    Wzu.LinkWidgetToState(self.labelContainer, self, menu, "available")
 
     self:addElement(self.labelContainer)
 
@@ -64,7 +86,12 @@ function Warzone.OverclockMenuButton.new(menu, controller)
             end
         }
     }
-    
+
+    --[[LUI.OverrideFunction_CallOriginalFirst(self, "setState", function(self, state)
+        self.background:setState(state)
+        self.labelContainer:setState(state)
+    end)]]
+
     self:mergeStateConditions({{stateName = "Disabled", condition = function (menu, self, event)
 		if not IsDisabled(self, controller) then
             return IsSelfModelValueEqualTo(self, controller, "available", 0)
