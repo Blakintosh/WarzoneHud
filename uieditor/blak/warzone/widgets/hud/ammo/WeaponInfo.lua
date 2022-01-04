@@ -52,6 +52,19 @@ function Warzone.WeaponInfo.new(menu, controller)
 
     Wzu.SubscribeToText(self.ammoName, controller, "currentWeapon.weaponTierName")
 
+    Wzu.SubscribeMultiple(self.ammoName, controller, {"currentWeapon.weaponTierName", "currentWeapon.weaponOverclocks"}, function(modelValue)
+        local tierValue = Engine.GetModelValue(Wzu.GetModel(controller, "currentWeapon.weaponTierName"))
+        local ocValue = Engine.GetModelValue(Wzu.GetModel(controller, "currentWeapon.weaponOverclocks"))
+
+        if tierValue then
+            if ocValue and ocValue > 0 then
+                self.ammoName:setText(Engine.Localize(tierValue) .. " (".. ocValue .." Overclocks)")
+            else
+                self.ammoName:setText(Engine.Localize(tierValue))
+            end
+        end
+    end)
+
     Wzu.ClipSequence(self, self.ammoName, "DefaultClip", {
         {
             duration = 0,

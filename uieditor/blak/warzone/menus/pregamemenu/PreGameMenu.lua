@@ -73,7 +73,7 @@ function LUI.createMenu.PreGameMenu(controller)
 		PreLoadFunc(menu, controller)
 	end
 
-	menu.soundSet = "HUD"
+	menu.soundSet = "iw8"
     menu.id = "PreGameMenu"
 	menu:setOwner(controller)
     menu:setLeftRight(true, true, 0, 0)
@@ -154,6 +154,7 @@ function LUI.createMenu.PreGameMenu(controller)
     menu:AddButtonCallbackFunction(menu.buttonList, controller, Enum.LUIButton.LUI_KEY_XBA_PSCROSS, "ENTER", function(ItemRef, menu, controller, ParentRef)
         local ActionModelVal = Engine.GetModelValue(Engine.GetModel(ItemRef:getModel(), "action"))
         if ActionModelVal then
+            menu:playSound("action")
             ActionModelVal(menu, ItemRef, controller)
         end
         return true
@@ -163,7 +164,7 @@ function LUI.createMenu.PreGameMenu(controller)
     end, false)
 
     menu:addElement(menu.buttonList)
-
+    
     --[[menu.buttonHints = CoD.MW19ButtonPrompts.new(menu, controller)
     menu.buttonHints:setLeftRight(false, false, -400, 400)
     menu.buttonHints:setTopBottom(true, false, 550, 600)

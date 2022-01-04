@@ -50,7 +50,7 @@ local function NextInterpolationStep(self, startClock, timeElapsed, duration, tw
     local timeStep = (currentStepClock - startClock)
     local outOfSync = (timeStep - timeElapsed)
     local iterationsToDo = math.floor(outOfSync / dur) + 1
-    if iterationsToDo < 4 and iterationsToDo > 1 then
+    if iterationsToDo < 6 and iterationsToDo > 1 then
         amendedDur = dur * iterationsToDo
     end
 

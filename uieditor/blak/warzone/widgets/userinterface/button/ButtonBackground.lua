@@ -22,13 +22,29 @@ function Warzone.ButtonBackground.new(menu, controller)
     Wzu.ClipSequence(self, self.buttonBg, "DefaultUp", {
         {
             duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonBackground),
             setAlpha = 0.3
         }
     })
     Wzu.ClipSequence(self, self.buttonBg, "DefaultOver", {
         {
             duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonBackground),
             setAlpha = 1
+        }
+    })
+    Wzu.ClipSequence(self, self.buttonBg, "DisabledUp", {
+        {
+            duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonBackgroundDisabled),
+            setAlpha = 0.5
+        }
+    })
+    Wzu.ClipSequence(self, self.buttonBg, "DisabledOver", {
+        {
+            duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonBackgroundDisabled),
+            setAlpha = 0.5
         }
     })
 
@@ -39,7 +55,6 @@ function Warzone.ButtonBackground.new(menu, controller)
     self.textureLayer:setTopBottom(true, true, 0, 0)
     Wzu.SetRGBFromTable(self.textureLayer, Wzu.Swatches.ButtonTextFocus)
     self.textureLayer:setAlpha(0.1)
-    --self.textureLayer:setImage(RegisterImage("button_gradient"))
     self.textureLayer:setMaterial(LUI.UIImage.GetCachedMaterial("uie_pixel_grid"))
 	self.textureLayer:setShaderVector(0, 2.0, 2.0, 1.0, 1.0)
 
@@ -65,6 +80,22 @@ function Warzone.ButtonBackground.new(menu, controller)
             setAlpha = 0.3
         }
     })
+    Wzu.ClipSequence(self, self.textureLayer, "DisabledUp", {
+        {
+            duration = 0,
+            setImage = RegisterImage("white"),
+            setRGB = Wzu.ConvertColorToTable(Wzu.Colors.White),
+            setAlpha = 0.1
+        }
+    })
+    Wzu.ClipSequence(self, self.textureLayer, "DisabledOver", {
+        {
+            duration = 0,
+            setImage = RegisterImage("button_gradient"),
+            setRGB = Wzu.ConvertColorToTable(Wzu.Colors.Grey128),
+            setAlpha = 0.1
+        }
+    })
 
     self:addElement(self.textureLayer)
 
@@ -88,6 +119,20 @@ function Warzone.ButtonBackground.new(menu, controller)
             setAlpha = 1
         }
     })
+    Wzu.ClipSequence(self, self.topLine, "DisabledUp", {
+        {
+            duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault),
+            setAlpha = 0
+        }
+    })
+    Wzu.ClipSequence(self, self.topLine, "DisabledOver", {
+        {
+            duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault),
+            setAlpha = 0
+        }
+    })
     
     self:addElement(self.topLine)
 
@@ -106,12 +151,36 @@ function Warzone.ButtonBackground.new(menu, controller)
     Wzu.ClipSequence(self, self.glow, "DefaultUp", {
         {
             duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonBackgroundFocus),
             setAlpha = 0
         }
     })
     Wzu.ClipSequence(self, self.glow, "DefaultOver", {
         {
             duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonBackgroundFocus),
+            setAlpha = 0.6
+        }
+    })
+    Wzu.ClipSequence(self, self.glow, "DisabledUp", {
+        {
+            duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.MenuLocked),
+            setAlpha = 0.6
+        },
+        {
+            duration = 100,
+            setAlpha = 0
+        }
+    })
+    Wzu.ClipSequence(self, self.glow, "DisabledOver", {
+        {
+            duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.MenuLocked),
+            setAlpha = 0
+        },
+        {
+            duration = 200,
             setAlpha = 0.6
         }
     })
@@ -123,6 +192,14 @@ function Warzone.ButtonBackground.new(menu, controller)
             end,
             Focus = function()
                 Wzu.AnimateSequence(self, "DefaultOver")
+            end
+        },
+        Disabled = {
+            DefaultClip = function()
+                Wzu.AnimateSequence(self, "DisabledUp")
+            end,
+            Focus = function()
+                Wzu.AnimateSequence(self, "DisabledOver")
             end
         }
     }

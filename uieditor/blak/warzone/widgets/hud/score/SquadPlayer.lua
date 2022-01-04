@@ -107,6 +107,12 @@ function Warzone.SquadPlayer.new(menu, controller)
         local color = Wzu.GetClientColor(modelValue)
         Wzu.SetRGBFromTable(self.username, color)
         Wzu.SetRGBFromTable(self.squadLeader, color)
+
+        -- Strictly speaking there are edge cases where host is not the orange client, but these only occur after a host migration.
+        -- So we don't need to care about that since custom maps can only be played in Private Match...
+        if modelValue ~= 0 then
+            self.squadLeader:setAlpha(0)
+        end
     end)
     
     self.clipsPerState = {

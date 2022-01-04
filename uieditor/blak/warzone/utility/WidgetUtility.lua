@@ -69,6 +69,17 @@ Wzu.Subscribe = function(self, controller, modelName, callback)
     end)
 end
 
+Wzu.SubscribeMultiple = function(self, controller, modelNames, callback)
+    for k, v in ipairs(modelNames) do
+        self:subscribeToModel(Wzu.GetModel(controller, v), function(model)
+            local modelValue = Engine.GetModelValue(model)
+            if modelValue then
+                callback(modelValue)
+            end
+        end)
+    end
+end
+
 Wzu.LinkToWidget = function(self, parent, modelName, callback)
     self:linkToElementModel(parent, modelName, true, function(model)
         local modelValue = Engine.GetModelValue(model)

@@ -58,7 +58,7 @@ function Warzone.RoundCounter.new(menu, controller)
         },
         {
             repeat_start = true,
-            repeat_count = 12
+            repeat_count = 10
         },
         {
             duration = 1000,

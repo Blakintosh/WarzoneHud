@@ -29,17 +29,33 @@ function Warzone.OverclockMenuButtonLabel.new(menu, controller)
     Wzu.ClipSequence(self, self.label, "DefaultUp", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault)
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault),
+            setAlpha = 1
         }
     })
     Wzu.ClipSequence(self, self.label, "DefaultOver", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault)
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault),
+            setAlpha = 1
         },
         {
             duration = 100,
             setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextFocus)
+        }
+    })
+    Wzu.ClipSequence(self, self.label, "DisabledUp", {
+        {
+            duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDisabled),
+            setAlpha = 0.6
+        }
+    })
+    Wzu.ClipSequence(self, self.label, "DisabledOver", {
+        {
+            duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDisabled),
+            setAlpha = 0.6
         }
     })
     
@@ -52,6 +68,14 @@ function Warzone.OverclockMenuButtonLabel.new(menu, controller)
             end,
             Focus = function()
                 Wzu.AnimateSequence(self, "DefaultOver")
+            end
+        },
+        Disabled = {
+            DefaultClip = function()
+                Wzu.AnimateSequence(self, "DisabledUp")
+            end,
+            Focus = function()
+                Wzu.AnimateSequence(self, "DisabledOver")
             end
         }
     }

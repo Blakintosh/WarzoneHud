@@ -44,6 +44,20 @@ function Warzone.PreGameMenuButtonLabel.new(menu, controller)
             setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextFocus)
         }
     })
+    Wzu.ClipSequence(self, self.label, "DisabledUp", {
+        {
+            duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDisabled),
+            setAlpha = 0.6
+        }
+    })
+    Wzu.ClipSequence(self, self.label, "DisabledOver", {
+        {
+            duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDisabled),
+            setAlpha = 0.6
+        }
+    })
     
     self:addElement(self.label)
 
@@ -54,6 +68,14 @@ function Warzone.PreGameMenuButtonLabel.new(menu, controller)
             end,
             Focus = function()
                 Wzu.AnimateSequence(self, "DefaultOver")
+            end
+        },
+        Disabled = {
+            DefaultClip = function()
+                Wzu.AnimateSequence(self, "DisabledUp")
+            end,
+            Focus = function()
+                Wzu.AnimateSequence(self, "DisabledOver")
             end
         }
     }

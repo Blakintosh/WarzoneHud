@@ -12,7 +12,7 @@ function Warzone.PreGameMenuButton.new(menu, controller)
     self:setUseStencil(false)
     self:setClass(Warzone.PreGameMenuButton)
     self.id = "PreGameMenuButton"
-    self.soundSet = "default"
+    self.soundSet = "iw8"
     self:setLeftRight(true, false, 0, 335)
     self:setTopBottom(true, false, 0, 32)
     self:makeFocusable()

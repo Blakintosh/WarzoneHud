@@ -14,7 +14,7 @@ function Warzone.OverclockMenuButton.new(menu, controller)
     self.id = "OverclockMenuButton"
     self:makeFocusable()
 	self:setHandleMouse(true)
-    self.soundSet = "default"
+    self.soundSet = "iw8"
     self.anyChildUsesUpdateState = true
 
     self.background = Warzone.SmallButtonBackground.new(menu, controller)
@@ -33,7 +33,6 @@ function Warzone.OverclockMenuButton.new(menu, controller)
     self:addElement(self.labelContainer)
 
     menu:AddButtonCallbackFunction(self, controller, Enum.LUIButton.LUI_KEY_XBA_PSCROSS, "ENTER", function(ItemRef, menu, controller, ParentRef)
-        Blak.DebugUtils.Log("amongus")
         if self.currentState ~= "Disabled" then
             Engine.SendMenuResponse(controller, "OverclockMenu", self.index) -- This is really ghetto but the more lua i do the more i realise i dont care
             return true
@@ -55,13 +54,26 @@ function Warzone.OverclockMenuButton.new(menu, controller)
             Focus = function()
                 self:setupElementClipCounter(0)
             end
+        },
+        Disabled = {
+            DefaultClip = function()
+                self:setupElementClipCounter(0)
+            end,
+            Focus = function()
+                self:setupElementClipCounter(0)
+            end
         }
     }
+    
+    self:mergeStateConditions({{stateName = "Disabled", condition = function (menu, self, event)
+		if not IsDisabled(self, controller) then
+            return IsSelfModelValueEqualTo(self, controller, "available", 0)
+        end
+        return true
+	end}})
 
-    --[[LUI.OverrideFunction_CallOriginalFirst(self, "playClip", function(self, clip)
-        self.background:playClip(clip)
-        self.labelContainer:playClip(clip)
-    end)]]
+    Wzu.LinkWidgetToState(self, self, menu, "disabled")
+    Wzu.LinkWidgetToState(self, self, menu, "available")
 
     self:registerEventHandler("gain_focus", function(self, event)
         self.background:processEvent(event)

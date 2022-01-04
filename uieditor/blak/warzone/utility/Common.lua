@@ -31,7 +31,9 @@ Wzu.Colors = {
     Ash = { r = 0.2824, g = 0.3294, b = 0.3333 },
     Grey17 = { r = 0.0667, g = 0.0667, b = 0.0667 },
     SmoothBlue = { r = 0.6078, g = 0.6667, b = 0.7020 },
-    Grey56 = { r = 0.2196, g = 0.2196, b = 0.2196 }
+    Grey56 = { r = 0.2196, g = 0.2196, b = 0.2196 },
+    Pavement = { r = 0.5176, g = 0.5529, b = 0.5059 },
+    Grey128 = { r = 0.5020, g = 0.5020, b = 0.5020 },
 }
 
 Wzu.Swatches = {
@@ -61,13 +63,16 @@ Wzu.Swatches = {
     MenuTitle = Wzu.Colors.TidePool,
     MenuFrame = Wzu.Colors.CodeLightBlue,
     MenuBorder = Wzu.Colors.Ash,
+    MenuLocked = Wzu.Colors.Pavement,
     ButtonTextDefault = Wzu.Colors.TidePool,
     ButtonTextFocus = Wzu.Colors.CodeLightBlue,
+    ButtonTextDisabled = Wzu.Colors.Pavement,
     MenuButtonText = Wzu.Colors.CodeBlueSelected,
     ButtonBackground = Wzu.Colors.Grey17, 
     ButtonBackgroundFocus = Wzu.Colors.CodeLightBlue,
+    ButtonBackgroundDisabled = Wzu.Colors.Asphalt,
     ButtonBorder = Wzu.Colors.Grey56,
-    TextPrimaryText = Wzu.Colors.WeatheredSlate
+    TextPrimaryText = Wzu.Colors.WeatheredSlate,
 }
 
 Wzu.Fonts = {
@@ -117,3 +122,28 @@ end
 Wzu.GetClientColor = function(clientNum)
     return Wzu.Swatches.Players[clientNum + 1]
 end
+
+SoundSet.iw8 = {
+    action = "iw8_ui_button_select", 
+    gain_focus = "", 
+    list_action = "iw8_ui_button_select", 
+    menu_go_back = "iw8_ui_menu_backout", 
+    menu_open = "", 
+    list_up = "iw8_ui_button_updownmovement", 
+    list_down = "iw8_ui_button_updownmovement", 
+    list_left = "iw8_ui_button_updownmovement", 
+    list_right = "iw8_ui_button_updownmovement", 
+    partyease_slide_left = "uin_party_ease_slide", 
+    partyease_slide_right = "uin_party_ease_slide_back", 
+    toggle = "uin_paint_image_flip_toggle", 
+    ekg_1 = "mpl_rejack_ekg_1", 
+    ekg_2 = "mpl_rejack_ekg_2", 
+    ekg_3 = "mpl_rejack_ekg_3", 
+    flatline = "mpl_rejack_flatline", 
+    faction_in = "mpl_start_faction_ui_in", 
+    faction_out = "mpl_start_faction_ui_out", 
+    xp_in = "mpl_start_xp_ui_in", 
+    xp_out = "mpl_start_xp_ui_out", 
+    obj_in = "mpl_start_show_obj_ui_in", 
+    obj_out = "mpl_start_show_obj_ui_out"
+}

@@ -61,7 +61,7 @@ function LUI.createMenu.OverclockMenu(controller)
 		PreLoadFunc(menu, controller)
 	end
 
-	menu.soundSet = "HUD"
+	menu.soundSet = "iw8"
     menu.id = "OverclockMenu"
 	menu:setOwner(controller)
     menu:makeFocusable()

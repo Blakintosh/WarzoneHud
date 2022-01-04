@@ -33,6 +33,20 @@ function Warzone.SmallButtonBackground.new(menu, controller)
             setAlpha = 1
         }
     })
+    Wzu.ClipSequence(self, self.buttonBg, "DisabledUp", {
+        {
+            duration = 0,
+            setRGB = Wzu.Swatches.ButtonBackgroundDisabled,
+            setAlpha = 0.5
+        }
+    })
+    Wzu.ClipSequence(self, self.buttonBg, "DisabledOver", {
+        {
+            duration = 0,
+            setRGB = Wzu.Swatches.ButtonBackgroundDisabled,
+            setAlpha = 1
+        }
+    })
 
     self:addElement(self.buttonBg)
 
@@ -67,6 +81,22 @@ function Warzone.SmallButtonBackground.new(menu, controller)
             setAlpha = 0.3
         }
     })
+    Wzu.ClipSequence(self, self.textureLayer, "DisabledUp", {
+        {
+            duration = 0,
+            setImage = RegisterImage("white"),
+            setRGB = Wzu.ConvertColorToTable(Wzu.Colors.White),
+            setAlpha = 0.1
+        }
+    })
+    Wzu.ClipSequence(self, self.textureLayer, "DisabledOver", {
+        {
+            duration = 0,
+            setImage = RegisterImage("white"),
+            setRGB = Wzu.ConvertColorToTable(Wzu.Colors.White),
+            setAlpha = 0.1
+        }
+    })
 
     self:addElement(self.textureLayer)
 
@@ -90,6 +120,20 @@ function Warzone.SmallButtonBackground.new(menu, controller)
             setAlpha = 1
         }
     })
+    Wzu.ClipSequence(self, self.bottomLine, "DisabledUp", {
+        {
+            duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault),
+            setAlpha = 0
+        }
+    })
+    Wzu.ClipSequence(self, self.bottomLine, "DisabledOver", {
+        {
+            duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault),
+            setAlpha = 0
+        }
+    })
     
     self:addElement(self.bottomLine)
 
@@ -108,12 +152,36 @@ function Warzone.SmallButtonBackground.new(menu, controller)
     Wzu.ClipSequence(self, self.glow, "DefaultUp", {
         {
             duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonBackgroundFocus),
             setAlpha = 0
         }
     })
     Wzu.ClipSequence(self, self.glow, "DefaultOver", {
         {
             duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonBackgroundFocus),
+            setAlpha = 0.6
+        }
+    })
+    Wzu.ClipSequence(self, self.glow, "DisabledUp", {
+        {
+            duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.MenuLocked),
+            setAlpha = 0.6
+        },
+        {
+            duration = 100,
+            setAlpha = 0
+        }
+    })
+    Wzu.ClipSequence(self, self.glow, "DisabledOver", {
+        {
+            duration = 0,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.MenuLocked),
+            setAlpha = 0
+        },
+        {
+            duration = 200,
             setAlpha = 0.6
         }
     })
@@ -125,6 +193,14 @@ function Warzone.SmallButtonBackground.new(menu, controller)
             end,
             Focus = function()
                 Wzu.AnimateSequence(self, "DefaultOver")
+            end
+        },
+        Disabled = {
+            DefaultClip = function()
+                Wzu.AnimateSequence(self, "DisabledUp")
+            end,
+            Focus = function()
+                Wzu.AnimateSequence(self, "DisabledOver")
             end
         }
     }
