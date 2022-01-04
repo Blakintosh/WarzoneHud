@@ -2,6 +2,7 @@ Warzone.WeaponInfo = InheritFrom(LUI.UIElement)
 
 local function PreLoadFunc(menu, controller)
     Engine.SetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "currentWeapon"), "weaponOverclockName"), "")
+    Engine.SetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "currentWeapon"), "weaponOverclocks"), 0)
 end
 
 function Warzone.WeaponInfo.new(menu, controller)
