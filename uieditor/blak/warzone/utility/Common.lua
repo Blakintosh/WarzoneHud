@@ -34,6 +34,7 @@ Wzu.Colors = {
     Grey56 = { r = 0.2196, g = 0.2196, b = 0.2196 },
     Pavement = { r = 0.5176, g = 0.5529, b = 0.5059 },
     Grey128 = { r = 0.5020, g = 0.5020, b = 0.5020 },
+    DarkPhoshper = { r = 0.1490, g = 0.2275, b = 0.2431 }
 }
 
 Wzu.Swatches = {
@@ -47,6 +48,7 @@ Wzu.Swatches = {
     BackgroundDisabled = Wzu.Colors.Asphalt,
     EnemyTeam = Wzu.Colors.Watermelon,
     FriendlyTeam = Wzu.Colors.CodeLightBlue,
+    FriendlyTeamDark = Wzu.Colors.DarkPhoshper,
     FriendlyTeamTextHighlight = Wzu.Colors.lightBlue,
     Rarities = {
         Wzu.Colors.Grey63, --Misc

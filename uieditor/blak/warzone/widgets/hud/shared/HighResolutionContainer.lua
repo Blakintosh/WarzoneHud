@@ -57,6 +57,13 @@ function Warzone.HighResolutionContainer.new(menu, controller)
     self.powerups:setScaledTopBottom(true, false, 70, 110)
 
     self:addElement(self.powerups)
+
+    -- Notification
+    self.notification = Wzu.CreateContainedHudElement(menu, controller, Warzone.Notification)
+    self.notification:setScaledLeftRight(false, false, -640, 640)
+    self.notification:setScaledTopBottom(true, false, 130, 190)
+
+    self:addElement(self.notification)
     
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(self)
         self.ammo:close()
@@ -65,6 +72,7 @@ function Warzone.HighResolutionContainer.new(menu, controller)
         self.cursorHint:close()
         self.oob:close()
         self.powerups:close()
+        self.notification:close()
     end)
     
     if PostLoadFunc then

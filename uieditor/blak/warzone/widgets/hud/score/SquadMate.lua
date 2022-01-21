@@ -1,3 +1,4 @@
+require( "ui.uieditor.widgets.onOffImage" )
 require("ui.uieditor.blak.warzone.widgets.hud.score.HealthBar")
 
 Warzone.SquadMate = InheritFrom(LUI.UIElement)
@@ -89,10 +90,20 @@ function Warzone.SquadMate.new(menu, controller)
 
     self:addElement(self.healthBar)
 
-    self.squadLeader = LUI.UIImage.new()
+    self.squadLeader = CoD.onOffImage.new(menu, controller)
     self.squadLeader:setScaledLeftRight(true, false, 2, 16)
     self.squadLeader:setScaledTopBottom(true, false, 1, 15)
-    self.squadLeader:setImage(RegisterImage("ui_mp_br_player_status_squad_leader"))
+    self.squadLeader.image:setImage(RegisterImage("ui_mp_br_player_status_squad_leader"))
+
+    self.squadLeader:mergeStateConditions({
+        {
+            stateName = "On", 
+            condition = function(menu, widget, event)
+                -- Edge cases where client num != 0 only happen in pubs, so no need for me to care
+                return IsSelfModelValueEqualTo(self, controller, "clientNum", 0)
+            end
+        }
+    })
 
     Wzu.ClipSequence(self, self.squadLeader, "DefaultState", {
         {

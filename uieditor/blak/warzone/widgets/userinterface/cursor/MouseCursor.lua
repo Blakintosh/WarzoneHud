@@ -59,7 +59,7 @@ Warzone.MouseCursor.new = function()
 	return self
 end
 
-LUI.UIMouseCursor.new = Warzone.MouseCursor.new
+--[[LUI.UIMouseCursor.new = Warzone.MouseCursor.new
 
 local cursor = Warzone.MouseCursor.new()
-LUI.roots.UIRootFull:addElement(cursor)
+LUI.roots.UIRootFull:addElement(cursor)]]

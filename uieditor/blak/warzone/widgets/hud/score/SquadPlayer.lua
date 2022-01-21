@@ -1,3 +1,4 @@
+require( "ui.uieditor.widgets.onOffImage" )
 require("ui.uieditor.blak.warzone.widgets.hud.score.HealthBar")
 require("ui.uieditor.blak.warzone.widgets.hud.perks.PerksList")
 
@@ -81,10 +82,21 @@ function Warzone.SquadPlayer.new(menu, controller)
 
     self:addElement(self.healthBar)
 
-    self.squadLeader = LUI.UIImage.new()
+    self.squadLeader = CoD.onOffImage.new()
     self.squadLeader:setScaledLeftRight(true, false, 2, 16)
     self.squadLeader:setScaledTopBottom(true, false, 1, 15)
-    self.squadLeader:setImage(RegisterImage("ui_mp_br_player_status_squad_leader"))
+    self.squadLeader.image:setImage(RegisterImage("ui_mp_br_player_status_squad_leader"))
+
+    self.squadLeader:mergeStateConditions({
+        {
+            stateName = "On", 
+            condition = function(menu, widget, event)
+                -- Edge cases where client num != 0 only happen in pubs, so no need for me to care
+                return IsSelfModelValueEqualTo(self, controller, "clientNum", 0)
+            end
+        }
+    })
+
     self:addElement(self.squadLeader)
 
     self.username = Wzu.TextElement(Wzu.Fonts.BattlenetBold, Wzu.Swatches.HUDMain, true)
@@ -107,12 +119,6 @@ function Warzone.SquadPlayer.new(menu, controller)
         local color = Wzu.GetClientColor(modelValue)
         Wzu.SetRGBFromTable(self.username, color)
         Wzu.SetRGBFromTable(self.squadLeader, color)
-
-        -- Strictly speaking there are edge cases where host is not the orange client, but these only occur after a host migration.
-        -- So we don't need to care about that since custom maps can only be played in Private Match...
-        if modelValue ~= 0 then
-            self.squadLeader:setAlpha(0)
-        end
     end)
     
     self.clipsPerState = {

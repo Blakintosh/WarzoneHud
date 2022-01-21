@@ -27,6 +27,9 @@ end
 Wzu.TweenGraphs.inQuad = function(x)
     return x*x
 end
+Wzu.TweenGraphs.outQuad = function(x)
+    return (1 - (1 - x) * (1 - x))
+end
 
 local function NextInterpolationStep(self, startClock, timeElapsed, duration, tween, tweenUpdateCallback)
     local dur = 25 -- 40 hz.

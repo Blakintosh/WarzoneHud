@@ -391,13 +391,6 @@ Warzone.WeaponPickup.new = function (menu, controller)
     self:addElement(self.main)
 
     LUI.OverrideFunction_CallOriginalSecond(menu, "close", function(self)
-        self.backgroundUpper:close()
-        self.backgroundLower:close()
-        self.interiorGlow:close()
-        self.divider:close()
-        self.triangle:close()
-        self.bottomBar:close()
-        self.bottomGlow:close()
         self.main:close()
     end)
 
