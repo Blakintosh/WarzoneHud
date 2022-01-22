@@ -355,6 +355,9 @@ function Warzone.Notification.new(menu, controller)
         self.currentNotification = notificationTable
         -- First set the title up
         self.message:setText(notificationTable.title)
+        -- And set the icons
+        self.imageL:setImage(notificationTable.icon)
+        self.imageR:setImage(notificationTable.icon)
         -- Then play the clip itself
         self:playClip(notificationTable.clip)
         self.stripes:playClip(notificationTable.clip)
@@ -391,8 +394,8 @@ function Warzone.Notification.new(menu, controller)
     end
 
     local NotificationIconTable = {
-        [0] = "hud_icon_ammo_resupply",
-        [1] = "icon_killstreak_tablet_airstrike"
+        [0] = RegisterImage("hud_icon_ammo_resupply"),
+        [1] = RegisterImage("icon_killstreak_tablet_airstrike")
     }
     
     Wzu.ScriptNotify(controller, self, "zombie_notification", function(notifyData)
