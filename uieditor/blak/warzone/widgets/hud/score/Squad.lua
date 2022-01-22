@@ -7,6 +7,12 @@ end}
 
 Warzone.Squad = InheritFrom(LUI.UIElement)
 
+local function PreLoadFunc(menu, controller)
+    for clientNum = 0, 4 - 1, 1 do
+        Engine.CreateModel(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "PlayerList"), "client" .. clientNum), "health")
+    end
+end
+
 function Warzone.Squad.new(menu, controller)
     local self = LUI.UIElement.new()
     if PreLoadFunc then

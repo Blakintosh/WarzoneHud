@@ -85,7 +85,8 @@ local function NextInterpolationStep(self, startClock, timeElapsed, duration, tw
         else
             widget:processEvent({
                 name = "tween_complete",
-                interrupted = true
+                interrupted = true,
+                progress = tv
             })
             return
         end

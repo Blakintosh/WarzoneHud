@@ -122,6 +122,15 @@ function Warzone.WeaponPickupMainBody.new(menu, controller)
     self.swapPrompt:setText("Swap")
 
     self:addElement(self.swapPrompt)
+
+    LUI.OverrideFunction_CallOriginalSecond(menu, "close", function(sender)
+        sender.weaponInfo:close()
+        sender.tiersInfo:close()
+        sender.buttonPrompt:close()
+        sender.dpsRow:close()
+        sender.ammoRow:close()
+        sender.damageRow:close()
+    end)
     
     if PostLoadFunc then
         PostLoadFunc(menu, controller)

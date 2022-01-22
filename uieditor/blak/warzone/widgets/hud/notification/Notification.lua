@@ -103,7 +103,6 @@ function Warzone.Notification.new(menu, controller)
     self.background:setScaledTopBottom(true, true, 0, 0)
     self.background:setImage(RegisterImage("widg_gradient_center_out"))
     Wzu.SetRGBFromTable(self.background, Wzu.Swatches.FriendlyTeam)
-    --self.background:setMaterial(LUI.UIImage.GetCachedMaterial("ui_"))
 
     Wzu.ClipSequence(self, self.background, "DefaultClip", {
         {
@@ -174,11 +173,6 @@ function Warzone.Notification.new(menu, controller)
     })
 
     Wzu.AddShadowedElement(self, self.message)
-
-    --[[2_local2:setImage(RegisterImage("uie_t7_menu_loadingspinner_flipbook"))
-	f2_local2:setMaterial(LUI.UIImage.GetCachedMaterial("uie_flipbook"))
-	f2_local2:setShaderVector(0, 28, 0, 0, 0)
-	f2_local2:setShaderVector(1, 22, 0, 0, 0)]]
 
     self.arrowL = Warzone.NotificationArrow.new(menu, controller)
     self.arrowL:setScaledLeftRight(true, false, 250, 350)
@@ -340,16 +334,6 @@ function Warzone.Notification.new(menu, controller)
             end
         }
     }
-
-    --[[local function GumCallback(ModelRef)
-        if IsParamModelEqualToString(ModelRef, "zombie_bgb_token_notification") then
-            AddZombieBGBTokenNotification(menu, GumWidget, controller, ModelRef) -- Add a popup for a 'free hit'
-        elseif IsParamModelEqualToString(ModelRef, "zombie_bgb_notification") then
-            AddZombieBGBNotification(menu, GumWidget, ModelRef) -- Add a popup for the gum you got
-        elseif IsParamModelEqualToString(ModelRef, "zombie_notification") then
-            AddZombieNotification(menu, GumWidget, ModelRef) -- Add a popup for a powerup
-        end
-    end]]
     
     self.playNotification = function(self, notificationTable)
         self.currentNotification = notificationTable

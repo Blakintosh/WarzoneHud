@@ -67,6 +67,8 @@ function Warzone.SquadPlayer.new(menu, controller)
     self.healthBar:setScaledLeftRight(true, false, 18, 151)
     self.healthBar:setScaledTopBottom(false, true, -23, -18)
 
+    Wzu.LinkWidgetToElementModel(self.healthBar, self, controller)
+
     Wzu.ClipSequence(self, self.healthBar, "HasPerks", {
         {
             duration = 0,

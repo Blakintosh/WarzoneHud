@@ -34,7 +34,8 @@ Wzu.Colors = {
     Grey56 = { r = 0.2196, g = 0.2196, b = 0.2196 },
     Pavement = { r = 0.5176, g = 0.5529, b = 0.5059 },
     Grey128 = { r = 0.5020, g = 0.5020, b = 0.5020 },
-    DarkPhoshper = { r = 0.1490, g = 0.2275, b = 0.2431 }
+    DarkPhoshper = { r = 0.1490, g = 0.2275, b = 0.2431 },
+    IceIceBaby = { r = 0.8902, g = 0.9529, b = 0.9686 },
 }
 
 Wzu.Swatches = {
@@ -42,7 +43,9 @@ Wzu.Swatches = {
     Overcharged = Wzu.Colors.FreshMango,
     HUDShadow = Wzu.Colors.Grey63,
     HUDMain = Wzu.Colors.WeatheredSlate,
+    HUDStable = Wzu.Colors.IceIceBaby,
     HUDWarning = Wzu.Colors.AlertOrange,
+    HUDWarningDanger = Wzu.Colors.VibrantRed,
     Cash = Wzu.Colors.BRPlunderGreen,
     GlobalKeyColor = Wzu.Colors.CodeLightBlue,
     BackgroundDisabled = Wzu.Colors.Asphalt,
@@ -75,6 +78,7 @@ Wzu.Swatches = {
     ButtonBackgroundDisabled = Wzu.Colors.Asphalt,
     ButtonBorder = Wzu.Colors.Grey56,
     TextPrimaryText = Wzu.Colors.WeatheredSlate,
+    FieldUpgradeIdle = Wzu.Colors.WeatheredSlate
 }
 
 Wzu.Fonts = {
