@@ -21,12 +21,38 @@ function Warzone.ButtonPrompt.new(menu, controller)
     self.unboundBacker:setScaledTopBottom(true, false, 0, 16)
     self.unboundBacker:setImage(RegisterImage("ui_keybind_backing_unbound"))
 
+    Wzu.ClipSequence(self, self.unboundBacker, "Disabled", {
+        {
+            duration = 0,
+            setAlpha = 1
+        }
+    })
+    Wzu.ClipSequence(self, self.unboundBacker, "Enabled", {
+        {
+            duration = 0,
+            setAlpha = 0
+        }
+    })
+
     self:addElement(self.unboundBacker)
 
     self.backer = LUI.UIImage.new()
     self.backer:setScaledLeftRight(true, false, 0, 16)
     self.backer:setScaledTopBottom(true, false, 0, 16)
     self.backer:setImage(RegisterImage("ui_keybind_backing"))
+
+    Wzu.ClipSequence(self, self.backer, "Disabled", {
+        {
+            duration = 0,
+            setAlpha = 0
+        }
+    })
+    Wzu.ClipSequence(self, self.backer, "Enabled", {
+        {
+            duration = 0,
+            setAlpha = 1
+        }
+    })
 
     self:addElement(self.backer)
 
@@ -36,7 +62,33 @@ function Warzone.ButtonPrompt.new(menu, controller)
     self.keyBind:setText(Engine.Localize("[{+activate}]"))
     self.keyBind:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_CENTER)
 
+    Wzu.ClipSequence(self, self.keyBind, "Disabled", {
+        {
+            duration = 0,
+            setAlpha = 0
+        }
+    })
+    Wzu.ClipSequence(self, self.keyBind, "Enabled", {
+        {
+            duration = 0,
+            setAlpha = 1
+        }
+    })
+
     self:addElement(self.keyBind)
+
+    self.clipsPerState = {
+        DefaultState = {
+            DefaultClip = function()
+                Wzu.AnimateSequence(self, "Enabled")
+            end
+        },
+        Disabled = {
+            DefaultClip = function()
+                Wzu.AnimateSequence(self, "Disabled")
+            end
+        }
+    }
     
     if PostLoadFunc then
         PostLoadFunc(self, controller)

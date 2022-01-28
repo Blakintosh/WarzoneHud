@@ -1,4 +1,4 @@
-require("ui.uieditor.blak.warzone.widgets.hud.weaponpickup.WeaponPickup")
+require("ui.uieditor.blak.warzone.widgets.hud.perkpickup.PerkPickup")
 
 local SetupWaypointContainer = function (self, objective)
 	if objective.objId then
@@ -65,21 +65,21 @@ local PostLoadFunc = function (self)
 	self.setupWaypointContainer = SetupWaypointContainer
 end
 
-Warzone.WeaponPickupContainer = InheritFrom(LUI.UIElement)
-Warzone.WeaponPickupContainer.new = function (menu, controller)
+Warzone.PerkPickupContainer = InheritFrom(LUI.UIElement)
+Warzone.PerkPickupContainer.new = function (menu, controller)
 	local self = LUI.UIElement.new()
 	if PreLoadFunc then
 		PreLoadFunc(self, controller)
 	end
 	self:setUseStencil(false)
-	self:setClass(Warzone.WeaponPickupContainer)
-	self.id = "WeaponPickupContainer"
+	self:setClass(Warzone.PerkPickupContainer)
+	self.id = "PerkPickupContainer"
 	self.soundSet = "default"
 	self:setLeftRight(true, false, 0, 1280)
 	self:setTopBottom(true, false, 0, 720)
 	self.anyChildUsesUpdateState = true
     
-	self.Waypoint = Warzone.WeaponPickup.new(menu, controller)
+	self.Waypoint = Warzone.PerkPickup.new(menu, controller)
 	self.Waypoint:setLeftRight(false, false, -160, 160)
 	self.Waypoint:setTopBottom(false, false, -135, 135)
 

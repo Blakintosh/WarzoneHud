@@ -1,4 +1,4 @@
-require("ui.uieditor.blak.warzone.widgets.hud.weaponpickup.WeaponPickupMainBody")
+require("ui.uieditor.blak.warzone.widgets.hud.perkpickup.PerkPickupMainBody")
 
 local SetupWaypoint = function (self, objective)
 	if objective.objId then
@@ -283,8 +283,14 @@ local SetWaypointState = function (self, waypointState)
 	end
 end
 
-local function PreLoadFunc(self, controller)
-    Engine.CreateModel(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "prospectiveWeapon"), "attributes"), "weaponRarity")
+local function PreLoadFunc(menu, controller)
+    Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "prospectivePerk"), "specialty")
+    Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "prospectivePerk"), "cost")
+    Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "prospectivePerk"), "perkCountString")
+    Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "prospectivePerk"), "atPerkLimit")
+    Engine.CreateModel(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "prospectivePerk"), "attributes"), "name")
+    Engine.CreateModel(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "prospectivePerk"), "attributes"), "effects")
+    Engine.CreateModel(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "prospectivePerk"), "attributes"), "color")
 end
 
 local PostLoadFunc = function (self, controller)
@@ -295,27 +301,27 @@ local PostLoadFunc = function (self, controller)
 	self.SetWaypointState = SetWaypointState
 end
 
-local function SubRGBToRarity(self, controller)
-    Wzu.Subscribe(self, controller, "prospectiveWeapon.attributes.weaponRarity", function(modelValue)
-        if Wzu.Swatches.Rarities[modelValue + 1] then
-            Wzu.SetRGBFromTable(self, Wzu.Swatches.Rarities[modelValue + 1])
+local function SubRGBToPerk(self, controller)
+    Wzu.Subscribe(self, controller, "prospectivePerk.attributes.color", function(modelValue)
+        if Wzu.Colors.Perks[modelValue] then
+            Wzu.SetRGBFromTable(self, Wzu.Colors.Perks[modelValue])
         else
-            Wzu.SetRGBFromTable(self, Wzu.Swatches.Rarities[1])
+            Wzu.SetRGBFromTable(self, Wzu.Colors.White)
         end
     end)
 end
 
-Warzone.WeaponPickup = InheritFrom(LUI.UIElement)
+Warzone.PerkPickup = InheritFrom(LUI.UIElement)
 
-Warzone.WeaponPickup.new = function (menu, controller)
+Warzone.PerkPickup.new = function (menu, controller)
 	local self = LUI.UIElement.new()
 	if PreLoadFunc then
 		PreLoadFunc(self, controller)
 	end
 
 	self:setUseStencil(false)
-	self:setClass(Warzone.WeaponPickup)
-	self.id = "WeaponPickup"
+	self:setClass(Warzone.PerkPickup)
+	self.id = "PerkPickup"
 	self.soundSet = "default"
 	self:setLeftRight(true, false, 0, 320)
 	self:setTopBottom(true, false, 0, 140)
@@ -345,7 +351,7 @@ Warzone.WeaponPickup.new = function (menu, controller)
     self.interiorGlow:setMaterial(LUI.UIImage.GetCachedMaterial("uie_pixel_grid"))
 	self.interiorGlow:setShaderVector(0, 2.0, 2.0, 1.0, 1.0)
 
-    SubRGBToRarity(self.interiorGlow, controller)
+    SubRGBToPerk(self.interiorGlow, controller)
 
     self:addElement(self.interiorGlow)
 
@@ -353,7 +359,7 @@ Warzone.WeaponPickup.new = function (menu, controller)
     self.divider:setLeftRight(true, true, 0, 0)
     self.divider:setTopBottom(true, false, 23, 24)
 
-    SubRGBToRarity(self.divider, controller)
+    SubRGBToPerk(self.divider, controller)
 
     self:addElement(self.divider)
 
@@ -362,7 +368,7 @@ Warzone.WeaponPickup.new = function (menu, controller)
     self.triangle:setTopBottom(true, false, 37, 50)
     self.triangle:setImage(RegisterImage("hud_reticle_triangle_outline_pointright"))
 
-    SubRGBToRarity(self.triangle, controller)
+    SubRGBToPerk(self.triangle, controller)
 
     self:addElement(self.triangle)
 
@@ -370,7 +376,7 @@ Warzone.WeaponPickup.new = function (menu, controller)
     self.bottomBar:setLeftRight(true, true, 0, 0)
     self.bottomBar:setTopBottom(false, true, -1, 0)
 
-    SubRGBToRarity(self.bottomBar, controller)
+    SubRGBToPerk(self.bottomBar, controller)
 
     self:addElement(self.bottomBar)
 
@@ -379,11 +385,11 @@ Warzone.WeaponPickup.new = function (menu, controller)
     self.bottomGlow:setTopBottom(false, true, -8, 8)
     self.bottomGlow:setImage(RegisterImage("hud_glow"))
 
-    SubRGBToRarity(self.bottomGlow, controller)
+    SubRGBToPerk(self.bottomGlow, controller)
 
     self:addElement(self.bottomGlow)
 
-    self.main = Warzone.WeaponPickupMainBody.new(menu, controller)
+    self.main = Warzone.PerkPickupMainBody.new(menu, controller)
     self.main:setScaledLeftRight(false, false, -148, 148)
     self.main:setScaledTopBottom(false, false, -60.5, 60.5)
     self.main:setScale(1 / _ResolutionScalar)

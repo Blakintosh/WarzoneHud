@@ -36,6 +36,13 @@ Wzu.Colors = {
     Grey128 = { r = 0.5020, g = 0.5020, b = 0.5020 },
     DarkPhoshper = { r = 0.1490, g = 0.2275, b = 0.2431 },
     IceIceBaby = { r = 0.8902, g = 0.9529, b = 0.9686 },
+    Perks = {
+        ArmorVest = { r = 0.8667, g = 0.1755, b = 0.1755 },
+        FastReload = { r = 0.1, g = 0.7157, b = 0.1 },
+        Rof = { r = 0.9294, g = 0.7686, b = 0.1451 },
+        DoubleTap2 = { r = 0.9294, g = 0.7686, b = 0.1451 },
+        QuickRevive = { r = 0.3529, g = 0.8039, b = 0.9725 }
+    }
 }
 
 Wzu.Swatches = {

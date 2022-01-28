@@ -1,5 +1,6 @@
 require( "ui.uieditor.widgets.onOffImage" )
 require("ui.uieditor.blak.warzone.widgets.hud.score.HealthBar")
+require("ui.uieditor.blak.warzone.widgets.hud.score.PlusPointsContainer")
 
 Warzone.SquadMate = InheritFrom(LUI.UIElement)
 
@@ -43,6 +44,7 @@ function Warzone.SquadMate.new(menu, controller)
     self.cash:setScaledLeftRight(true, false, 18.5, 100)
     self.cash:setScaledTopBottom(false, true, -14, -3)
     self.cash:setText(Engine.Localize("$500"))
+    self.cash:setPriority(5)
 
     Wzu.ClipSequence(self, self.cash, "DefaultState", {
         {
@@ -144,6 +146,13 @@ function Warzone.SquadMate.new(menu, controller)
     })
 
     Wzu.AddShadowedElement(self, self.username)
+
+    self.plusPoints = Warzone.PlusPointsContainer.new(menu, controller)
+    self.plusPoints:setScaledLeftRight(true, false, 18.5, 100)
+    self.plusPoints:setScaledTopBottom(false, true, -14, -3)
+    self.plusPoints:setPriority(4)
+    
+    self:addElement(self.plusPoints)
 
     Wzu.LinkToWidget(self, self, "clientNum", function(modelValue)
         local color = Wzu.GetClientColor(modelValue)

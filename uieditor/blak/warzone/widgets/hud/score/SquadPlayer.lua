@@ -1,6 +1,7 @@
 require( "ui.uieditor.widgets.onOffImage" )
 require("ui.uieditor.blak.warzone.widgets.hud.score.HealthBar")
 require("ui.uieditor.blak.warzone.widgets.hud.perks.PerksList")
+require("ui.uieditor.blak.warzone.widgets.hud.score.PlusPointsContainer")
 
 Warzone.SquadPlayer = InheritFrom(LUI.UIElement)
 
@@ -35,6 +36,7 @@ function Warzone.SquadPlayer.new(menu, controller)
     self.cash:setScaledLeftRight(true, false, 18.5, 100)
     self.cash:setScaledTopBottom(false, true, -18, -4)
     self.cash:setText(Engine.Localize("$500"))
+    self.cash:setPriority(5)
 
     Wzu.ClipSequence(self, self.cash, "HasPerks", {
         {
@@ -116,6 +118,26 @@ function Warzone.SquadPlayer.new(menu, controller)
     self.perksList:setScaledTopBottom(true, false, 13, 33)
 
     self:addElement(self.perksList)
+
+    self.plusPoints = Warzone.PlusPointsContainer.new(menu, controller)
+    self.plusPoints:setScaledLeftRight(true, false, 18.5, 151)
+    self.plusPoints:setScaledTopBottom(false, true, -18, -4)
+    self.plusPoints:setPriority(4)
+
+    Wzu.ClipSequence(self, self.plusPoints, "HasPerks", {
+        {
+            duration = 0,
+            setScaledTopBottom = {false, true, -16, -2}
+        }
+    })
+    Wzu.ClipSequence(self, self.plusPoints, "DefaultState", {
+        {
+            duration = 0,
+            setScaledTopBottom = {false, true, -18, -4}
+        }
+    })
+    
+    self:addElement(self.plusPoints)
 
     Wzu.LinkToWidget(self, self, "clientNum", function(modelValue)
         local color = Wzu.GetClientColor(modelValue)

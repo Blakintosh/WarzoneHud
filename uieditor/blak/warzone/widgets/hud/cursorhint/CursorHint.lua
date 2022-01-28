@@ -1,5 +1,9 @@
 Warzone.CursorHint = InheritFrom(LUI.UIElement)
 
+local function PreLoadFunc(menu, controller)
+    Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "hudItems"), "suppressCursorHintDisplay")
+end
+
 function Warzone.CursorHint.new(menu, controller)
     local self = LUI.UIElement.new()
     if PreLoadFunc then
@@ -77,7 +81,9 @@ function Warzone.CursorHint.new(menu, controller)
             stateName = "Show",
             condition = function(menu, self, event)
                 if IsModelValueTrue(controller, "hudItems.showCursorHint") then
-                    return not IsModelValueEqualTo(controller, "hudItems.cursorHintText", "")
+                    if not IsModelValueEqualTo(controller, "hudItems.cursorHintText", "") then
+                        return not IsModelValueEqualTo(controller, "hudItems.suppressCursorHintDisplay", 1)
+                    end
                 end
                 return false
             end
@@ -86,6 +92,7 @@ function Warzone.CursorHint.new(menu, controller)
 
     Wzu.SubState(controller, menu, self, "hudItems.cursorHintText")
     Wzu.SubState(controller, menu, self, "hudItems.showCursorHint")
+    Wzu.SubState(controller, menu, self, "hudItems.suppressCursorHintDisplay")
     
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(Sender)
         Sender.button:close()

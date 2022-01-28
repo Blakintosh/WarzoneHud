@@ -1,12 +1,13 @@
 require("ui.uieditor.blak.warzone.widgets.hud.weaponpickup.WeaponPickupCompRow")
 require("ui.uieditor.blak.warzone.widgets.hud.weaponpickup.WeaponPickupTiers")
 require("ui.uieditor.blak.warzone.widgets.hud.weaponpickup.WeaponPickupName")
+require("ui.uieditor.blak.warzone.widgets.hud.weaponpickup.WeaponPickupCost")
 require("ui.uieditor.blak.warzone.widgets.hud.shared.ButtonPrompt")
 
 Warzone.WeaponPickupMainBody = InheritFrom(LUI.UIElement)
 
 local function PreLoadFunc(menu, controller)
-    for k, v in ipairs({"weaponName", "weaponClass", "weaponTier", "weaponOverclocks", "weaponRarity"}) do
+    for k, v in ipairs({"weaponName", "weaponClass", "weaponTier", "weaponOverclocks", "weaponRarity", "cost", "buyString"}) do
         Engine.CreateModel(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "prospectiveWeapon"), "attributes"), v)
     end
 
@@ -114,6 +115,18 @@ function Warzone.WeaponPickupMainBody.new(menu, controller)
     self.buttonPrompt = Warzone.ButtonPrompt.new(menu, controller)
     self.buttonPrompt:setScaledLeftRight(true, false, 0, 16)
     self.buttonPrompt:setScaledTopBottom(false, false, -66, -50)
+
+    self.buttonPrompt:mergeStateConditions({{
+        stateName = "Disabled",
+        condition = function(menu, self, event)
+            local cost = tonumber(Engine.GetModelValue(Engine.GetModel(Engine.GetModelForController(controller), "prospectiveWeapon.attributes.cost")))
+            return not IsModelValueGreaterThanOrEqualTo(controller, "PlayerList.0.playerScore", cost)
+        end
+    }})
+
+    Wzu.SubState(controller, menu, self.buttonPrompt, "prospectiveWeapon.attributes.cost")
+    Wzu.SubState(controller, menu, self.buttonPrompt, "PlayerList.0.playerScore")
+
     self:addElement(self.buttonPrompt)
 
     self.swapPrompt = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
@@ -121,9 +134,17 @@ function Warzone.WeaponPickupMainBody.new(menu, controller)
     self.swapPrompt:setScaledTopBottom(false, false, -64, -52)
     self.swapPrompt:setText("Swap")
 
+    Wzu.SubscribeToText(self.swapPrompt, controller, "prospectiveWeapon.attributes.buyString")
+
     self:addElement(self.swapPrompt)
 
-    LUI.OverrideFunction_CallOriginalSecond(menu, "close", function(sender)
+    self.costPrompt = Warzone.WeaponPickupCost.new(menu, controller)
+    self.costPrompt:setScaledLeftRight(false, true, -20, 0)
+    self.costPrompt:setScaledTopBottom(false, false, -65, -51)
+
+    self:addElement(self.costPrompt)
+
+    LUI.OverrideFunction_CallOriginalSecond(self, "close", function(sender)
         sender.weaponInfo:close()
         sender.tiersInfo:close()
         sender.buttonPrompt:close()

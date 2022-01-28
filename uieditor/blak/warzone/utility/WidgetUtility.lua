@@ -39,6 +39,16 @@ Wzu.TextElement = function(font, color, shadow)
     return self
 end
 
+Wzu.TightTextElement = function(font, color)
+    local self = LUI.UITightText.new()
+
+    self:setTTF(font)
+    self:setText(Engine.Localize("MENU_NEW"))
+    Wzu.SetRGBFromTable(self, color)
+
+    return self
+end
+
 Wzu.AddShadowedElement = function(parent, self)
     parent:addElement(self.shadow)
     parent:addElement(self)
