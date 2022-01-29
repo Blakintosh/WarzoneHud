@@ -186,9 +186,11 @@ function Warzone.PerkPickupMainBody.new(menu, controller)
     end)
 
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(sender)
-        sender.weaponInfo:close()
-        sender.costPrompt:close()
-        sender.buttonPrompt:close()
+        if sender.weaponInfo and sender.costPrompt and sender.buttonPrompt then
+            sender.weaponInfo:close()
+            sender.costPrompt:close()
+            sender.buttonPrompt:close()
+        end
     end)
     
     if PostLoadFunc then

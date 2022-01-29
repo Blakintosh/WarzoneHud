@@ -118,7 +118,9 @@ Warzone.PerkPickupContainer.new = function (menu, controller)
     Wzu.SubState(controller, menu, self, "hudItems.cursorHintText")
 
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", function (self)
-		self.Waypoint:close()
+        if self.Waypoint then
+		    self.Waypoint:close()
+        end
 	end)
 
 	if PostLoadFunc then

@@ -397,7 +397,9 @@ Warzone.PerkPickup.new = function (menu, controller)
     self:addElement(self.main)
 
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(sender)
-        sender.main:close()
+        if sender.main then
+            sender.main:close()
+        end
     end)
 
 	if PostLoadFunc then
