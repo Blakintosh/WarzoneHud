@@ -19,8 +19,6 @@ local CreateNewPlusPointsElement = function ( element, score, controller, menu, 
 		return
 	end
 
-    
-
     local newPlusPointsElement = Warzone.PlusPoints.new(menu, controller)
     newPlusPointsElement:setScaledLeftRight(true, false, 0, 200)
     newPlusPointsElement:setScaledTopBottom(true, true, 0, 0)
@@ -204,9 +202,7 @@ function Warzone.Squad.new(menu, controller)
     end)
     
     if PostLoadFunc then
-        SafeCall(function()
         PostLoadFunc(self, controller, menu)
-        end)
     end
     
     return self
