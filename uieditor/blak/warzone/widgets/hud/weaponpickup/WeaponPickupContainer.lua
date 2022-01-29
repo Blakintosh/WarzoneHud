@@ -117,8 +117,8 @@ Warzone.WeaponPickupContainer.new = function (menu, controller)
     Wzu.SubState(controller, menu, self, "hudItems.showCursorHint")
     Wzu.SubState(controller, menu, self, "hudItems.cursorHintText")
 
-	LUI.OverrideFunction_CallOriginalSecond(self, "close", function (self)
-		self.Waypoint:close()
+	LUI.OverrideFunction_CallOriginalSecond(self, "close", function (sender)
+		sender.Waypoint:close()
 	end)
 
 	if PostLoadFunc then

@@ -144,6 +144,7 @@ function Warzone.WeaponPickupMainBody.new(menu, controller)
 
     self:addElement(self.costPrompt)
 
+    -- CHECK: Seems to be creating sporadic UI errors
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(sender)
         sender.weaponInfo:close()
         sender.tiersInfo:close()
@@ -151,6 +152,7 @@ function Warzone.WeaponPickupMainBody.new(menu, controller)
         sender.dpsRow:close()
         sender.ammoRow:close()
         sender.damageRow:close()
+        sender.costPrompt:close()
     end)
     
     if PostLoadFunc then

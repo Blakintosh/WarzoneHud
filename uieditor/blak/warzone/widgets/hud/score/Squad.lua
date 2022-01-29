@@ -1,4 +1,5 @@
 require("ui.uieditor.blak.warzone.widgets.hud.score.SquadPlayer")
+require("ui.uieditor.blak.warzone.widgets.hud.score.SquadPlayerPlusPoints")
 require("ui.uieditor.blak.warzone.widgets.hud.score.SquadMate")
 require("ui.uieditor.blak.warzone.widgets.hud.score.PlusPoints")
 
@@ -157,16 +158,16 @@ function Warzone.Squad.new(menu, controller)
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
 
-    --[[self.player0 = LUI.UIList.new(menu, controller, 2, 0, nil, false, false, 0, 0, false, false)
-	self.player0:makeFocusable()
-    self.player0:setScaledLeftRight(true, false, 24, 279)
-    self.player0:setScaledTopBottom(false, true, -67, -20)
-	self.player0:setWidgetType(Warzone.SquadPlayer)
-	self.player0:setDataSource("PlayerListZM")
+    self.player = LUI.UIList.new(menu, controller, 2, 0, nil, false, false, 0, 0, false, false)
+	self.player:makeFocusable()
+    self.player:setScaledLeftRight(true, false, 24, 279)
+    self.player:setScaledTopBottom(false, true, -67, -20)
+	self.player:setWidgetType(Warzone.SquadPlayer)
+	self.player:setDataSource("PlayerListZM")
     
-    self:addElement(self.player0)]]
+    self:addElement(self.player)
 
-    self.player0 = Warzone.SquadPlayer.new(menu, controller)
+    self.player0 = Warzone.SquadPlayerPlusPoints.new(menu, controller)
     self.player0:setScaledLeftRight(true, false, 24, 279)
     self.player0:setScaledTopBottom(false, true, -67, -20)
     Wzu.SetElementModel(self.player0, controller, "ZMPlayerList", "0")
@@ -195,6 +196,7 @@ function Warzone.Squad.new(menu, controller)
     self:addElement(self.player3)
 
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(Sender)
+        Sender.player:close()
         Sender.player0:close()
         Sender.player1:close()
         Sender.player2:close()
