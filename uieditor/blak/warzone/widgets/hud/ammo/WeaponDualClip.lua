@@ -1,24 +1,22 @@
-Warzone.WeaponClip = InheritFrom(LUI.UIElement)
+Warzone.WeaponDualClip = InheritFrom(LUI.UIElement)
 
-function Warzone.WeaponClip.new(menu, controller)
+function Warzone.WeaponDualClip.new(menu, controller)
     local self = LUI.UIElement.new()
     if PreLoadFunc then
         PreLoadFunc(menu, controller)
     end
     
     self:setUseStencil(false)
-    self:setClass(Warzone.WeaponClip)
-    self.id = "WeaponClip"
+    self:setClass(Warzone.WeaponDualClip)
+    self.id = "WeaponDualClip"
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
-    self:setScaledLeftRight(false, true, -20, 0)
-    self:setScaledTopBottom(true, true, 0, 0)
 
     self.ammoClip = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, true)
     self.ammoClip:setScaledLeftRight(false, true, -20, 0)
     self.ammoClip:setScaledTopBottom(true, true, 0, 0)
 
-    Wzu.SubscribeToText(self.ammoClip, controller, "currentWeapon.ammoInClip")
+    Wzu.SubscribeToText(self.ammoClip, controller, "currentWeapon.ammoInDWClip")
 
     Wzu.ClipSequence(self, self.ammoClip, "DefaultState", {
         {
@@ -72,13 +70,13 @@ function Warzone.WeaponClip.new(menu, controller)
         {
             stateName = "LowAmmo",
             condition = function(menu, self, event)
-                return IsLowAmmoClip(controller)
+                return IsLowAmmoDWClip(controller)
             end
         }
     })
 
     Wzu.SubState(controller, menu, self, "currentWeapon.weapon")
-    Wzu.SubState(controller, menu, self, "currentWeapon.ammoInClip")
+    Wzu.SubState(controller, menu, self, "currentWeapon.ammoInDWClip")
 
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)

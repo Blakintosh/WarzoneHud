@@ -1,4 +1,4 @@
-require("ui.uieditor.blak.warzone.widgets.hud.ammo.WeaponClip")
+require("ui.uieditor.blak.warzone.widgets.hud.ammo.WeaponClipInfo")
 require("ui.uieditor.blak.warzone.widgets.hud.ammo.WeaponReserve")
 
 Warzone.WeaponClipReserve = InheritFrom(LUI.UIElement)
@@ -15,7 +15,7 @@ function Warzone.WeaponClipReserve.new(menu, controller)
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
 
-    self.ammoClip = Warzone.WeaponClip.new(menu, controller)
+    self.ammoClip = Warzone.WeaponClipInfo.new(menu, controller)
     self.ammoClip:setScaledLeftRight(false, true, -200, 0)
     self.ammoClip:setScaledTopBottom(true, false, -3.5, 28)
 

@@ -1,12 +1,12 @@
 Wzu.TextElement = function(font, color, shadow)
-    local self = LUI.UITightText.new()
+    local self = LUI.UIText.new()
 
     self:setTTF(font)
     self:setText(Engine.Localize("MENU_NEW"))
     Wzu.SetRGBFromTable(self, color)
 
     if shadow then
-        self.shadow = LUI.UITightText.new()
+        self.shadow = LUI.UIText.new()
         self.shadow:setTTF(font)
         self.shadow:setText(Engine.Localize("MENU_NEW"))
         Wzu.SetRGBFromTable(self.shadow, Wzu.Swatches.HUDShadow)
