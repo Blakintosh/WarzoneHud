@@ -19,6 +19,13 @@ function Warzone.SquadPlayerPlusPoints.new(menu, controller)
     self.id = "SquadPlayerPlusPoints"
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
+
+    self.perksList = Warzone.PerksList.new(menu, controller)
+    self.perksList:setScaledLeftRight(true, false, 19, 300)
+    self.perksList:setScaledTopBottom(true, false, 13, 33)
+    self.perksList:setAlpha(0)
+
+    self:addElement(self.perksList)
     
     self.plusPoints = Warzone.PlusPointsContainer.new(menu, controller)
     self.plusPoints:setScaledLeftRight(true, false, 18.5, 151)

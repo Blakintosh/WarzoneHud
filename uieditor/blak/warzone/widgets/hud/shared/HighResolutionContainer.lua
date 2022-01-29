@@ -67,7 +67,7 @@ function Warzone.HighResolutionContainer.new(menu, controller)
     
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(self)
         self.ammo:close()
-        self.squad:close()
+        --self.squad:close()
         self.round:close()
         self.cursorHint:close()
         self.oob:close()
