@@ -64,15 +64,23 @@ function Warzone.HighResolutionContainer.new(menu, controller)
     self.notification:setScaledTopBottom(true, false, 130, 190)
 
     self:addElement(self.notification)
+
+    -- "Reload"
+    self.reload = Wzu.CreateContainedHudElement(menu, controller, Warzone.ReloadPrompt)
+    self.reload:setScaledLeftRight(false, false, -640, 640)
+    self.reload:setScaledTopBottom(true, false, 420, 470)
+
+    self:addElement(self.reload)
     
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(self)
         self.ammo:close()
-        --self.squad:close()
+        self.squad:close()
         self.round:close()
         self.cursorHint:close()
         self.oob:close()
         self.powerups:close()
         self.notification:close()
+        self.reload:close()
     end)
     
     if PostLoadFunc then

@@ -54,6 +54,18 @@ Wzu.AddShadowedElement = function(parent, self)
     parent:addElement(self)
 end
 
+Wzu.ContainedShadowTextElement = function(font, color)
+    local self = LUI.UIElement.new()
+
+    self.text = Wzu.TextElement(font, color, true)
+    self.text:setScaledLeftRight(true, true, 0, 0)
+    self.text:setScaledTopBottom(true, true, 0, 0)
+
+    Wzu.AddShadowedElement(self, self.text)
+
+    return self
+end
+
 Wzu.GetModel = function(controller, modelName)
     return Engine.GetModel(Engine.GetModelForController(controller), modelName)
 end

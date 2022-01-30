@@ -36,6 +36,7 @@ Wzu.Colors = {
     Grey128 = { r = 0.5020, g = 0.5020, b = 0.5020 },
     DarkPhoshper = { r = 0.1490, g = 0.2275, b = 0.2431 },
     IceIceBaby = { r = 0.8902, g = 0.9529, b = 0.9686 },
+    Gold = { r = 0.8863, g = 0.7569, b = 0.0706 },
     Perks = {
         ArmorVest = { r = 0.8667, g = 0.1755, b = 0.1755 },
         FastReload = { r = 0.1, g = 0.7157, b = 0.1 },
@@ -53,6 +54,7 @@ Wzu.Swatches = {
     HUDStable = Wzu.Colors.IceIceBaby,
     HUDWarning = Wzu.Colors.AlertOrange,
     HUDWarningDanger = Wzu.Colors.VibrantRed,
+    HUDCaution = Wzu.Colors.Gold,
     Cash = Wzu.Colors.BRPlunderGreen,
     GlobalKeyColor = Wzu.Colors.CodeLightBlue,
     BackgroundDisabled = Wzu.Colors.Asphalt,

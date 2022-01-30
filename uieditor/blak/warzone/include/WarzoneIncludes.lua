@@ -21,6 +21,7 @@ require("ui.uieditor.blak.warzone.widgets.hud.oob.OutOfBounds")
 require("ui.uieditor.blak.warzone.widgets.hud.powerups.PowerupsList")
 require("ui.uieditor.blak.warzone.widgets.hud.weaponpickup.WeaponPickupContainer")
 require("ui.uieditor.blak.warzone.widgets.hud.perkpickup.PerkPickupContainer")
+require("ui.uieditor.blak.warzone.widgets.hud.reloadprompt.ReloadPrompt")
 
 -- Associated Menus
 require("ui.uieditor.blak.warzone.menus.overclockmenu.OverclockMenu")

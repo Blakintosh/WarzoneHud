@@ -49,7 +49,7 @@ function Warzone.WeaponPickupCost.new(menu, controller)
     Wzu.ClipSequence(self, self.costValue, "Default", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain),
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDCaution),
             setAlpha = 1
         }
     })

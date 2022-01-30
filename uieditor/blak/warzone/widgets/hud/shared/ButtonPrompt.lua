@@ -37,9 +37,12 @@ function Warzone.ButtonPrompt.new(menu, controller)
     self:addElement(self.unboundBacker)
 
     self.backer = LUI.UIImage.new()
-    self.backer:setScaledLeftRight(true, false, 0, 16)
+    self.backer:setScaledLeftRight(true, true, 0, 0)
     self.backer:setScaledTopBottom(true, false, 0, 16)
     self.backer:setImage(RegisterImage("ui_keybind_backing"))
+    self.backer:setMaterial(LUI.UIImage.GetCachedMaterial("uie_nineslice_normal"))
+    self.backer:setShaderVector(0, 0.04, 0.5, 0, 0)
+    self.backer:setupNineSliceShader(12, 12)
 
     Wzu.ClipSequence(self, self.backer, "Disabled", {
         {
@@ -57,8 +60,12 @@ function Warzone.ButtonPrompt.new(menu, controller)
     self:addElement(self.backer)
 
     self.keyBind = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Colors.Asphalt, false)
-    self.keyBind:setScaledLeftRight(false, false, -8, 8)
+    self.keyBind:setScaledLeftRight(true, true, 0, 0)
     self.keyBind:setScaledTopBottom(true, false, 0, 16)
+
+    LUI.OverrideFunction_CallOriginalFirst(self.keyBind, "setText", function(widget, text)
+        ScaleWidgetToLabel(self, self.keyBind, 16)
+    end)
     self.keyBind:setText(Engine.Localize("[{+activate}]"))
     self.keyBind:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_CENTER)
 
@@ -89,6 +96,10 @@ function Warzone.ButtonPrompt.new(menu, controller)
             end
         }
     }
+
+    self:registerEventHandler("input_source_changed", function(sender, event)
+        ScaleWidgetToLabel(self, self.keyBind, 16)
+    end)
     
     if PostLoadFunc then
         PostLoadFunc(self, controller)

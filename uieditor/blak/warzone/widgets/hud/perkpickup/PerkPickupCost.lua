@@ -30,13 +30,13 @@ function Warzone.PerkPickupCost.new(menu, controller)
     Wzu.ClipSequence(self, self.costValue, "Default", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDCaution)
         }
     })
     Wzu.ClipSequence(self, self.costValue, "CanAfford_Limit", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDCaution)
         }
     })
     Wzu.ClipSequence(self, self.costValue, "CantAfford_BelowLimit", {
