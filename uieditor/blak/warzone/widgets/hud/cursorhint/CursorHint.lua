@@ -20,6 +20,8 @@ function Warzone.CursorHint.new(menu, controller)
     self.button:setScaledLeftRight(true, false, 0, 16)
     self.button:setScaledTopBottom(true, false, 0, 16)
 
+    self.button:setButtonPrompt("activate", "activate")
+
     Wzu.ClipSequence(self, self.button, "Show", {
         {
             duration = 0,

@@ -1,6 +1,26 @@
-require("ui.uieditor.blak.warzone.widgets.hud.score.HealthBar")
-
 Warzone.ButtonPrompt = InheritFrom(LUI.UIElement)
+
+local function AbbreviatePCKey(self, key)
+    if string.match( Engine.GetKeyBindingLocalizedString( controller, "+"..key ), "UNBOUND" ) then
+        return ""
+    end
+
+    if string.len( Engine.GetKeyBindingLocalizedString(controller, "+"..key) ) == 1 then
+        return Engine.Localize( Engine.GetKeyBindingLocalizedString(controller, "+"..key) )
+    end
+        
+    if string.match( Engine.GetKeyBindingLocalizedString( controller, "+"..key ), "%s" ) then
+        if string.len( Engine.GetKeyBindingLocalizedString( controller, "+"..key ):match("^(.-)%s") ) > 1 then
+            if string.len( Engine.GetKeyBindingLocalizedString( controller, "+"..key ):reverse():match("^(.-)%s") ) > 1 then
+                return ""
+            else
+                return ( Engine.Localize( Engine.GetKeyBindingLocalizedString( controller, "+"..key ):reverse():match("^(.-)%s") ) )
+            end
+        else
+            return ( Engine.Localize( Engine.GetKeyBindingLocalizedString( controller, "+"..key ):match("^(.-)%s") ) )
+        end
+    end
+end
 
 function Warzone.ButtonPrompt.new(menu, controller)
     local self = LUI.UIElement.new()
@@ -66,7 +86,18 @@ function Warzone.ButtonPrompt.new(menu, controller)
     LUI.OverrideFunction_CallOriginalFirst(self.keyBind, "setText", function(widget, text)
         ScaleWidgetToLabel(self, self.keyBind, 16)
     end)
-    self.keyBind:setText(Engine.Localize("[{+activate}]"))
+
+    self.setButtonPrompt = function(self, pcKey, gamepadButton)
+        self.assignedKey = pcKey
+        self.gamepadKey = gamepadButton
+
+        if not Engine.LastInput_Gamepad() and self.assignedKey then
+            self.keyBind:setText(AbbreviatePCKey(self, self.assignedKey))
+        elseif Engine.LastInput_Gamepad() and self.gamepadKey then
+            self.keyBind:setText(Engine.Localize("[{+"..self.gamepadKey.."}]"))
+        end
+    end
+
     self.keyBind:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_CENTER)
 
     Wzu.ClipSequence(self, self.keyBind, "Disabled", {
@@ -98,6 +129,11 @@ function Warzone.ButtonPrompt.new(menu, controller)
     }
 
     self:registerEventHandler("input_source_changed", function(sender, event)
+        if not Engine.LastInput_Gamepad() and self.assignedKey then
+            self.keyBind:setText(AbbreviatePCKey(self, self.assignedKey))
+        elseif Engine.LastInput_Gamepad() and self.gamepadKey then
+            self.keyBind:setText(Engine.Localize("[{+"..self.gamepadKey.."}]"))
+        end
         ScaleWidgetToLabel(self, self.keyBind, 16)
     end)
     

@@ -19,7 +19,8 @@ function Warzone.ReloadButtonPrompt.new(menu, controller)
     self.button = Warzone.ButtonPrompt.new(menu, controller)
     self.button:setScaledLeftRight(true, false, 0, 16)
     self.button:setScaledTopBottom(true, false, 0, 16)
-    self.button.keyBind:setText(Engine.Localize("[{+reload}]"))
+    self.button:setButtonPrompt("reload", "usereload")
+    --self.button.keyBind:setText(Engine.Localize("[{+reload}]"))
 
     Wzu.ClipSequence(self, self.button, "Reload", {
         {

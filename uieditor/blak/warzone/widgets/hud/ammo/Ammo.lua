@@ -3,6 +3,8 @@ require("ui.uieditor.blak.warzone.widgets.hud.ammo.WeaponIconAndRarity")
 require("ui.uieditor.blak.warzone.widgets.hud.ammo.WeaponClipReserve")
 require("ui.uieditor.blak.warzone.widgets.hud.ammo.LethalGrenade")
 require("ui.uieditor.blak.warzone.widgets.hud.ammo.TacticalGrenade")
+-- Not part of "ammo", but attached to its HUD
+require("ui.uieditor.blak.warzone.widgets.hud.flashlight.Flashlight")
 
 Warzone.Ammo = InheritFrom(LUI.UIElement)
 
@@ -42,6 +44,12 @@ function Warzone.Ammo.new(menu, controller)
     self.lethalNade:setScaledLeftRight(false, true, -60, -12)
     self.lethalNade:setScaledTopBottom(false, true, -76, -52)
     self:addElement(self.lethalNade)
+
+    self.flashlight = Warzone.Flashlight.new(menu, controller)
+    self.flashlight:setScaledLeftRight(false, true, -160, -12)
+    self.flashlight:setScaledTopBottom(false, true, -44, 0)
+
+    self:addElement(self.flashlight)
     
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(Sender)
         Sender.weaponIcon:close()
@@ -49,6 +57,7 @@ function Warzone.Ammo.new(menu, controller)
         Sender.weaponAmmo:close()
         Sender.tacNade:close()
         Sender.lethalNade:close()
+        Sender.flashlight:close()
     end)
     
     if PostLoadFunc then
