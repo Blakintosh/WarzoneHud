@@ -1,5 +1,6 @@
 require("ui.uieditor.blak.warzone.widgets.hud.shared.ButtonPrompt")
 require("ui.uieditor.blak.warzone.widgets.hud.flashlight.FlashlightMode")
+require("ui.uieditor.blak.warzone.widgets.hud.flashlight.FlashlightLight")
 
 
 DataSources.FlashlightModes = DataSourceHelpers.ListSetup("FlashlightModes", function(controller)
@@ -8,19 +9,19 @@ DataSources.FlashlightModes = DataSourceHelpers.ListSetup("FlashlightModes", fun
     table.insert(returnTable, {
         models = {
             displayText = "AUTO",
-            elementId = "auto"
+            elementId = 0
         }
     })
     table.insert(returnTable, {
         models = {
             displayText = "ON",
-            elementId = "on"
+            elementId = 1
         }
     })
     table.insert(returnTable, {
         models = {
             displayText = "OFF",
-            elementId = "off"
+            elementId = 2
         }
     })
     
@@ -31,17 +32,10 @@ Warzone.Flashlight = InheritFrom(LUI.UIElement)
 
 local function PreLoadFunc(menu, controller)
     local flModel = Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "hudItems"), "flashlightMode")
-    Engine.SetModelValue(flModel, "auto")
-    local stateTable = {"auto", "on", "off"}
-    local stateN = 1
+    Engine.SetModelValue(flModel, 0)
 
-    --[[menu:addElement(LUI.UITimer.newElementTimer(15000, false, function(event)
-        stateN = stateN + 1
-        if stateN > #stateTable then
-            stateN = 1
-        end
-        Engine.SetModelValue(flModel, stateTable[stateN])
-    end))]]
+    local flAmodel = Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "hudItems"), "flashlightActive")
+    Engine.SetModelValue(flAmodel, 0)
 end
 
 function Warzone.Flashlight.new(menu, controller)
@@ -56,10 +50,9 @@ function Warzone.Flashlight.new(menu, controller)
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
 
-    self.icon = LUI.UIImage.new()
+    self.icon = Warzone.FlashlightLight.new(menu, controller)
     self.icon:setScaledLeftRight(true, false, 0, 32)
     self.icon:setScaledTopBottom(false, false, -16, 16)
-    self.icon:setImage(RegisterImage("hud_icon_equipment_flashlight"))
 
     Wzu.ClipSequence(self, self.icon, "DefaultClip", {
         {
