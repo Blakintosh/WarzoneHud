@@ -95,8 +95,7 @@ function Warzone.WeaponIconAndRarity.new(menu, controller)
     self.weaponIcon:setScaledTopBottom(true, false, 2, 66)
 
     self.weaponIcon:setImage(RegisterImage("blacktransparent"))
-    self.weaponIcon:setImage(RegisterImage("icon_weapon_ar_scharlie"))
-    --Wzu.SubscribeToImage(self.weaponIcon, controller, "currentWeapon.weaponIcon")
+    Wzu.SubscribeToImage(self.weaponIcon, controller, "currentWeapon.weaponIcon")
 
     self:addElement(self.weaponIcon)
 

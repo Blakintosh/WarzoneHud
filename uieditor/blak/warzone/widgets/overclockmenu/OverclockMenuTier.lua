@@ -8,7 +8,6 @@ local function SubRGBToRarity(self, controller)
             Wzu.SetRGBFromTable(self, Wzu.Swatches.Rarities[1])
         end
     end)
-    Engine.SetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "currentWeapon"), "weaponOverclocks"), 0)
 end
 
 function Warzone.OverclockMenuTier.new(menu, controller)
