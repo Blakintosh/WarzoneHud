@@ -6,6 +6,22 @@ local function PreLoadFunc(menu, controller)
     Engine.SetModelValue(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "currentWeapon"), "weaponRarity"), 0)
 end
 
+local function ResolveRarityIcon(self, controller)
+    local value = 1
+
+    local ocVal = Engine.GetModelValue(Engine.GetModel(Engine.GetModelForController(controller), "currentWeapon.weaponOverclocks"))
+    if ocVal then
+        value = value + ocVal
+    end
+
+    local rarityVal = Engine.GetModelValue(Engine.GetModel(Engine.GetModelForController(controller), "currentWeapon.weaponRarity"))
+    if rarityVal and rarityVal > 6 then
+        value = value + 1
+    end
+
+    self:setImage(RegisterImage("icon_rarity_" .. tostring(value)))
+end
+
 function Warzone.WeaponIconAndRarity.new(menu, controller)
     local self = LUI.UIElement.new()
     if PreLoadFunc then
@@ -37,7 +53,7 @@ function Warzone.WeaponIconAndRarity.new(menu, controller)
     self:addElement(self.weaponRarity)
 
     self.rarityIconGlow = LUI.UIImage.new()
-    self.rarityIconGlow:setScaledLeftRight(true, false, 135, 197)
+    self.rarityIconGlow:setScaledLeftRight(true, false, 139, 201)
     self.rarityIconGlow:setScaledTopBottom(true, false, 3, 66)
     self.rarityIconGlow:setImage(RegisterImage("hud_glow"))
     self.rarityIconGlow:setAlpha(0.3)
@@ -54,17 +70,22 @@ function Warzone.WeaponIconAndRarity.new(menu, controller)
     self:addElement(self.rarityIconGlow)
 
     self.rarityIcon = LUI.UIImage.new()
-    self.rarityIcon:setScaledLeftRight(true, false, 156, 180)
+    self.rarityIcon:setScaledLeftRight(true, false, 160, 184)
     self.rarityIcon:setScaledTopBottom(true, false, 23, 47)
     self.rarityIcon:setImage(RegisterImage("icon_rarity_5"))
-    Wzu.SetRGBFromTable(self.rarityIcon, Wzu.Swatches.Rarities[1])
+    Wzu.SetRGBFromTable(self.rarityIcon, Wzu.Swatches.RaritiesLight[1])
 
     Wzu.Subscribe(self.rarityIcon, controller, "currentWeapon.weaponRarity", function(modelValue)
-        if Wzu.Swatches.Rarities[modelValue + 1] then
-            Wzu.SetRGBFromTable(self.rarityIcon, Wzu.Swatches.Rarities[modelValue + 1])
+        ResolveRarityIcon(self.rarityIcon, controller)
+        if Wzu.Swatches.RaritiesLight[modelValue + 1] then
+            Wzu.SetRGBFromTable(self.rarityIcon, Wzu.Swatches.RaritiesLight[modelValue + 1])
         else
-            Wzu.SetRGBFromTable(self.rarityIcon, Wzu.Swatches.Rarities[1])
+            Wzu.SetRGBFromTable(self.rarityIcon, Wzu.Swatches.RaritiesLight[1])
         end
+    end)
+
+    Wzu.Subscribe(self.rarityIcon, controller, "currentWeapon.weaponOverclocks", function(modelValue)
+        ResolveRarityIcon(self.rarityIcon, controller)
     end)
 
     self:addElement(self.rarityIcon)
@@ -74,7 +95,8 @@ function Warzone.WeaponIconAndRarity.new(menu, controller)
     self.weaponIcon:setScaledTopBottom(true, false, 2, 66)
 
     self.weaponIcon:setImage(RegisterImage("blacktransparent"))
-    Wzu.SubscribeToImage(self.weaponIcon, controller, "currentWeapon.weaponIcon")
+    self.weaponIcon:setImage(RegisterImage("icon_weapon_ar_scharlie"))
+    --Wzu.SubscribeToImage(self.weaponIcon, controller, "currentWeapon.weaponIcon")
 
     self:addElement(self.weaponIcon)
 

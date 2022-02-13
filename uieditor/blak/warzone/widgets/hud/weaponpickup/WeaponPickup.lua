@@ -297,10 +297,10 @@ end
 
 local function SubRGBToRarity(self, controller)
     Wzu.Subscribe(self, controller, "prospectiveWeapon.attributes.weaponRarity", function(modelValue)
-        if Wzu.Swatches.Rarities[modelValue + 1] then
-            Wzu.SetRGBFromTable(self, Wzu.Swatches.Rarities[modelValue + 1])
+        if Wzu.Swatches.RaritiesLight[modelValue + 1] then
+            Wzu.SetRGBFromTable(self, Wzu.Swatches.RaritiesLight[modelValue + 1])
         else
-            Wzu.SetRGBFromTable(self, Wzu.Swatches.Rarities[1])
+            Wzu.SetRGBFromTable(self, Wzu.Swatches.RaritiesLight[1])
         end
     end)
 end

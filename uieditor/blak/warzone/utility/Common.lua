@@ -72,6 +72,16 @@ Wzu.Swatches = {
         Wzu.Colors.VibrantRed, --Ultra
         Wzu.Colors.BlakintoshPurple, --Packed
     },
+    RaritiesLight = {
+        Wzu.Colors.Grey128, --Misc
+        Wzu.Colors.MustardGreen, --Common
+        Wzu.Colors.ChelseaCucumber, --Uncommon
+        Wzu.Colors.PictonBlue, --Rare
+        Wzu.Colors.Deluge, --Epic
+        Wzu.Colors.EpicOrange, --Legendary
+        Wzu.Colors.VibrantRed, --Ultra
+        Wzu.Colors.BlakintoshPurple, --Packed
+    },
     WeaponMeterWorse = Wzu.Colors.RocketRedDark,
     WeaponMeterBetter = Wzu.Colors.ModernGreen,
     MenuTitle = Wzu.Colors.TidePool,

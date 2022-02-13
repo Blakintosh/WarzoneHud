@@ -170,13 +170,6 @@ function Warzone.Flashlight.new(menu, controller)
     
     self:addElement(self.modeList)
 
-    --[[self.auto = Warzone.FlashlightMode.new(menu, controller)
-    self.auto:setScaledLeftRight(true, false, 72, 88)
-    self.auto:setScaledTopBottom(false, false, -8, 8)
-    self.auto.text:setText("AUTO")
-
-    self:addElement(self.auto)]]
-
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()

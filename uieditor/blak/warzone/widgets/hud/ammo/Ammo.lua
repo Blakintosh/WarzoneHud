@@ -3,6 +3,7 @@ require("ui.uieditor.blak.warzone.widgets.hud.ammo.WeaponIconAndRarity")
 require("ui.uieditor.blak.warzone.widgets.hud.ammo.WeaponClipReserve")
 require("ui.uieditor.blak.warzone.widgets.hud.ammo.LethalGrenade")
 require("ui.uieditor.blak.warzone.widgets.hud.ammo.TacticalGrenade")
+require("ui.uieditor.blak.warzone.widgets.hud.ammo.AltWeaponPrompt")
 -- Not part of "ammo", but attached to its HUD
 require("ui.uieditor.blak.warzone.widgets.hud.flashlight.Flashlight")
 
@@ -44,6 +45,12 @@ function Warzone.Ammo.new(menu, controller)
     self.lethalNade:setScaledLeftRight(false, true, -60, -12)
     self.lethalNade:setScaledTopBottom(false, true, -76, -52)
     self:addElement(self.lethalNade)
+
+    self.altWeapon = Warzone.AltWeaponPrompt.new(menu, controller)
+    self.altWeapon:setScaledLeftRight(false, true, -260, -100)
+    self.altWeapon:setScaledTopBottom(false, true, -44, 0)
+
+    self:addElement(self.altWeapon)
 
     self.flashlight = Warzone.Flashlight.new(menu, controller)
     self.flashlight:setScaledLeftRight(false, true, -160, -12)
