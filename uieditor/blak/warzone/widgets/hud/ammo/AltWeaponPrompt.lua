@@ -7,14 +7,14 @@ DataSources.AltWeaponPromptModes = DataSourceHelpers.ListSetup("AltWeaponPromptM
 
     table.insert(returnTable, {
         models = {
-            icon = "ui_firetype_fullauto",
-            elementId = 0
+            iconSub = "currentWeapon.altWeaponLeftIcon",
+            elementId = 1
         }
     })
     table.insert(returnTable, {
         models = {
-            icon = "ui_firetype_semiauto",
-            elementId = 1
+            iconSub = "currentWeapon.altWeaponRightIcon",
+            elementId = 2
         }
     })
     
@@ -24,8 +24,9 @@ end, true)
 Warzone.AltWeaponPrompt = InheritFrom(LUI.UIElement)
 
 local function PreLoadFunc(menu, controller)
-    local awaModel = Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "currentWeapon"), "altWeaponEquipped")
-    Engine.SetModelValue(awaModel, 0)
+    Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "currentWeapon"), "altWeaponState")
+    Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "currentWeapon"), "altWeaponLeftIcon")
+    Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "currentWeapon"), "altWeaponRightIcon")
 end
 
 function Warzone.AltWeaponPrompt.new(menu, controller)
@@ -45,18 +46,6 @@ function Warzone.AltWeaponPrompt.new(menu, controller)
     self.button:setScaledTopBottom(false, false, -8, 8)
     self.button:setButtonPrompt("actionslot 3", "actionslot 3")
 
-    Wzu.ClipSequence(self, self.button, "UnderbarrelAlt", {
-        {
-            duration = 0,
-            setAlpha = 1
-        }
-    })
-    Wzu.ClipSequence(self, self.button, "Underbarrel", {
-        {
-            duration = 0,
-            setAlpha = 1
-        }
-    })
     Wzu.ClipSequence(self, self.button, "AltWeapon", {
         {
             duration = 0,
@@ -81,18 +70,6 @@ function Warzone.AltWeaponPrompt.new(menu, controller)
     self.modeList:setHorizontalCount(2)
     self.modeList:setSpacing(16)
 
-    Wzu.ClipSequence(self, self.modeList, "UnderbarrelAlt", {
-        {
-            duration = 0,
-            setAlpha = 0
-        }
-    })
-    Wzu.ClipSequence(self, self.modeList, "Underbarrel", {
-        {
-            duration = 0,
-            setAlpha = 0
-        }
-    })
     Wzu.ClipSequence(self, self.modeList, "AltWeapon", {
         {
             duration = 0,
@@ -108,52 +85,10 @@ function Warzone.AltWeaponPrompt.new(menu, controller)
     
     self:addElement(self.modeList)
 
-    self.backWeapon = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Colors.White, false)
-    self.backWeapon:setScaledLeftRight(true, false, 24, 100)
-    self.backWeapon:setScaledTopBottom(false, false, -8, 6)
-    self.backWeapon:setText("For Badass Battle Rifle")
-
-    Wzu.ClipSequence(self, self.backWeapon, "UnderbarrelAlt", {
-        {
-            duration = 0,
-            setAlpha = 1
-        }
-    })
-    Wzu.ClipSequence(self, self.backWeapon, "Underbarrel", {
-        {
-            duration = 0,
-            setAlpha = 0
-        }
-    })
-    Wzu.ClipSequence(self, self.backWeapon, "AltWeapon", {
-        {
-            duration = 0,
-            setAlpha = 0
-        }
-    })
-    Wzu.ClipSequence(self, self.backWeapon, "DefaultState", {
-        {
-            duration = 0,
-            setAlpha = 0
-        }
-    })
-
-    self:addElement(self.backWeapon)
-
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "AltWeapon")
-            end
-        },
-        Underbarrel = {
-            DefaultClip = function()
-                Wzu.AnimateSequence(self, "Underbarrel")
-            end
-        },
-        UnderbarrelAlt = {
-            DefaultClip = function()
-                Wzu.AnimateSequence(self, "UnderbarrelAlt")
+                Wzu.AnimateSequence(self, "DefaultState")
             end
         },
         AltWeapon = {
@@ -163,11 +98,14 @@ function Warzone.AltWeaponPrompt.new(menu, controller)
         }
     }
 
-    --[[Wzu.Subscribe(self, controller, "hudItems.AltWeaponPromptMode", function(modelValue)
-        self:playClip("Update")
-    end)]]
+    self:mergeStateConditions({{
+        stateName = "AltWeapon",
+        condition = function(menu, self, event)
+            return IsModelValueGreaterThan(controller, "currentWeapon.altWeaponState", 0)
+        end
+    }})
 
-    --self:setState("UnderbarrelAlt")
+    Wzu.SubState(controller, menu, self, "currentWeapon.altWeaponState")
 
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)

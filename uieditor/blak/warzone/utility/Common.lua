@@ -42,7 +42,12 @@ Wzu.Colors = {
         FastReload = { r = 0.1, g = 0.7157, b = 0.1 },
         Rof = { r = 0.9294, g = 0.7686, b = 0.1451 },
         DoubleTap2 = { r = 0.9294, g = 0.7686, b = 0.1451 },
-        QuickRevive = { r = 0.3529, g = 0.8039, b = 0.9725 }
+        QuickRevive = { r = 0.3529, g = 0.8039, b = 0.9725 },
+        ExtraAmmo = { r = 0.3020, g = 0.5882, b = 0.9412 },
+        VigorVodka = { r = 0.9216, g = 0.2196, b = 0.3255 },
+        PhdFlopper = { r = 0.6392, g = 0.1490, b = 0.9412 },
+        ShadyShandy = { r = 0.8196, g = 0.2706, b = 0.0784 },
+        BulletDamage = { r = 0.9411, g = 0.2275, b = 0.1490 }
     }
 }
 

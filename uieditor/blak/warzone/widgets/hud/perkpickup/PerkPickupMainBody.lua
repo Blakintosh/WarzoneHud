@@ -70,6 +70,41 @@ function Warzone.PerkPickupMainBody.new(menu, controller)
             effects = "Player health increased to 250.",
             color = "ArmorVest",
             icon = "wz_icon_perk_armorvest"
+        },
+        {
+            specialty = "specialty_phdflopper",
+            name = "PHD Slider",
+            effects = "Enables sliding which releases a grenade trail.\nImmunity to self inflicted damage.",
+            color = "PhdFlopper",
+            icon = "wz_icon_perk_phdflopper"
+        },
+        {
+            specialty = "specialty_extraammo",
+            name = "Bandolier Brew",
+            effects = "Increases ballistic weapon ammo reserves 50%.",
+            color = "ExtraAmmo",
+            icon = "wz_icon_perk_extraammo"
+        },
+        {
+            specialty = "specialty_bulletdamage",
+            name = "Stopping Power",
+            effects = "Doubles ballistic weapon damage.",
+            color = "BulletDamage",
+            icon = "wz_icon_perk_bulletdamage"
+        },
+        {
+            specialty = "specialty_combat_efficiency",
+            name = "Shady Shandy",
+            effects = "Able to see nearby zombies through walls.",
+            color = "ShadyShandy",
+            icon = "wz_icon_perk_combat_efficiency"
+        },
+        {
+            specialty = "specialty_fastmeleerecovery",
+            name = "Vigor Vodka",
+            effects = "Quintuples melee damage.\nMelee attacks chain to nearby enemies.",
+            color = "VigorVodka",
+            icon = "wz_icon_perk_fastmeleerecovery"
         }
     }
 

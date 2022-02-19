@@ -19,11 +19,9 @@ function Warzone.AltWeaponPromptMode.new(menu, controller)
     self.image:setScaledTopBottom(false, false, -8, 8)
     self.image:setImage(RegisterImage("ui_firetype_fullauto"))
 
-    Wzu.LinkToWidget(self.image, self, "icon", function(modelValue)
-        self.image:setImage(RegisterImage(modelValue))
+    Wzu.LinkToWidget(self.image, self, "iconSub", function(modelValue)
+        Wzu.SubscribeToImage(self.image, controller, modelValue)
     end)
-
-    --Wzu.LinkToWidgetText(self.image, self, "displayText")
 
     Wzu.ClipSequence(self, self.image, "Default", {
         {
@@ -82,12 +80,12 @@ function Warzone.AltWeaponPromptMode.new(menu, controller)
         condition = function(menu, self, event)
             local modelValue = Engine.GetModelValue(Engine.GetModel(self:getModel(), "elementId"))
             if modelValue then
-                return IsModelValueEqualTo(controller, "currentWeapon.altWeaponEquipped", modelValue)
+                return IsModelValueEqualTo(controller, "currentWeapon.altWeaponState", modelValue)
             end
             return false
         end
     }})
-    Wzu.SubState(controller, menu, self, "currentWeapon.altWeaponEquipped")
+    Wzu.SubState(controller, menu, self, "currentWeapon.altWeaponState")
 
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)
