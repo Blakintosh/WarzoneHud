@@ -10,6 +10,8 @@ function Warzone.HighResolutionContainer.new(menu, controller)
     self:setClass(Warzone.HighResolutionContainer)
     self.id = "HighResolutionContainer"
     self.soundSet = "default"
+    self:makeFocusable()
+    self.onlyChildrenFocusable = true
     self.anyChildUsesUpdateState = true
     
     -- ===============================================================
@@ -71,6 +73,25 @@ function Warzone.HighResolutionContainer.new(menu, controller)
     self.reload:setScaledTopBottom(true, false, 420, 470)
 
     self:addElement(self.reload)
+
+    self.scoreboard = Wzu.CreateContainedScoreboardElement(menu, controller, Warzone.Scoreboard)
+    self.scoreboard:setScaledLeftRight(false, false, -485, 485)
+    self.scoreboard:setScaledTopBottom(true, false, 150, 330)
+
+    self:addElement(self.scoreboard)
+    
+    -- Navigation
+    self.scoreboard.id = "scoreboard"
+    self.scoreboard.contents.id = "contents"
+
+    self:registerEventHandler("gain_focus", function(sender, event)
+		if self.m_focusable then
+			if self.scoreboard:processEvent(event) then
+				return true
+			end
+		end
+		return LUI.UIElement.gainFocus(self, event)
+    end)
     
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(self)
         self.ammo:close()
@@ -81,6 +102,7 @@ function Warzone.HighResolutionContainer.new(menu, controller)
         self.powerups:close()
         self.notification:close()
         self.reload:close()
+        self.scoreboard:close()
     end)
     
     if PostLoadFunc then

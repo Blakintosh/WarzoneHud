@@ -52,6 +52,29 @@ end
 
 Wzu.CreateContainedScoreboardElement = function(menu, controller, type)
     local self = Warzone.Container.new(menu, controller, type)
+    self:makeFocusable()
+    self.onlyChildrenFocusable = true
+
+    Wzu.ClipSequence(self, self.contents, "DefaultState", {
+        {
+            duration = 0,
+            setAlpha = 0
+        },
+        {
+            duration = 0,
+            setAlpha = 1
+        }
+    })
+    Wzu.ClipSequence(self, self.contents, "Hidden", {
+        {
+            duration = 0,
+            setAlpha = 1
+        },
+        {
+            duration = 0,
+            setAlpha = 0
+        }
+    })
 
     self:mergeStateConditions({
         {

@@ -27,6 +27,7 @@ Wzu.Colors = {
     RocketRedDark = { r = 0.6627, g = 0.2471, b = 0.1725 },
     ModernGreen = { r = 0.5490, g = 0.7745, b = 0.4275 },
     TidePool = { r = 0.3490, g = 0.4745, b = 0.5216 },
+    CodeBlue = { r = 0.2039, g = 0.3569, b = 0.4706 },
     CodeBlueSelected = { r = 0.4745, g = 0.8510, b = 1 },
     Ash = { r = 0.2824, g = 0.3294, b = 0.3333 },
     Grey17 = { r = 0.0667, g = 0.0667, b = 0.0667 },
@@ -37,6 +38,8 @@ Wzu.Colors = {
     DarkPhoshper = { r = 0.1490, g = 0.2275, b = 0.2431 },
     IceIceBaby = { r = 0.8902, g = 0.9529, b = 0.9686 },
     Gold = { r = 0.8863, g = 0.7569, b = 0.0706 },
+    VeryDarkBlue = { r = 0.0588, g = 0.05882, b = 0.1451 },
+    CodeDarkBlue = { r = 0, g = 0.3020, b = 0.4667 },
     Perks = {
         ArmorVest = { r = 0.8667, g = 0.1755, b = 0.1755 },
         FastReload = { r = 0.1, g = 0.7157, b = 0.1 },
@@ -102,7 +105,12 @@ Wzu.Swatches = {
     ButtonBackgroundDisabled = Wzu.Colors.Asphalt,
     ButtonBorder = Wzu.Colors.Grey56,
     TextPrimaryText = Wzu.Colors.WeatheredSlate,
-    FieldUpgradeIdle = Wzu.Colors.WeatheredSlate
+    FieldUpgradeIdle = Wzu.Colors.WeatheredSlate,
+    ScoreboardFriendly = Wzu.Colors.CodeLightBlue,
+    FriendlyDarkBlue = Wzu.Colors.VeryDarkBlue,
+    ScoreboardFriendlyTeamDark = Wzu.Colors.CodeDarkBlue,
+    GlobalKeyColorMid = Wzu.Colors.CodeBlue,
+    PlayerTeam = Wzu.Colors.Gold
 }
 
 Wzu.Fonts = {
