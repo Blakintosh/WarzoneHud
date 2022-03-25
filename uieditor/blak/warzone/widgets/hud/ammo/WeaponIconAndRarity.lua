@@ -19,6 +19,11 @@ local function ResolveRarityIcon(self, controller)
         value = value + 1
     end
 
+    if rarityVal == 0 then
+        self:setImage(RegisterImage("blacktransparent"))
+        return
+    end
+
     self:setImage(RegisterImage("icon_rarity_" .. tostring(value)))
 end
 
@@ -53,8 +58,8 @@ function Warzone.WeaponIconAndRarity.new(menu, controller)
     self:addElement(self.weaponRarity)
 
     self.rarityIconGlow = LUI.UIImage.new()
-    self.rarityIconGlow:setScaledLeftRight(true, false, 139, 201)
-    self.rarityIconGlow:setScaledTopBottom(true, false, 3, 66)
+    self.rarityIconGlow:setScaledLeftRight(true, false, 22, 64)
+    self.rarityIconGlow:setScaledTopBottom(true, false, 32, 68)
     self.rarityIconGlow:setImage(RegisterImage("hud_glow"))
     self.rarityIconGlow:setAlpha(0.3)
     Wzu.SetRGBFromTable(self.rarityIconGlow, Wzu.Swatches.Rarities[1])
@@ -70,8 +75,8 @@ function Warzone.WeaponIconAndRarity.new(menu, controller)
     self:addElement(self.rarityIconGlow)
 
     self.rarityIcon = LUI.UIImage.new()
-    self.rarityIcon:setScaledLeftRight(true, false, 160, 184)
-    self.rarityIcon:setScaledTopBottom(true, false, 23, 47)
+    self.rarityIcon:setScaledLeftRight(true, false, 34, 50)
+    self.rarityIcon:setScaledTopBottom(true, false, 42, 58)
     self.rarityIcon:setImage(RegisterImage("icon_rarity_5"))
     Wzu.SetRGBFromTable(self.rarityIcon, Wzu.Swatches.RaritiesLight[1])
 
@@ -93,6 +98,7 @@ function Warzone.WeaponIconAndRarity.new(menu, controller)
     self.weaponIcon = LUI.UIImage.new()
     self.weaponIcon:setScaledLeftRight(true, false, 24, 152)
     self.weaponIcon:setScaledTopBottom(true, false, 2, 66)
+    self.weaponIcon:setScale(1)
 
     self.weaponIcon:setImage(RegisterImage("blacktransparent"))
     Wzu.SubscribeToImage(self.weaponIcon, controller, "currentWeapon.weaponIcon")

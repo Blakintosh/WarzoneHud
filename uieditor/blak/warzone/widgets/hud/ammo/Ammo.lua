@@ -25,6 +25,19 @@ function Warzone.Ammo.new(menu, controller)
     self.weaponIcon:setScaledLeftRight(true, false, -1, 174)
     self.weaponIcon:setScaledTopBottom(true, false, 22, 95)
     self:addElement(self.weaponIcon)
+
+    Wzu.ClipSequence(self, self.weaponIcon, "Default", {
+        {
+            duration = 0,
+            setScaledLeftRight = {true, false, -1, 174}
+        }
+    })
+    Wzu.ClipSequence(self, self.weaponIcon, "DualWield", {
+        {
+            duration = 0,
+            setScaledLeftRight = {true, false, -27, 148}
+        }
+    })
     
     self.weaponInfo = Warzone.WeaponInfo.new(menu, controller)
     self.weaponInfo:setScaledLeftRight(true, false, 0, 300)
@@ -57,6 +70,30 @@ function Warzone.Ammo.new(menu, controller)
     self.flashlight:setScaledTopBottom(false, true, -44, 0)
 
     self:addElement(self.flashlight)
+
+    self.clipsPerState = {
+        DefaultState = {
+            DefaultClip = function()
+                Wzu.AnimateSequence(self, "Default")
+            end
+        },
+        DualWield = {
+            DefaultClip = function()
+                Wzu.AnimateSequence(self, "DualWield")
+            end
+        }
+    }
+
+    self:mergeStateConditions({
+        {
+            stateName = "DualWield",
+            condition = function(menu, self, event)
+                return IsModelValueGreaterThanOrEqualTo(controller, "currentWeapon.ammoInDWClip", 0)
+            end
+        }
+    })
+
+    Wzu.SubState(controller, menu, self, "currentWeapon.ammoInDWClip")
     
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(Sender)
         Sender.weaponIcon:close()
