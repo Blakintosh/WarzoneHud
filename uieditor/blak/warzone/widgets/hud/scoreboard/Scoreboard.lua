@@ -73,7 +73,7 @@ function Warzone.Scoreboard.new(menu, controller)
     self.mapName = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, true)
     self.mapName:setScaledLeftRight(true, false, 272, 300)
     self.mapName:setScaledTopBottom(true, false, 8, 32)
-    self.mapName:setText("NOVOMORY")
+    self.mapName:setText("KARELIA")
 
     Wzu.AddShadowedElement(self, self.mapName)
     
