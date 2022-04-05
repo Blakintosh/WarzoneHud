@@ -16,34 +16,34 @@ function Warzone.SmallButtonBackground.new(menu, controller)
     self.buttonBg = LUI.UIImage.new()
     self.buttonBg:setLeftRight(true, true, 0, 0)
     self.buttonBg:setTopBottom(true, true, 0, 0)
-    Wzu.SetRGBFromTable(self.buttonBg, Wzu.Swatches.ButtonBorder)
-    self.buttonBg:setAlpha(0.45)
+    Wzu.SetRGBFromTable(self.buttonBg, Wzu.Swatches.ButtonBackground)
+    self.buttonBg:setAlpha(0.8)
 
     Wzu.ClipSequence(self, self.buttonBg, "DefaultUp", {
         {
             duration = 0,
-            setRGB = Wzu.Swatches.ButtonBorder,
-            setAlpha = 0.45
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonBackground),
+            setAlpha = 0.8
         }
     })
     Wzu.ClipSequence(self, self.buttonBg, "DefaultOver", {
         {
             duration = 0,
-            setRGB = Wzu.Swatches.ButtonBackground,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonBackground),
             setAlpha = 1
         }
     })
     Wzu.ClipSequence(self, self.buttonBg, "DisabledUp", {
         {
             duration = 0,
-            setRGB = Wzu.Swatches.ButtonBackgroundDisabled,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonBackgroundDisabled),
             setAlpha = 0.5
         }
     })
     Wzu.ClipSequence(self, self.buttonBg, "DisabledOver", {
         {
             duration = 0,
-            setRGB = Wzu.Swatches.ButtonBackgroundDisabled,
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonBackgroundDisabled),
             setAlpha = 1
         }
     })
@@ -63,7 +63,7 @@ function Warzone.SmallButtonBackground.new(menu, controller)
         {
             duration = 0,
             setImage = RegisterImage("white"),
-            setRGB = Wzu.ConvertColorToTable(Wzu.Colors.White),
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextureUnfocused),
             setAlpha = 0.05
         }
     })
@@ -71,7 +71,7 @@ function Warzone.SmallButtonBackground.new(menu, controller)
         {
             duration = 0,
             setImage = RegisterImage("widg_gradient_center_out"),
-            setRGB = Wzu.ConvertColorToTable(Wzu.Colors.White),
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextureUnfocused),
             setAlpha = 0.05
         },
         {
@@ -191,7 +191,7 @@ function Warzone.SmallButtonBackground.new(menu, controller)
             DefaultClip = function()
                 Wzu.AnimateSequence(self, "DefaultUp")
             end,
-            Focus = function()
+            Over = function()
                 Wzu.AnimateSequence(self, "DefaultOver")
             end
         },
@@ -199,7 +199,7 @@ function Warzone.SmallButtonBackground.new(menu, controller)
             DefaultClip = function()
                 Wzu.AnimateSequence(self, "DisabledUp")
             end,
-            Focus = function()
+            Over = function()
                 Wzu.AnimateSequence(self, "DisabledOver")
             end
         }

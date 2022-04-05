@@ -18,9 +18,13 @@ function Warzone.MenuTitle.new(menu, controller)
     self:addElement(self.title)
 
     self.horizontalBar = LUI.UIImage.new()
-    self.horizontalBar:setScaledLeftRight(true, false, 0, 177)
+    self.horizontalBar:setScaledLeftRight(true, false, 0, 60)
     self.horizontalBar:setScaledTopBottom(true, false, 35, 36)
     Wzu.SetRGBFromTable(self.horizontalBar, Wzu.Swatches.MenuTitle)
+
+    LUI.OverrideFunction_CallOriginalFirst(self.title, "setText", function(widget, text)
+        self.horizontalBar:setScaledLeftRight(true, false, 0, 60 + (widget:getTextWidth() / _ResolutionScalar))
+    end)
 
     self:addElement(self.horizontalBar)
     

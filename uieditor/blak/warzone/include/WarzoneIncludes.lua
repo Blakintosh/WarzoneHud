@@ -27,6 +27,8 @@ require("ui.uieditor.blak.warzone.widgets.hud.reloadprompt.ReloadPrompt")
 -- Associated Menus
 require("ui.uieditor.blak.warzone.menus.overclockmenu.OverclockMenu")
 require("ui.uieditor.blak.warzone.menus.pregamemenu.PreGameMenu")
+require("ui.uieditor.blak.warzone.menus.startmenu.StartMenu")
+require("ui.uieditor.blak.warzone.menus.startmenu_options.StartMenu_Options")
 
 -- Interface elements
 --require("ui.uieditor.blak.warzone.widgets.userinterface.cursor.MouseCursor")
