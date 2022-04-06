@@ -1,4 +1,4 @@
-require("ui.uieditor.blak.warzone.widgets.pregamemenu.pregamemenuhighrescontainer")
+require("ui.uieditor.blak.warzone.widgets.pregamemenu.pregamemenu_clienthighrescontainer")
 
 DataSources.PreGameClient = DataSourceHelpers.ListSetup("PreGameClient", function(controller)
     local returnTable = {}
