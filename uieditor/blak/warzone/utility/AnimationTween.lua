@@ -30,6 +30,21 @@ end
 Wzu.TweenGraphs.outQuad = function(x)
     return (1 - (1 - x) * (1 - x))
 end
+-- Bounce graphs
+Wzu.TweenGraphs.outBounce = function(x)
+    if x < 1 / 2.75 then
+        return (7.5625 * x * x)
+    elseif x < 2 / 2.75 then
+        x = x - (1.5 / 2.75)
+        return (7.5625 * x * x + 0.75)
+    elseif x < 2.5 / 2.75 then
+        x = x - (2.25 / 2.75)
+        return (7.5625 * x * x + 0.9375)
+    else
+        x = x - (2.625 / 2.75)
+        return (7.5625 * x * x + 0.984375)
+    end
+end
 
 local function NextInterpolationStep(self, startClock, timeElapsed, duration, tween, tweenUpdateCallback)
     local dur = 25 -- 40 hz.

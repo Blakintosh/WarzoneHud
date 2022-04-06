@@ -1,46 +1,45 @@
-require("ui.uieditor.blak.warzone.widgets.userinterface.button.ButtonBackground")
-require("ui.uieditor.blak.warzone.widgets.pregamemenu.PreGameMenuButtonLabel")
+require("ui.uieditor.blak.warzone.widgets.userinterface.button.SolidButtonBackground")
 
-Warzone.PreGameMenuButton = InheritFrom(LUI.UIElement)
+Warzone.OverlayButton = InheritFrom(LUI.UIElement)
 
-function Warzone.PreGameMenuButton.new(menu, controller)
+function Warzone.OverlayButton.new(menu, controller)
     local self = LUI.UIElement.new()
     if PreLoadFunc then
         PreLoadFunc(menu, controller)
     end
     
     self:setUseStencil(false)
-    self:setClass(Warzone.PreGameMenuButton)
-    self.id = "PreGameMenuButton"
+    self:setClass(Warzone.OverlayButton)
+    self.id = "OverlayButton"
     self.soundSet = "iw8"
-    self:setScaledLeftRight(true, false, 0, 335)
-    self:setScaledTopBottom(true, false, 0, 32)
+    self:setScaledLeftRight(false, false, 0, 400)
+    self:setScaledTopBottom(true, false, 0, 28)
     self:makeFocusable()
 	self:setHandleMouse(true)
     self.anyChildUsesUpdateState = true
 
-    self.background = Warzone.ButtonBackground.new(menu, controller)
+    self.background = Warzone.SolidButtonBackground.new(menu, controller)
     self.background:setScaledLeftRight(true, true, 0, 0)
     self.background:setScaledTopBottom(true, true, 0, 0)
 
     self:addElement(self.background)
 
-    self.label = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.ButtonTextDefault, false)
-    self.label:setScaledLeftRight(true, false, 14, 100)
-    self.label:setScaledTopBottom(true, false, 8, 23)
+    self.label = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.ButtonTextDefaultGrey, false)
+    self.label:setScaledLeftRight(false, false, -100, 100)
+    self.label:setScaledTopBottom(true, false, 6, 21)
 
-    Wzu.LinkToWidgetText(self.label, self, "displayText")
+    Wzu.LinkToWidgetText(self.label, self, "displayText", true)
 
     Wzu.ClipSequence(self, self.label, "DefaultUp", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault)
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefaultGrey)
         }
     })
     Wzu.ClipSequence(self, self.label, "DefaultOver", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault)
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefaultGrey)
         },
         {
             duration = 100,
@@ -64,6 +63,21 @@ function Warzone.PreGameMenuButton.new(menu, controller)
     
     self:addElement(self.label)
 
+    --[[menu:AddButtonCallbackFunction(self, controller, Enum.LUIButton.LUI_KEY_XBA_PSCROSS, "ENTER", function(ItemRef, menu, controller, ParentRef)
+        Blak.DebugUtils.Log("amongus")
+        if self.currentState ~= "Disabled" then
+            Engine.SendMenuResponse(controller, "OverclockMenu", self.index) -- This is really ghetto but the more lua i do the more i realise i dont care
+            return true
+        end
+        return false
+    end, function(ItemRef, menu, controller)
+        if self.currentState ~= "Disabled" then
+            CoD.Menu.SetButtonLabel(menu, Enum.LUIButton.LUI_KEY_XBA_PSCROSS, "MENU_SELECT")
+            return true
+        end
+        return false
+    end, false)]]
+
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
@@ -71,14 +85,6 @@ function Warzone.PreGameMenuButton.new(menu, controller)
             end,
             Focus = function()
                 Wzu.AnimateSequence(self, "DefaultOver")
-            end
-        },
-        Disabled = {
-            DefaultClip = function()
-                Wzu.AnimateSequence(self, "DisabledUp")
-            end,
-            Focus = function()
-                Wzu.AnimateSequence(self, "DisabledOver")
             end
         }
     }

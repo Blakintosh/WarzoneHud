@@ -74,11 +74,21 @@ function Warzone.HighResolutionContainer.new(menu, controller)
 
     self:addElement(self.reload)
 
+    -- Scoreboard
     self.scoreboard = Wzu.CreateContainedScoreboardElement(menu, controller, Warzone.Scoreboard)
     self.scoreboard:setScaledLeftRight(false, false, -485, 485)
     self.scoreboard:setScaledTopBottom(true, false, 150, 330)
 
     self:addElement(self.scoreboard)
+
+    -- Watermark
+    self.watermark = Wzu.TextElement(Wzu.Fonts.KillstreakRegular, Wzu.Swatches.HUDMain)
+    self.watermark:setScaledLeftRight(false, true, -300, 0)
+    self.watermark:setScaledTopBottom(true, false, 0, 12)
+    self.watermark:setText("karelia "..VERSION_WATERMARK)
+    self.watermark:setAlpha(0.2)
+
+    self:addElement(self.watermark)
     
     -- Navigation
     self.scoreboard.id = "scoreboard"

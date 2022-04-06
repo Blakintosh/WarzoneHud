@@ -40,6 +40,10 @@ Wzu.Colors = {
     Gold = { r = 0.8863, g = 0.7569, b = 0.0706 },
     VeryDarkBlue = { r = 0.0588, g = 0.05882, b = 0.1451 },
     CodeDarkBlue = { r = 0, g = 0.3020, b = 0.4667 },
+    WetPavement = { r = 0.2980, g = 0.3216, b = 0.2824 },
+    BlueGrey = { r = 0.3020, g = 0.3843, b = 0.4784 },
+    WarmerMedGrey = { r = 0.6471, g = 0.6157, b = 0.5843},
+    UnfocusedGrey = { r = 0.4196, g = 0.4235, b = 0.4039 },
     Perks = {
         ArmorVest = { r = 0.8667, g = 0.1755, b = 0.1755 },
         FastReload = { r = 0.1, g = 0.7157, b = 0.1 },
@@ -97,6 +101,7 @@ Wzu.Swatches = {
     MenuBorder = Wzu.Colors.Ash,
     MenuLocked = Wzu.Colors.Pavement,
     ButtonTextDefault = Wzu.Colors.TidePool,
+    ButtonTextDefaultGrey = Wzu.Colors.UnfocusedGrey,
     ButtonTextFocus = Wzu.Colors.CodeLightBlue,
     ButtonTextDisabled = Wzu.Colors.Pavement,
     MenuButtonText = Wzu.Colors.CodeBlueSelected,
@@ -111,7 +116,13 @@ Wzu.Swatches = {
     FriendlyDarkBlue = Wzu.Colors.VeryDarkBlue,
     ScoreboardFriendlyTeamDark = Wzu.Colors.CodeDarkBlue,
     GlobalKeyColorMid = Wzu.Colors.CodeBlue,
-    PlayerTeam = Wzu.Colors.Gold
+    PlayerTeam = Wzu.Colors.Gold,
+    PopupBackground = Wzu.Colors.WetPavement,
+    PopupFrame = Wzu.Colors.TidePool,
+    PopupBgGradient = Wzu.Colors.BlueGrey,
+    PopupHeaderTxt = Wzu.Colors.CodeDarkBlue,
+    PopupTitleTxt = Wzu.Colors.TidePool,
+    PopupSubHeaderTxt2 = Wzu.Colors.WarmerMedGrey
 }
 
 Wzu.Fonts = {
@@ -185,5 +196,6 @@ SoundSet.iw8 = {
     xp_in = "mpl_start_xp_ui_in", 
     xp_out = "mpl_start_xp_ui_out", 
     obj_in = "mpl_start_show_obj_ui_in", 
-    obj_out = "mpl_start_show_obj_ui_out"
+    obj_out = "mpl_start_show_obj_ui_out",
+    popup_open = "iw8_ui_menu_leavelobby_alert"
 }

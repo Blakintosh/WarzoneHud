@@ -53,6 +53,12 @@ function Warzone.ButtonPrompt.new(menu, controller)
             setAlpha = 0
         }
     })
+    Wzu.ClipSequence(self, self.unboundBacker, "EnabledGamepad", {
+        {
+            duration = 0,
+            setAlpha = 0
+        }
+    })
 
     self:addElement(self.unboundBacker)
 
@@ -74,6 +80,12 @@ function Warzone.ButtonPrompt.new(menu, controller)
         {
             duration = 0,
             setAlpha = 1
+        }
+    })
+    Wzu.ClipSequence(self, self.backer, "EnabledGamepad", {
+        {
+            duration = 0,
+            setAlpha = 0
         }
     })
 
@@ -112,6 +124,12 @@ function Warzone.ButtonPrompt.new(menu, controller)
             setAlpha = 1
         }
     })
+    Wzu.ClipSequence(self, self.keyBind, "EnabledGamepad", {
+        {
+            duration = 0,
+            setAlpha = 1
+        }
+    })
 
     self:addElement(self.keyBind)
 
@@ -125,8 +143,22 @@ function Warzone.ButtonPrompt.new(menu, controller)
             DefaultClip = function()
                 Wzu.AnimateSequence(self, "Disabled")
             end
+        },
+        EnabledGamepad = {
+            DefaultClip = function()
+                Wzu.AnimateSequence(self, "EnabledGamepad")
+            end
         }
     }
+
+    self:mergeStateConditions({
+        {
+            stateName = "EnabledGamepad",
+            condition = function(one, two, three)
+                return Engine.LastInput_Gamepad()
+            end
+        }
+    })
 
     self:registerEventHandler("input_source_changed", function(sender, event)
         if not Engine.LastInput_Gamepad() and self.assignedKey then
@@ -134,6 +166,7 @@ function Warzone.ButtonPrompt.new(menu, controller)
         elseif Engine.LastInput_Gamepad() and self.gamepadKey then
             self.keyBind:setText(Engine.Localize("[{+"..self.gamepadKey.."}]"))
         end
+        menu:updateElementState(self, { menu = menu })
         ScaleWidgetToLabel(self, self.keyBind, 16)
     end)
     

@@ -162,9 +162,14 @@ Wzu.SubscribeToText_ToUpper = function(self, controller, modelName)
     end)
 end
 
-Wzu.LinkToWidgetText = function(self, parent, modelName)
+Wzu.LinkToWidgetText = function(self, parent, modelName, toUpper)
+    toUpper = toUpper or false
     Wzu.LinkToWidget(self, parent, modelName, function(modelValue)
-        self:setText(Engine.Localize(modelValue))
+        if toUpper then
+            self:setText(LocalizeToUpperString(modelValue))
+        else
+            self:setText(Engine.Localize(modelValue))
+        end
     end)
 end
 

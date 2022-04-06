@@ -30,6 +30,9 @@ require("ui.uieditor.blak.warzone.menus.pregamemenu.PreGameMenu")
 require("ui.uieditor.blak.warzone.menus.startmenu.StartMenu")
 require("ui.uieditor.blak.warzone.menus.startmenu_options.StartMenu_Options")
 
+-- Overlays
+require("ui.uieditor.blak.warzone.menus.overlays.compact.CompactOverlay")
+
 -- Interface elements
 --require("ui.uieditor.blak.warzone.widgets.userinterface.cursor.MouseCursor")
 

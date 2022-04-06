@@ -92,6 +92,24 @@ function Warzone.StartMenuHighResContainer.new(menu, controller)
     self.footer:setScaledTopBottom(false, true, -48, 0)
 
     self:addElement(self.footer)
+
+    self.version = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.version:setScaledLeftRight(false, true, -200, -16)
+    self.version:setScaledTopBottom(false, true, -22, -8)
+    self.version:setAlpha(0.5)
+
+    self.version:setText("Version: "..VERSION_WATERMARK)
+
+    self:addElement(self.version)
+
+    self:registerEventHandler("gain_focus", function (Sender, Event)
+		if Sender.m_focusable then
+			if Sender.buttonList:processEvent(Event) then
+				return true
+			end
+		end
+		return LUI.UIElement.gainFocus(Sender, Event)
+	end)
     
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(self)
         self.title:close()
