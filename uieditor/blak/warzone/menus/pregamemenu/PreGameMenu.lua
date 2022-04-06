@@ -99,11 +99,12 @@ function LUI.createMenu.PreGameMenu(controller)
 		menu.contents:processEvent({name = "gain_focus", controller = controller})
 	end
 
-    menu:AddButtonCallbackFunction(menu, controller, Enum.LUIButton.LUI_KEY_XBB_PSCIRCLE, "MENU_BACK", function(ItemRef, menu, controller, ParentRef)
+    -- for testing only
+    --[[menu:AddButtonCallbackFunction(menu, controller, Enum.LUIButton.LUI_KEY_XBB_PSCIRCLE, "MENU_BACK", function(ItemRef, menu, controller, ParentRef)
         Close(menu, controller)
     end, function(ItemRef, menu, controller)
         return nil
-    end, false)
+    end, false)]]
 	
 	menu:processEvent({
         name = "menu_loaded",
