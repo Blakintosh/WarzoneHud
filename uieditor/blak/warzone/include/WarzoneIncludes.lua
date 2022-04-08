@@ -33,6 +33,7 @@ require("ui.uieditor.blak.warzone.menus.startmenu_options.StartMenu_Options")
 
 -- Overlays
 require("ui.uieditor.blak.warzone.menus.overlays.compact.CompactOverlay")
+require("ui.uieditor.blak.warzone.menus.overlays.fullsize.FullSizeOverlay")
 
 -- Interface elements
 --require("ui.uieditor.blak.warzone.widgets.userinterface.cursor.MouseCursor")

@@ -1,4 +1,4 @@
-require("ui.uieditor.blak.warzone.widgets.userinterface.button.SmallButtonBackground")
+require("ui.uieditor.blak.warzone.widgets.userinterface.button.ButtonPromptBackground")
 
 Warzone.FooterButton = InheritFrom(LUI.UIElement)
 
@@ -15,7 +15,7 @@ function Warzone.FooterButton.new(menu, controller)
 	self:setHandleMouse(true)
     self.anyChildUsesUpdateState = true
 
-    self.background = Warzone.SmallButtonBackground.new(menu, controller)
+    self.background = Warzone.ButtonPromptBackground.new(menu, controller)
     self.background:setScaledLeftRight(true, true, 0, 0)
     self.background:setScaledTopBottom(true, true, 0, 0)
 

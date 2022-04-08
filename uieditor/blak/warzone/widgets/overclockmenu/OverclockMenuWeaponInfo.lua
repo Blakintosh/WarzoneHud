@@ -23,15 +23,15 @@ function Warzone.OverclockMenuWeaponInfo.new(menu, controller)
 
     self.weaponName = Wzu.TextElement(Wzu.Fonts.MainLight, Wzu.Swatches.HUDMain, false)
     self.weaponName:setScaledLeftRight(true, false, 0, 200)
-    self.weaponName:setScaledTopBottom(true, false, 20, 60)
+    self.weaponName:setScaledTopBottom(true, false, 22, 56)
 
     Wzu.SubscribeToText(self.weaponName, controller, "currentWeapon.rootWeaponName")
 
     self:addElement(self.weaponName)
 
     self.tiersInfo = Warzone.OverclockMenuTier.new(menu, controller)
-    self.tiersInfo:setScaledLeftRight(false, true, -300, 0)
-    self.tiersInfo:setScaledTopBottom(true, false, 0, 60)
+    self.tiersInfo:setScaledLeftRight(false, true, -330, 0)
+    self.tiersInfo:setScaledTopBottom(true, false, 0, 52)
 
     self:addElement(self.tiersInfo)
 

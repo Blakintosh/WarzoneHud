@@ -107,6 +107,10 @@ function LUI.createMenu.StartMenu_Main(controller)
 			return false
 		end
 	end, false)
+
+    menu:registerEventHandler("menu_loaded", function(sender, event)
+        return menu:dispatchEventToChildren(event)
+    end)
 	
 	menu:processEvent({
         name = "menu_loaded",
@@ -120,6 +124,7 @@ function LUI.createMenu.StartMenu_Main(controller)
     
 	local function CloseFunc(ObjRef)
 		ObjRef.container:close()
+        CoD.OverlayUtility.CreateOverlay(controller, menu, "DataStorageConsentPopup")
 
 		Engine.UnsubscribeAndFreeModel(Engine.GetModel(Engine.GetModelForController(controller), "StartMenu.buttonPrompts"))
 	end

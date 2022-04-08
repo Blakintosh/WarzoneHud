@@ -144,7 +144,7 @@ function Warzone.ButtonBackground.new(menu, controller)
     self.glow:setImage(RegisterImage("button_glow"))
     self.glow:setAlpha(0)
     self.glow:setShaderVector(0, 0.04, 0.5, 0, 0)
-    self.glow:setupNineSliceShader(6, 6)
+    self.glow:setupNineSliceShader(12, 12)
     
     self:addElement(self.glow)
 

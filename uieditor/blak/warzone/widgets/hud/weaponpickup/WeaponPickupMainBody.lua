@@ -146,14 +146,16 @@ function Warzone.WeaponPickupMainBody.new(menu, controller)
 
     -- CHECK: Seems to be creating sporadic UI errors
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(sender)
-        if sender.weaponInfo and sender.tiersInfo and sender.buttonPrompt and sender.dpsRow and sender.ammoRow and sender.damageRow and sender.costPrompt then
-            sender.weaponInfo:close()
-            sender.tiersInfo:close()
-            sender.buttonPrompt:close()
-            sender.dpsRow:close()
-            sender.ammoRow:close()
-            sender.damageRow:close()
-            sender.costPrompt:close()
+        if sender then
+            if sender.weaponInfo and sender.tiersInfo and sender.buttonPrompt and sender.dpsRow and sender.ammoRow and sender.damageRow and sender.costPrompt then
+                sender.weaponInfo:close()
+                sender.tiersInfo:close()
+                sender.buttonPrompt:close()
+                sender.dpsRow:close()
+                sender.ammoRow:close()
+                sender.damageRow:close()
+                sender.costPrompt:close()
+            end
         end
     end)
     

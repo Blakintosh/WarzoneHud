@@ -1,29 +1,29 @@
-Warzone.SolidButtonBackground = InheritFrom(LUI.UIElement)
+Warzone.ButtonPromptBackground = InheritFrom(LUI.UIElement)
 
-function Warzone.SolidButtonBackground.new(menu, controller)
+function Warzone.ButtonPromptBackground.new(menu, controller)
     local self = LUI.UIElement.new()
     if PreLoadFunc then
         PreLoadFunc(menu, controller)
     end
     
     self:setUseStencil(false)
-    self:setClass(Warzone.SolidButtonBackground)
-    self.id = "SolidButtonBackground"
-    self:makeFocusable()
+    self:setClass(Warzone.ButtonPromptBackground)   
+    self.id = "ButtonPromptBackground"
     self.soundSet = "default"
+    self:makeFocusable()
     self.anyChildUsesUpdateState = true
 
     self.buttonBg = LUI.UIImage.new()
     self.buttonBg:setScaledLeftRight(true, true, 0, 0)
     self.buttonBg:setScaledTopBottom(true, true, 0, 0)
     Wzu.SetRGBFromTable(self.buttonBg, Wzu.Swatches.ButtonBackground)
-    self.buttonBg:setAlpha(1)
+    self.buttonBg:setAlpha(0.8)
 
     Wzu.ClipSequence(self, self.buttonBg, "DefaultUp", {
         {
             duration = 0,
             setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonBackground),
-            setAlpha = 1
+            setAlpha = 0.8
         }
     })
     Wzu.ClipSequence(self, self.buttonBg, "DefaultOver", {
@@ -44,7 +44,7 @@ function Warzone.SolidButtonBackground.new(menu, controller)
         {
             duration = 0,
             setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonBackgroundDisabled),
-            setAlpha = 0.5
+            setAlpha = 1
         }
     })
 
@@ -53,29 +53,30 @@ function Warzone.SolidButtonBackground.new(menu, controller)
     self.textureLayer = LUI.UIImage.new()
     self.textureLayer:setScaledLeftRight(true, true, 0, 0)
     self.textureLayer:setScaledTopBottom(true, true, 0, 0)
-    Wzu.SetRGBFromTable(self.textureLayer, Wzu.Swatches.ButtonTextFocus)
-    self.textureLayer:setAlpha(0.1)
+    Wzu.SetRGBFromTable(self.textureLayer, Wzu.Colors.White)
+    self.textureLayer:setAlpha(0.05)
+    self.textureLayer:setImage(RegisterImage("button_gradient"))
     self.textureLayer:setMaterial(LUI.UIImage.GetCachedMaterial("uie_pixel_grid"))
 	self.textureLayer:setShaderVector(0, 2.0, 2.0, 1.0, 1.0)
 
     Wzu.ClipSequence(self, self.textureLayer, "DefaultUp", {
         {
             duration = 0,
-            setImage = RegisterImage("button_gradient"),
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.MenuButtonText),
-            setAlpha = 0.1
+            setImage = RegisterImage("white"),
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextureUnfocused),
+            setAlpha = 0.05
         }
     })
     Wzu.ClipSequence(self, self.textureLayer, "DefaultOver", {
         {
             duration = 0,
-            setImage = RegisterImage("button_gradient"),
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.MenuButtonText),
-            setAlpha = 0.1
+            setImage = RegisterImage("widg_gradient_center_out"),
+            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextureUnfocused),
+            setAlpha = 0.05
         },
         {
             duration = 200,
-            setImage = RegisterImage("button_gradient"),
+            setImage = RegisterImage("widg_gradient_center_out"),
             setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextFocus),
             setAlpha = 0.3
         }
@@ -91,42 +92,42 @@ function Warzone.SolidButtonBackground.new(menu, controller)
     Wzu.ClipSequence(self, self.textureLayer, "DisabledOver", {
         {
             duration = 0,
-            setImage = RegisterImage("button_gradient"),
-            setRGB = Wzu.ConvertColorToTable(Wzu.Colors.Grey128),
+            setImage = RegisterImage("white"),
+            setRGB = Wzu.ConvertColorToTable(Wzu.Colors.White),
             setAlpha = 0.1
         }
     })
 
     self:addElement(self.textureLayer)
 
-    self.topLine = LUI.UIImage.new()
-    self.topLine:setScaledLeftRight(true, true, 0, 0)
-    self.topLine:setScaledTopBottom(true, false, -1, 0)
-    self.topLine:setAlpha(0)
-    Wzu.SetRGBFromTable(self.topLine, Wzu.Swatches.ButtonTextDefault)
+    self.bottomLine = LUI.UIImage.new()
+    self.bottomLine:setScaledLeftRight(true, true, 0, 0)
+    self.bottomLine:setScaledTopBottom(false, true, 0, 1)
+    self.bottomLine:setAlpha(0)
+    Wzu.SetRGBFromTable(self.bottomLine, Wzu.Swatches.ButtonTextDefault)
 
-    Wzu.ClipSequence(self, self.topLine, "DefaultUp", {
+    Wzu.ClipSequence(self, self.bottomLine, "DefaultUp", {
         {
             duration = 0,
             setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault),
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.topLine, "DefaultOver", {
+    Wzu.ClipSequence(self, self.bottomLine, "DefaultOver", {
         {
             duration = 0,
             setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextFocus),
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.topLine, "DisabledUp", {
+    Wzu.ClipSequence(self, self.bottomLine, "DisabledUp", {
         {
             duration = 0,
             setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault),
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.topLine, "DisabledOver", {
+    Wzu.ClipSequence(self, self.bottomLine, "DisabledOver", {
         {
             duration = 0,
             setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault),
@@ -134,7 +135,7 @@ function Warzone.SolidButtonBackground.new(menu, controller)
         }
     })
     
-    self:addElement(self.topLine)
+    self:addElement(self.bottomLine)
 
     self.glow = LUI.UIImage.new()
     self.glow:setScaledLeftRight(true, true, -2, 2)
@@ -190,7 +191,7 @@ function Warzone.SolidButtonBackground.new(menu, controller)
             DefaultClip = function()
                 Wzu.AnimateSequence(self, "DefaultUp")
             end,
-            Focus = function()
+            Over = function()
                 Wzu.AnimateSequence(self, "DefaultOver")
             end
         },
@@ -198,11 +199,13 @@ function Warzone.SolidButtonBackground.new(menu, controller)
             DefaultClip = function()
                 Wzu.AnimateSequence(self, "DisabledUp")
             end,
-            Focus = function()
+            Over = function()
                 Wzu.AnimateSequence(self, "DisabledOver")
             end
         }
     }
+
+    --self:playClip("Focus")
     
     if PostLoadFunc then
         PostLoadFunc(self, controller)

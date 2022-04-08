@@ -10,6 +10,11 @@ local function SubRGBToRarity(self, controller)
     end)
 end
 
+local function PreLoadFunc(menu, controller)
+    Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "currentWeapon"), "weaponDamage")
+    Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "currentWeapon"), "weaponDps")
+end
+
 function Warzone.OverclockMenuTier.new(menu, controller)
     local self = LUI.UIElement.new()
     if PreLoadFunc then
@@ -70,7 +75,7 @@ function Warzone.OverclockMenuTier.new(menu, controller)
 
     self.weaponTier = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, false)
     self.weaponTier:setScaledLeftRight(true, false, 18, 150)
-    self.weaponTier:setScaledTopBottom(true, false, 8, 30)
+    self.weaponTier:setScaledTopBottom(true, false, 8, 26)
 
     Wzu.SubscribeToText_ToUpper(self.weaponTier, controller, "currentWeapon.weaponTierName")
 
@@ -78,7 +83,7 @@ function Warzone.OverclockMenuTier.new(menu, controller)
 
     self.weaponOverclocks = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
     self.weaponOverclocks:setScaledLeftRight(true, false, 18, 150)
-    self.weaponOverclocks:setScaledTopBottom(true, false, 32, 54)
+    self.weaponOverclocks:setScaledTopBottom(true, false, 26, 44)
     self.weaponOverclocks:setText("3 Overclocks")
 
     Wzu.Subscribe(self.weaponOverclocks, controller, "currentWeapon.weaponOverclocks", function(modelValue)
@@ -89,29 +94,35 @@ function Warzone.OverclockMenuTier.new(menu, controller)
 
     self.weaponDamageLabel = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, false)
     self.weaponDamageLabel:setScaledLeftRight(false, true, -200, -68)
-    self.weaponDamageLabel:setScaledTopBottom(true, false, 8, 30)
+    self.weaponDamageLabel:setScaledTopBottom(true, false, 8, 26)
     self.weaponDamageLabel:setText("DAMAGE")
 
     self:addElement(self.weaponDamageLabel)
 
     self.weaponDpsLabel = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, false)
     self.weaponDpsLabel:setScaledLeftRight(false, true, -200, -68)
-    self.weaponDpsLabel:setScaledTopBottom(true, false, 32, 54)
+    self.weaponDpsLabel:setScaledTopBottom(true, false, 26, 44)
     self.weaponDpsLabel:setText("DPS")
 
     self:addElement(self.weaponDpsLabel)
 
     self.weaponDamageValue = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
-    self.weaponDamageValue:setScaledLeftRight(true, false, 247, 300)
-    self.weaponDamageValue:setScaledTopBottom(true, false, 8, 30)
+    self.weaponDamageValue:setScaledLeftRight(true, false, 277, 360)
+    self.weaponDamageValue:setScaledTopBottom(true, false, 8, 26)
     self.weaponDamageValue:setText("0")
+
+    Wzu.SubscribeToText(self.weaponDamageValue, controller, "currentWeapon.weaponDamage")
 
     self:addElement(self.weaponDamageValue)
 
     self.weaponDpsValue = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
-    self.weaponDpsValue:setScaledLeftRight(true, false, 247, 300)
-    self.weaponDpsValue:setScaledTopBottom(true, false, 32, 54)
+    self.weaponDpsValue:setScaledLeftRight(true, false, 277, 360)
+    self.weaponDpsValue:setScaledTopBottom(true, false, 26, 44)
     self.weaponDpsValue:setText("0")
+
+    Wzu.Subscribe(self.weaponDpsValue, controller, "currentWeapon.weaponDps", function(modelValue)
+        self.weaponDpsValue:setText(Engine.Localize(math.ceil(modelValue)))
+    end)
 
     self:addElement(self.weaponDpsValue)
 
