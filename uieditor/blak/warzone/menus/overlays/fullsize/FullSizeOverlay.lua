@@ -13,8 +13,8 @@ LUI.createMenu.FullSizeOverlay = function (controller)
 
 	menu.soundSet = "iw8"
 	menu:setOwner(controller)
-	menu:setLeftRight(true, true, 0, 0)
-	menu:setTopBottom(true, true, 0, 0)
+	menu:setLeftRight(true, false, 0, 1280)
+	menu:setTopBottom(true, false, 0, 720)
     menu:makeFocusable()
 	menu:playSound("popup_open", controller)
 	menu.buttonModel = Engine.CreateModel(Engine.GetModelForController(controller), "FullSizeOverlay.buttonPrompts")
@@ -91,6 +91,7 @@ LUI.createMenu.FullSizeOverlay = function (controller)
 	menu:processEvent({name = "menu_loaded", controller = controller})
 	menu:processEvent({name = "update_state", menu = menu})
 
+    Wzu.SetCursorType(Wzu.CursorTypes.Normal)
 	if not menu:restoreState() then
 		menu.contents:processEvent({name = "gain_focus", controller = controller})
 	end

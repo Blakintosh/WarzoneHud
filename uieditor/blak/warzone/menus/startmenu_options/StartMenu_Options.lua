@@ -19,13 +19,12 @@ function LUI.createMenu.StartMenu_Options(controller)
 	menu.soundSet = "iw8"
     menu.id = "StartMenu_Options"
 	menu:setOwner(controller)
-    menu:setLeftRight(true, true, 0, 0)
-	menu:setTopBottom(true, true, 0, 0)
+    menu:setLeftRight(true, false, 0, 1280)
+	menu:setTopBottom(true, false, 0, 720)
     menu:makeFocusable()
 	menu:playSound("menu_go_back", controller)
 	menu.buttonModel = Engine.CreateModel(Engine.GetModelForController(controller), "StartMenu_Options.buttonPrompts")
 	menu.anyChildUsesUpdateState = true
-    menu:setForceMouseEventDispatch(true)
 
     menu.container = Warzone.StartMenu_OptionsHighResContainer.new(menu, controller)
     menu.container:setScaledLeftRight(false, false, -640, 640)
@@ -42,6 +41,7 @@ function LUI.createMenu.StartMenu_Options(controller)
 
     menu:addElement(menu.options)
 
+    Wzu.SetCursorType(Wzu.CursorTypes.Normal)
     if not menu:restoreState() then
 		menu.options:processEvent({name = "gain_focus", controller = controller})
 	end
@@ -81,10 +81,6 @@ function LUI.createMenu.StartMenu_Options(controller)
 	if PostLoadFunc then
 		PostLoadFunc(menu, controller)
 	end
-
-    
-    menu:setLeftRight(true, true, 0, 0)
-	menu:setTopBottom(true, true, 0, 0)
 
 	return menu
 end

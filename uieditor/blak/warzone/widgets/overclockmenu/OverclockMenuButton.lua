@@ -130,6 +130,7 @@ function Warzone.OverclockMenuButton.new(menu, controller)
 
     menu:AddButtonCallbackFunction(self, controller, Enum.LUIButton.LUI_KEY_XBA_PSCROSS, "ENTER", function(ItemRef, menu, controller, ParentRef)
         if self.currentState ~= "Disabled" then
+            self:playSound("action")
             Engine.SendMenuResponse(controller, "OverclockMenu", self.index) -- This is really ghetto but the more lua i do the more i realise i dont care
             
             local parent = self:getParent()
@@ -185,6 +186,7 @@ function Warzone.OverclockMenuButton.new(menu, controller)
     Wzu.LinkWidgetToState(self, self, menu, "available")
 
     self:registerEventHandler("gain_focus", function(self, event)
+        self:playSound("list_up")
         self.background:processEvent(event)
         if self.index then
             Engine.SetModelValue(Engine.GetModel(Engine.GetModelForController(controller), "overclockTree.focusedUpgradeIndex"), self.index)

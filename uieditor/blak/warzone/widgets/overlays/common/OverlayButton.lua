@@ -101,11 +101,13 @@ function Warzone.OverlayButton.new(menu, controller)
 
     self:registerEventHandler("gain_focus", function(self, event)
         self.background:processEvent(event)
+        Wzu.SetCursorType(Wzu.CursorTypes.Active, controller)
         return LUI.UIElement.gainFocus(self, event)
     end)
 
     self:registerEventHandler("lose_focus", function(self, event)
         self.background:processEvent(event)
+        Wzu.SetCursorType(Wzu.CursorTypes.Normal, controller)
         return LUI.UIElement.loseFocus(self, event)
     end)
 

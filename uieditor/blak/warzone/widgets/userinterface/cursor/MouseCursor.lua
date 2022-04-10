@@ -21,13 +21,13 @@ end
 
 Warzone.MouseCursor.new = function()
 	local self = LUI.UIImage.new()
-    self:setImage(Wzu.CursorTypes.Normal)
+    self:setImage(RegisterImage(Wzu.CursorTypes.Normal))
 	self:setPriority(Warzone.MouseCursor.priority)
 	self:registerEventHandler("mousemove", mouseMove)
 	self.size = 64
 
     Wzu.SetCursorType = function(type)
-        self:setImage(type)
+        self:setImage(RegisterImage(type))
     end
 
     local lockInputFunc = Engine.LockInput
@@ -36,9 +36,11 @@ Warzone.MouseCursor.new = function()
         if active then
             self:setAlpha(1)
             lockInputFunc(controller, true)
+            HideMouseCursor(self)
         else
             self:setAlpha(0)
             lockInputFunc(controller, false)
+            --ShowMouseCursor(self)
         end
     end
 
@@ -59,7 +61,10 @@ Warzone.MouseCursor.new = function()
 	return self
 end
 
---[[LUI.UIMouseCursor.new = Warzone.MouseCursor.new
+--LUI.UIMouseCursor.new = Warzone.MouseCursor.new
 
-local cursor = Warzone.MouseCursor.new()
-LUI.roots.UIRootFull:addElement(cursor)]]
+if not LUI.roots.UIRootFull.mouseCursor then
+    local cursor = Warzone.MouseCursor.new()
+    LUI.roots.UIRootFull:addElement(cursor)
+    LUI.roots.UIRootFull.mouseCursor = cursor
+end

@@ -51,13 +51,13 @@ function LUI.createMenu.StartMenu_Main(controller)
 	menu.soundSet = "iw8"
     menu.id = "StartMenu_Main"
 	menu:setOwner(controller)
-    menu:setLeftRight(true, true, 0, 0)
-	menu:setTopBottom(true, true, 0, 0)
+    menu:setLeftRight(true, false, 0, 1280)
+	menu:setTopBottom(true, false, 0, 720)
     menu:makeFocusable()
 	menu:playSound("menu_pause", controller)
 	menu.buttonModel = Engine.CreateModel(Engine.GetModelForController(controller), "StartMenu.buttonPrompts")
 	menu.anyChildUsesUpdateState = true
-    menu:setForceMouseEventDispatch(true)
+    --menu:setForceMouseEventDispatch(true)
 
     menu.container = Warzone.StartMenuHighResContainer.new(menu, controller)
     menu.container:setScaledLeftRight(false, false, -640, 640)
@@ -124,7 +124,6 @@ function LUI.createMenu.StartMenu_Main(controller)
     
 	local function CloseFunc(ObjRef)
 		ObjRef.container:close()
-        CoD.OverlayUtility.CreateOverlay(controller, menu, "DataStorageConsentPopup")
 
 		Engine.UnsubscribeAndFreeModel(Engine.GetModel(Engine.GetModelForController(controller), "StartMenu.buttonPrompts"))
 	end
@@ -134,10 +133,6 @@ function LUI.createMenu.StartMenu_Main(controller)
 	if PostLoadFunc then
 		PostLoadFunc(menu, controller)
 	end
-
-    
-    menu:setLeftRight(true, true, 0, 0)
-	menu:setTopBottom(true, true, 0, 0)
 
 	return menu
 end

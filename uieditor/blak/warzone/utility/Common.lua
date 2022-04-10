@@ -153,12 +153,12 @@ Wzu.Sounds = {
 }
 
 Wzu.CursorTypes = {
-    Normal = RegisterImage("ui_cursor_arrow_normal"),
-    Active = RegisterImage("ui_cursor_arrow_active"),
-    Input = RegisterImage("ui_cursor_i_beam"),
-    Rotate = RegisterImage("ui_cursor_arrow_rotation"),
-    Translate = RegisterImage("ui_cursor_arrow_panfourways"),
-    Contextual = RegisterImage("ui_cursor_arrow_contextual")
+    Normal = "ui_cursor_arrow_normal",
+    Active = "ui_cursor_arrow_active",
+    Input = "ui_cursor_i_beam",
+    Rotate = "ui_cursor_arrow_rotation",
+    Translate = "ui_cursor_arrow_panfourways",
+    Contextual = "ui_cursor_arrow_contextual"
 }
 
 Wzu.SetRGBFromTable = function(self, color)

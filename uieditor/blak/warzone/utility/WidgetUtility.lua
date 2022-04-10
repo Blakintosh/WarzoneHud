@@ -325,3 +325,83 @@ Wzu.ScaleWidgetToLabel.DownscaleWithMinimum = function(parent, label, padding, m
         parent:setLeftRight(LeftAnchor, RightAnchor, LeftRightStart, LeftRightStart)
     end
 end
+
+-- Menu based setup mourse cursor function
+-- Important: you can't use (true, true, 0, 0) on the menu dimensions with this, as it makes getLocalRect not work as needed
+Wzu.SetupMouseCursor = function(menu, controller)
+    local cursorModel = Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "mouseCursor"), "cursorImage")
+    Engine.SetModelValue(cursorModel, "ui_cursor_arrow_normal")
+    menu.mouseCursor = LUI.UIImage.new()
+    menu.mouseCursor:setLeftRight(true, false, 0, 64)
+    menu.mouseCursor:setTopBottom(true, false, 0, 64)
+    menu.mouseCursor:setImage(RegisterImage("ui_cursor_arrow_normal"))
+    menu.mouseCursor:hide()
+
+    --[[Wzu.Subscribe(menu.mouseCursor, controller, "mouseCursor.cursorImage", function(modelValue)
+        if not modelValue or not menu.mouseCursor or not menu.mouseCursor.setImage then
+            return
+        end
+
+        menu.mouseCursor:setImage(RegisterImage(modelValue))
+    end)]]
+
+    menu:addElement(menu.mouseCursor)
+
+    menu.clipsPerState = {
+        DefaultState = {
+            DefaultClip = function()
+                menu:setupElementClipCounter(0)
+            end,
+            Over = function()
+                menu:setupElementClipCounter(0)
+            end
+        }
+    }
+
+    menu:setHandleMouse( true )
+	if menu.mouseCursor then
+		local cursorStartX, cursorStartY, cursorEndX, cursorEndY = menu.mouseCursor:getLocalRect()
+		menu.mouseCursorWidth = cursorEndX - cursorStartX
+		menu.mouseCursorHeight = cursorEndY - cursorStartY
+		if menu.mouseCursorWidth and menu.mouseCursorHeight then
+			menu:registerEventHandler( "mousemove", function ( element, event )
+                menu.mouseCursor:show()
+				local whether, xCoord, yCoord = LUI.UIElement.IsMouseInsideElement( element, event )
+				local unitStartX, unitStartY, unitEndX, unitEndY = element:getLocalRect()
+				local unitSizeX = unitEndX - unitStartX
+				local unitSizeY = unitEndY - unitStartY
+				local startDimX, startDimY, endDimX, endDimY = element:getRect()
+
+                if startDimX == nil or endDimX == nil then
+                    return
+                end
+				local dimSizeX = endDimX - startDimX
+				local dimSizeY = endDimY - startDimY
+				local xPosition = CoD.ClampColor( (xCoord - startDimX) / dimSizeX * unitSizeX, 0, unitSizeX )
+				local yPosition = CoD.ClampColor( (yCoord - startDimY) / dimSizeY * unitSizeY, 0, unitSizeY )
+				element.mouseCursor:setLeftRight( true, false, xPosition - (element.mouseCursorWidth / 2), xPosition + (element.mouseCursorWidth / 2) )
+				element.mouseCursor:setTopBottom( true, false, yPosition - (element.mouseCursorHeight / 2), yPosition + (element.mouseCursorHeight / 2) )
+				LUI.UIElement.MouseMoveEvent( element, event )
+			end )
+		end
+	end
+	menu:registerEventHandler( "mouseenter", function ( element, event )
+		HideMouseCursor( menu )
+		element:playClip( "Over" )
+	end )
+	menu:registerEventHandler( "mouseleave", function ( element, event )
+		ShowMouseCursor( menu )
+		element:playClip( "DefaultClip" )
+	end )
+    menu:registerEventHandler( "menu_loaded", function( element, event )
+        HideMouseCursor(menu)
+    end )
+	LUI.OverrideFunction_CallOriginalFirst( menu, "close", function ()
+		ShowMouseCursor( menu )
+	end )
+end
+
+Wzu.SetCursorType = function(type, controller)
+    --local model = Engine.GetModel(Engine.GetModelForController(controller), "mouseCursor.cursorImage")
+    --Engine.SetModelValue(model, type)
+end

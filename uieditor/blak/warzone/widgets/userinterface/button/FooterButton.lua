@@ -76,11 +76,13 @@ function Warzone.FooterButton.new(menu, controller)
     self:registerEventHandler("mouseenter", function(self, event)
         self.background:processEvent(event)
         self:playSound("list_up", controller)
+        Wzu.SetCursorType(Wzu.CursorTypes.Active)
         return LUI.UIElement.mouseEnter(self, event)
     end)
 
     self:registerEventHandler("mouseleave", function(self, event)
         self.background:processEvent(event)
+        Wzu.SetCursorType(Wzu.CursorTypes.Normal)
         return LUI.UIElement.mouseLeave(self, event)
     end)
 

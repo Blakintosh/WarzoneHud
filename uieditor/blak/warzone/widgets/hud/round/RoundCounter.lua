@@ -272,7 +272,7 @@ function Warzone.RoundCounter.new(menu, controller)
             end
         },
         {
-            duration = 300,
+            duration = 250,
             interpolation = Wzu.TweenGraphs.inQuad,
             setScale = 1
         },
@@ -281,7 +281,7 @@ function Warzone.RoundCounter.new(menu, controller)
             setScale = 1
         },
         {
-            duration = 250,
+            duration = 300,
             interpolation = Wzu.TweenGraphs.inQuad,
             setScale = 0
         },
@@ -300,7 +300,7 @@ function Warzone.RoundCounter.new(menu, controller)
             setScale = 0
         },
         {
-            duration = 400,
+            duration = 250,
             interpolation = Wzu.TweenGraphs.inQuad,
             setScale = 1
         }
