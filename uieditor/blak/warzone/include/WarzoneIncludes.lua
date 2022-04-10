@@ -37,7 +37,7 @@ require("ui.uieditor.blak.warzone.menus.overlays.compact.CompactOverlay")
 require("ui.uieditor.blak.warzone.menus.overlays.fullsize.FullSizeOverlay")
 
 -- Interface elements
---require("ui.uieditor.blak.warzone.widgets.userinterface.cursor.MouseCursor")
+require("ui.uieditor.blak.warzone.widgets.userinterface.cursor.MouseCursor")
 
 -- Not part of the Warzone HUD, but necessary for function
 require("ui.uieditor.widgets.HUD.Waypoint.GenericWaypointContainer")
