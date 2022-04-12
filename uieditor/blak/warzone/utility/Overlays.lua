@@ -40,6 +40,25 @@ CoD.OverlayUtility.Overlays.DataStorageConsentPopup.listDatasource = function ()
 	end, true, nil)
 	return "DataStorageConsentPopup_List"
 end
+
+CoD.OverlayUtility.Overlays.ChangelogPopup = LUI.ShallowCopy(CoD.OverlayUtility.Overlays.RestartGamePopup)
+CoD.OverlayUtility.Overlays.ChangelogPopup.title = "Info / Known Issues"
+CoD.OverlayUtility.Overlays.ChangelogPopup.description = [[More menu tweaks have been made including new cursor. OC menu is nearly done.
+
+Known issues:
+- Wall next to blue house isn't clipped
+- Reflection has been removed due to sound engine issues]]
+
+CoD.OverlayUtility.Overlays.ChangelogPopup.listDatasource = function ()
+	DataSources.ChangelogPopup_List = DataSourceHelpers.ListSetup("ChangelogPopup_List", function (f228_arg0)
+		return {{models = {displayText = Engine.Localize("MENU_OK")}, properties = {action = function (f229_arg0, f229_arg1, f229_arg2, f229_arg3, f229_arg4)
+			GoBack(f229_arg4, f229_arg2)
+		end
+}}}
+	end, true, nil)
+	return "ChangelogPopup_List"
+end
+
 --[[function Wzu.QuitGame(f390_arg0, controller, f390_arg2, arg3, menu)
 	CoD.OverlayUtility.CreateOverlay(controller, menu, "QuitGamePopup")
 end]]

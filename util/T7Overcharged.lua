@@ -35,6 +35,10 @@ function InitializeT7Overcharged(options)
 
     UIErrorHash.Remove()
     if debug then
+<<<<<<< HEAD
       --HotReload.Start(options.filespath)
+=======
+      HotReload.Start(options.filespath)
+>>>>>>> 5652735e0ed17ab8db29fabac5807724390f575e
     end
 end
