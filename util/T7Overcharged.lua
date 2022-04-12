@@ -1,4 +1,3 @@
-
 EnableGlobals();
 
 require("ui.util.T7OverchargedUtil")
@@ -7,75 +6,35 @@ require("ui.util.T7OverchargedUtil")
 --    mapname or modname: Enables debug mode and hot reloading when launched via the launcher
 --    filespath: The path to the mod or map files that will be used for hot reloading eg [[.\maps\zm_factory\]]
 --    workshopid: The id of the workshop item so the dll can be found
-function InitializeT7Overcharged( options )
-  if CoD.T7Overcharged then
-    return false
-  end
+function InitializeT7Overcharged(options)
+    if T7Overcharged then return false end
 
-  local debug = false
-  if options.mapname and Engine.GetCurrentMap() == options.mapname or
-     options.modname and Engine.UsingModsUgcName() ==  options.modname then
-    debug = true
-  end
+    local debug = false
+    if options.mapname and Engine.GetCurrentMap() == options.mapname or
+        options.modname and Engine.UsingModsUgcName() == options.modname then
+        debug = true
+    end
 
     -- The path that we copy the dll's from
-  local dllPath = debug and options.filespath .. [[T7Overcharged\x64\Release\]] or [[..\..\workshop\content\311210\]] .. options.workshopid .. "\\"
-    -- The dll's needed for the calls, the first one being the one that actually get's called
-  local dlls = { "T7Overcharged.dll" }
+    local dllPath = debug and options.filespath .. [[zone\]] or [[..\..\workshop\content\311210\]] .. options.workshopid .. "\\"
+    local dll = "T7Overcharged.dll"
 
+    SafeCall(function()
+      EnableGlobals()
+      local dllInit = require("package").loadlib(dllPath..dll, "init")
 
-  -- Make sure all needed dll's are moved to the bo3 root folder
-  for i = 1, #dlls do
-    CopyFile( dllPath..dlls[i], ".\\"..dlls[i] )
-  end
+      -- Check if the dll was properly loaded
+      if not dllInit then
+        Engine.ComError( Enum.errorCode.ERROR_UI, "Unable to initialize T7Overcharged install the latest VCRedist" )
+        return
+      end
 
-  SafeCall(function()
-    require("package").loadlib( dlls[1], "init" )()
-  end)
-
-  if debug then
-    T7Overcharged.InitHotReload( options.filespath )
-  end
-end
-
-function StartHotReload( luiRoot, controller )
-  local timer = nil
-  local refreshMenu = nil
-
-  if not CoD.HotReloadMenus then
-    CoD.HotReloadMenus = {}
-  end
-
-  -- Make sure we don't start reloading multiple times
-  if CoD.HotReloadMenus[luiRoot.menuName] then
-    return
-  else
-    CoD.HotReloadMenus[luiRoot.menuName] = true
-  end
-
-  refreshMenu = function()
-    timer:close()
-
-    local updateHud = 0
-    SafeCall(function() 
-      updateHud = T7Overcharged.CheckForHotReload()
+      -- Execute the dll
+      dllInit()
     end)
 
-    if updateHud == 1 then
-      local parent = luiRoot:getParent()
-      luiRoot:close()
-      parent.T7HudMenuGameMode = LUI.createMenu[luiRoot.menuName]( controller )
-      parent:addElement( parent.T7HudMenuGameMode )
-
-      timer = LUI.UITimer.newElementTimer(1000, true, refreshMenu)
-      parent.T7HudMenuGameMode:addElement(timer)
-
-      luiRoot = parent.T7HudMenuGameMode
-    else
-      timer = LUI.UITimer.newElementTimer(1000, true, refreshMenu)
-      luiRoot:addElement(timer)
+    UIErrorHash.Remove()
+    if debug then
+      HotReload.Start(options.filespath)
     end
-  end
-  timer = LUI.UITimer.newElementTimer(1000, true, refreshMenu)
-  luiRoot:addElement(timer)
 end
