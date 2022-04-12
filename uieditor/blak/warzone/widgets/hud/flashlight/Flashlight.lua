@@ -185,6 +185,10 @@ function Warzone.Flashlight.new(menu, controller)
         self:playClip("Update")
     end)
 
+    LUI.OverrideFunction_CallOriginalSecond(self, "close", function(sender)
+        sender.icon:close()
+    end)
+
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)
     end

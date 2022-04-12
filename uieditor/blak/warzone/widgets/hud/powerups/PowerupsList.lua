@@ -4,7 +4,8 @@ local WarzonePowerupList = {
     powerup_instant_kill = "ui_mp_br_timer_event_instakill", 
     powerup_double_points = "ui_mp_br_timer_event_doublepoints",
     powerup_fire_sale = "ui_mp_br_timer_event_firesale",
-    powerup_mini_gun = "ui_mp_br_timer_event_juggernaut"
+    powerup_mini_gun = "ui_mp_br_timer_event_juggernaut",
+    powerup_bon_fire = "ui_mp_br_timer_event_bonfiresale"
 }
 
 local PowerupInList = function (self, cf_name)
@@ -114,7 +115,7 @@ Warzone.PowerupsList.new = function (menu, controller)
     self.PowerupList:setSpacing(4)
 	self.PowerupList.id = "PowerupList"
 	self.PowerupList:setWidgetType(Warzone.Powerup)
-	self.PowerupList:setHorizontalCount(4)
+	self.PowerupList:setHorizontalCount(5)
 	self.PowerupList:setDataSource("WarzonePowerups")
 	self:addElement(self.PowerupList)
 
