@@ -81,6 +81,20 @@ function Warzone.HighResolutionContainer.new(menu, controller)
 
     self:addElement(self.scoreboard)
 
+    -- Centre dot
+    self.centreDot = Warzone.CentreDotReticle.new(menu, controller)
+    self.centreDot:setScaledLeftRight(false, false, -3, 3)
+    self.centreDot:setScaledTopBottom(false, false, -3, 3)
+
+    self:addElement(self.centreDot)
+
+    -- Hitmarker
+    self.hitmarker = Warzone.Hitmarker.new(menu, controller)
+    self.hitmarker:setScaledLeftRight(false, false, -19, 19)
+    self.hitmarker:setScaledTopBottom(false, false, -19, 19)
+
+    self:addElement(self.hitmarker)
+
     -- Watermark
     self.watermark = Wzu.TextElement(Wzu.Fonts.KillstreakRegular, Wzu.Swatches.HUDMain)
     self.watermark:setScaledLeftRight(false, true, -300, 0)

@@ -23,6 +23,8 @@ require("ui.uieditor.blak.warzone.widgets.hud.powerups.PowerupsList")
 require("ui.uieditor.blak.warzone.widgets.hud.weaponpickup.WeaponPickupContainer")
 require("ui.uieditor.blak.warzone.widgets.hud.perkpickup.PerkPickupContainer")
 require("ui.uieditor.blak.warzone.widgets.hud.reloadprompt.ReloadPrompt")
+require("ui.uieditor.blak.warzone.widgets.hud.crosshair.CentreDotReticle")
+require("ui.uieditor.blak.warzone.widgets.hud.hitmarker.Hitmarker")
 
 -- Associated Menus
 require("ui.uieditor.blak.warzone.menus.overclockmenu.OverclockMenu")

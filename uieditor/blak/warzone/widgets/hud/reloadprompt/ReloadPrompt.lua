@@ -97,6 +97,11 @@ function Warzone.ReloadPrompt.new(menu, controller)
     Wzu.SubState(controller, menu, self, "currentWeapon.ammoInClip")
     Wzu.SubState(controller, menu, self, "currentWeapon.ammoStock")
 
+    LUI.OverrideFunction_CallOriginalSecond(self, "close", function (sender)
+		sender.lowAmmo:close()
+		sender.reload:close()
+	end)
+
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)
     end

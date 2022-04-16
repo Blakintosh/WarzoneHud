@@ -41,9 +41,8 @@ function Warzone.LethalGrenade.new(menu, controller)
     self.icon = LUI.UIImage.new()
     self.icon:setScaledLeftRight(true, false, 0, 24)
     self.icon:setScaledTopBottom(true, false, 0, 24)
-    self.icon:setImage(RegisterImage("hud_icon_equipment_frag"))
 
-    --Wzu.SubscribeToImage(self.icon, controller, "CurrentPrimaryOffhand.primaryOffhand")
+    Wzu.SubscribeToImage(self.icon, controller, "CurrentPrimaryOffhand.primaryOffhand")
 
     Wzu.ClipSequence(self, self.icon, "DefaultState", {
         {

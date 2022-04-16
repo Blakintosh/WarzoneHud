@@ -17,13 +17,13 @@ end
 
 local SetupWaypoint = function (Sender, Event)
     if Sender.objective.id then
-        if Sender.objective.id == "zm_wz_weapon_prompt" then
+        --[[if Sender.objective.id == "zm_wz_weapon_prompt" then
             Sender.gameTypeContainer = Warzone.WeaponPickupContainer.new(Sender.menu, Event.controller)
         elseif Sender.objective.id == "zm_wz_perk_prompt" then
             Sender.gameTypeContainer = Warzone.PerkPickupContainer.new(Sender.menu, Event.controller)
-        else
+        else]]
             Sender.gameTypeContainer = CoD.GenericWaypointContainer.new(Sender.menu, Event.controller)
-        end
+        --end
         Sender.gameTypeContainer:setLeftRight(true, true, 0, 0)
         Sender.gameTypeContainer:setTopBottom(true, true, 0, 0)
                     
@@ -176,7 +176,7 @@ end
 
 Warzone.Waypoints = InheritFrom(LUI.UIElement)
 
-function Warzone.Waypoints.new(menu, controller, contentWidget)
+function Warzone.Waypoints.new(menu, controller)
     local self = LUI.UIElement.new()
     if PreLoadFunc then
         PreLoadFunc(menu, controller)
@@ -194,6 +194,7 @@ function Warzone.Waypoints.new(menu, controller, contentWidget)
 	self.GenericWaypointContainer:setTopBottom(false, false, -360, 360)
 	self.GenericWaypointContainer:setAlpha(0)
 	self:addElement(self.GenericWaypointContainer)
+
 	
 	self.WaypointBase = CoD.WaypointBase.new(menu, controller)
 	self.WaypointBase:setLeftRight(false, false, -640, 640)
