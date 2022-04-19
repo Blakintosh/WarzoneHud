@@ -131,11 +131,11 @@ end
 Util.SubState = function(InstanceRef, HudRef, parent, ModelName)
     parent:subscribeToModel(Engine.GetModel(Engine.GetModelForController(InstanceRef), ModelName), function(ModelRef)
         HudRef:updateElementState(parent, {
-        name = "model_validation",
-        menu = HudRef,
-        modelValue = Engine.GetModelValue(ModelRef),
-        modelName = ModelName
-    })
+			name = "model_validation",
+			menu = HudRef,
+			modelValue = Engine.GetModelValue(ModelRef),
+			modelName = ModelName
+    	})
     end)
 end
 
@@ -404,4 +404,15 @@ end
 Util.SetCursorType = function(type, controller)
     --local model = Engine.GetModel(Engine.GetModelForController(controller), "mouseCursor.cursorImage")
     --Engine.SetModelValue(model, type)
+end
+
+Util.PrepareFont = function(self, font)
+	local dummy = LUI.UIText.new()
+
+	dummy:setLeftRight(true, false, 0, 1280)
+	dummy:setTopBottom(true, false, -36, 0)
+	dummy:setTTF(font)
+	dummy:setText("The quick brown fox jumps over the lazy dog")
+
+	self:addElement(dummy)
 end

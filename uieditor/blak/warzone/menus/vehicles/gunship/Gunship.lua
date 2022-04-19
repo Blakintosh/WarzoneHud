@@ -1,9 +1,6 @@
---[[require("ui.uieditor.widgets.blak.veh.ac130.blakac130vision")
-require("ui.uieditor.widgets.blak.veh.ac130.blakac130weapon")
-require("ui.uieditor.widgets.blak.veh.ac130.blakac130crosshair")
-require("ui.uieditor.blak_utils.DebugUtils")]]
+require("ui.uieditor.blak.warzone.widgets.vehicles.gunship.GunshipHighResContainer")
 
-DataSources.BlakAC130Weapons = DataSourceHelpers.ListSetup("BlakAC130Weapons", function(InstanceRef)
+DataSources.GunshipWeapons = DataSourceHelpers.ListSetup("GunshipWeapons", function(InstanceRef)
 	local dataTable = {}
 
 	for i = 0, 2 do
@@ -73,49 +70,18 @@ LUI.createMenu.Gunship = function (controller)
 	menu.buttonModel = Engine.CreateModel(Engine.GetModelForController(controller), "Gunship.buttonPrompts")
     menu.anyChildUsesUpdateState = true
 
-    -- Top right
-    menu.killstreakLabel = LUI.UIText.new()
-    menu.killstreakLabel:setLeftRight(false, true, -310, -100)
-    menu.killstreakLabel:setTopBottom(true, false, 80, 92)
-    menu.killstreakLabel:setText("AC-130 ONLINE")
-    menu.killstreakLabel:setTTF("fonts/killstreak_regular.ttf")
+    menu.container = Warzone.GunshipHighResContainer.new(menu, controller)
+	menu.container:setScaledLeftRight(false, false, -640, 640)
+	menu.container:setScaledTopBottom(false, false, -360, 360)
+	menu.container:setScale(1 / _ResolutionScalar)
 
-    menu:addElement(menu.killstreakLabel)
-
-	-- Top left
-	menu.visionLabel = CoD.BlakAC130Vision.new(menu, controller)
-	menu.visionLabel:setLeftRight(true, false, 100, 400)
-	menu.visionLabel:setTopBottom(true, false, 70, 114)
-
-	menu:addElement(menu.visionLabel)
-
-	-- Weapons
-	menu.weapons = LUI.UIList.new(menu, controller, 0, 0, nil, false, false, false, 0, 0, false, false)
-	menu.weapons:setLeftRight(true, false, 490, 790)
-	menu.weapons:setTopBottom(true, false, 550, 650)
-	menu.weapons:setWidgetType(CoD.BlakAC130Weapon)
-	menu.weapons:setDataSource("BlakAC130Weapons")
-	menu.weapons:setHorizontalCount(3)
-
-	menu.weapons:subscribeToModel(Engine.GetModel(Engine.GetModelForController(controller), "ac130datasourcerefresh"), function(ModelRef)
-		menu.weapons:updateDataSource()
-	end)
-
-	menu:addElement(menu.weapons)
-
-	menu.crosshair = CoD.BlakAC130Crosshair.new(menu, controller)
-	menu.crosshair:setLeftRight(false, false, -300, 300)
-	menu.crosshair:setTopBottom(true, false, 100, 620)
-
-	menu:addElement(menu.crosshair)
+	menu:addElement(menu.container)
 	
 	menu:processEvent({name = "menu_loaded", controller = controller})
 	menu:processEvent({name = "update_state", menu = menu})
 
-	LUI.OverrideFunction_CallOriginalSecond(menu, "close", function (Sender)
-		Sender.visionLabel:close()
-		Sender.weapons:close()
-		Sender.crosshair:close()
+	LUI.OverrideFunction_CallOriginalSecond(menu, "close", function (self)
+		self.container:close()
 
 		Engine.UnsubscribeAndFreeModel(Engine.GetModel(Engine.GetModelForController(controller), "Gunship.buttonPrompts"))
 	end)
@@ -123,6 +89,7 @@ LUI.createMenu.Gunship = function (controller)
 	if PostLoadFunc then
 		PostLoadFunc(menu, controller)
 	end
+	
 	return menu
 end
 

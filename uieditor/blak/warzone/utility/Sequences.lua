@@ -13,6 +13,21 @@ Util.ClipSequence = function(parent, self, identifier, sequences)
     })
 end
 
+Util.CopySequence = function(parent, source, target, previousIdentifier, identifier)
+	if not parent.__sequences or not parent.__sequences[previousIdentifier] then
+		Console.PrintError("Parent has no sequences or no sequences with the specified identifier "..previousIdentifier)
+		return
+	end
+
+	for k, v in ipairs(parent.__sequences[previousIdentifier]) do
+		if v.widget == source then
+			Util.ClipSequence(parent, target, identifier, v.sequences)
+			return
+		end
+	end
+	Console.PrintError("Unable to find a sequence for widget "..(source.id or "(no ID)").." using identifier "..previousIdentifier)
+end
+
 -- Ricochet on deez nuts
 local function FindInitialValuesForProperty(lastSequence, property)
     for k, v in pairs(lastSequence) do

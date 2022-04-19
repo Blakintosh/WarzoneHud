@@ -34,6 +34,8 @@ require("ui.uieditor.blak.warzone.menus.startmenu.StartMenu")
 require("ui.uieditor.blak.warzone.menus.startmenu_options.StartMenu_Options")
 require("ui.uieditor.blak.warzone.menus.keypadmenu.KeypadMenu")
 require("ui.uieditor.blak.warzone.menus.wheelmenu.WheelMenu")
+-- Vehicles
+require("ui.uieditor.blak.warzone.menus.vehicles.gunship.Gunship")
 
 -- Overlays
 require("ui.uieditor.blak.warzone.menus.overlays.compact.CompactOverlay")
