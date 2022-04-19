@@ -33,6 +33,7 @@ require("ui.uieditor.blak.warzone.menus.pregamemenu.PreGameMenu_Client")
 require("ui.uieditor.blak.warzone.menus.startmenu.StartMenu")
 require("ui.uieditor.blak.warzone.menus.startmenu_options.StartMenu_Options")
 require("ui.uieditor.blak.warzone.menus.keypadmenu.KeypadMenu")
+require("ui.uieditor.blak.warzone.menus.wheelmenu.WheelMenu")
 
 -- Overlays
 require("ui.uieditor.blak.warzone.menus.overlays.compact.CompactOverlay")

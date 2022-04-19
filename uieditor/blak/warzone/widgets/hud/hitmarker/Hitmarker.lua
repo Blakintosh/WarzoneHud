@@ -344,7 +344,7 @@ function Warzone.Hitmarker.new(menu, controller)
         }
     }
     
-    SubscribeToModelByName(self, controller, "hudItems.zm_hitmarker", function(model)
+    Wzu.Subscribe(self, controller, "hudItems.zm_hitmarker", function(model)
         local modelValue = Engine.GetModelValue(model)
         if modelValue then
             modelValue = math.abs(modelValue)
@@ -369,7 +369,7 @@ function Warzone.Hitmarker.new(menu, controller)
         }
     })
     
-    SubscribeToModelAndUpdateState(controller, menu, self, "hudItems.isADS")
+    Wzu.SubState(controller, menu, self, "hudItems.isADS")
 
     if PostLoadFunc then
         PostLoadFunc(menu, controller)

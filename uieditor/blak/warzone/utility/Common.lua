@@ -44,6 +44,7 @@ Wzu.Colors = {
     BlueGrey = { r = 0.3020, g = 0.3843, b = 0.4784 },
     WarmerMedGrey = { r = 0.6471, g = 0.6157, b = 0.5843},
     UnfocusedGrey = { r = 0.4196, g = 0.4235, b = 0.4039 },
+	Grey89 = { r = 0.3490, g = 0.3490, b = 0.3490 },
     Perks = {
         ArmorVest = { r = 0.8667, g = 0.1755, b = 0.1755 },
         FastReload = { r = 0.1, g = 0.7157, b = 0.1 },
@@ -122,7 +123,8 @@ Wzu.Swatches = {
     PopupBgGradient = Wzu.Colors.BlueGrey,
     PopupHeaderTxt = Wzu.Colors.CodeDarkBlue,
     PopupTitleTxt = Wzu.Colors.TidePool,
-    PopupSubHeaderTxt2 = Wzu.Colors.WarmerMedGrey
+    PopupSubHeaderTxt2 = Wzu.Colors.WarmerMedGrey,
+	ScorestreakButtonUnavailable = Wzu.Colors.Grey89
 }
 
 Wzu.Fonts = {
