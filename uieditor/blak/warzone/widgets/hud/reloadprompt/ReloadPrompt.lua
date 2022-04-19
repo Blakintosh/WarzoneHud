@@ -31,22 +31,22 @@ function Warzone.ReloadPrompt.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
             end
         },
         Reload = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Reload")
+                Util.AnimateSequence(self, "Reload")
             end
         },
         Low = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Low")
+                Util.AnimateSequence(self, "Low")
             end
         },
         No = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "No")
+                Util.AnimateSequence(self, "No")
             end
         }
     }
@@ -92,10 +92,10 @@ function Warzone.ReloadPrompt.new(menu, controller)
         }
     })
 
-    Wzu.SubState(controller, menu, self, "currentWeapon.weapon")
-    Wzu.SubState(controller, menu, self, "currentWeapon.ammoInDWClip")
-    Wzu.SubState(controller, menu, self, "currentWeapon.ammoInClip")
-    Wzu.SubState(controller, menu, self, "currentWeapon.ammoStock")
+    Util.SubState(controller, menu, self, "currentWeapon.weapon")
+    Util.SubState(controller, menu, self, "currentWeapon.ammoInDWClip")
+    Util.SubState(controller, menu, self, "currentWeapon.ammoInClip")
+    Util.SubState(controller, menu, self, "currentWeapon.ammoStock")
 
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function (sender)
 		sender.lowAmmo:close()

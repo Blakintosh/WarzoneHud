@@ -14,23 +14,23 @@ function Warzone.FlashlightMode.new(menu, controller)
     self:setScaledLeftRight(true, false, 0, 16)
     self:setScaledTopBottom(true, false, 0, 16)
 
-    self.text = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.text = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.text:setScaledLeftRight(false, false, -8, 8)
     self.text:setScaledTopBottom(true, false, 1.5, 10.5)
 
-    Wzu.LinkToWidgetText(self.text, self, "displayText")
+    Util.LinkToWidgetText(self.text, self, "displayText")
 
-    Wzu.ClipSequence(self, self.text, "Default", {
+    Util.ClipSequence(self, self.text, "Default", {
         {
             duration = 0,
-            setTTF = Wzu.Fonts.MainRegular,
+            setTTF = Util.Fonts.MainRegular,
             setAlpha = 0.5
         }
     })
-    Wzu.ClipSequence(self, self.text, "Active", {
+    Util.ClipSequence(self, self.text, "Active", {
         {
             duration = 0,
-            setTTF = Wzu.Fonts.MainBold,
+            setTTF = Util.Fonts.MainBold,
             setAlpha = 1
         }
     })
@@ -41,20 +41,20 @@ function Warzone.FlashlightMode.new(menu, controller)
     self.footer:setScaledLeftRight(false, false, -8, 8)
     self.footer:setScaledTopBottom(false, true, -1, 0)
 
-    Wzu.ClipSequence(self, self.footer, "Default", {
+    Util.ClipSequence(self, self.footer, "Default", {
         {
             duration = 0,
             setScaledLeftRight = {false, false, -0, 0}
         }
     })
-    Wzu.ClipSequence(self, self.footer, "Active", {
+    Util.ClipSequence(self, self.footer, "Active", {
         {
             duration = 0,
             setScaledLeftRight = {false, false, -0, 0}
         },
         {
             duration = 200,
-            interpolation = Wzu.TweenGraphs.inOutSine,
+            interpolation = Util.TweenGraphs.inOutSine,
             setScaledLeftRight = {false, false, -8, 8}
         }
     })
@@ -64,12 +64,12 @@ function Warzone.FlashlightMode.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Default")
+                Util.AnimateSequence(self, "Default")
             end
         },
         Active = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Active")
+                Util.AnimateSequence(self, "Active")
             end
         }
     }
@@ -84,7 +84,7 @@ function Warzone.FlashlightMode.new(menu, controller)
             return false
         end
     }})
-    Wzu.SubState(controller, menu, self, "hudItems.flashlightMode")
+    Util.SubState(controller, menu, self, "hudItems.flashlightMode")
 
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)

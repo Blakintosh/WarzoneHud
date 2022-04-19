@@ -22,13 +22,13 @@ function Warzone.CursorHint.new(menu, controller)
 
     self.button:setButtonPrompt("activate", "activate")
 
-    Wzu.ClipSequence(self, self.button, "Show", {
+    Util.ClipSequence(self, self.button, "Show", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.button, "DefaultState", {
+    Util.ClipSequence(self, self.button, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0
@@ -37,7 +37,7 @@ function Warzone.CursorHint.new(menu, controller)
 
     self:addElement(self.button)
 
-    self.prompt = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, true)
+    self.prompt = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, true)
     self.prompt:setScaledLeftRight(true, false, 27, 327)
     self.prompt:setScaledTopBottom(true, false, -2, 18)
     self.prompt:setText(Engine.Localize("MENU_NEW"))
@@ -50,30 +50,30 @@ function Warzone.CursorHint.new(menu, controller)
 		end
 	end)
 
-    Wzu.ClipSequence(self, self.prompt, "Show", {
+    Util.ClipSequence(self, self.prompt, "Show", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.prompt, "DefaultState", {
+    Util.ClipSequence(self, self.prompt, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
 
-    Wzu.AddShadowedElement(self, self.prompt)
+    Util.AddShadowedElement(self, self.prompt)
 
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
             end
         },
         Show = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Show")
+                Util.AnimateSequence(self, "Show")
             end
         }
     }
@@ -92,9 +92,9 @@ function Warzone.CursorHint.new(menu, controller)
         }
     })
 
-    Wzu.SubState(controller, menu, self, "hudItems.cursorHintText")
-    Wzu.SubState(controller, menu, self, "hudItems.showCursorHint")
-    Wzu.SubState(controller, menu, self, "hudItems.suppressCursorHintDisplay")
+    Util.SubState(controller, menu, self, "hudItems.cursorHintText")
+    Util.SubState(controller, menu, self, "hudItems.showCursorHint")
+    Util.SubState(controller, menu, self, "hudItems.suppressCursorHintDisplay")
     
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(Sender)
         Sender.button:close()

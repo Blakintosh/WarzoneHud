@@ -16,24 +16,24 @@ Warzone.Powerup.new = function (menu, controller)
     self.Circle:setScaledLeftRight(true, true, 0, 0)
     self.Circle:setScaledTopBottom(true, true, 0, 0)
     self.Circle:setImage(RegisterImage("hud_ability_base_circle"))
-    Wzu.SetRGBFromTable(self.Circle, Wzu.Colors.PowerupOrange)
+    Util.SetRGBFromTable(self.Circle, Util.Colors.PowerupOrange)
     self.Circle:setMaterial(LUI.UIImage.GetCachedMaterial("uie_clock_normal"))
     self.Circle:setShaderVector(0, 0.5, 0, 0, 0)
 	self.Circle:setShaderVector(1, 0.5, 0, 0, 0)
 	self.Circle:setShaderVector(2, 0.5, 0, 0, 0)
 	self.Circle:setShaderVector(3, 0, 0, 0, 0)
 
-    Wzu.LinkToWidget(self.Circle, self, "timeLeft", function(modelValue)
+    Util.LinkToWidget(self.Circle, self, "timeLeft", function(modelValue)
         self.Circle:setShaderVector(0, CoD.GetVectorComponentFromString(modelValue, 1), CoD.GetVectorComponentFromString(modelValue, 2), CoD.GetVectorComponentFromString(modelValue, 3), CoD.GetVectorComponentFromString(modelValue, 4))
     end)
 
-    Wzu.ClipSequence(self, self.Circle, "DefaultState", {
+    Util.ClipSequence(self, self.Circle, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.Circle, "Enabled", {
+    Util.ClipSequence(self, self.Circle, "Enabled", {
         {
             duration = 0,
             setAlpha = 1
@@ -46,17 +46,17 @@ Warzone.Powerup.new = function (menu, controller)
 	self.PowerupImage:setScaledLeftRight(false, false, -16, 16)
 	self.PowerupImage:setScaledTopBottom(false, false, -16, 16)
 
-	Wzu.LinkToWidget(self.PowerupImage, self, "image", function(modelValue)
+	Util.LinkToWidget(self.PowerupImage, self, "image", function(modelValue)
 		self.PowerupImage:setImage(RegisterImage(modelValue))
 	end)
 
-    Wzu.ClipSequence(self, self.PowerupImage, "DefaultState", {
+    Util.ClipSequence(self, self.PowerupImage, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.PowerupImage, "Enabled", {
+    Util.ClipSequence(self, self.PowerupImage, "Enabled", {
         {
             duration = 0,
             setAlpha = 1
@@ -68,12 +68,12 @@ Warzone.Powerup.new = function (menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
             end
         },
         Enabled = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Enabled")
+                Util.AnimateSequence(self, "Enabled")
             end
         }
     }
@@ -87,7 +87,7 @@ Warzone.Powerup.new = function (menu, controller)
         }
     })
 
-    Wzu.LinkWidgetToState(self, self, menu, "status")
+    Util.LinkWidgetToState(self, self, menu, "status")
 
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", function (Sender)
         Sender.Circle:close()

@@ -21,12 +21,12 @@ end
 
 Warzone.MouseCursor.new = function()
 	local self = LUI.UIImage.new()
-    self:setImage(RegisterImage(Wzu.CursorTypes.Normal))
+    self:setImage(RegisterImage(Util.CursorTypes.Normal))
 	self:setPriority(Warzone.MouseCursor.priority)
 	self:registerEventHandler("mousemove", mouseMove)
 	self.size = 64
 
-    Wzu.SetCursorType = function(type)
+    Util.SetCursorType = function(type)
         self:setImage(RegisterImage(type))
     end
 

@@ -12,7 +12,7 @@ function Warzone.MenuTitle.new(menu, controller)
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
 
-    self.title = Wzu.TextElement(Wzu.Fonts.MainLight, Wzu.Swatches.MenuTitle, false)
+    self.title = Util.TextElement(Util.Fonts.MainLight, Util.Swatches.MenuTitle, false)
     self.title:setScaledLeftRight(true, false, 60, 150)
     self.title:setScaledTopBottom(true, false, 0, 38)
     self:addElement(self.title)
@@ -20,7 +20,7 @@ function Warzone.MenuTitle.new(menu, controller)
     self.horizontalBar = LUI.UIImage.new()
     self.horizontalBar:setScaledLeftRight(true, false, 0, 60)
     self.horizontalBar:setScaledTopBottom(true, false, 35, 36)
-    Wzu.SetRGBFromTable(self.horizontalBar, Wzu.Swatches.MenuTitle)
+    Util.SetRGBFromTable(self.horizontalBar, Util.Swatches.MenuTitle)
 
     LUI.OverrideFunction_CallOriginalFirst(self.title, "setText", function(widget, text)
         self.horizontalBar:setScaledLeftRight(true, false, 0, 60 + (widget:getTextWidth() / _ResolutionScalar))

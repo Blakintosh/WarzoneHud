@@ -296,11 +296,11 @@ local PostLoadFunc = function (self, controller)
 end
 
 local function SubRGBToRarity(self, controller)
-    Wzu.Subscribe(self, controller, "prospectiveWeapon.attributes.weaponRarity", function(modelValue)
-        if Wzu.Swatches.RaritiesLight[modelValue + 1] then
-            Wzu.SetRGBFromTable(self, Wzu.Swatches.RaritiesLight[modelValue + 1])
+    Util.Subscribe(self, controller, "prospectiveWeapon.attributes.weaponRarity", function(modelValue)
+        if Util.Swatches.RaritiesLight[modelValue + 1] then
+            Util.SetRGBFromTable(self, Util.Swatches.RaritiesLight[modelValue + 1])
         else
-            Wzu.SetRGBFromTable(self, Wzu.Swatches.RaritiesLight[1])
+            Util.SetRGBFromTable(self, Util.Swatches.RaritiesLight[1])
         end
     end)
 end

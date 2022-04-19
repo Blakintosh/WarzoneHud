@@ -12,7 +12,7 @@ function Warzone.StartMenuMissionInfo.new(menu, controller)
     self.soundSet = "iw8"
     self.anyChildUsesUpdateState = true
     
-    self.mapName = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.mapName = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.mapName:setScaledLeftRight(true, false, 4, 100)
     self.mapName:setScaledTopBottom(true, false, 0, 14)
 
@@ -20,7 +20,7 @@ function Warzone.StartMenuMissionInfo.new(menu, controller)
 
     self:addElement(self.mapName)
     
-    self.factionName = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.factionName = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.factionName:setScaledLeftRight(false, true, -100, -4)
     self.factionName:setScaledTopBottom(true, false, 0, 14)
 
@@ -31,7 +31,7 @@ function Warzone.StartMenuMissionInfo.new(menu, controller)
     self.divider = LUI.UIImage.new()
     self.divider:setScaledLeftRight(true, true, 0, 0)
     self.divider:setScaledTopBottom(true, false, 20, 21)
-    Wzu.SetRGBFromTable(self.divider, Wzu.Swatches.HUDMain)
+    Util.SetRGBFromTable(self.divider, Util.Swatches.HUDMain)
     self.divider:setAlpha(0.8)
 
     self:addElement(self.divider)
@@ -43,7 +43,7 @@ function Warzone.StartMenuMissionInfo.new(menu, controller)
 
     self:addElement(self.modeIcon)
 
-    self.gamemode = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, false)
+    self.gamemode = Util.TextElement(Util.Fonts.MainBold, Util.Swatches.HUDMain, false)
     self.gamemode:setScaledLeftRight(true, false, 104, 304)
     self.gamemode:setScaledTopBottom(true, false, 48, 72)
 
@@ -51,7 +51,7 @@ function Warzone.StartMenuMissionInfo.new(menu, controller)
 
     self:addElement(self.gamemode)
 
-    self.modeDescription = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Colors.Grey191, false)
+    self.modeDescription = Util.TextElement(Util.Fonts.MainRegular, Util.Colors.Grey191, false)
     self.modeDescription:setScaledLeftRight(true, false, 104, 504)
     self.modeDescription:setScaledTopBottom(true, false, 86, 102)
     self.modeDescription:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_LEFT)

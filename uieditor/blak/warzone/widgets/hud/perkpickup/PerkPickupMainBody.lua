@@ -14,11 +14,11 @@ local function PreLoadFunc(menu, controller)
 end
 
 local function SubRGBToPerk(self, controller)
-    Wzu.Subscribe(self, controller, "prospectivePerk.attributes.color", function(modelValue)
-        if Wzu.Colors.Perks[modelValue] then
-            Wzu.SetRGBFromTable(self, Wzu.Colors.Perks[modelValue])
+    Util.Subscribe(self, controller, "prospectivePerk.attributes.color", function(modelValue)
+        if Util.Colors.Perks[modelValue] then
+            Util.SetRGBFromTable(self, Util.Colors.Perks[modelValue])
         else
-            Wzu.SetRGBFromTable(self, Wzu.Colors.White)
+            Util.SetRGBFromTable(self, Util.Colors.White)
         end
     end)
 end
@@ -165,12 +165,12 @@ function Warzone.PerkPickupMainBody.new(menu, controller)
         end
     }})
 
-    Wzu.SubState(controller, menu, self.buttonPrompt, "prospectivePerk.cost")
-    Wzu.SubState(controller, menu, self.buttonPrompt, "PlayerList.0.playerScore")
+    Util.SubState(controller, menu, self.buttonPrompt, "prospectivePerk.cost")
+    Util.SubState(controller, menu, self.buttonPrompt, "PlayerList.0.playerScore")
 
     self:addElement(self.buttonPrompt)
 
-    self.swapPrompt = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.swapPrompt = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.swapPrompt:setScaledLeftRight(true, false, 20, 60)
     self.swapPrompt:setScaledTopBottom(false, false, -64, -52)
     self.swapPrompt:setText("Perk")
@@ -187,29 +187,29 @@ function Warzone.PerkPickupMainBody.new(menu, controller)
     self.perkIcon:setScaledLeftRight(false, true, -32, 0)
     self.perkIcon:setScaledTopBottom(true, false, 18, 50)
     
-    Wzu.SubscribeToImage(self.perkIcon, controller, "prospectivePerk.attributes.icon")
+    Util.SubscribeToImage(self.perkIcon, controller, "prospectivePerk.attributes.icon")
 
     self:addElement(self.perkIcon)
 
-    self.perkEffects = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, false)
+    self.perkEffects = Util.TextElement(Util.Fonts.MainBold, Util.Swatches.HUDMain, false)
     self.perkEffects:setScaledLeftRight(true, false, 12, 52)
     self.perkEffects:setScaledTopBottom(true, false, 65, 79)
     self.perkEffects:setText("EFFECTS:")
 
     self:addElement(self.perkEffects)
 
-    self.perkEffectDesc = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.perkEffectDesc = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.perkEffectDesc:setScaledLeftRight(true, false, 12, 312)
     self.perkEffectDesc:setScaledTopBottom(true, false, 80, 96)
     self.perkEffectDesc:setText("AMONG US")
     self.perkEffectDesc:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_LEFT)
     self.perkEffectDesc:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_TOP)
 
-    Wzu.SubscribeToText(self.perkEffectDesc, controller, "prospectivePerk.attributes.effects")
+    Util.SubscribeToText(self.perkEffectDesc, controller, "prospectivePerk.attributes.effects")
 
     self:addElement(self.perkEffectDesc)
 
-    Wzu.Subscribe(self, controller, "prospectivePerk.specialty", function(modelValue)
+    Util.Subscribe(self, controller, "prospectivePerk.specialty", function(modelValue)
         for k,v in ipairs(self.perkTable) do
             if v.specialty == modelValue then
                 Engine.SetModelValue(Engine.GetModel(Engine.GetModelForController(controller), "prospectivePerk.attributes.name"), v.name)

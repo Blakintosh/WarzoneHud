@@ -53,7 +53,7 @@ function Warzone.CentreDotReticle.new(menu, controller)
 
     self.centreDot:setImage(RegisterImage("hud_reticle_hip_dot")) --loaded 2d image
 
-    Wzu.ClipSequence(self, self.centreDot, "Show", {
+    Util.ClipSequence(self, self.centreDot, "Show", {
         {
             duration = 0,
             setAlpha = 0
@@ -63,7 +63,7 @@ function Warzone.CentreDotReticle.new(menu, controller)
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.centreDot, "Hide", {
+    Util.ClipSequence(self, self.centreDot, "Hide", {
         {
             duration = 0,
             setAlpha = 0
@@ -75,12 +75,12 @@ function Warzone.CentreDotReticle.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function() --This is the standard state & clip that will play when all state conditions fail to evaluate as true
-                Wzu.AnimateSequence(self, "Show")
+                Util.AnimateSequence(self, "Show")
             end
         },
         Hidden = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Hide")
+                Util.AnimateSequence(self, "Hide")
             end
         }
     }
@@ -124,31 +124,31 @@ function Warzone.CentreDotReticle.new(menu, controller)
     
     -- These are all generic visibility model subscriptions. They are what hide the HUD when, say, you're in the scoreboard, or other cases where HUD needs to be hidden.
     -- Don't need to understand visibility bits, just have to use them. Though I might remove them depending on how the Bo3 .menu reticle behaves when these things occur
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_HUD_VISIBLE)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_WEAPON_HUD_VISIBLE)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_HUD_HARDCORE)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_GAME_ENDED)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_DEMO_CAMERA_MODE_MOVIECAM)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_DEMO_ALL_GAME_HUD_HIDDEN)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IN_KILLCAM)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IS_FLASH_BANGED)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_UI_ACTIVE)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IS_SCOPED)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IN_VEHICLE)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IN_GUIDED_MISSILE)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_SCOREBOARD_OPEN)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IN_REMOTE_KILLSTREAK_STATIC)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_EMP_ACTIVE)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_HUD_VISIBLE)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_WEAPON_HUD_VISIBLE)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_HUD_HARDCORE)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_GAME_ENDED)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_DEMO_CAMERA_MODE_MOVIECAM)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_DEMO_ALL_GAME_HUD_HIDDEN)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IN_KILLCAM)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IS_FLASH_BANGED)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_UI_ACTIVE)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IS_SCOPED)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IN_VEHICLE)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IN_GUIDED_MISSILE)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_SCOREBOARD_OPEN)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IN_REMOTE_KILLSTREAK_STATIC)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_EMP_ACTIVE)
 
-    Wzu.SubState(controller, menu, self, "hudItems.playerSpawned")
+    Util.SubState(controller, menu, self, "hudItems.playerSpawned")
 
     -- Extra conditions that I will add to update the HUD
     -- these are all custom UI Models that I'm going to script in gsc/csc
-    Wzu.SubState(controller, menu, self, "hudItems.isSwitchingWeapon")
-    Wzu.SubState(controller, menu, self, "hudItems.isReloading")
-    Wzu.SubState(controller, menu, self, "hudItems.isFiring")
-    Wzu.SubState(controller, menu, self, "hudItems.isADS")
-    Wzu.SubState(controller, menu, self, "hudItems.useCentreDot")
+    Util.SubState(controller, menu, self, "hudItems.isSwitchingWeapon")
+    Util.SubState(controller, menu, self, "hudItems.isReloading")
+    Util.SubState(controller, menu, self, "hudItems.isFiring")
+    Util.SubState(controller, menu, self, "hudItems.isADS")
+    Util.SubState(controller, menu, self, "hudItems.useCentreDot")
     
     if PostLoadFunc then
         PostLoadFunc(menu, controller)

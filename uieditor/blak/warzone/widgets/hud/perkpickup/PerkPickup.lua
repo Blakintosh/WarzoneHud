@@ -302,11 +302,11 @@ local PostLoadFunc = function (self, controller)
 end
 
 local function SubRGBToPerk(self, controller)
-    Wzu.Subscribe(self, controller, "prospectivePerk.attributes.color", function(modelValue)
-        if Wzu.Colors.Perks[modelValue] then
-            Wzu.SetRGBFromTable(self, Wzu.Colors.Perks[modelValue])
+    Util.Subscribe(self, controller, "prospectivePerk.attributes.color", function(modelValue)
+        if Util.Colors.Perks[modelValue] then
+            Util.SetRGBFromTable(self, Util.Colors.Perks[modelValue])
         else
-            Wzu.SetRGBFromTable(self, Wzu.Colors.White)
+            Util.SetRGBFromTable(self, Util.Colors.White)
         end
     end)
 end

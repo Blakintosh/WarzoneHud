@@ -23,7 +23,7 @@ function Warzone.OverclockMenuButton.new(menu, controller)
     self.background:setScaledLeftRight(true, true, 0, 0)
     self.background:setScaledTopBottom(true, true, 0, 0)
 
-    Wzu.LinkWidgetToElementModel(self.background, self, controller)
+    Util.LinkWidgetToElementModel(self.background, self, controller)
 
     self.background:mergeStateConditions({{stateName = "Disabled", condition = function (menu, widget, event)
 		if not IsDisabled(self.background, controller) then
@@ -32,52 +32,52 @@ function Warzone.OverclockMenuButton.new(menu, controller)
         return true
 	end}})
 
-    Wzu.LinkWidgetToState(self.background, self, menu, "disabled")
-    Wzu.LinkWidgetToState(self.background, self, menu, "available")
+    Util.LinkWidgetToState(self.background, self, menu, "disabled")
+    Util.LinkWidgetToState(self.background, self, menu, "available")
 
     self:addElement(self.background)
 
-    self.label = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.ButtonTextDefault, false)
+    self.label = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.ButtonTextDefault, false)
     self.label:setScaledLeftRight(false, false, -50, 50)
     self.label:setScaledTopBottom(true, false, 3, 17)
 
     LUI.OverrideFunction_CallOriginalFirst(self.label, "setText", function(sender, text)
-        Wzu.ScaleWidgetToLabel.Centered(self, self.label, 10)
+        Util.ScaleWidgetToLabel.Centered(self, self.label, 10)
     end)
 
-    Wzu.LinkToWidget(self.label, self, "name", function(modelValue)
+    Util.LinkToWidget(self.label, self, "name", function(modelValue)
         self.label:setText(Engine.Localize(Engine.GetIString(modelValue, "CS_LOCALIZED_STRINGS")))
     end)
 
-    Wzu.ClipSequence(self, self.label, "DefaultUp", {
+    Util.ClipSequence(self, self.label, "DefaultUp", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault),
+            setRGB = Util.ConvertColorToTable(Util.Swatches.ButtonTextDefault),
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.label, "DefaultOver", {
+    Util.ClipSequence(self, self.label, "DefaultOver", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault),
+            setRGB = Util.ConvertColorToTable(Util.Swatches.ButtonTextDefault),
             setAlpha = 1
         },
         {
             duration = 100,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextFocus)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.ButtonTextFocus)
         }
     })
-    Wzu.ClipSequence(self, self.label, "DisabledUp", {
+    Util.ClipSequence(self, self.label, "DisabledUp", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDisabled),
+            setRGB = Util.ConvertColorToTable(Util.Swatches.ButtonTextDisabled),
             setAlpha = 0.6
         }
     })
-    Wzu.ClipSequence(self, self.label, "DisabledOver", {
+    Util.ClipSequence(self, self.label, "DisabledOver", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDisabled),
+            setRGB = Util.ConvertColorToTable(Util.Swatches.ButtonTextDisabled),
             setAlpha = 0.6
         }
     })
@@ -89,13 +89,13 @@ function Warzone.OverclockMenuButton.new(menu, controller)
     self.focusInfo:setScaledTopBottom(false, true, 4, 40)
     self.focusInfo.frameWidget:changeFrameWidget("Warzone.OverclockMenuButtonInfoBody")
 
-    Wzu.ClipSequence(self, self.focusInfo, "DefaultUp", {
+    Util.ClipSequence(self, self.focusInfo, "DefaultUp", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.focusInfo, "DefaultOver", {
+    Util.ClipSequence(self, self.focusInfo, "DefaultOver", {
         {
             duration = 0,
             setAlpha = 0
@@ -105,13 +105,13 @@ function Warzone.OverclockMenuButton.new(menu, controller)
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.focusInfo, "DisabledUp", {
+    Util.ClipSequence(self, self.focusInfo, "DisabledUp", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.focusInfo, "DisabledOver", {
+    Util.ClipSequence(self, self.focusInfo, "DisabledOver", {
         {
             duration = 0,
             setAlpha = 0
@@ -154,18 +154,18 @@ function Warzone.OverclockMenuButton.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultUp")
+                Util.AnimateSequence(self, "DefaultUp")
             end,
             Focus = function()
-                Wzu.AnimateSequence(self, "DefaultOver")
+                Util.AnimateSequence(self, "DefaultOver")
             end
         },
         Disabled = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DisabledUp")
+                Util.AnimateSequence(self, "DisabledUp")
             end,
             Focus = function()
-                Wzu.AnimateSequence(self, "DisabledOver")
+                Util.AnimateSequence(self, "DisabledOver")
             end
         }
     }
@@ -182,8 +182,8 @@ function Warzone.OverclockMenuButton.new(menu, controller)
         return true
 	end}})
 
-    Wzu.LinkWidgetToState(self, self, menu, "disabled")
-    Wzu.LinkWidgetToState(self, self, menu, "available")
+    Util.LinkWidgetToState(self, self, menu, "disabled")
+    Util.LinkWidgetToState(self, self, menu, "available")
 
     self:registerEventHandler("gain_focus", function(self, event)
         self:playSound("list_up")

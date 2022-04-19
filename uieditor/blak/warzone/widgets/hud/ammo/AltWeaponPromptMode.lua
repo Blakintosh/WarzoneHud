@@ -19,17 +19,17 @@ function Warzone.AltWeaponPromptMode.new(menu, controller)
     self.image:setScaledTopBottom(false, false, -8, 8)
     self.image:setImage(RegisterImage("ui_firetype_fullauto"))
 
-    Wzu.LinkToWidget(self.image, self, "iconSub", function(modelValue)
-        Wzu.SubscribeToImage(self.image, controller, modelValue)
+    Util.LinkToWidget(self.image, self, "iconSub", function(modelValue)
+        Util.SubscribeToImage(self.image, controller, modelValue)
     end)
 
-    Wzu.ClipSequence(self, self.image, "Default", {
+    Util.ClipSequence(self, self.image, "Default", {
         {
             duration = 0,
             setAlpha = 0.5
         }
     })
-    Wzu.ClipSequence(self, self.image, "Active", {
+    Util.ClipSequence(self, self.image, "Active", {
         {
             duration = 0,
             setAlpha = 1
@@ -42,20 +42,20 @@ function Warzone.AltWeaponPromptMode.new(menu, controller)
     self.footer:setScaledLeftRight(false, false, -8, 8)
     self.footer:setScaledTopBottom(false, true, -1, 0)
 
-    Wzu.ClipSequence(self, self.footer, "Default", {
+    Util.ClipSequence(self, self.footer, "Default", {
         {
             duration = 0,
             setScaledLeftRight = {false, false, -0, 0}
         }
     })
-    Wzu.ClipSequence(self, self.footer, "Active", {
+    Util.ClipSequence(self, self.footer, "Active", {
         {
             duration = 0,
             setScaledLeftRight = {false, false, -0, 0}
         },
         {
             duration = 200,
-            interpolation = Wzu.TweenGraphs.inOutSine,
+            interpolation = Util.TweenGraphs.inOutSine,
             setScaledLeftRight = {false, false, -8, 8}
         }
     })
@@ -65,12 +65,12 @@ function Warzone.AltWeaponPromptMode.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Default")
+                Util.AnimateSequence(self, "Default")
             end
         },
         Active = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Active")
+                Util.AnimateSequence(self, "Active")
             end
         }
     }
@@ -85,7 +85,7 @@ function Warzone.AltWeaponPromptMode.new(menu, controller)
             return false
         end
     }})
-    Wzu.SubState(controller, menu, self, "currentWeapon.altWeaponState")
+    Util.SubState(controller, menu, self, "currentWeapon.altWeaponState")
 
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)

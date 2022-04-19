@@ -41,7 +41,7 @@ function LUI.createMenu.StartMenu_Options(controller)
 
     menu:addElement(menu.options)
 
-    Wzu.SetCursorType(Wzu.CursorTypes.Normal)
+    Util.SetCursorType(Util.CursorTypes.Normal)
     if not menu:restoreState() then
 		menu.options:processEvent({name = "gain_focus", controller = controller})
 	end

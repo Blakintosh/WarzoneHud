@@ -17,19 +17,19 @@ function Warzone.LethalGrenade.new(menu, controller)
     self.circle:setScaledTopBottom(true, false, 7, 17)
     self.circle:setImage(RegisterImage("hud_circle_small"))
 
-    Wzu.ClipSequence(self, self.circle, "DefaultState", {
+    Util.ClipSequence(self, self.circle, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.circle, "NoAmmo", {
+    Util.ClipSequence(self, self.circle, "NoAmmo", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.circle, "NoNade", {
+    Util.ClipSequence(self, self.circle, "NoNade", {
         {
             duration = 0,
             setAlpha = 1
@@ -42,30 +42,30 @@ function Warzone.LethalGrenade.new(menu, controller)
     self.icon:setScaledLeftRight(true, false, 0, 24)
     self.icon:setScaledTopBottom(true, false, 0, 24)
 
-    Wzu.SubscribeToImage(self.icon, controller, "CurrentPrimaryOffhand.primaryOffhand")
+    Util.SubscribeToImage(self.icon, controller, "CurrentPrimaryOffhand.primaryOffhand")
 
-    Wzu.ClipSequence(self, self.icon, "DefaultState", {
+    Util.ClipSequence(self, self.icon, "DefaultState", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Colors.White),
+            setRGB = Util.ConvertColorToTable(Util.Colors.White),
             setAlpha = 1,
             setScaledLeftRight = {true, false, 0, 24},
             setScaledTopBottom = {true, false, 0, 24}
         }
     })
-    Wzu.ClipSequence(self, self.icon, "NoAmmo", {
+    Util.ClipSequence(self, self.icon, "NoAmmo", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Colors.Grey63),
+            setRGB = Util.ConvertColorToTable(Util.Colors.Grey63),
             setAlpha = 1,
             setScaledLeftRight = {true, false, 3, 31},
             setScaledTopBottom = {true, false, -2, 26}
         }
     })
-    Wzu.ClipSequence(self, self.icon, "NoNade", {
+    Util.ClipSequence(self, self.icon, "NoNade", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Colors.White),
+            setRGB = Util.ConvertColorToTable(Util.Colors.White),
             setAlpha = 0,
             setScaledLeftRight = {true, false, 0, 24},
             setScaledTopBottom = {true, false, 0, 24}
@@ -74,52 +74,52 @@ function Warzone.LethalGrenade.new(menu, controller)
 
     self:addElement(self.icon)
 
-    self.nadeCount = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, true)
+    self.nadeCount = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, true)
     self.nadeCount:setScaledLeftRight(true, false, 24, 48)
     self.nadeCount:setScaledTopBottom(true, false, 4, 22)
 
-    Wzu.SubscribeToText(self.nadeCount, controller, "CurrentPrimaryOffhand.primaryOffhandCount")
+    Util.SubscribeToText(self.nadeCount, controller, "CurrentPrimaryOffhand.primaryOffhandCount")
 
-    Wzu.ClipSequence(self, self.nadeCount, "DefaultState", {
+    Util.ClipSequence(self, self.nadeCount, "DefaultState", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.nadeCount, "NoAmmo", {
+    Util.ClipSequence(self, self.nadeCount, "NoAmmo", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.nadeCount, "NoNade", {
+    Util.ClipSequence(self, self.nadeCount, "NoNade", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
 
-    Wzu.AddShadowedElement(self, self.nadeCount)
+    Util.AddShadowedElement(self, self.nadeCount)
 
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
                 Blak.DebugUtils.SafeRunFunction(function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
                 end)
             end
         },
         NoAmmo = {
             DefaultClip = function()
                 Blak.DebugUtils.SafeRunFunction(function()
-                Wzu.AnimateSequence(self, "NoAmmo")
+                Util.AnimateSequence(self, "NoAmmo")
                 end)
             end
         },
         NoNade = {
             DefaultClip = function()
                 Blak.DebugUtils.SafeRunFunction(function()
-                Wzu.AnimateSequence(self, "NoNade")
+                Util.AnimateSequence(self, "NoNade")
                 end)
             end
         }
@@ -140,12 +140,12 @@ function Warzone.LethalGrenade.new(menu, controller)
         }
     })
 
-    Wzu.SubState(controller, menu, self, "CurrentPrimaryOffhand.primaryOffhand")
-    Wzu.SubState(controller, menu, self, "CurrentPrimaryOffhand.primaryOffhandCount")
+    Util.SubState(controller, menu, self, "CurrentPrimaryOffhand.primaryOffhand")
+    Util.SubState(controller, menu, self, "CurrentPrimaryOffhand.primaryOffhandCount")
 
-    Wzu.Subscribe(self, controller, "CurrentPrimaryOffhand.primaryOffhandCount", function(modelValue)
+    Util.Subscribe(self, controller, "CurrentPrimaryOffhand.primaryOffhandCount", function(modelValue)
         if self.storedNadeCount and self.storedNadeCount < modelValue then
-            Engine.PlaySound(Wzu.Sounds.Grenades.RestockLethal)
+            Engine.PlaySound(Util.Sounds.Grenades.RestockLethal)
         end
         self.storedNadeCount = modelValue
     end)

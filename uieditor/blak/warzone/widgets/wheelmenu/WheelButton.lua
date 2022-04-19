@@ -27,7 +27,7 @@ Warzone.WheelButton.new = function ( menu, controller )
 	self.decor:setScaledTopBottom(false, false, -0, 0)
 	self.decor.id = "decor"
 
-	Wzu.LinkWidgetToElementModel(self.decor, self, controller)
+	Util.LinkWidgetToElementModel(self.decor, self, controller)
 
 	self:addElement(self.decor)
 

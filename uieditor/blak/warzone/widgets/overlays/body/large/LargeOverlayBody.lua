@@ -24,17 +24,17 @@ Warzone.LargeOverlayBody.new = function (menu, controller)
     self.title = Warzone.MenuTitle.new(menu, controller)
     self.title:setScaledLeftRight(true, false, 0, 150)
     self.title:setScaledTopBottom(true, false, 26, 64)
-    Wzu.LinkToWidgetText(self.title.title, self, "title", true)
+    Util.LinkToWidgetText(self.title.title, self, "title", true)
 
     self:addElement(self.title)
 
-    self.desc = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Colors.Grey191, false)
+    self.desc = Util.TextElement(Util.Fonts.MainRegular, Util.Colors.Grey191, false)
     self.desc:setScaledLeftRight(true, false, 62, 762)
     self.desc:setScaledTopBottom(true, false, 84, 98)
     self.desc:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_TOP)
     self.desc:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_LEFT)
 
-    Wzu.LinkToWidgetText(self.desc, self, "description")
+    Util.LinkToWidgetText(self.desc, self, "description")
 
     self:addElement(self.desc)
 

@@ -1,11 +1,11 @@
 Warzone.WeaponPickupTiers = InheritFrom(LUI.UIElement)
 
 local function SubRGBToRarity(self, controller)
-    Wzu.Subscribe(self, controller, "prospectiveWeapon.attributes.weaponRarity", function(modelValue)
-        if Wzu.Swatches.RaritiesLight[modelValue + 1] then
-            Wzu.SetRGBFromTable(self, Wzu.Swatches.RaritiesLight[modelValue + 1])
+    Util.Subscribe(self, controller, "prospectiveWeapon.attributes.weaponRarity", function(modelValue)
+        if Util.Swatches.RaritiesLight[modelValue + 1] then
+            Util.SetRGBFromTable(self, Util.Swatches.RaritiesLight[modelValue + 1])
         else
-            Wzu.SetRGBFromTable(self, Wzu.Swatches.RaritiesLight[1])
+            Util.SetRGBFromTable(self, Util.Swatches.RaritiesLight[1])
         end
     end)
 end
@@ -22,31 +22,31 @@ function Warzone.WeaponPickupTiers.new(menu, controller)
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
 
-    self.tier = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, true)
+    self.tier = Util.TextElement(Util.Fonts.MainBold, Util.Swatches.HUDMain, true)
     self.tier:setScaledLeftRight(false, true, -300, 0)
     self.tier:setScaledTopBottom(true, false, 0, 16)
     self.tier:setText("S-TIER")
 
-    Wzu.Subscribe(self.tier, controller, "prospectiveWeapon.attributes.weaponTier", function(modelValue)
+    Util.Subscribe(self.tier, controller, "prospectiveWeapon.attributes.weaponTier", function(modelValue)
         self.tier:setText(LocalizeToUpperString(modelValue))
     end)
 
     SubRGBToRarity(self.tier, controller)
 
-    Wzu.AddShadowedElement(self, self.tier)
+    Util.AddShadowedElement(self, self.tier)
 
-    self.msiAfterburner = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, true)
+    self.msiAfterburner = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, true)
     self.msiAfterburner:setScaledLeftRight(false, true, -300, 0)
     self.msiAfterburner:setScaledTopBottom(true, false, 16, 26)
     self.msiAfterburner:setText("0 OVERCLOCKS")
 
     SubRGBToRarity(self.msiAfterburner, controller)
 
-    Wzu.Subscribe(self.msiAfterburner, controller, "prospectiveWeapon.attributes.weaponOverclocks", function(modelValue)
+    Util.Subscribe(self.msiAfterburner, controller, "prospectiveWeapon.attributes.weaponOverclocks", function(modelValue)
         self.msiAfterburner:setText(LocalizeToUpperString(modelValue .. " overclocks"))
     end)
 
-    Wzu.AddShadowedElement(self, self.msiAfterburner)
+    Util.AddShadowedElement(self, self.msiAfterburner)
     
     if PostLoadFunc then
         PostLoadFunc(self, controller, menu)

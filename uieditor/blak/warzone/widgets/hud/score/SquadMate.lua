@@ -21,17 +21,17 @@ function Warzone.SquadMate.new(menu, controller)
     self.background = LUI.UIImage.new()
     self.background:setScaledLeftRight(true, true, 0, 0)
     self.background:setScaledTopBottom(true, true, 0, 0)
-    Wzu.SetRGBFromTable(self.background, Wzu.Colors.Black)
+    Util.SetRGBFromTable(self.background, Util.Colors.Black)
     self.background:setAlpha(0.3)
     self.background:setImage(RegisterImage("ui_mp_br_squad_widget_backer_gradient"))
 
-    Wzu.ClipSequence(self, self.background, "DefaultState", {
+    Util.ClipSequence(self, self.background, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0.3
         }
     })
-    Wzu.ClipSequence(self, self.background, "Hidden", {
+    Util.ClipSequence(self, self.background, "Hidden", {
         {
             duration = 0,
             setAlpha = 0
@@ -40,19 +40,19 @@ function Warzone.SquadMate.new(menu, controller)
 
     self:addElement(self.background)
 
-    self.cash = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.Cash, false)
+    self.cash = Util.TextElement(Util.Fonts.MainBold, Util.Swatches.Cash, false)
     self.cash:setScaledLeftRight(true, false, 18.5, 100)
     self.cash:setScaledTopBottom(false, true, -14, -3)
     self.cash:setText(Engine.Localize("$500"))
     self.cash:setPriority(5)
 
-    Wzu.ClipSequence(self, self.cash, "DefaultState", {
+    Util.ClipSequence(self, self.cash, "DefaultState", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.cash, "Hidden", {
+    Util.ClipSequence(self, self.cash, "Hidden", {
         {
             duration = 0,
             setAlpha = 0
@@ -60,9 +60,9 @@ function Warzone.SquadMate.new(menu, controller)
     })
 
     self.cash.lastPlayerScore = 0
-    Wzu.LinkToWidget(self.cash, self, "playerScore", function(modelValue)
-        Wzu.Tween.interpolate(self.cash, 1000, Wzu.TweenGraphs.inOutSine, function(progress)
-            local value = Wzu.GetTweenedProgress(progress, self.cash.lastPlayerScore, modelValue)
+    Util.LinkToWidget(self.cash, self, "playerScore", function(modelValue)
+        Util.Tween.interpolate(self.cash, 1000, Util.TweenGraphs.inOutSine, function(progress)
+            local value = Util.GetTweenedProgress(progress, self.cash.lastPlayerScore, modelValue)
             self.cash:setText(Engine.Localize("$" .. math.floor(value)))
         end)
 
@@ -77,15 +77,15 @@ function Warzone.SquadMate.new(menu, controller)
     self.healthBar:setScaledLeftRight(true, false, 18, 104)
     self.healthBar:setScaledTopBottom(false, true, -20, -16)
 
-    Wzu.LinkWidgetToElementModel(self.healthBar, self, controller)
+    Util.LinkWidgetToElementModel(self.healthBar, self, controller)
 
-    Wzu.ClipSequence(self, self.healthBar, "DefaultState", {
+    Util.ClipSequence(self, self.healthBar, "DefaultState", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.healthBar, "Hidden", {
+    Util.ClipSequence(self, self.healthBar, "Hidden", {
         {
             duration = 0,
             setAlpha = 0
@@ -109,13 +109,13 @@ function Warzone.SquadMate.new(menu, controller)
         }
     })
 
-    Wzu.ClipSequence(self, self.squadLeader, "DefaultState", {
+    Util.ClipSequence(self, self.squadLeader, "DefaultState", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.squadLeader, "Hidden", {
+    Util.ClipSequence(self, self.squadLeader, "Hidden", {
         {
             duration = 0,
             setAlpha = 0
@@ -124,28 +124,28 @@ function Warzone.SquadMate.new(menu, controller)
 
     self:addElement(self.squadLeader)
 
-    self.username = Wzu.TextElement(Wzu.Fonts.BattlenetBold, Wzu.Swatches.HUDMain, true)
+    self.username = Util.TextElement(Util.Fonts.BattlenetBold, Util.Swatches.HUDMain, true)
     self.username:setScaledLeftRight(true, false, 19, 100)
     self.username:setScaledTopBottom(true, false, 1, 11)
 
-    Wzu.LinkToWidget(self.username, self, "playerName", function(modelValue)
+    Util.LinkToWidget(self.username, self, "playerName", function(modelValue)
         self.username:setText(Engine.Localize(modelValue))
     end)
 
-    Wzu.ClipSequence(self, self.username, "DefaultState", {
+    Util.ClipSequence(self, self.username, "DefaultState", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.username, "Hidden", {
+    Util.ClipSequence(self, self.username, "Hidden", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
 
-    Wzu.AddShadowedElement(self, self.username)
+    Util.AddShadowedElement(self, self.username)
 
     self.plusPoints = Warzone.PlusPointsContainer.new(menu, controller)
     self.plusPoints:setScaledLeftRight(true, false, 18.5, 100)
@@ -154,21 +154,21 @@ function Warzone.SquadMate.new(menu, controller)
     
     self:addElement(self.plusPoints)
 
-    Wzu.LinkToWidget(self, self, "clientNum", function(modelValue)
-        local color = Wzu.GetClientColor(modelValue)
-        Wzu.SetRGBFromTable(self.username, color)
-        Wzu.SetRGBFromTable(self.squadLeader, color)
+    Util.LinkToWidget(self, self, "clientNum", function(modelValue)
+        local color = Util.GetClientColor(modelValue)
+        Util.SetRGBFromTable(self.username, color)
+        Util.SetRGBFromTable(self.squadLeader, color)
     end)
 
    self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
             end
         },
         Hidden = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Hidden")
+                Util.AnimateSequence(self, "Hidden")
             end
         }
     }
@@ -182,7 +182,7 @@ function Warzone.SquadMate.new(menu, controller)
         }
     })
 
-    Wzu.LinkWidgetToState(self, self, menu, "playerScoreShown")
+    Util.LinkWidgetToState(self, self, menu, "playerScoreShown")
 
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(Sender)
         Sender.healthBar:close()

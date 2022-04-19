@@ -57,7 +57,7 @@ function Warzone.Scoreboard.new(menu, controller)
     self.scoreListBackerTop = LUI.UIImage.new()
     self.scoreListBackerTop:setScaledLeftRight(true, true, 248, -8)
     self.scoreListBackerTop:setScaledTopBottom(true, false, 32, 36)
-    Wzu.SetRGBFromTable(self.scoreListBackerTop, Wzu.Swatches.GlobalKeyColorMid)
+    Util.SetRGBFromTable(self.scoreListBackerTop, Util.Swatches.GlobalKeyColorMid)
     self.scoreListBackerTop:setAlpha(0.4)
 
     self:addElement(self.scoreListBackerTop)
@@ -65,23 +65,23 @@ function Warzone.Scoreboard.new(menu, controller)
     self.scoreListBackerBottom = LUI.UIImage.new()
     self.scoreListBackerBottom:setScaledLeftRight(true, true, 248, -8)
     self.scoreListBackerBottom:setScaledTopBottom(true, false, 156, 160)
-    Wzu.SetRGBFromTable(self.scoreListBackerBottom, Wzu.Swatches.GlobalKeyColorMid)
+    Util.SetRGBFromTable(self.scoreListBackerBottom, Util.Swatches.GlobalKeyColorMid)
     self.scoreListBackerBottom:setAlpha(0.4)
 
     self:addElement(self.scoreListBackerBottom)
 
-    self.mapName = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, true)
+    self.mapName = Util.TextElement(Util.Fonts.MainBold, Util.Swatches.HUDMain, true)
     self.mapName:setScaledLeftRight(true, false, 272, 300)
     self.mapName:setScaledTopBottom(true, false, 8, 32)
     self.mapName:setText("KARELIA")
 
-    Wzu.AddShadowedElement(self, self.mapName)
+    Util.AddShadowedElement(self, self.mapName)
     
     self.row1bg = LUI.UIImage.new()
     self.row1bg:setScaledLeftRight(true, true, 252, -12)
     self.row1bg:setScaledTopBottom(true, false, 36, 66)
     self.row1bg:setAlpha(0.4)
-    Wzu.SetRGBFromTable(self.row1bg, Wzu.Swatches.FriendlyTeam)
+    Util.SetRGBFromTable(self.row1bg, Util.Swatches.FriendlyTeam)
 
     self:addElement(self.row1bg)
     
@@ -89,7 +89,7 @@ function Warzone.Scoreboard.new(menu, controller)
     self.row3bg:setScaledLeftRight(true, true, 252, -12)
     self.row3bg:setScaledTopBottom(true, false, 96, 126)
     self.row3bg:setAlpha(0.4)
-    Wzu.SetRGBFromTable(self.row3bg, Wzu.Swatches.FriendlyTeam)
+    Util.SetRGBFromTable(self.row3bg, Util.Swatches.FriendlyTeam)
 
     self:addElement(self.row3bg)
 
@@ -97,7 +97,7 @@ function Warzone.Scoreboard.new(menu, controller)
     self.row2bg:setScaledLeftRight(true, true, 252, -12)
     self.row2bg:setScaledTopBottom(true, false, 66, 96)
     self.row2bg:setAlpha(0.4)
-    Wzu.SetRGBFromTable(self.row2bg, Wzu.Swatches.GlobalKeyColorMid)
+    Util.SetRGBFromTable(self.row2bg, Util.Swatches.GlobalKeyColorMid)
 
     self:addElement(self.row2bg)
     
@@ -105,7 +105,7 @@ function Warzone.Scoreboard.new(menu, controller)
     self.row4bg:setScaledLeftRight(true, true, 252, -12)
     self.row4bg:setScaledTopBottom(true, false, 126, 156)
     self.row4bg:setAlpha(0.4)
-    Wzu.SetRGBFromTable(self.row4bg, Wzu.Swatches.GlobalKeyColorMid)
+    Util.SetRGBFromTable(self.row4bg, Util.Swatches.GlobalKeyColorMid)
 
     self:addElement(self.row4bg)
 

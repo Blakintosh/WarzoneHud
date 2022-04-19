@@ -170,28 +170,28 @@ function Warzone.Squad.new(menu, controller)
     self.player0 = Warzone.SquadPlayerPlusPoints.new(menu, controller)
     self.player0:setScaledLeftRight(true, false, 24, 279)
     self.player0:setScaledTopBottom(false, true, -67, -20)
-    Wzu.SetElementModel(self.player0, controller, "ZMPlayerList", "0")
+    Util.SetElementModel(self.player0, controller, "ZMPlayerList", "0")
     
     self:addElement(self.player0)
 
     self.player1 = Warzone.SquadMate.new(menu, controller)
     self.player1:setScaledLeftRight(true, false, 24, 219)
     self.player1:setScaledTopBottom(false, true, -112, -72)
-    Wzu.SetElementModel(self.player1, controller, "ZMPlayerList", "1")
+    Util.SetElementModel(self.player1, controller, "ZMPlayerList", "1")
     
     self:addElement(self.player1)
 
     self.player2 = Warzone.SquadMate.new(menu, controller)
     self.player2:setScaledLeftRight(true, false, 24, 219)
     self.player2:setScaledTopBottom(false, true, -157, -117)
-    Wzu.SetElementModel(self.player2, controller, "ZMPlayerList", "2")
+    Util.SetElementModel(self.player2, controller, "ZMPlayerList", "2")
     
     self:addElement(self.player2)
 
     self.player3 = Warzone.SquadMate.new(menu, controller)
     self.player3:setScaledLeftRight(true, false, 24, 219)
     self.player3:setScaledTopBottom(false, true, -202, -162)
-    Wzu.SetElementModel(self.player3, controller, "ZMPlayerList", "3")
+    Util.SetElementModel(self.player3, controller, "ZMPlayerList", "3")
     
     self:addElement(self.player3)
 

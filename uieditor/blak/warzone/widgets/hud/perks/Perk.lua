@@ -16,17 +16,17 @@ Warzone.Perk.new = function (menu, controller)
 	self.PerkImage:setLeftRight(true, true, 0, 0)
 	self.PerkImage:setTopBottom(true, true, 0, 0)
 
-	Wzu.LinkToWidget(self.PerkImage, self, "image", function(modelValue)
+	Util.LinkToWidget(self.PerkImage, self, "image", function(modelValue)
 		self.PerkImage:setImage(RegisterImage(modelValue))
 	end)
 
-    Wzu.ClipSequence(self, self.background, "DefaultState", {
+    Util.ClipSequence(self, self.background, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.background, "Enabled", {
+    Util.ClipSequence(self, self.background, "Enabled", {
         {
             duration = 0,
             setAlpha = 1
@@ -38,7 +38,7 @@ Warzone.Perk.new = function (menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
             end
         }
     }
@@ -52,7 +52,7 @@ Warzone.Perk.new = function (menu, controller)
         }
     })
 
-    Wzu.LinkWidgetToState(self, self, menu, "status")
+    Util.LinkWidgetToState(self, self, menu, "status")
 
 	LUI.OverrideFunction_CallOriginalSecond(self, "close", function (Sender)
 		Sender.PerkImage:close()

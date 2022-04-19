@@ -1,4 +1,4 @@
-Wzu.CreateContainedHudElement = function(menu, controller, type)
+Util.CreateContainedHudElement = function(menu, controller, type)
     local self = Warzone.Container.new(menu, controller, type)
 
     self:mergeStateConditions({
@@ -29,33 +29,33 @@ Wzu.CreateContainedHudElement = function(menu, controller, type)
         }
     })
     
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_HUD_VISIBLE)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_WEAPON_HUD_VISIBLE)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_HUD_HARDCORE)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_GAME_ENDED)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_DEMO_CAMERA_MODE_MOVIECAM)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_DEMO_ALL_GAME_HUD_HIDDEN)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IN_KILLCAM)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IS_FLASH_BANGED)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_UI_ACTIVE)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IS_SCOPED)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IN_VEHICLE)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IN_GUIDED_MISSILE)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_SCOREBOARD_OPEN)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IN_REMOTE_KILLSTREAK_STATIC)
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_EMP_ACTIVE)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_HUD_VISIBLE)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_WEAPON_HUD_VISIBLE)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_HUD_HARDCORE)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_GAME_ENDED)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_DEMO_CAMERA_MODE_MOVIECAM)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_DEMO_ALL_GAME_HUD_HIDDEN)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IN_KILLCAM)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IS_FLASH_BANGED)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_UI_ACTIVE)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IS_SCOPED)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IN_VEHICLE)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IN_GUIDED_MISSILE)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_SCOREBOARD_OPEN)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_IN_REMOTE_KILLSTREAK_STATIC)
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_EMP_ACTIVE)
 
-    Wzu.SubState(controller, menu, self, "hudItems.playerSpawned")
+    Util.SubState(controller, menu, self, "hudItems.playerSpawned")
 
     return self
 end
 
-Wzu.CreateContainedScoreboardElement = function(menu, controller, type)
+Util.CreateContainedScoreboardElement = function(menu, controller, type)
     local self = Warzone.Container.new(menu, controller, type)
     self:makeFocusable()
     self.onlyChildrenFocusable = true
 
-    Wzu.ClipSequence(self, self.contents, "DefaultState", {
+    Util.ClipSequence(self, self.contents, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0
@@ -65,7 +65,7 @@ Wzu.CreateContainedScoreboardElement = function(menu, controller, type)
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.contents, "Hidden", {
+    Util.ClipSequence(self, self.contents, "Hidden", {
         {
             duration = 0,
             setAlpha = 1
@@ -90,8 +90,8 @@ Wzu.CreateContainedScoreboardElement = function(menu, controller, type)
         }
     })
 
-    Wzu.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_SCOREBOARD_OPEN)
-    Wzu.SubState(controller, menu, self, "forceScoreboard")
+    Util.SubVisBit(controller, menu, self, Enum.UIVisibilityBit.BIT_SCOREBOARD_OPEN)
+    Util.SubState(controller, menu, self, "forceScoreboard")
 
     return self
 end

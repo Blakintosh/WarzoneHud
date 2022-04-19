@@ -95,7 +95,7 @@ function LUI.createMenu.PreGameMenu(controller)
 
     menu:addElement(menu.contents)
 
-    Wzu.SetCursorType(Wzu.CursorTypes.Normal)
+    Util.SetCursorType(Util.CursorTypes.Normal)
     if not menu:restoreState() then
 		menu.contents:processEvent({name = "gain_focus", controller = controller})
 	end

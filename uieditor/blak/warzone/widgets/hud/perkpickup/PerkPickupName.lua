@@ -12,12 +12,12 @@ function Warzone.PerkPickupName.new(menu, controller)
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
 
-    self.weaponName = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, true)
+    self.weaponName = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, true)
     self.weaponName:setScaledLeftRight(true, false, 0, 300)
     self.weaponName:setScaledTopBottom(true, false, -4, 20)
-    Wzu.SubscribeToText(self.weaponName, controller, "prospectivePerk.attributes.name")
+    Util.SubscribeToText(self.weaponName, controller, "prospectivePerk.attributes.name")
 
-    Wzu.AddShadowedElement(self, self.weaponName)
+    Util.AddShadowedElement(self, self.weaponName)
     
     if PostLoadFunc then
         PostLoadFunc(self, controller, menu)

@@ -59,6 +59,6 @@ CoD.OverlayUtility.Overlays.ChangelogPopup.listDatasource = function ()
 	return "ChangelogPopup_List"
 end
 
---[[function Wzu.QuitGame(f390_arg0, controller, f390_arg2, arg3, menu)
+--[[function Util.QuitGame(f390_arg0, controller, f390_arg2, arg3, menu)
 	CoD.OverlayUtility.CreateOverlay(controller, menu, "QuitGamePopup")
 end]]

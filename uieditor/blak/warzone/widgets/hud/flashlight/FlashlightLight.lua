@@ -17,13 +17,13 @@ function Warzone.FlashlightLight.new(menu, controller)
     self.icon:setScaledTopBottom(true, true, -0, 0)
     self.icon:setImage(RegisterImage("hud_icon_equipment_flashlight"))
 
-    Wzu.ClipSequence(self, self.icon, "Default", {
+    Util.ClipSequence(self, self.icon, "Default", {
         {
             duration = 0,
             setAlpha = 0.5
         }
     })
-    Wzu.ClipSequence(self, self.icon, "Active", {
+    Util.ClipSequence(self, self.icon, "Active", {
         {
             duration = 0,
             setAlpha = 1
@@ -35,12 +35,12 @@ function Warzone.FlashlightLight.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Default")
+                Util.AnimateSequence(self, "Default")
             end
         },
         Active = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Active")
+                Util.AnimateSequence(self, "Active")
             end
         }
     }
@@ -51,7 +51,7 @@ function Warzone.FlashlightLight.new(menu, controller)
             return IsModelValueEqualTo(controller, "hudItems.flashlightActive", 1)
         end
     }})
-    Wzu.SubState(controller, menu, self, "hudItems.flashlightActive")
+    Util.SubState(controller, menu, self, "hudItems.flashlightActive")
 
     if PostLoadFunc then
         PostLoadFunc(menu, controller)

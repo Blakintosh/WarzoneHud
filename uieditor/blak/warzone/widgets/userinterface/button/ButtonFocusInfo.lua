@@ -39,18 +39,18 @@ function Warzone.ButtonFocusInfo.new(menu, controller)
     --[[self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultUp")
+                Util.AnimateSequence(self, "DefaultUp")
             end,
             Focus = function()
-                Wzu.AnimateSequence(self, "DefaultOver")
+                Util.AnimateSequence(self, "DefaultOver")
             end
         },
         Disabled = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DisabledUp")
+                Util.AnimateSequence(self, "DisabledUp")
             end,
             Focus = function()
-                Wzu.AnimateSequence(self, "DisabledOver")
+                Util.AnimateSequence(self, "DisabledOver")
             end
         }
     }]]

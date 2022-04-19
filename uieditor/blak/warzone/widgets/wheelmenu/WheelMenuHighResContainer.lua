@@ -20,7 +20,7 @@ function Warzone.WheelMenuHighResContainer.new(menu, controller)
 	self.innerBg:setScaledLeftRight(false, false, -170, 170)
 	self.innerBg:setScaledTopBottom(false, false, -170, 170)
 	self.innerBg:setImage(RegisterImage("radial_inner_base"))
-	Wzu.SetRGBFromTable(self.innerBg, Wzu.Colors.Black)
+	Util.SetRGBFromTable(self.innerBg, Util.Colors.Black)
 	self.innerBg:setAlpha(0.7)
 
 	self:addElement(self.innerBg)
@@ -101,7 +101,7 @@ function Warzone.WheelMenuHighResContainer.new(menu, controller)
 	self.arrow:setScaledLeftRight(false, false, -166, 166)
 	self.arrow:setScaledTopBottom(false, false, -166, 166)
 	self.arrow:setImage(RegisterImage("radial_select_arrow"))
-	Wzu.SetRGBFromTable(self.arrow, Wzu.Colors.CodeLightBlue)
+	Util.SetRGBFromTable(self.arrow, Util.Colors.CodeLightBlue)
 
 	self.arrow:registerEventHandler("mousemove", function(sender, event)
 		local x, y = ProjectRootCoordinate(event.rootName, event.x, event.y)
@@ -128,14 +128,14 @@ function Warzone.WheelMenuHighResContainer.new(menu, controller)
 
 	self:addElement(self.selectLine)
 
-	self.label = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.ButtonTextFocus, true)
+	self.label = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.ButtonTextFocus, true)
 	self.label:setScaledLeftRight(false, false, -100, 100)
 	self.label:setScaledTopBottom(false, false, -9, 7)
 	self.label:setText("Flashlight")
 
-	Wzu.SubscribeToText(self.label, controller, "WheelMenu.focusedName")
+	Util.SubscribeToText(self.label, controller, "WheelMenu.focusedName")
 
-	Wzu.AddShadowedElement(self, self.label)
+	Util.AddShadowedElement(self, self.label)
 
 	self.wheelButton1.navigation = {
 		left = self.wheelButton8,

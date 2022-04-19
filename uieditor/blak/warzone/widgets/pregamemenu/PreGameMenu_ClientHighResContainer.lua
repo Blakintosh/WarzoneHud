@@ -27,33 +27,33 @@ function Warzone.PreGameMenu_ClientHighResContainer.new(menu, controller)
 	self.logo:setShaderVector(3, 0, 0, 0, 0)
 	self.logo:setShaderVector(4, 0, 0, 0, 0)
 
-    Wzu.ClipSequence(self, self.logo, "Default", {
+    Util.ClipSequence(self, self.logo, "Default", {
         {
             duration = 0,
             setShaderVector = {0, 0, 1, 0, 0}
         },
         {
             duration = 12000,
-            interpolation = Wzu.TweenGraphs.inOutSine,
+            interpolation = Util.TweenGraphs.inOutSine,
             setShaderVector = {0, 0.4, 1, 0, 0}
         },
         {
             duration = 12000,
-            interpolation = Wzu.TweenGraphs.inOutSine,
+            interpolation = Util.TweenGraphs.inOutSine,
             setShaderVector = {0, 0, 1, 0, 0}
         }
     })
 
     self:addElement(self.logo)
 
-    self.hostInfo = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, true)
+    self.hostInfo = Util.TextElement(Util.Fonts.MainBold, Util.Swatches.HUDMain, true)
     self.hostInfo:setScaledLeftRight(true, false, 125, 451)
     self.hostInfo:setScaledTopBottom(true, false, 188, 202)
     self.hostInfo:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_CENTER)
     self.hostInfo:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_TOP)
     self.hostInfo:setText("Please wait for the host to complete match setup.")
 
-    Wzu.AddShadowedElement(self, self.hostInfo)
+    Util.AddShadowedElement(self, self.hostInfo)
 
     self.buttonList = LUI.UIList.new(menu, controller, 1, 0, nil, false, false, 0, 0, false, false)
     self.buttonList:makeFocusable()
@@ -107,7 +107,7 @@ function Warzone.PreGameMenu_ClientHighResContainer.new(menu, controller)
 
     self:addElement(self.footer)
 
-    self.mapMaker = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, false)
+    self.mapMaker = Util.TextElement(Util.Fonts.MainBold, Util.Swatches.HUDMain, false)
     self.mapMaker:setScaledLeftRight(false, true, -200, -16)
     self.mapMaker:setScaledTopBottom(false, true, -36, -22)
 
@@ -115,7 +115,7 @@ function Warzone.PreGameMenu_ClientHighResContainer.new(menu, controller)
 
     self:addElement(self.mapMaker)
 
-    self.version = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.version = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.version:setScaledLeftRight(false, true, -200, -16)
     self.version:setScaledTopBottom(false, true, -22, -8)
 
@@ -126,7 +126,7 @@ function Warzone.PreGameMenu_ClientHighResContainer.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Default", {
+                Util.AnimateSequence(self, "Default", {
                     looping = true,
                     clipName = "DefaultClip"
                 })

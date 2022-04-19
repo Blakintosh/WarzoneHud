@@ -1,37 +1,37 @@
-Wzu.Tween = {}
-Wzu.TweenGraphs = {}
+Util.Tween = {}
+Util.TweenGraphs = {}
 
 -- Introducing: Ricochet Anti-Cheat.
-Wzu.TweenGraphs.inOutSine = function(x)
+Util.TweenGraphs.inOutSine = function(x)
     return -(( math.cos(math.pi * x) - 1) / 2)
 end
-Wzu.TweenGraphs.linear = function(x)
+Util.TweenGraphs.linear = function(x)
     return x
 end
 -- Quintic graphs
-Wzu.TweenGraphs.outQuint = function(x)
+Util.TweenGraphs.outQuint = function(x)
     return (1 - (1 - x)^5)
 end
 -- Cubic graphs
-Wzu.TweenGraphs.inCubic = function(x)
+Util.TweenGraphs.inCubic = function(x)
     return x^3
 end
 -- Quadratic graphs
-Wzu.TweenGraphs.inOutQuad = function(x)
+Util.TweenGraphs.inOutQuad = function(x)
     if x < 0.5 then
         return (2 * x * x)
     else
         return (1 - (-2 * x + 2)^2 / 2)
     end
 end
-Wzu.TweenGraphs.inQuad = function(x)
+Util.TweenGraphs.inQuad = function(x)
     return x*x
 end
-Wzu.TweenGraphs.outQuad = function(x)
+Util.TweenGraphs.outQuad = function(x)
     return (1 - (1 - x) * (1 - x))
 end
 -- Bounce graphs
-Wzu.TweenGraphs.outBounce = function(x)
+Util.TweenGraphs.outBounce = function(x)
     if x < 1 / 2.75 then
         return (7.5625 * x * x)
     elseif x < 2 / 2.75 then
@@ -108,7 +108,7 @@ local function NextInterpolationStep(self, startClock, timeElapsed, duration, tw
     end)
 end
 
-Wzu.Tween.interpolate = function(self, duration, tween, tweenUpdateCallback)
+Util.Tween.interpolate = function(self, duration, tween, tweenUpdateCallback)
     tweenUpdateCallback(0)
 
     local startClock = Engine.CurrentGameTime()

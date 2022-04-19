@@ -19,16 +19,16 @@ function Warzone.NotificationStripes.new(menu, controller)
     self.strip1:setZRot(180)
     self.strip1:setAlpha(0.6)
     self.strip1:setImage(RegisterImage("hud_tablet_warning_stripes"))
-    Wzu.SetRGBFromTable(self.strip1, Wzu.Swatches.FriendlyTeam)
+    Util.SetRGBFromTable(self.strip1, Util.Swatches.FriendlyTeam)
 
-    Wzu.ClipSequence(self, self.strip1, "DefaultClip", {
+    Util.ClipSequence(self, self.strip1, "DefaultClip", {
         {
             duration = 0,
             setScaledLeftRight = {false, false, -2813, 0}
         }
     })
 
-    Wzu.ClipSequence(self, self.strip1, "NotifBlueStripes", {
+    Util.ClipSequence(self, self.strip1, "NotifBlueStripes", {
         {
             duration = 0,
             setScaledLeftRight = {false, false, -2813, 0}
@@ -47,16 +47,16 @@ function Warzone.NotificationStripes.new(menu, controller)
     self.strip2:setZRot(180)
     self.strip2:setAlpha(0.6)
     self.strip2:setImage(RegisterImage("hud_tablet_warning_stripes"))
-    Wzu.SetRGBFromTable(self.strip2, Wzu.Swatches.FriendlyTeam)
+    Util.SetRGBFromTable(self.strip2, Util.Swatches.FriendlyTeam)
 
-    Wzu.ClipSequence(self, self.strip1, "DefaultClip", {
+    Util.ClipSequence(self, self.strip1, "DefaultClip", {
         {
             duration = 0,
             setScaledLeftRight = {false, false, 0, 2813}
         }
     })
 
-    Wzu.ClipSequence(self, self.strip2, "NotifBlueStripes", {
+    Util.ClipSequence(self, self.strip2, "NotifBlueStripes", {
         {
             duration = 0,
             setScaledLeftRight = {false, false, 0, 2813}
@@ -72,10 +72,10 @@ function Warzone.NotificationStripes.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultClip")
+                Util.AnimateSequence(self, "DefaultClip")
             end,
             NotifBlueStripes = function()
-                Wzu.AnimateSequence(self, "NotifBlueStripes")
+                Util.AnimateSequence(self, "NotifBlueStripes")
             end
         }
     }

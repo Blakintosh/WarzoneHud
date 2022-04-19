@@ -12,55 +12,55 @@ function Warzone.WeaponReserve.new(menu, controller)
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
 
-    self.ammoReserve = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Colors.Grey191, true)
+    self.ammoReserve = Util.TextElement(Util.Fonts.MainRegular, Util.Colors.Grey191, true)
     self.ammoReserve:setScaledLeftRight(false, true, -200, 0)
     self.ammoReserve:setScaledTopBottom(true, true, 0, 0)
 
-    Wzu.SubscribeToText(self.ammoReserve, controller, "currentWeapon.ammoStock")
+    Util.SubscribeToText(self.ammoReserve, controller, "currentWeapon.ammoStock")
 
-    Wzu.ClipSequence(self, self.ammoReserve, "DefaultState", {
+    Util.ClipSequence(self, self.ammoReserve, "DefaultState", {
         {
             duration = 0,
             setAlpha = 1,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Colors.Grey191)
+            setRGB = Util.ConvertColorToTable(Util.Colors.Grey191)
         }
     })
-    Wzu.ClipSequence(self, self.ammoReserve, "NoAmmo", {
+    Util.ClipSequence(self, self.ammoReserve, "NoAmmo", {
         {
             duration = 0,
             setAlpha = 1,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDWarning)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDWarning)
         }
     })
-    Wzu.ClipSequence(self, self.ammoReserve, "NoDraw", {
+    Util.ClipSequence(self, self.ammoReserve, "NoDraw", {
         {
             duration = 0,
             setAlpha = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Colors.Grey191)
+            setRGB = Util.ConvertColorToTable(Util.Colors.Grey191)
         }
     })
     
-    Wzu.AddShadowedElement(self, self.ammoReserve)
+    Util.AddShadowedElement(self, self.ammoReserve)
 
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
                 Blak.DebugUtils.SafeRunFunction(function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
                 end)
             end
         },
         NoAmmo = {
             DefaultClip = function()
                 Blak.DebugUtils.SafeRunFunction(function()
-                Wzu.AnimateSequence(self, "NoAmmo")
+                Util.AnimateSequence(self, "NoAmmo")
                 end)
             end
         },
         NoDraw = {
             DefaultClip = function()
                 Blak.DebugUtils.SafeRunFunction(function()
-                Wzu.AnimateSequence(self, "NoDraw")
+                Util.AnimateSequence(self, "NoDraw")
                 end)
             end
         }
@@ -81,8 +81,8 @@ function Warzone.WeaponReserve.new(menu, controller)
         }
     })
 
-    Wzu.SubState(controller, menu, self, "currentWeapon.weapon")
-    Wzu.SubState(controller, menu, self, "currentWeapon.ammoStock")
+    Util.SubState(controller, menu, self, "currentWeapon.weapon")
+    Util.SubState(controller, menu, self, "currentWeapon.ammoStock")
 
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)

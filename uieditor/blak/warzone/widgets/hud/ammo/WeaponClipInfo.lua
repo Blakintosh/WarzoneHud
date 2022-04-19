@@ -19,26 +19,26 @@ function Warzone.WeaponClipInfo.new(menu, controller)
 
     self.ammoClip = Warzone.WeaponClip.new(menu, controller)
 
-    Wzu.ClipSequence(self, self.ammoClip, "Hidden", {
+    Util.ClipSequence(self, self.ammoClip, "Hidden", {
         {
             duration = 0,
             setScaledLeftRight = {false, true, -18, 0}
         }
     })
 
-    Wzu.ClipSequence(self, self.ammoClip, "OneDigit", {
+    Util.ClipSequence(self, self.ammoClip, "OneDigit", {
         {
             duration = 0,
             setScaledLeftRight = {false, true, -18, 0}
         }
     })
-    Wzu.ClipSequence(self, self.ammoClip, "TwoDigits", {
+    Util.ClipSequence(self, self.ammoClip, "TwoDigits", {
         {
             duration = 0,
             setScaledLeftRight = {false, true, -32, 0}
         }
     })
-    Wzu.ClipSequence(self, self.ammoClip, "ThreeDigits", {
+    Util.ClipSequence(self, self.ammoClip, "ThreeDigits", {
         {
             duration = 0,
             setScaledLeftRight = {false, true, -46, 0}
@@ -51,26 +51,26 @@ function Warzone.WeaponClipInfo.new(menu, controller)
     self.ammoSlash:setScaledLeftRight(false, true, -25, 0)
     self.ammoSlash:setScaledTopBottom(true, true, 0, 0)
 
-    Wzu.ClipSequence(self, self.ammoSlash, "Hidden", {
+    Util.ClipSequence(self, self.ammoSlash, "Hidden", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
 
-    Wzu.ClipSequence(self, self.ammoSlash, "OneDigit", {
+    Util.ClipSequence(self, self.ammoSlash, "OneDigit", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.ammoSlash, "TwoDigits", {
+    Util.ClipSequence(self, self.ammoSlash, "TwoDigits", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.ammoSlash, "ThreeDigits", {
+    Util.ClipSequence(self, self.ammoSlash, "ThreeDigits", {
         {
             duration = 0,
             setAlpha = 1
@@ -83,26 +83,26 @@ function Warzone.WeaponClipInfo.new(menu, controller)
     self.ammoDWClip:setScaledLeftRight(false, true, -20, 0)
     self.ammoDWClip:setScaledTopBottom(true, true, 0, 0)
 
-    Wzu.ClipSequence(self, self.ammoDWClip, "Hidden", {
+    Util.ClipSequence(self, self.ammoDWClip, "Hidden", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
 
-    Wzu.ClipSequence(self, self.ammoDWClip, "OneDigit", {
+    Util.ClipSequence(self, self.ammoDWClip, "OneDigit", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.ammoDWClip, "TwoDigits", {
+    Util.ClipSequence(self, self.ammoDWClip, "TwoDigits", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.ammoDWClip, "ThreeDigits", {
+    Util.ClipSequence(self, self.ammoDWClip, "ThreeDigits", {
         {
             duration = 0,
             setAlpha = 1
@@ -114,22 +114,22 @@ function Warzone.WeaponClipInfo.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "OneDigit")
+                Util.AnimateSequence(self, "OneDigit")
             end
         },
         Hidden = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Hidden")
+                Util.AnimateSequence(self, "Hidden")
             end
         },
         TwoDigits = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "TwoDigits")
+                Util.AnimateSequence(self, "TwoDigits")
             end
         },
         ThreeDigits = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "ThreeDigits")
+                Util.AnimateSequence(self, "ThreeDigits")
             end
         }
     }
@@ -155,9 +155,9 @@ function Warzone.WeaponClipInfo.new(menu, controller)
         }
     })
 
-    Wzu.SubState(controller, menu, self, "currentWeapon.weapon")
-    Wzu.SubState(controller, menu, self, "currentWeapon.ammoInDWClip")
-    Wzu.SubState(controller, menu, self, "currentWeapon.ammoInClip")
+    Util.SubState(controller, menu, self, "currentWeapon.weapon")
+    Util.SubState(controller, menu, self, "currentWeapon.ammoInDWClip")
+    Util.SubState(controller, menu, self, "currentWeapon.ammoInClip")
 
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)

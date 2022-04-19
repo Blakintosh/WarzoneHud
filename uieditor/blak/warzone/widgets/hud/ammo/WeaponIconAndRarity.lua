@@ -45,13 +45,13 @@ function Warzone.WeaponIconAndRarity.new(menu, controller)
 
     self.weaponRarity:setImage(RegisterImage("wdg_ellipse_glow"))
     self.weaponRarity:setAlpha(0.4)
-    Wzu.SetRGBFromTable(self.weaponRarity, Wzu.Swatches.Rarities[1])
+    Util.SetRGBFromTable(self.weaponRarity, Util.Swatches.Rarities[1])
 
-    Wzu.Subscribe(self.weaponRarity, controller, "currentWeapon.weaponRarity", function(modelValue)
-        if Wzu.Swatches.Rarities[modelValue + 1] then
-            Wzu.SetRGBFromTable(self.weaponRarity, Wzu.Swatches.Rarities[modelValue + 1])
+    Util.Subscribe(self.weaponRarity, controller, "currentWeapon.weaponRarity", function(modelValue)
+        if Util.Swatches.Rarities[modelValue + 1] then
+            Util.SetRGBFromTable(self.weaponRarity, Util.Swatches.Rarities[modelValue + 1])
         else
-            Wzu.SetRGBFromTable(self.weaponRarity, Wzu.Swatches.Rarities[1])
+            Util.SetRGBFromTable(self.weaponRarity, Util.Swatches.Rarities[1])
         end
     end)
 
@@ -62,13 +62,13 @@ function Warzone.WeaponIconAndRarity.new(menu, controller)
     self.rarityIconGlow:setScaledTopBottom(true, false, 32, 68)
     self.rarityIconGlow:setImage(RegisterImage("hud_glow"))
     self.rarityIconGlow:setAlpha(0.3)
-    Wzu.SetRGBFromTable(self.rarityIconGlow, Wzu.Swatches.Rarities[1])
+    Util.SetRGBFromTable(self.rarityIconGlow, Util.Swatches.Rarities[1])
 
-    Wzu.Subscribe(self.rarityIconGlow, controller, "currentWeapon.weaponRarity", function(modelValue)
-        if Wzu.Swatches.Rarities[modelValue + 1] then
-            Wzu.SetRGBFromTable(self.rarityIconGlow, Wzu.Swatches.Rarities[modelValue + 1])
+    Util.Subscribe(self.rarityIconGlow, controller, "currentWeapon.weaponRarity", function(modelValue)
+        if Util.Swatches.Rarities[modelValue + 1] then
+            Util.SetRGBFromTable(self.rarityIconGlow, Util.Swatches.Rarities[modelValue + 1])
         else
-            Wzu.SetRGBFromTable(self.rarityIconGlow, Wzu.Swatches.Rarities[1])
+            Util.SetRGBFromTable(self.rarityIconGlow, Util.Swatches.Rarities[1])
         end
     end)
 
@@ -78,18 +78,18 @@ function Warzone.WeaponIconAndRarity.new(menu, controller)
     self.rarityIcon:setScaledLeftRight(true, false, 34, 50)
     self.rarityIcon:setScaledTopBottom(true, false, 42, 58)
     self.rarityIcon:setImage(RegisterImage("icon_rarity_5"))
-    Wzu.SetRGBFromTable(self.rarityIcon, Wzu.Swatches.RaritiesLight[1])
+    Util.SetRGBFromTable(self.rarityIcon, Util.Swatches.RaritiesLight[1])
 
-    Wzu.Subscribe(self.rarityIcon, controller, "currentWeapon.weaponRarity", function(modelValue)
+    Util.Subscribe(self.rarityIcon, controller, "currentWeapon.weaponRarity", function(modelValue)
         ResolveRarityIcon(self.rarityIcon, controller)
-        if Wzu.Swatches.RaritiesLight[modelValue + 1] then
-            Wzu.SetRGBFromTable(self.rarityIcon, Wzu.Swatches.RaritiesLight[modelValue + 1])
+        if Util.Swatches.RaritiesLight[modelValue + 1] then
+            Util.SetRGBFromTable(self.rarityIcon, Util.Swatches.RaritiesLight[modelValue + 1])
         else
-            Wzu.SetRGBFromTable(self.rarityIcon, Wzu.Swatches.RaritiesLight[1])
+            Util.SetRGBFromTable(self.rarityIcon, Util.Swatches.RaritiesLight[1])
         end
     end)
 
-    Wzu.Subscribe(self.rarityIcon, controller, "currentWeapon.weaponOverclocks", function(modelValue)
+    Util.Subscribe(self.rarityIcon, controller, "currentWeapon.weaponOverclocks", function(modelValue)
         ResolveRarityIcon(self.rarityIcon, controller)
     end)
 
@@ -101,7 +101,7 @@ function Warzone.WeaponIconAndRarity.new(menu, controller)
     self.weaponIcon:setScale(1)
 
     self.weaponIcon:setImage(RegisterImage("blacktransparent"))
-    Wzu.SubscribeToImage(self.weaponIcon, controller, "currentWeapon.weaponIcon")
+    Util.SubscribeToImage(self.weaponIcon, controller, "currentWeapon.weaponIcon")
 
     self:addElement(self.weaponIcon)
 

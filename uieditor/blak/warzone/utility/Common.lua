@@ -1,4 +1,4 @@
-Wzu.Colors = {
+Util.Colors = {
     Black = { r = 0, g = 0, b = 0 },
     White = { r = 1, g = 1, b = 1 },
     FreshMango = { r = 0.9961, g = 0.6667, b = 0.2902 },
@@ -59,75 +59,75 @@ Wzu.Colors = {
     }
 }
 
-Wzu.Swatches = {
-    Players = {Wzu.Colors.FreshMango, Wzu.Colors.Malibu, Wzu.Colors.GreenYellow, Wzu.Colors.Player4Color},
-    Overcharged = Wzu.Colors.FreshMango,
-    HUDShadow = Wzu.Colors.Grey63,
-    HUDMain = Wzu.Colors.WeatheredSlate,
-    HUDStable = Wzu.Colors.IceIceBaby,
-    HUDWarning = Wzu.Colors.AlertOrange,
-    HUDWarningDanger = Wzu.Colors.VibrantRed,
-    HUDCaution = Wzu.Colors.Gold,
-    Cash = Wzu.Colors.BRPlunderGreen,
-    GlobalKeyColor = Wzu.Colors.CodeLightBlue,
-    BackgroundDisabled = Wzu.Colors.Asphalt,
-    EnemyTeam = Wzu.Colors.Watermelon,
-    FriendlyTeam = Wzu.Colors.CodeLightBlue,
-    FriendlyTeamDark = Wzu.Colors.DarkPhoshper,
-    FriendlyTeamTextHighlight = Wzu.Colors.lightBlue,
+Util.Swatches = {
+    Players = {Util.Colors.FreshMango, Util.Colors.Malibu, Util.Colors.GreenYellow, Util.Colors.Player4Color},
+    Overcharged = Util.Colors.FreshMango,
+    HUDShadow = Util.Colors.Grey63,
+    HUDMain = Util.Colors.WeatheredSlate,
+    HUDStable = Util.Colors.IceIceBaby,
+    HUDWarning = Util.Colors.AlertOrange,
+    HUDWarningDanger = Util.Colors.VibrantRed,
+    HUDCaution = Util.Colors.Gold,
+    Cash = Util.Colors.BRPlunderGreen,
+    GlobalKeyColor = Util.Colors.CodeLightBlue,
+    BackgroundDisabled = Util.Colors.Asphalt,
+    EnemyTeam = Util.Colors.Watermelon,
+    FriendlyTeam = Util.Colors.CodeLightBlue,
+    FriendlyTeamDark = Util.Colors.DarkPhoshper,
+    FriendlyTeamTextHighlight = Util.Colors.lightBlue,
     Rarities = {
-        Wzu.Colors.Grey63, --Misc
-        Wzu.Colors.MustardGreen, --Common
-        Wzu.Colors.ChelseaCucumber, --Uncommon
-        Wzu.Colors.PictonBlue, --Rare
-        Wzu.Colors.Deluge, --Epic
-        Wzu.Colors.EpicOrange, --Legendary
-        Wzu.Colors.VibrantRed, --Ultra
-        Wzu.Colors.BlakintoshPurple, --Packed
+        Util.Colors.Grey63, --Misc
+        Util.Colors.MustardGreen, --Common
+        Util.Colors.ChelseaCucumber, --Uncommon
+        Util.Colors.PictonBlue, --Rare
+        Util.Colors.Deluge, --Epic
+        Util.Colors.EpicOrange, --Legendary
+        Util.Colors.VibrantRed, --Ultra
+        Util.Colors.BlakintoshPurple, --Packed
     },
     RaritiesLight = {
-        Wzu.Colors.Grey128, --Misc
-        Wzu.Colors.MustardGreen, --Common
-        Wzu.Colors.ChelseaCucumber, --Uncommon
-        Wzu.Colors.PictonBlue, --Rare
-        Wzu.Colors.Deluge, --Epic
-        Wzu.Colors.EpicOrange, --Legendary
-        Wzu.Colors.VibrantRed, --Ultra
-        Wzu.Colors.BlakintoshPurple, --Packed
+        Util.Colors.Grey128, --Misc
+        Util.Colors.MustardGreen, --Common
+        Util.Colors.ChelseaCucumber, --Uncommon
+        Util.Colors.PictonBlue, --Rare
+        Util.Colors.Deluge, --Epic
+        Util.Colors.EpicOrange, --Legendary
+        Util.Colors.VibrantRed, --Ultra
+        Util.Colors.BlakintoshPurple, --Packed
     },
-    WeaponMeterWorse = Wzu.Colors.RocketRedDark,
-    WeaponMeterBetter = Wzu.Colors.ModernGreen,
-    MenuTitle = Wzu.Colors.TidePool,
-    MenuFrame = Wzu.Colors.CodeLightBlue,
-    MenuBorder = Wzu.Colors.Ash,
-    MenuLocked = Wzu.Colors.Pavement,
-    ButtonTextDefault = Wzu.Colors.TidePool,
-    ButtonTextDefaultGrey = Wzu.Colors.UnfocusedGrey,
-    ButtonTextFocus = Wzu.Colors.CodeLightBlue,
-    ButtonTextDisabled = Wzu.Colors.Pavement,
-    MenuButtonText = Wzu.Colors.CodeBlueSelected,
-    ButtonBackground = Wzu.Colors.Grey17, 
-    ButtonBackgroundFocus = Wzu.Colors.CodeLightBlue,
-    ButtonBackgroundDisabled = Wzu.Colors.Asphalt,
-    ButtonBorder = Wzu.Colors.Grey56,
-    ButtonTextureUnfocused = Wzu.Colors.Grey128,
-    TextPrimaryText = Wzu.Colors.WeatheredSlate,
-    FieldUpgradeIdle = Wzu.Colors.WeatheredSlate,
-    ScoreboardFriendly = Wzu.Colors.CodeLightBlue,
-    FriendlyDarkBlue = Wzu.Colors.VeryDarkBlue,
-    ScoreboardFriendlyTeamDark = Wzu.Colors.CodeDarkBlue,
-    GlobalKeyColorMid = Wzu.Colors.CodeBlue,
-    PlayerTeam = Wzu.Colors.Gold,
-    PopupBackground = Wzu.Colors.WetPavement,
-    PopupFrame = Wzu.Colors.TidePool,
-    PopupBgGradient = Wzu.Colors.BlueGrey,
-    PopupHeaderTxt = Wzu.Colors.CodeDarkBlue,
-    PopupTitleTxt = Wzu.Colors.TidePool,
-    PopupSubHeaderTxt2 = Wzu.Colors.WarmerMedGrey,
-	ScorestreakButtonUnavailable = Wzu.Colors.Grey89
+    WeaponMeterWorse = Util.Colors.RocketRedDark,
+    WeaponMeterBetter = Util.Colors.ModernGreen,
+    MenuTitle = Util.Colors.TidePool,
+    MenuFrame = Util.Colors.CodeLightBlue,
+    MenuBorder = Util.Colors.Ash,
+    MenuLocked = Util.Colors.Pavement,
+    ButtonTextDefault = Util.Colors.TidePool,
+    ButtonTextDefaultGrey = Util.Colors.UnfocusedGrey,
+    ButtonTextFocus = Util.Colors.CodeLightBlue,
+    ButtonTextDisabled = Util.Colors.Pavement,
+    MenuButtonText = Util.Colors.CodeBlueSelected,
+    ButtonBackground = Util.Colors.Grey17, 
+    ButtonBackgroundFocus = Util.Colors.CodeLightBlue,
+    ButtonBackgroundDisabled = Util.Colors.Asphalt,
+    ButtonBorder = Util.Colors.Grey56,
+    ButtonTextureUnfocused = Util.Colors.Grey128,
+    TextPrimaryText = Util.Colors.WeatheredSlate,
+    FieldUpgradeIdle = Util.Colors.WeatheredSlate,
+    ScoreboardFriendly = Util.Colors.CodeLightBlue,
+    FriendlyDarkBlue = Util.Colors.VeryDarkBlue,
+    ScoreboardFriendlyTeamDark = Util.Colors.CodeDarkBlue,
+    GlobalKeyColorMid = Util.Colors.CodeBlue,
+    PlayerTeam = Util.Colors.Gold,
+    PopupBackground = Util.Colors.WetPavement,
+    PopupFrame = Util.Colors.TidePool,
+    PopupBgGradient = Util.Colors.BlueGrey,
+    PopupHeaderTxt = Util.Colors.CodeDarkBlue,
+    PopupTitleTxt = Util.Colors.TidePool,
+    PopupSubHeaderTxt2 = Util.Colors.WarmerMedGrey,
+	ScorestreakButtonUnavailable = Util.Colors.Grey89
 }
 
-Wzu.Fonts = {
+Util.Fonts = {
     MainRegular = "fonts/main_regular.ttf",
     MainBold = "fonts/main_bold.ttf",
     MainLight = "fonts/main_light.ttf",
@@ -135,7 +135,7 @@ Wzu.Fonts = {
     BattlenetBold = "fonts/notosans_semicondensedbold.ttf"
 }
 
-Wzu.Sounds = {
+Util.Sounds = {
     Countdowns = {
         MatchEnd = {
             Low = "ui_mp_timer_countdown_matchend_5_1",
@@ -154,7 +154,7 @@ Wzu.Sounds = {
     }
 }
 
-Wzu.CursorTypes = {
+Util.CursorTypes = {
     Normal = "ui_cursor_arrow_normal",
     Active = "ui_cursor_arrow_active",
     Input = "ui_cursor_i_beam",
@@ -163,16 +163,16 @@ Wzu.CursorTypes = {
     Contextual = "ui_cursor_arrow_contextual"
 }
 
-Wzu.SetRGBFromTable = function(self, color)
+Util.SetRGBFromTable = function(self, color)
     self:setRGB(color.r, color.g, color.b)
 end
 
-Wzu.ConvertColorToTable = function(color)
+Util.ConvertColorToTable = function(color)
     return {color.r, color.g, color.b}
 end
 
-Wzu.GetClientColor = function(clientNum)
-    return Wzu.Swatches.Players[clientNum + 1]
+Util.GetClientColor = function(clientNum)
+    return Util.Swatches.Players[clientNum + 1]
 end
 
 SoundSet.iw8 = {

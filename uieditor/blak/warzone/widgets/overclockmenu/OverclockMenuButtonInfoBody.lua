@@ -17,17 +17,17 @@ function Warzone.OverclockMenuButtonInfoBody.new(menu, controller)
     self.background = LUI.UIImage.new()
     self.background:setScaledLeftRight(true, true, 0, 0)
     self.background:setScaledTopBottom(true, true, 0, 0)
-    Wzu.SetRGBFromTable(self.background, Wzu.Colors.Black)
+    Util.SetRGBFromTable(self.background, Util.Colors.Black)
     self.background:setAlpha(0.6)
 
     self:addElement(self.background)
 
-    self.title = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, false)
+    self.title = Util.TextElement(Util.Fonts.MainBold, Util.Swatches.HUDMain, false)
     self.title:setScaledLeftRight(true, false, 8, 120)
     self.title:setScaledTopBottom(true, false, 2, 15)
     self.title:setText("RADICALLY INVASIVE (Overclock 2)")
 
-    Wzu.LinkToWidget(self.title, self, "name", function(modelValue)
+    Util.LinkToWidget(self.title, self, "name", function(modelValue)
         local index = Engine.GetModelValue(Engine.GetModel(self:getModel(), "index"))
         if index then
             self.title:setText(LocalizeToUpperString(Engine.GetIString(modelValue, "CS_LOCALIZED_STRINGS")) .. " " .. Engine.Localize("KARELIA_CALIBER_OVERCLOCK_INDEX", index))
@@ -38,12 +38,12 @@ function Warzone.OverclockMenuButtonInfoBody.new(menu, controller)
 
     self:addElement(self.title)
 
-    self.subtitle = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.subtitle = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.subtitle:setScaledLeftRight(true, false, 8, 120)
     self.subtitle:setScaledTopBottom(true, false, 15, 28)
     self.subtitle:setText("^1You don't have the previous Caliber")
 
-    Wzu.LinkToWidget(self.subtitle, self, "comment", function(modelValue)
+    Util.LinkToWidget(self.subtitle, self, "comment", function(modelValue)
         local cost = Engine.GetModelValue(Engine.GetModel(self:getModel(), "cost"))
         if cost then
             self.subtitle:setText(Engine.Localize(Engine.GetIString(modelValue, "CS_LOCALIZED_STRINGS"), cost))
@@ -52,7 +52,7 @@ function Warzone.OverclockMenuButtonInfoBody.new(menu, controller)
 
     self:addElement(self.subtitle)
 
-    self.body = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain)
+    self.body = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain)
     self.body:setScaledLeftRight(true, false, 8, 220)
     self.body:setScaledTopBottom(true, false, 28, 41)
     self.body:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_LEFT)
@@ -62,7 +62,7 @@ function Warzone.OverclockMenuButtonInfoBody.new(menu, controller)
     LUI.OverrideFunction_CallOriginalFirst(self.body, "setText", function(widget, text)
         ScaleWidgetToLabelWrappedLeftAlign(self, widget, 0, -80)
     end)
-    Wzu.LinkToWidget(self.body, self, "description", function(modelValue)
+    Util.LinkToWidget(self.body, self, "description", function(modelValue)
         self.body:setText(Engine.Localize(Engine.GetIString(modelValue, "CS_LOCALIZED_STRINGS")))
     end)
 
@@ -71,18 +71,18 @@ function Warzone.OverclockMenuButtonInfoBody.new(menu, controller)
     --[[self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultUp")
+                Util.AnimateSequence(self, "DefaultUp")
             end,
             Focus = function()
-                Wzu.AnimateSequence(self, "DefaultOver")
+                Util.AnimateSequence(self, "DefaultOver")
             end
         },
         Disabled = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DisabledUp")
+                Util.AnimateSequence(self, "DisabledUp")
             end,
             Focus = function()
-                Wzu.AnimateSequence(self, "DisabledOver")
+                Util.AnimateSequence(self, "DisabledOver")
             end
         }
     }]]

@@ -19,11 +19,11 @@ local function PreLoadFunc(menu, controller)
 end
 
 local function SubRGBToRarity(self, controller)
-    Wzu.Subscribe(self, controller, "prospectiveWeapon.attributes.weaponRarity", function(modelValue)
-        if Wzu.Swatches.RaritiesLight[modelValue + 1] then
-            Wzu.SetRGBFromTable(self, Wzu.Swatches.RaritiesLight[modelValue + 1])
+    Util.Subscribe(self, controller, "prospectiveWeapon.attributes.weaponRarity", function(modelValue)
+        if Util.Swatches.RaritiesLight[modelValue + 1] then
+            Util.SetRGBFromTable(self, Util.Swatches.RaritiesLight[modelValue + 1])
         else
-            Wzu.SetRGBFromTable(self, Wzu.Swatches.RaritiesLight[1])
+            Util.SetRGBFromTable(self, Util.Swatches.RaritiesLight[1])
         end
     end)
 end
@@ -124,17 +124,17 @@ function Warzone.WeaponPickupMainBody.new(menu, controller)
         end
     }})
 
-    Wzu.SubState(controller, menu, self.buttonPrompt, "prospectiveWeapon.attributes.cost")
-    Wzu.SubState(controller, menu, self.buttonPrompt, "PlayerList.0.playerScore")
+    Util.SubState(controller, menu, self.buttonPrompt, "prospectiveWeapon.attributes.cost")
+    Util.SubState(controller, menu, self.buttonPrompt, "PlayerList.0.playerScore")
 
     self:addElement(self.buttonPrompt)
 
-    self.swapPrompt = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.swapPrompt = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.swapPrompt:setScaledLeftRight(true, false, 20, 60)
     self.swapPrompt:setScaledTopBottom(false, false, -64, -52)
     self.swapPrompt:setText("Swap")
 
-    Wzu.SubscribeToText(self.swapPrompt, controller, "prospectiveWeapon.attributes.buyString")
+    Util.SubscribeToText(self.swapPrompt, controller, "prospectiveWeapon.attributes.buyString")
 
     self:addElement(self.swapPrompt)
 

@@ -17,7 +17,7 @@ function Warzone.HealthBar.new(menu, controller)
     self.background = LUI.UIImage.new()
     self.background:setScaledLeftRight(true, true, 0, 0)
     self.background:setScaledTopBottom(true, true, 0, 0)
-    Wzu.SetRGBFromTable(self.background, Wzu.Colors.Black)
+    Util.SetRGBFromTable(self.background, Util.Colors.Black)
     self.background:setAlpha(0.2)
 
     self:addElement(self.background)
@@ -29,7 +29,7 @@ function Warzone.HealthBar.new(menu, controller)
     self.damageBar:setShaderVector(1, 0, 0, 0, 0)
     self.damageBar:setShaderVector(2, 1, 0, 0, 0)
     self.damageBar:setShaderVector(3, 0, 0, 0, 0)
-    Wzu.SetRGBFromTable(self.damageBar.filler, Wzu.Swatches.HUDWarning)
+    Util.SetRGBFromTable(self.damageBar.filler, Util.Swatches.HUDWarning)
 
     self:addElement(self.damageBar)
 
@@ -41,26 +41,26 @@ function Warzone.HealthBar.new(menu, controller)
     self.healthBar:setShaderVector(1, 0, 0, 0, 0)
     self.healthBar:setShaderVector(2, 1, 0, 0, 0)
     self.healthBar:setShaderVector(3, 0, 0, 0, 0)
-    Wzu.SetRGBFromTable(self.healthBar.filler, Wzu.Colors.White)
+    Util.SetRGBFromTable(self.healthBar.filler, Util.Colors.White)
 
-    Wzu.ClipSequence(self, self.healthBar, "LowHealth", {
+    Util.ClipSequence(self, self.healthBar, "LowHealth", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDStable)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDStable)
         },
         {
             duration = 267,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDWarningDanger)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDWarningDanger)
         },
         {
             duration = 267,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDStable)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDStable)
         }
     })
-    Wzu.ClipSequence(self, self.healthBar, "DefaultClip", {
+    Util.ClipSequence(self, self.healthBar, "DefaultClip", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.FieldUpgradeIdle)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.FieldUpgradeIdle)
         }
     })
 
@@ -70,8 +70,8 @@ function Warzone.HealthBar.new(menu, controller)
     self.damageBar.filler.lastValue = 1
 
     local function GainHealth(modelValue)
-        Wzu.Tween.interpolate(self.healthBar.filler, 1000, Wzu.TweenGraphs.linear, function(progress)
-            local value = Wzu.GetTweenedProgress(progress, self.healthBar.filler.lastValue, modelValue)
+        Util.Tween.interpolate(self.healthBar.filler, 1000, Util.TweenGraphs.linear, function(progress)
+            local value = Util.GetTweenedProgress(progress, self.healthBar.filler.lastValue, modelValue)
             self.healthBar.filler:setShaderVector(0, value, 0, 0, 0)
         end)
 
@@ -79,12 +79,12 @@ function Warzone.HealthBar.new(menu, controller)
             if not event.interrupted then
                 self.healthBar.filler.lastValue = modelValue
             else
-                self.healthBar.filler.lastValue = Wzu.GetTweenedProgress(event.progress, self.healthBar.filler.lastValue, modelValue)
+                self.healthBar.filler.lastValue = Util.GetTweenedProgress(event.progress, self.healthBar.filler.lastValue, modelValue)
             end
         end)
 
-        Wzu.Tween.interpolate(self.damageBar.filler, 1000, Wzu.TweenGraphs.linear, function(progress)
-            local value = Wzu.GetTweenedProgress(progress, self.damageBar.filler.lastValue, modelValue)
+        Util.Tween.interpolate(self.damageBar.filler, 1000, Util.TweenGraphs.linear, function(progress)
+            local value = Util.GetTweenedProgress(progress, self.damageBar.filler.lastValue, modelValue)
             self.damageBar.filler:setShaderVector(0, value, 0, 0, 0)
         end)
 
@@ -92,7 +92,7 @@ function Warzone.HealthBar.new(menu, controller)
             if not event.interrupted then
                 self.damageBar.filler.lastValue = modelValue
             else
-                self.damageBar.filler.lastValue = Wzu.GetTweenedProgress(event.progress, self.damageBar.filler.lastValue, modelValue)
+                self.damageBar.filler.lastValue = Util.GetTweenedProgress(event.progress, self.damageBar.filler.lastValue, modelValue)
             end
         end)
     end
@@ -102,8 +102,8 @@ function Warzone.HealthBar.new(menu, controller)
         self.healthBar.filler.lastValue = modelValue
         self.healthBar.filler:setShaderVector(0, modelValue, 0, 0, 0)
 
-        Wzu.Tween.interpolate(self.damageBar.filler, 1000, Wzu.TweenGraphs.linear, function(progress)
-            local value = Wzu.GetTweenedProgress(progress, self.damageBar.filler.lastValue, modelValue)
+        Util.Tween.interpolate(self.damageBar.filler, 1000, Util.TweenGraphs.linear, function(progress)
+            local value = Util.GetTweenedProgress(progress, self.damageBar.filler.lastValue, modelValue)
             self.damageBar.filler:setShaderVector(0, value, 0, 0, 0)
         end)
 
@@ -115,12 +115,12 @@ function Warzone.HealthBar.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultClip")
+                Util.AnimateSequence(self, "DefaultClip")
             end
         },
         LowHealth = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "LowHealth", {
+                Util.AnimateSequence(self, "LowHealth", {
                     looping = true,
                     clipName = "DefaultClip"
                 })
@@ -129,7 +129,7 @@ function Warzone.HealthBar.new(menu, controller)
     }
 
     self.lastHealth = 1
-    Wzu.LinkToWidget(self, self, "clientNum", function(modelValue)
+    Util.LinkToWidget(self, self, "clientNum", function(modelValue)
         self:mergeStateConditions({{
             stateName = "LowHealth",
             condition = function(menu, self, event)
@@ -137,9 +137,9 @@ function Warzone.HealthBar.new(menu, controller)
             end
         }})
 
-        Wzu.SubState(controller, menu, self, "PlayerList.client"..modelValue..".health")
+        Util.SubState(controller, menu, self, "PlayerList.client"..modelValue..".health")
 
-        Wzu.Subscribe(self, controller, "PlayerList.client"..modelValue..".health", function(modelValue2)
+        Util.Subscribe(self, controller, "PlayerList.client"..modelValue..".health", function(modelValue2)
             if modelValue2 > self.lastHealth then
                 GainHealth(modelValue2)
             elseif modelValue2 < self.lastHealth then

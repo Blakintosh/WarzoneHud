@@ -1,7 +1,7 @@
 EnableGlobals()
 
-if not Wzu then
-    Wzu = {}
+if not Util then
+    Util = {}
 end
 
 DebugPrint = function(message)

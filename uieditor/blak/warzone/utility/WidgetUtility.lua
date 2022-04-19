@@ -1,15 +1,15 @@
-Wzu.TextElement = function(font, color, shadow)
+Util.TextElement = function(font, color, shadow)
     local self = LUI.UIText.new()
 
     self:setTTF(font)
     self:setText(Engine.Localize("MENU_NEW"))
-    Wzu.SetRGBFromTable(self, color)
+    Util.SetRGBFromTable(self, color)
 
     if shadow then
         self.shadow = LUI.UIText.new()
         self.shadow:setTTF(font)
         self.shadow:setText(Engine.Localize("MENU_NEW"))
-        Wzu.SetRGBFromTable(self.shadow, Wzu.Swatches.HUDShadow)
+        Util.SetRGBFromTable(self.shadow, Util.Swatches.HUDShadow)
         self.shadow:setAlpha(0.6)
 
         -- Shadow will copy main on everything
@@ -39,51 +39,51 @@ Wzu.TextElement = function(font, color, shadow)
     return self
 end
 
-Wzu.TightTextElement = function(font, color)
+Util.TightTextElement = function(font, color)
     local self = LUI.UITightText.new()
 
     self:setTTF(font)
     self:setText(Engine.Localize("MENU_NEW"))
-    Wzu.SetRGBFromTable(self, color)
+    Util.SetRGBFromTable(self, color)
 
     return self
 end
 
-Wzu.AddShadowedElement = function(parent, self)
+Util.AddShadowedElement = function(parent, self)
     parent:addElement(self.shadow)
     parent:addElement(self)
 end
 
-Wzu.ContainedShadowTextElement = function(font, color)
+Util.ContainedShadowTextElement = function(font, color)
     local self = LUI.UIElement.new()
 
-    self.text = Wzu.TextElement(font, color, true)
+    self.text = Util.TextElement(font, color, true)
     self.text:setScaledLeftRight(true, true, 0, 0)
     self.text:setScaledTopBottom(true, true, 0, 0)
 
-    Wzu.AddShadowedElement(self, self.text)
+    Util.AddShadowedElement(self, self.text)
 
     return self
 end
 
-Wzu.GetModel = function(controller, modelName)
+Util.GetModel = function(controller, modelName)
     return Engine.GetModel(Engine.GetModelForController(controller), modelName)
 end
 
-Wzu.SetElementModel = function(self, controller, modelPt1, modelPt2)
+Util.SetElementModel = function(self, controller, modelPt1, modelPt2)
     self:subscribeToGlobalModel(controller, modelPt1, modelPt2, function(model)
         self:setModel(model, controller)
     end)
 end
 
-Wzu.SetElementModel_Create = function(self, controller, modelPt1, modelPt2)
+Util.SetElementModel_Create = function(self, controller, modelPt1, modelPt2)
     self:subscribeToModel(Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), modelPt1), modelPt2), function(model)
         self:setModel(model, controller)
     end)
 end
 
-Wzu.Subscribe = function(self, controller, modelName, callback)
-    self:subscribeToModel(Wzu.GetModel(controller, modelName), function(model)
+Util.Subscribe = function(self, controller, modelName, callback)
+    self:subscribeToModel(Util.GetModel(controller, modelName), function(model)
         local modelValue = Engine.GetModelValue(model)
         if modelValue then
             callback(modelValue)
@@ -91,9 +91,9 @@ Wzu.Subscribe = function(self, controller, modelName, callback)
     end)
 end
 
-Wzu.SubscribeMultiple = function(self, controller, modelNames, callback)
+Util.SubscribeMultiple = function(self, controller, modelNames, callback)
     for k, v in ipairs(modelNames) do
-        self:subscribeToModel(Wzu.GetModel(controller, v), function(model)
+        self:subscribeToModel(Util.GetModel(controller, v), function(model)
             local modelValue = Engine.GetModelValue(model)
             if modelValue then
                 callback(modelValue)
@@ -102,7 +102,7 @@ Wzu.SubscribeMultiple = function(self, controller, modelNames, callback)
     end
 end
 
-Wzu.LinkToWidget = function(self, parent, modelName, callback)
+Util.LinkToWidget = function(self, parent, modelName, callback)
     self:linkToElementModel(parent, modelName, true, function(model)
         local modelValue = Engine.GetModelValue(model)
         if modelValue ~= nil then
@@ -111,13 +111,13 @@ Wzu.LinkToWidget = function(self, parent, modelName, callback)
     end)
 end
 
-Wzu.LinkWidgetToElementModel = function(self, parent, controller)
+Util.LinkWidgetToElementModel = function(self, parent, controller)
     self:linkToElementModel(parent, nil, false, function(model)
         self:setModel(model, controller)
     end)
 end
 
-Wzu.SubVisBit = function(InstanceRef, HudRef, parent, VisiblityBit)
+Util.SubVisBit = function(InstanceRef, HudRef, parent, VisiblityBit)
     parent:subscribeToModel(Engine.GetModel(Engine.GetModelForController(InstanceRef), "UIVisibilityBit." .. VisiblityBit), function(ModelRef)
         HudRef:updateElementState(parent, {
         name = "model_validation",
@@ -128,7 +128,7 @@ Wzu.SubVisBit = function(InstanceRef, HudRef, parent, VisiblityBit)
     end)
 end
 
-Wzu.SubState = function(InstanceRef, HudRef, parent, ModelName)
+Util.SubState = function(InstanceRef, HudRef, parent, ModelName)
     parent:subscribeToModel(Engine.GetModel(Engine.GetModelForController(InstanceRef), ModelName), function(ModelRef)
         HudRef:updateElementState(parent, {
         name = "model_validation",
@@ -139,7 +139,7 @@ Wzu.SubState = function(InstanceRef, HudRef, parent, ModelName)
     end)
 end
 
-Wzu.LinkWidgetToState = function(self, parent, menu, modelName)
+Util.LinkWidgetToState = function(self, parent, menu, modelName)
     self:linkToElementModel(parent, modelName, true, function(model)
         menu:updateElementState(self, {
             name = "model_validation",
@@ -150,21 +150,21 @@ Wzu.LinkWidgetToState = function(self, parent, menu, modelName)
     end)
 end
 
-Wzu.SubscribeToText = function(self, controller, modelName)
-    Wzu.Subscribe(self, controller, modelName, function(modelValue)
+Util.SubscribeToText = function(self, controller, modelName)
+    Util.Subscribe(self, controller, modelName, function(modelValue)
         self:setText(Engine.Localize(modelValue))
     end)
 end
 
-Wzu.SubscribeToText_ToUpper = function(self, controller, modelName)
-    Wzu.Subscribe(self, controller, modelName, function(modelValue)
+Util.SubscribeToText_ToUpper = function(self, controller, modelName)
+    Util.Subscribe(self, controller, modelName, function(modelValue)
         self:setText(LocalizeToUpperString(modelValue))
     end)
 end
 
-Wzu.LinkToWidgetText = function(self, parent, modelName, toUpper)
+Util.LinkToWidgetText = function(self, parent, modelName, toUpper)
     toUpper = toUpper or false
-    Wzu.LinkToWidget(self, parent, modelName, function(modelValue)
+    Util.LinkToWidget(self, parent, modelName, function(modelValue)
         if toUpper then
             self:setText(LocalizeToUpperString(modelValue))
         else
@@ -173,8 +173,8 @@ Wzu.LinkToWidgetText = function(self, parent, modelName, toUpper)
     end)
 end
 
-Wzu.SubscribeToImage = function(self, controller, modelName)
-    Wzu.Subscribe(self, controller, modelName, function(modelValue)
+Util.SubscribeToImage = function(self, controller, modelName)
+    Util.Subscribe(self, controller, modelName, function(modelValue)
         self:setImage(RegisterImage(modelValue))
     end)
 end
@@ -184,7 +184,7 @@ end
 ---@param self userdata parent to link the notify to
 ---@param notifyName string The name of the script notify
 ---@param callback function A callback function that will receive notify data.
-Wzu.ScriptNotify = function(controller, self, notifyName, callback)
+Util.ScriptNotify = function(controller, self, notifyName, callback)
     self:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function(ModelRef)
         if IsParamModelEqualToString(ModelRef, notifyName) then
             callback(CoD.GetScriptNotifyData(ModelRef))
@@ -192,9 +192,9 @@ Wzu.ScriptNotify = function(controller, self, notifyName, callback)
     end)
 end
 
-Wzu.ScaleWidgetToLabel = {}
+Util.ScaleWidgetToLabel = {}
 
-Wzu.ScaleWidgetToLabel.Centered = function(parent, label, padding)
+Util.ScaleWidgetToLabel.Centered = function(parent, label, padding)
     if label == nil then
 		return 
 	else
@@ -207,7 +207,7 @@ Wzu.ScaleWidgetToLabel.Centered = function(parent, label, padding)
 	end
 end
 
-Wzu.ScaleWidgetToLabel.CenteredDownscale = function(parent, label, padding)
+Util.ScaleWidgetToLabel.CenteredDownscale = function(parent, label, padding)
     if label == nil then
 		return 
 	else
@@ -220,7 +220,7 @@ Wzu.ScaleWidgetToLabel.CenteredDownscale = function(parent, label, padding)
 	end
 end
 
-Wzu.ScaleWidgetToLabel.CenteredWithMinimum = function(parent, label, padding, minimum)
+Util.ScaleWidgetToLabel.CenteredWithMinimum = function(parent, label, padding, minimum)
     if label == nil then
 		return 
 	else
@@ -234,7 +234,7 @@ Wzu.ScaleWidgetToLabel.CenteredWithMinimum = function(parent, label, padding, mi
 	end
 end
 
-Wzu.ScaleWidgetToLabel.WithMinimum = function(parent, label, padding, minimum)
+Util.ScaleWidgetToLabel.WithMinimum = function(parent, label, padding, minimum)
     if label == nil then
         return 
     end
@@ -280,7 +280,7 @@ Wzu.ScaleWidgetToLabel.WithMinimum = function(parent, label, padding, minimum)
     end
 end
 
-Wzu.ScaleWidgetToLabel.DownscaleWithMinimum = function(parent, label, padding, minimum)
+Util.ScaleWidgetToLabel.DownscaleWithMinimum = function(parent, label, padding, minimum)
     if label == nil then
         return 
     end
@@ -328,7 +328,7 @@ end
 
 -- Menu based setup mourse cursor function
 -- Important: you can't use (true, true, 0, 0) on the menu dimensions with this, as it makes getLocalRect not work as needed
-Wzu.SetupMouseCursor = function(menu, controller)
+Util.SetupMouseCursor = function(menu, controller)
     local cursorModel = Engine.CreateModel(Engine.CreateModel(Engine.GetModelForController(controller), "mouseCursor"), "cursorImage")
     Engine.SetModelValue(cursorModel, "ui_cursor_arrow_normal")
     menu.mouseCursor = LUI.UIImage.new()
@@ -337,7 +337,7 @@ Wzu.SetupMouseCursor = function(menu, controller)
     menu.mouseCursor:setImage(RegisterImage("ui_cursor_arrow_normal"))
     menu.mouseCursor:hide()
 
-    --[[Wzu.Subscribe(menu.mouseCursor, controller, "mouseCursor.cursorImage", function(modelValue)
+    --[[Util.Subscribe(menu.mouseCursor, controller, "mouseCursor.cursorImage", function(modelValue)
         if not modelValue or not menu.mouseCursor or not menu.mouseCursor.setImage then
             return
         end
@@ -401,7 +401,7 @@ Wzu.SetupMouseCursor = function(menu, controller)
 	end )
 end
 
-Wzu.SetCursorType = function(type, controller)
+Util.SetCursorType = function(type, controller)
     --local model = Engine.GetModel(Engine.GetModelForController(controller), "mouseCursor.cursorImage")
     --Engine.SetModelValue(model, type)
 end

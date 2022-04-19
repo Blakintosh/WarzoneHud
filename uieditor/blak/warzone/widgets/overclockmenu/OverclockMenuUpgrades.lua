@@ -17,7 +17,7 @@ function Warzone.OverclockMenuUpgrades.new(menu, controller)
     self:makeFocusable()
     self.onlyChildrenFocusable = true
 
-    self.title = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, false)
+    self.title = Util.TextElement(Util.Fonts.MainBold, Util.Swatches.HUDMain, false)
     self.title:setScaledLeftRight(true, false, 100, 300)
     self.title:setScaledTopBottom(true, false, 0, 18)
     self.title:setText("DAMAGE UPGRADES")
@@ -41,7 +41,7 @@ function Warzone.OverclockMenuUpgrades.new(menu, controller)
     self.overclockButton1:setScaledTopBottom(true, false, 76, 98)
     self.overclockButton1.index = 1
 
-    Wzu.SetElementModel_Create(self.overclockButton1, controller, "overclockTree", "1")
+    Util.SetElementModel_Create(self.overclockButton1, controller, "overclockTree", "1")
 
     self:addElement(self.overclockButton1)
 
@@ -50,7 +50,7 @@ function Warzone.OverclockMenuUpgrades.new(menu, controller)
     self.overclockButton2:setScaledTopBottom(true, false, 76, 98)
     self.overclockButton2.index = 2
 
-    Wzu.SetElementModel_Create(self.overclockButton2, controller, "overclockTree", "2")
+    Util.SetElementModel_Create(self.overclockButton2, controller, "overclockTree", "2")
 
     self:addElement(self.overclockButton2)
 
@@ -59,7 +59,7 @@ function Warzone.OverclockMenuUpgrades.new(menu, controller)
     self.overclockButton3:setScaledTopBottom(true, false, 76, 98)
     self.overclockButton3.index = 3
 
-    Wzu.SetElementModel_Create(self.overclockButton3, controller, "overclockTree", "3")
+    Util.SetElementModel_Create(self.overclockButton3, controller, "overclockTree", "3")
 
     self:addElement(self.overclockButton3)
 

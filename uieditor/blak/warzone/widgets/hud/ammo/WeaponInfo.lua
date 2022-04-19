@@ -17,19 +17,19 @@ function Warzone.WeaponInfo.new(menu, controller)
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
 
-    self.weaponName = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, true)
+    self.weaponName = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, true)
     self.weaponName:setScaledLeftRight(true, false, 0.5, 200)
     self.weaponName:setScaledTopBottom(true, false, -1.5, 14)
 
-    Wzu.SubscribeToText(self.weaponName, controller, "currentWeapon.weaponName")
+    Util.SubscribeToText(self.weaponName, controller, "currentWeapon.weaponName")
 
-    Wzu.ClipSequence(self, self.weaponName, "DefaultClip", {
+    Util.ClipSequence(self, self.weaponName, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.weaponName, "NewWeapon", {
+    Util.ClipSequence(self, self.weaponName, "NewWeapon", {
         {
             duration = 0,
             setAlpha = 1
@@ -44,18 +44,18 @@ function Warzone.WeaponInfo.new(menu, controller)
         }
     })
 
-    Wzu.AddShadowedElement(self, self.weaponName)
+    Util.AddShadowedElement(self, self.weaponName)
 
-    self.ammoName = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.Overcharged, true)
+    self.ammoName = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.Overcharged, true)
     self.ammoName:setScaledLeftRight(true, false, 0.5, 200)
     self.ammoName:setScaledTopBottom(true, false, 16, 29)
     self.ammoName:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_LEFT)
 
-    Wzu.SubscribeToText(self.ammoName, controller, "currentWeapon.weaponTierName")
+    Util.SubscribeToText(self.ammoName, controller, "currentWeapon.weaponTierName")
 
-    Wzu.SubscribeMultiple(self.ammoName, controller, {"currentWeapon.weaponTierName", "currentWeapon.weaponOverclocks"}, function(modelValue)
-        local tierValue = Engine.GetModelValue(Wzu.GetModel(controller, "currentWeapon.weaponTierName"))
-        local ocValue = Engine.GetModelValue(Wzu.GetModel(controller, "currentWeapon.weaponOverclocks"))
+    Util.SubscribeMultiple(self.ammoName, controller, {"currentWeapon.weaponTierName", "currentWeapon.weaponOverclocks"}, function(modelValue)
+        local tierValue = Engine.GetModelValue(Util.GetModel(controller, "currentWeapon.weaponTierName"))
+        local ocValue = Engine.GetModelValue(Util.GetModel(controller, "currentWeapon.weaponOverclocks"))
 
         if tierValue then
             if ocValue and ocValue > 0 then
@@ -66,13 +66,13 @@ function Warzone.WeaponInfo.new(menu, controller)
         end
     end)
 
-    Wzu.ClipSequence(self, self.ammoName, "DefaultClip", {
+    Util.ClipSequence(self, self.ammoName, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.ammoName, "NewWeapon", {
+    Util.ClipSequence(self, self.ammoName, "NewWeapon", {
         {
             duration = 0,
             setAlpha = 1
@@ -87,20 +87,20 @@ function Warzone.WeaponInfo.new(menu, controller)
         }
     })
 
-    Wzu.AddShadowedElement(self, self.ammoName)
+    Util.AddShadowedElement(self, self.ammoName)
     
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultClip")
+                Util.AnimateSequence(self, "DefaultClip")
             end,
             NewWeapon = function()
-                Wzu.AnimateSequence(self, "NewWeapon")
+                Util.AnimateSequence(self, "NewWeapon")
             end
         }
     }
 
-    Wzu.Subscribe(self, controller, "currentWeapon.weapon", function(modelValue)
+    Util.Subscribe(self, controller, "currentWeapon.weapon", function(modelValue)
         PlayClip(self, "NewWeapon", controller)
     end)
     

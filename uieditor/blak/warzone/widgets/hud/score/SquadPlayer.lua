@@ -26,25 +26,25 @@ function Warzone.SquadPlayer.new(menu, controller)
     self.background = LUI.UIImage.new()
     self.background:setScaledLeftRight(true, true, 0, 0)
     self.background:setScaledTopBottom(true, true, 0, 0)
-    Wzu.SetRGBFromTable(self.background, Wzu.Colors.Black)
+    Util.SetRGBFromTable(self.background, Util.Colors.Black)
     self.background:setAlpha(0.3)
     self.background:setImage(RegisterImage("ui_mp_br_squad_widget_backer_gradient"))
 
     self:addElement(self.background)
 
-    self.cash = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.Cash, false)
+    self.cash = Util.TextElement(Util.Fonts.MainBold, Util.Swatches.Cash, false)
     self.cash:setScaledLeftRight(true, false, 18.5, 100)
     self.cash:setScaledTopBottom(false, true, -18, -4)
     self.cash:setText(Engine.Localize("$500"))
     self.cash:setPriority(5)
 
-    Wzu.ClipSequence(self, self.cash, "HasPerks", {
+    Util.ClipSequence(self, self.cash, "HasPerks", {
         {
             duration = 0,
             setScaledTopBottom = {false, true, -16, -2}
         }
     })
-    Wzu.ClipSequence(self, self.cash, "DefaultState", {
+    Util.ClipSequence(self, self.cash, "DefaultState", {
         {
             duration = 0,
             setScaledTopBottom = {false, true, -18, -4}
@@ -52,9 +52,9 @@ function Warzone.SquadPlayer.new(menu, controller)
     })
 
     self.cash.lastPlayerScore = 0
-    Wzu.LinkToWidget(self.cash, self, "playerScore", function(modelValue)
-        Wzu.Tween.interpolate(self.cash, 1000, Wzu.TweenGraphs.inOutSine, function(progress)
-            local value = Wzu.GetTweenedProgress(progress, self.cash.lastPlayerScore, modelValue)
+    Util.LinkToWidget(self.cash, self, "playerScore", function(modelValue)
+        Util.Tween.interpolate(self.cash, 1000, Util.TweenGraphs.inOutSine, function(progress)
+            local value = Util.GetTweenedProgress(progress, self.cash.lastPlayerScore, modelValue)
             self.cash:setText(Engine.Localize("$" .. math.floor(value)))
         end)
 
@@ -69,15 +69,15 @@ function Warzone.SquadPlayer.new(menu, controller)
     self.healthBar:setScaledLeftRight(true, false, 18, 151)
     self.healthBar:setScaledTopBottom(false, true, -23, -18)
 
-    Wzu.LinkWidgetToElementModel(self.healthBar, self, controller)
+    Util.LinkWidgetToElementModel(self.healthBar, self, controller)
 
-    Wzu.ClipSequence(self, self.healthBar, "HasPerks", {
+    Util.ClipSequence(self, self.healthBar, "HasPerks", {
         {
             duration = 0,
             setScaledTopBottom = {false, true, -21, -16}
         }
     })
-    Wzu.ClipSequence(self, self.healthBar, "DefaultState", {
+    Util.ClipSequence(self, self.healthBar, "DefaultState", {
         {
             duration = 0,
             setScaledTopBottom = {false, true, -23, -18}
@@ -103,15 +103,15 @@ function Warzone.SquadPlayer.new(menu, controller)
 
     self:addElement(self.squadLeader)
 
-    self.username = Wzu.TextElement(Wzu.Fonts.BattlenetBold, Wzu.Swatches.HUDMain, true)
+    self.username = Util.TextElement(Util.Fonts.BattlenetBold, Util.Swatches.HUDMain, true)
     self.username:setScaledLeftRight(true, false, 19, 100)
     self.username:setScaledTopBottom(true, false, 1, 13)
 
-    Wzu.LinkToWidget(self.username, self, "playerName", function(modelValue)
+    Util.LinkToWidget(self.username, self, "playerName", function(modelValue)
         self.username:setText(Engine.Localize(modelValue))
     end)
 
-    Wzu.AddShadowedElement(self, self.username)
+    Util.AddShadowedElement(self, self.username)
 
     self.perksList = Warzone.PerksList.new(menu, controller)
     self.perksList:setScaledLeftRight(true, false, 19, 300)
@@ -124,13 +124,13 @@ function Warzone.SquadPlayer.new(menu, controller)
     self.plusPoints:setScaledTopBottom(false, true, -18, -4)
     self.plusPoints:setPriority(4)
 
-    Wzu.ClipSequence(self, self.plusPoints, "HasPerks", {
+    Util.ClipSequence(self, self.plusPoints, "HasPerks", {
         {
             duration = 0,
             setScaledTopBottom = {false, true, -16, -2}
         }
     })
-    Wzu.ClipSequence(self, self.plusPoints, "DefaultState", {
+    Util.ClipSequence(self, self.plusPoints, "DefaultState", {
         {
             duration = 0,
             setScaledTopBottom = {false, true, -18, -4}
@@ -139,21 +139,21 @@ function Warzone.SquadPlayer.new(menu, controller)
     
     self:addElement(self.plusPoints)
 
-    Wzu.LinkToWidget(self, self, "clientNum", function(modelValue)
-        local color = Wzu.GetClientColor(modelValue)
-        Wzu.SetRGBFromTable(self.username, color)
-        Wzu.SetRGBFromTable(self.squadLeader, color)
+    Util.LinkToWidget(self, self, "clientNum", function(modelValue)
+        local color = Util.GetClientColor(modelValue)
+        Util.SetRGBFromTable(self.username, color)
+        Util.SetRGBFromTable(self.squadLeader, color)
     end)
     
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
             end
         },
         HasPerks = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "HasPerks")
+                Util.AnimateSequence(self, "HasPerks")
             end
         }
     }
@@ -167,7 +167,7 @@ function Warzone.SquadPlayer.new(menu, controller)
         }
     })
     
-    Wzu.SubState(controller, menu, self, "hudItems.perkListUpdated")
+    Util.SubState(controller, menu, self, "hudItems.perkListUpdated")
 
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(Sender)
         Sender.healthBar:close()

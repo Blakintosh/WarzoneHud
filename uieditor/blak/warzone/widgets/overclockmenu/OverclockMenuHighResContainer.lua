@@ -30,12 +30,12 @@ function Warzone.OverclockMenuHighResContainer.new(menu, controller)
 
     self:addElement(self.title)
 
-    self.score = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.score = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.score:setScaledLeftRight(false, true, -150, -60)
     self.score:setScaledTopBottom(true, false, 90, 124)
     self.score:setText("$1200")
 
-    Wzu.Subscribe(self.score, controller, "PlayerList.0.playerScore", function(modelValue)
+    Util.Subscribe(self.score, controller, "PlayerList.0.playerScore", function(modelValue)
         self.score:setText("$" .. Engine.Localize(modelValue))
     end)
 

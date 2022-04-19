@@ -17,85 +17,85 @@ function Warzone.PerkPickupCost.new(menu, controller)
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
 
-    self.costs = Wzu.TightTextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain)
+    self.costs = Util.TightTextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain)
     self.costs:setScaledLeftRight(true, false, 0, 300)
     self.costs:setScaledTopBottom(true, true, 0, 0)
     self.costs:setText("Costs ")
 
-    self.costValue = Wzu.TightTextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDWarningDanger)
+    self.costValue = Util.TightTextElement(Util.Fonts.MainBold, Util.Swatches.HUDWarningDanger)
     self.costValue:setScaledLeftRight(true, false, 0, 300)
     self.costValue:setScaledTopBottom(true, true, 0, 0)
     self.costValue:setText("0")
 
-    Wzu.ClipSequence(self, self.costValue, "Default", {
+    Util.ClipSequence(self, self.costValue, "Default", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDCaution)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDCaution)
         }
     })
-    Wzu.ClipSequence(self, self.costValue, "CanAfford_Limit", {
+    Util.ClipSequence(self, self.costValue, "CanAfford_Limit", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDCaution)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDCaution)
         }
     })
-    Wzu.ClipSequence(self, self.costValue, "CantAfford_BelowLimit", {
+    Util.ClipSequence(self, self.costValue, "CantAfford_BelowLimit", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDWarning)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDWarning)
         }
     })
-    Wzu.ClipSequence(self, self.costValue, "CantAfford_Limit", {
+    Util.ClipSequence(self, self.costValue, "CantAfford_Limit", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDWarning)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDWarning)
         }
     })
 
-    Wzu.SubscribeToText(self.costValue, controller, "prospectivePerk.cost")
+    Util.SubscribeToText(self.costValue, controller, "prospectivePerk.cost")
 
-    self.perkLeft = Wzu.TightTextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain)
+    self.perkLeft = Util.TightTextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain)
     self.perkLeft:setScaledLeftRight(true, false, 0, 300)
     self.perkLeft:setScaledTopBottom(true, true, 1, -1)
     self.perkLeft:setText(" [")
 
-    self.perkCount = Wzu.TightTextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain)
+    self.perkCount = Util.TightTextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain)
     self.perkCount:setScaledLeftRight(true, false, 0, 300)
     self.perkCount:setScaledTopBottom(true, true, 1, -1)
     self.perkCount:setText("0/4")
 
-    Wzu.SubscribeToText(self.perkCount, controller, "prospectivePerk.perkCountString")
+    Util.SubscribeToText(self.perkCount, controller, "prospectivePerk.perkCountString")
 
-    Wzu.ClipSequence(self, self.perkCount, "Default", {
+    Util.ClipSequence(self, self.perkCount, "Default", {
         {
             duration = 0,
-            setTTF = Wzu.Fonts.MainRegular,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+            setTTF = Util.Fonts.MainRegular,
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain)
         }
     })
-    Wzu.ClipSequence(self, self.perkCount, "CanAfford_Limit", {
+    Util.ClipSequence(self, self.perkCount, "CanAfford_Limit", {
         {
             duration = 0,
-            setTTF = Wzu.Fonts.MainBold,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDWarning)
+            setTTF = Util.Fonts.MainBold,
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDWarning)
         }
     })
-    Wzu.ClipSequence(self, self.perkCount, "CantAfford_BelowLimit", {
+    Util.ClipSequence(self, self.perkCount, "CantAfford_BelowLimit", {
         {
             duration = 0,
-            setTTF = Wzu.Fonts.MainRegular,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+            setTTF = Util.Fonts.MainRegular,
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain)
         }
     })
-    Wzu.ClipSequence(self, self.perkCount, "CantAfford_Limit", {
+    Util.ClipSequence(self, self.perkCount, "CantAfford_Limit", {
         {
             duration = 0,
-            setTTF = Wzu.Fonts.MainBold,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDWarning)
+            setTTF = Util.Fonts.MainBold,
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDWarning)
         }
     })
     
-    self.perkRight = Wzu.TightTextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain)
+    self.perkRight = Util.TightTextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain)
     self.perkRight:setScaledLeftRight(true, false, 0, 300)
     self.perkRight:setScaledTopBottom(true, true, 1, -1)
     self.perkRight:setText(" Perks]")
@@ -103,22 +103,22 @@ function Warzone.PerkPickupCost.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Default")
+                Util.AnimateSequence(self, "Default")
             end
         },
         CanAfford_Limit = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "CanAfford_Limit")
+                Util.AnimateSequence(self, "CanAfford_Limit")
             end
         },
         CantAfford_BelowLimit = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "CantAfford_BelowLimit")
+                Util.AnimateSequence(self, "CantAfford_BelowLimit")
             end
         },
         CantAfford_Limit = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "CantAfford_Limit")
+                Util.AnimateSequence(self, "CantAfford_Limit")
             end
         }
     }
@@ -157,8 +157,8 @@ function Warzone.PerkPickupCost.new(menu, controller)
         }
     })
 
-    Wzu.SubState(controller, menu, self, "prospectivePerk.atPerkLimit")
-    Wzu.SubState(controller, menu, self, "PlayerList.0.playerScore")
+    Util.SubState(controller, menu, self, "prospectivePerk.atPerkLimit")
+    Util.SubState(controller, menu, self, "PlayerList.0.playerScore")
 
     -- Must be added in reverse due to the way Right-align Horiz. lists work
     self:addElement(self.perkRight)

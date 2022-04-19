@@ -16,50 +16,50 @@ function Warzone.ReturnAO.new(menu, controller)
     self.icon:setScaledLeftRight(false, false, -30, 30)
     self.icon:setScaledTopBottom(true, false, 0, 60)
     self.icon:setImage(RegisterImage("hud_icon_warning"))
-    Wzu.SetRGBFromTable(self.icon, Wzu.Swatches.EnemyTeam)
+    Util.SetRGBFromTable(self.icon, Util.Swatches.EnemyTeam)
 
     self:addElement(self.icon)
 
-    self.label = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.EnemyTeam, true)
+    self.label = Util.TextElement(Util.Fonts.MainBold, Util.Swatches.EnemyTeam, true)
     self.label:setScaledLeftRight(false, false, -200, 200)
     self.label:setScaledTopBottom(true, false, 56, 90)
     self.label:setText("DANGER AHEAD")
 
-    Wzu.ClipSequence(self, self.label, "DefaultState", {
+    Util.ClipSequence(self, self.label, "DefaultState", {
         {
             duration = 0,
             setText = "DANGER AHEAD"
         }
     })
-    Wzu.ClipSequence(self, self.label, "Urgent", {
+    Util.ClipSequence(self, self.label, "Urgent", {
         {
             duration = 0,
             setText = "DANGER IMMINENT"
         }
     })
 
-    Wzu.AddShadowedElement(self, self.label)
+    Util.AddShadowedElement(self, self.label)
 
-    self.timeLeft = Wzu.TextElement(Wzu.Fonts.KillstreakRegular, Wzu.Swatches.HUDMain, true)
+    self.timeLeft = Util.TextElement(Util.Fonts.KillstreakRegular, Util.Swatches.HUDMain, true)
     self.timeLeft:setScaledLeftRight(false, false, -200, 200)
     self.timeLeft:setScaledTopBottom(true, false, 100, 123)
     self.timeLeft:setText("63.5")
 
-    Wzu.Subscribe(self.timeLeft, controller, "karelia.outOfBoundsTime", function(modelValue)
+    Util.Subscribe(self.timeLeft, controller, "karelia.outOfBoundsTime", function(modelValue)
         self.timeLeft:setText(modelValue .. "." .. tostring(math.random(0, 9)))
     end)
 
-    Wzu.AddShadowedElement(self, self.timeLeft)
+    Util.AddShadowedElement(self, self.timeLeft)
 
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
             end
         },
         Urgent = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Urgent")
+                Util.AnimateSequence(self, "Urgent")
             end
         }
     }
@@ -72,7 +72,7 @@ function Warzone.ReturnAO.new(menu, controller)
             end
         }
     })
-    Wzu.SubState(controller, menu, self, "karelia.outOfBoundsTime")
+    Util.SubState(controller, menu, self, "karelia.outOfBoundsTime")
 
     if PostLoadFunc then
         PostLoadFunc(menu, controller)

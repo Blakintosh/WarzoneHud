@@ -46,13 +46,13 @@ function Warzone.AltWeaponPrompt.new(menu, controller)
     self.button:setScaledTopBottom(false, false, -8, 8)
     self.button:setButtonPrompt("actionslot 3", "actionslot 3")
 
-    Wzu.ClipSequence(self, self.button, "AltWeapon", {
+    Util.ClipSequence(self, self.button, "AltWeapon", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.button, "DefaultState", {
+    Util.ClipSequence(self, self.button, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0
@@ -70,13 +70,13 @@ function Warzone.AltWeaponPrompt.new(menu, controller)
     self.modeList:setHorizontalCount(2)
     self.modeList:setSpacing(16)
 
-    Wzu.ClipSequence(self, self.modeList, "AltWeapon", {
+    Util.ClipSequence(self, self.modeList, "AltWeapon", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.modeList, "DefaultState", {
+    Util.ClipSequence(self, self.modeList, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0
@@ -88,12 +88,12 @@ function Warzone.AltWeaponPrompt.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
             end
         },
         AltWeapon = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "AltWeapon")
+                Util.AnimateSequence(self, "AltWeapon")
             end
         }
     }
@@ -105,7 +105,7 @@ function Warzone.AltWeaponPrompt.new(menu, controller)
         end
     }})
 
-    Wzu.SubState(controller, menu, self, "currentWeapon.altWeaponState")
+    Util.SubState(controller, menu, self, "currentWeapon.altWeaponState")
 
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)

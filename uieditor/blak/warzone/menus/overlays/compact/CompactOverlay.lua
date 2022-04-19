@@ -30,14 +30,14 @@ LUI.createMenu.CompactOverlay = function (controller)
 		menu.contents:setModel(model, controller)
 	end)
 
-    Wzu.ClipSequence(menu, menu.contents, "Default", {
+    Util.ClipSequence(menu, menu.contents, "Default", {
         {
             duration = 0,
             setAlpha = 0
         },
         {
             duration = 300,
-            interpolation = Wzu.TweenGraphs.outBounce,
+            interpolation = Util.TweenGraphs.outBounce,
             setAlpha = 1
         }
     })
@@ -83,7 +83,7 @@ LUI.createMenu.CompactOverlay = function (controller)
     menu.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(menu, "Default")
+                Util.AnimateSequence(menu, "Default")
             end
         }
     }
@@ -91,7 +91,7 @@ LUI.createMenu.CompactOverlay = function (controller)
 	menu:processEvent({name = "menu_loaded", controller = controller})
 	menu:processEvent({name = "update_state", menu = menu})
 
-    Wzu.SetCursorType(Wzu.CursorTypes.Normal)
+    Util.SetCursorType(Util.CursorTypes.Normal)
 	if not menu:restoreState() then
 		menu.contents:processEvent({name = "gain_focus", controller = controller})
 	end

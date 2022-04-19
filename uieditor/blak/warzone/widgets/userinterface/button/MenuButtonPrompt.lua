@@ -12,7 +12,7 @@ local ResizeForKeyPrompt = function (self)
             storeSizeX = sizeX
 			self.buttonPromptImage:setLeftRight(leftAnchor, rightAnchor, basePosition, basePosition + sizeX)
 		else
-            Wzu.ScaleWidgetToLabel.Centered(self.promptButton, self.promptButton.label, 8)
+            Util.ScaleWidgetToLabel.Centered(self.promptButton, self.promptButton.label, 8)
 			local leftAnchor, rightAnchor, dimStart, dimEnd = self.promptButton:getLocalLeftRight()
 			local sizeX, sizeY = self.promptButton:getLocalSize()
             storeSizeX = 0
@@ -81,7 +81,7 @@ Warzone.MenuButtonPrompt.new = function (menu, controller)
 	self.buttonPromptImage:setShaderVector(0, 1, 0, 0, 0)
 	self:addElement(self.buttonPromptImage)
 
-    Wzu.ClipSequence(self, self.buttonPromptImage, "DefaultState", {
+    Util.ClipSequence(self, self.buttonPromptImage, "DefaultState", {
         {
             duration = 0,
             setRGB = {1, 1, 1},
@@ -90,7 +90,7 @@ Warzone.MenuButtonPrompt.new = function (menu, controller)
             setShaderVector = {0, 1, 0, 0, 0}
         }
     })
-    Wzu.ClipSequence(self, self.buttonPromptImage, "Disabled", {
+    Util.ClipSequence(self, self.buttonPromptImage, "Disabled", {
         {
             duration = 0,
             setRGB = {0.5, 0.5, 0.5},
@@ -99,7 +99,7 @@ Warzone.MenuButtonPrompt.new = function (menu, controller)
             setShaderVector = {0, 0, 0, 0, 0}
         }
     })
-    Wzu.ClipSequence(self, self.buttonPromptImage, "EnabledDefault", {
+    Util.ClipSequence(self, self.buttonPromptImage, "EnabledDefault", {
         {
             duration = 0,
             setRGB = {1, 1, 1},
@@ -108,7 +108,7 @@ Warzone.MenuButtonPrompt.new = function (menu, controller)
             setShaderVector = {0, 1, 0, 0, 0}
         }
     })
-    Wzu.ClipSequence(self, self.buttonPromptImage, "EnabledHide", {
+    Util.ClipSequence(self, self.buttonPromptImage, "EnabledHide", {
         {
             duration = 0,
             setLeftRight = {true, false, 0, 32},
@@ -116,7 +116,7 @@ Warzone.MenuButtonPrompt.new = function (menu, controller)
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.buttonPromptImage, "EnabledOver", {
+    Util.ClipSequence(self, self.buttonPromptImage, "EnabledOver", {
         {
             duration = 0,
             setRGB = {1, 1, 1},
@@ -125,7 +125,7 @@ Warzone.MenuButtonPrompt.new = function (menu, controller)
             setShaderVector = {0, 1, 0, 0, 0}
         }
     })
-    Wzu.ClipSequence(self, self.buttonPromptImage, "DisabledPC", {
+    Util.ClipSequence(self, self.buttonPromptImage, "DisabledPC", {
         {
             duration = 0,
             setRGB = {0.5, 0.5, 0.5},
@@ -134,7 +134,7 @@ Warzone.MenuButtonPrompt.new = function (menu, controller)
             setShaderVector = {0, 0, 0, 0, 0}
         }
     })
-    Wzu.ClipSequence(self, self.buttonPromptImage, "EnabledPCDefault", {
+    Util.ClipSequence(self, self.buttonPromptImage, "EnabledPCDefault", {
         {
             duration = 0,
             setRGB = {1, 1, 1},
@@ -143,7 +143,7 @@ Warzone.MenuButtonPrompt.new = function (menu, controller)
             setShaderVector = {0, 1, 0, 0, 0}
         }
     })
-    Wzu.ClipSequence(self, self.buttonPromptImage, "EnabledPCHide", {
+    Util.ClipSequence(self, self.buttonPromptImage, "EnabledPCHide", {
         {
             duration = 0,
             setLeftRight = {true, false, 0, 32},
@@ -151,7 +151,7 @@ Warzone.MenuButtonPrompt.new = function (menu, controller)
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.buttonPromptImage, "EnabledPCOver", {
+    Util.ClipSequence(self, self.buttonPromptImage, "EnabledPCOver", {
         {
             duration = 0,
             setRGB = {1, 1, 1},
@@ -161,7 +161,7 @@ Warzone.MenuButtonPrompt.new = function (menu, controller)
         }
     })
 	
-	self.label = Wzu.TightTextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain)
+	self.label = Util.TightTextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain)
 	self.label:setScaledLeftRight(true, false, 42, 88)
 	self.label:setScaledTopBottom(false, false, -7, 7)
 	self.label:setText(Engine.Localize("Select"))
@@ -169,66 +169,66 @@ Warzone.MenuButtonPrompt.new = function (menu, controller)
 		ScaleWidgetToLabel(self, sender, -40)
 	end)
 
-    Wzu.ClipSequence(self, self.label, "DefaultState", {
+    Util.ClipSequence(self, self.label, "DefaultState", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain),
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain),
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.label, "Disabled", {
+    Util.ClipSequence(self, self.label, "Disabled", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Colors.Grey191),
+            setRGB = Util.ConvertColorToTable(Util.Colors.Grey191),
             setAlpha = 0.5
         }
     })
-    Wzu.ClipSequence(self, self.label, "EnabledDefault", {
+    Util.ClipSequence(self, self.label, "EnabledDefault", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain),
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain),
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.label, "EnabledHide", {
+    Util.ClipSequence(self, self.label, "EnabledHide", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain),
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain),
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.label, "EnabledOver", {
+    Util.ClipSequence(self, self.label, "EnabledOver", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain),
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain),
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.label, "DisabledPC", {
+    Util.ClipSequence(self, self.label, "DisabledPC", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Colors.Grey191),
+            setRGB = Util.ConvertColorToTable(Util.Colors.Grey191),
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.label, "EnabledPCDefault", {
+    Util.ClipSequence(self, self.label, "EnabledPCDefault", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain),
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain),
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.label, "EnabledPCHide", {
+    Util.ClipSequence(self, self.label, "EnabledPCHide", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain),
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain),
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.label, "EnabledPCOver", {
+    Util.ClipSequence(self, self.label, "EnabledPCOver", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain),
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain),
             setAlpha = 0
         }
     })
@@ -240,36 +240,36 @@ Warzone.MenuButtonPrompt.new = function (menu, controller)
 
     local noA = { duration = 0, setAlpha = 0 }
     local fullA = { duration = 0, setAlpha = 1 }
-    Wzu.ClipSequence(self, self.promptButton, "DefaultState", {noA})
-    Wzu.ClipSequence(self, self.promptButton, "Disabled", {noA})
-    Wzu.ClipSequence(self, self.promptButton, "EnabledDefault", {noA})
-    Wzu.ClipSequence(self, self.promptButton, "EnabledHide", {noA})
-    Wzu.ClipSequence(self, self.promptButton, "EnabledOver", {noA})
-    Wzu.ClipSequence(self, self.promptButton, "DisabledPC", {fullA})
-    Wzu.ClipSequence(self, self.promptButton, "EnabledPCDefault", {fullA})
-    Wzu.ClipSequence(self, self.promptButton, "EnabledPCHide", {fullA})
-    Wzu.ClipSequence(self, self.promptButton, "EnabledPCOver", {fullA})
+    Util.ClipSequence(self, self.promptButton, "DefaultState", {noA})
+    Util.ClipSequence(self, self.promptButton, "Disabled", {noA})
+    Util.ClipSequence(self, self.promptButton, "EnabledDefault", {noA})
+    Util.ClipSequence(self, self.promptButton, "EnabledHide", {noA})
+    Util.ClipSequence(self, self.promptButton, "EnabledOver", {noA})
+    Util.ClipSequence(self, self.promptButton, "DisabledPC", {fullA})
+    Util.ClipSequence(self, self.promptButton, "EnabledPCDefault", {fullA})
+    Util.ClipSequence(self, self.promptButton, "EnabledPCHide", {fullA})
+    Util.ClipSequence(self, self.promptButton, "EnabledPCOver", {fullA})
 
     self:addElement(self.promptButton)
 
 	self.clipsPerState = {DefaultState = {DefaultClip = function ()
-		Wzu.AnimateSequence(self, "DefaultState")
+		Util.AnimateSequence(self, "DefaultState")
 	end}, Disabled = {DefaultClip = function ()
-		Wzu.AnimateSequence(self, "Disabled")
+		Util.AnimateSequence(self, "Disabled")
 	end}, Enabled = {DefaultClip = function ()
-		Wzu.AnimateSequence(self, "EnabledDefault")
+		Util.AnimateSequence(self, "EnabledDefault")
 	end, Hide = function ()
-		Wzu.AnimateSequence(self, "EnabledHide")
+		Util.AnimateSequence(self, "EnabledHide")
 	end, Over = function ()
-		Wzu.AnimateSequence(self, "EnabledOver")
+		Util.AnimateSequence(self, "EnabledOver")
 	end}, DisabledPC = {DefaultClip = function ()
-		Wzu.AnimateSequence(self, "DisabledPC")
+		Util.AnimateSequence(self, "DisabledPC")
 	end}, EnabledPC = {DefaultClip = function ()
-		Wzu.AnimateSequence(self, "EnabledPCDefault")
+		Util.AnimateSequence(self, "EnabledPCDefault")
 	end, Hide = function ()
-		Wzu.AnimateSequence(self, "EnabledPCHide")
+		Util.AnimateSequence(self, "EnabledPCHide")
 	end, Over = function ()
-		Wzu.AnimateSequence(self, "EnabledPCOver")
+		Util.AnimateSequence(self, "EnabledPCOver")
 	end}, InitialState = {DefaultClip = function ()
 		self:setupElementClipCounter(0)
 	end}}

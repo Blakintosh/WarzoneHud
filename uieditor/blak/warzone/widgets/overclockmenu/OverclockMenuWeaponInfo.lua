@@ -14,18 +14,18 @@ function Warzone.OverclockMenuWeaponInfo.new(menu, controller)
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
 
-    self.title = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, false)
+    self.title = Util.TextElement(Util.Fonts.MainBold, Util.Swatches.HUDMain, false)
     self.title:setScaledLeftRight(true, false, 0, 200)
     self.title:setScaledTopBottom(true, false, 0, 18)
     self.title:setText("YOUR WEAPON")
 
     self:addElement(self.title)
 
-    self.weaponName = Wzu.TextElement(Wzu.Fonts.MainLight, Wzu.Swatches.HUDMain, false)
+    self.weaponName = Util.TextElement(Util.Fonts.MainLight, Util.Swatches.HUDMain, false)
     self.weaponName:setScaledLeftRight(true, false, 0, 200)
     self.weaponName:setScaledTopBottom(true, false, 22, 56)
 
-    Wzu.SubscribeToText(self.weaponName, controller, "currentWeapon.rootWeaponName")
+    Util.SubscribeToText(self.weaponName, controller, "currentWeapon.rootWeaponName")
 
     self:addElement(self.weaponName)
 

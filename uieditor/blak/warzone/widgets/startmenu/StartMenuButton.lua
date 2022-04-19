@@ -24,41 +24,41 @@ function Warzone.StartMenuButton.new(menu, controller)
 
     self:addElement(self.background)
 
-    self.label = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.ButtonTextDefault, false)
+    self.label = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.ButtonTextDefault, false)
     self.label:setScaledLeftRight(true, false, 14, 100)
     self.label:setScaledTopBottom(true, false, 8, 23)
 
-    Wzu.LinkToWidget(self.label, self, "displayText", function(modelValue)
+    Util.LinkToWidget(self.label, self, "displayText", function(modelValue)
         self.label:setText(Engine.Localize(modelValue))
     end)
 
-    Wzu.ClipSequence(self, self.label, "DefaultUp", {
+    Util.ClipSequence(self, self.label, "DefaultUp", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.ButtonTextDefault)
         }
     })
-    Wzu.ClipSequence(self, self.label, "DefaultOver", {
+    Util.ClipSequence(self, self.label, "DefaultOver", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDefault)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.ButtonTextDefault)
         },
         {
             duration = 100,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextFocus)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.ButtonTextFocus)
         }
     })
-    Wzu.ClipSequence(self, self.label, "DisabledUp", {
+    Util.ClipSequence(self, self.label, "DisabledUp", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDisabled),
+            setRGB = Util.ConvertColorToTable(Util.Swatches.ButtonTextDisabled),
             setAlpha = 0.6
         }
     })
-    Wzu.ClipSequence(self, self.label, "DisabledOver", {
+    Util.ClipSequence(self, self.label, "DisabledOver", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ButtonTextDisabled),
+            setRGB = Util.ConvertColorToTable(Util.Swatches.ButtonTextDisabled),
             setAlpha = 0.6
         }
     })
@@ -83,10 +83,10 @@ function Warzone.StartMenuButton.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultUp")
+                Util.AnimateSequence(self, "DefaultUp")
             end,
             Focus = function()
-                Wzu.AnimateSequence(self, "DefaultOver")
+                Util.AnimateSequence(self, "DefaultOver")
             end
         }
     }
@@ -103,13 +103,13 @@ function Warzone.StartMenuButton.new(menu, controller)
 
     self:registerEventHandler("gain_focus", function(self, event)
         self.background:processEvent(event)
-        Wzu.SetCursorType(Wzu.CursorTypes.Active, controller)
+        Util.SetCursorType(Util.CursorTypes.Active, controller)
         return LUI.UIElement.gainFocus(self, event)
     end)
 
     self:registerEventHandler("lose_focus", function(self, event)
         self.background:processEvent(event)
-        Wzu.SetCursorType(Wzu.CursorTypes.Normal, controller)
+        Util.SetCursorType(Util.CursorTypes.Normal, controller)
         return LUI.UIElement.loseFocus(self, event)
     end)
 

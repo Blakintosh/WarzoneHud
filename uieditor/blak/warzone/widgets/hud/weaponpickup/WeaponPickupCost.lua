@@ -17,73 +17,73 @@ function Warzone.WeaponPickupCost.new(menu, controller)
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
 
-    self.costs = Wzu.TightTextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain)
+    self.costs = Util.TightTextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain)
     self.costs:setScaledLeftRight(true, false, 0, 300)
     self.costs:setScaledTopBottom(true, true, 0, 0)
     self.costs:setText("Costs ")
 
-    Wzu.ClipSequence(self, self.costs, "Default", {
+    Util.ClipSequence(self, self.costs, "Default", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.costs, "CantAfford", {
+    Util.ClipSequence(self, self.costs, "CantAfford", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.costs, "Hidden", {
+    Util.ClipSequence(self, self.costs, "Hidden", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
 
-    self.costValue = Wzu.TightTextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDWarningDanger)
+    self.costValue = Util.TightTextElement(Util.Fonts.MainBold, Util.Swatches.HUDWarningDanger)
     self.costValue:setScaledLeftRight(true, false, 0, 300)
     self.costValue:setScaledTopBottom(true, true, 0, 0)
     self.costValue:setText("0")
 
-    Wzu.ClipSequence(self, self.costValue, "Default", {
+    Util.ClipSequence(self, self.costValue, "Default", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDCaution),
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDCaution),
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.costValue, "CantAfford", {
+    Util.ClipSequence(self, self.costValue, "CantAfford", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDWarning),
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDWarning),
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.costValue, "Hidden", {
+    Util.ClipSequence(self, self.costValue, "Hidden", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDWarning),
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDWarning),
             setAlpha = 0
         }
     })
 
-    Wzu.SubscribeToText(self.costValue, controller, "prospectiveWeapon.attributes.cost")
+    Util.SubscribeToText(self.costValue, controller, "prospectiveWeapon.attributes.cost")
 
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Default")
+                Util.AnimateSequence(self, "Default")
             end
         },
         CantAfford = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "CantAfford")
+                Util.AnimateSequence(self, "CantAfford")
             end
         },
         Hidden = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Hidden")
+                Util.AnimateSequence(self, "Hidden")
             end
         }
     }
@@ -104,8 +104,8 @@ function Warzone.WeaponPickupCost.new(menu, controller)
         }
     })
 
-    Wzu.SubState(controller, menu, self, "prospectiveWeapon.attributes.cost")
-    Wzu.SubState(controller, menu, self, "PlayerList.0.playerScore")
+    Util.SubState(controller, menu, self, "prospectiveWeapon.attributes.cost")
+    Util.SubState(controller, menu, self, "PlayerList.0.playerScore")
 
     -- Must be added in reverse due to the way Right-align Horiz. lists work
     self:addElement(self.costValue)

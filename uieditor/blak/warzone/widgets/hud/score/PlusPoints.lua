@@ -15,11 +15,11 @@ function Warzone.PlusPoints.new(menu, controller)
 	self.id = "PlusPoints"
 	self.soundSet = "HUD"
 
-    self.label = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.Cash, false)
+    self.label = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.Cash, false)
     self.label:setScaledLeftRight(true, false, 0, 18)
     self.label:setScaledTopBottom(true, true, 0, 0)
 
-    Wzu.ClipSequence(self, self.label, "PlusPoints", {
+    Util.ClipSequence(self, self.label, "PlusPoints", {
         {
             duration = 0,
             setAlpha = 0.4,
@@ -37,7 +37,7 @@ function Warzone.PlusPoints.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "PlusPoints")
+                Util.AnimateSequence(self, "PlusPoints")
             end
         }
     }

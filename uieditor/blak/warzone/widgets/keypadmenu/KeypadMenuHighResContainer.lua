@@ -105,12 +105,12 @@ function Warzone.KeypadMenuHighResContainer.new(menu, controller)
     -- ===============================================================
 
     -- Title "Enter access code"
-    self.title = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, true)
+    self.title = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, true)
     self.title:setScaledLeftRight(false, false, -150, 150)
     self.title:setScaledTopBottom(true, false, 140, 164)
     self.title:setText(Engine.Localize("Enter Access Code"))
 
-    Wzu.AddShadowedElement(self, self.title)
+    Util.AddShadowedElement(self, self.title)
 
     self.codeHint = Warzone.KeypadMenuCodeFragments.new(menu, controller)
     self.codeHint:setScaledLeftRight(true, false, 20, 200)

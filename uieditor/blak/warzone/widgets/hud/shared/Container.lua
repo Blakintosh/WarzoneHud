@@ -16,7 +16,7 @@ function Warzone.Container.new(menu, controller, contentWidget)
     self.contents:setScaledLeftRight(true, true, 0, 0)
     self.contents:setScaledTopBottom(true, true, 0, 0)
 
-    Wzu.ClipSequence(self, self.contents, "DefaultState", {
+    Util.ClipSequence(self, self.contents, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0
@@ -24,10 +24,10 @@ function Warzone.Container.new(menu, controller, contentWidget)
         {
             duration = 300,
             setAlpha = 1,
-            interpolation = Wzu.TweenGraphs.inCubic
+            interpolation = Util.TweenGraphs.inCubic
         }
     })
-    Wzu.ClipSequence(self, self.contents, "Hidden", {
+    Util.ClipSequence(self, self.contents, "Hidden", {
         {
             duration = 0,
             setAlpha = 1
@@ -35,7 +35,7 @@ function Warzone.Container.new(menu, controller, contentWidget)
         {
             duration = 300,
             setAlpha = 0,
-            interpolation = Wzu.TweenGraphs.inCubic
+            interpolation = Util.TweenGraphs.inCubic
         }
     })
 
@@ -44,12 +44,12 @@ function Warzone.Container.new(menu, controller, contentWidget)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
             end
         },
         Hidden = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Hidden")
+                Util.AnimateSequence(self, "Hidden")
             end
         }
     }

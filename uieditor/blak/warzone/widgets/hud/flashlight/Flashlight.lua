@@ -54,14 +54,14 @@ function Warzone.Flashlight.new(menu, controller)
     self.icon:setScaledLeftRight(true, false, 0, 32)
     self.icon:setScaledTopBottom(false, false, -16, 16)
 
-    Wzu.ClipSequence(self, self.icon, "DefaultClip", {
+    Util.ClipSequence(self, self.icon, "DefaultClip", {
         {
             duration = 0,
             setScaledLeftRight = {true, false, 76, 108},
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.icon, "Update", {
+    Util.ClipSequence(self, self.icon, "Update", {
         {
             duration = 0,
             setScaledLeftRight = {true, false, 0, 32},
@@ -74,7 +74,7 @@ function Warzone.Flashlight.new(menu, controller)
         },
         {
             duration = 300,
-            interpolation = Wzu.TweenGraphs.inQuad,
+            interpolation = Util.TweenGraphs.inQuad,
             setScaledLeftRight = {true, false, 0, 32},
             setAlpha = 0
         },
@@ -85,7 +85,7 @@ function Warzone.Flashlight.new(menu, controller)
         },
         {
             duration = 300,
-            interpolation = Wzu.TweenGraphs.inQuad,
+            interpolation = Util.TweenGraphs.inQuad,
             setScaledLeftRight = {true, false, 76, 108},
             setAlpha = 1
         }
@@ -98,14 +98,14 @@ function Warzone.Flashlight.new(menu, controller)
     self.button:setScaledTopBottom(false, false, -8, 8)
     self.button:setButtonPrompt("actionslot 1", "actionslot 1")
 
-    Wzu.ClipSequence(self, self.button, "DefaultClip", {
+    Util.ClipSequence(self, self.button, "DefaultClip", {
         {
             duration = 0,
             setScaledLeftRight = {true, false, 120, 136},
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.button, "Update", {
+    Util.ClipSequence(self, self.button, "Update", {
         {
             duration = 0,
             setScaledLeftRight = {true, false, 44, 60},
@@ -118,7 +118,7 @@ function Warzone.Flashlight.new(menu, controller)
         },
         {
             duration = 300,
-            interpolation = Wzu.TweenGraphs.inQuad,
+            interpolation = Util.TweenGraphs.inQuad,
             setScaledLeftRight = {true, false, 44, 60},
             setAlpha = 0
         },
@@ -129,7 +129,7 @@ function Warzone.Flashlight.new(menu, controller)
         },
         {
             duration = 300,
-            interpolation = Wzu.TweenGraphs.inQuad,
+            interpolation = Util.TweenGraphs.inQuad,
             setScaledLeftRight = {true, false, 120, 136},
             setAlpha = 1
         }
@@ -146,13 +146,13 @@ function Warzone.Flashlight.new(menu, controller)
     self.modeList:setHorizontalCount(3)
     self.modeList:setSpacing(16)
 
-    Wzu.ClipSequence(self, self.modeList, "DefaultClip", {
+    Util.ClipSequence(self, self.modeList, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.modeList, "Update", {
+    Util.ClipSequence(self, self.modeList, "Update", {
         {
             duration = 0,
             setAlpha = 1
@@ -163,7 +163,7 @@ function Warzone.Flashlight.new(menu, controller)
         },
         {
             duration = 300,
-            interpolation = Wzu.TweenGraphs.inQuad,
+            interpolation = Util.TweenGraphs.inQuad,
             setAlpha = 0
         }
     })
@@ -173,15 +173,15 @@ function Warzone.Flashlight.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultClip")
+                Util.AnimateSequence(self, "DefaultClip")
             end,
             Update = function()
-                Wzu.AnimateSequence(self, "Update")
+                Util.AnimateSequence(self, "Update")
             end
         }
     }
 
-    Wzu.Subscribe(self, controller, "hudItems.flashlightMode", function(modelValue)
+    Util.Subscribe(self, controller, "hudItems.flashlightMode", function(modelValue)
         self:playClip("Update")
     end)
 

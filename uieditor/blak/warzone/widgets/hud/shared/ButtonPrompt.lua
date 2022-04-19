@@ -41,19 +41,19 @@ function Warzone.ButtonPrompt.new(menu, controller)
     self.unboundBacker:setScaledTopBottom(true, false, 0, 16)
     self.unboundBacker:setImage(RegisterImage("ui_keybind_backing_unbound"))
 
-    Wzu.ClipSequence(self, self.unboundBacker, "Disabled", {
+    Util.ClipSequence(self, self.unboundBacker, "Disabled", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.unboundBacker, "Enabled", {
+    Util.ClipSequence(self, self.unboundBacker, "Enabled", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.unboundBacker, "EnabledGamepad", {
+    Util.ClipSequence(self, self.unboundBacker, "EnabledGamepad", {
         {
             duration = 0,
             setAlpha = 0
@@ -70,19 +70,19 @@ function Warzone.ButtonPrompt.new(menu, controller)
     self.backer:setShaderVector(0, 0.04, 0.5, 0, 0)
     self.backer:setupNineSliceShader(12, 12)
 
-    Wzu.ClipSequence(self, self.backer, "Disabled", {
+    Util.ClipSequence(self, self.backer, "Disabled", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.backer, "Enabled", {
+    Util.ClipSequence(self, self.backer, "Enabled", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.backer, "EnabledGamepad", {
+    Util.ClipSequence(self, self.backer, "EnabledGamepad", {
         {
             duration = 0,
             setAlpha = 0
@@ -91,7 +91,7 @@ function Warzone.ButtonPrompt.new(menu, controller)
 
     self:addElement(self.backer)
 
-    self.keyBind = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Colors.Asphalt, false)
+    self.keyBind = Util.TextElement(Util.Fonts.MainRegular, Util.Colors.Asphalt, false)
     self.keyBind:setScaledLeftRight(true, true, 0, 0)
     self.keyBind:setScaledTopBottom(true, false, 0, 16)
 
@@ -112,19 +112,19 @@ function Warzone.ButtonPrompt.new(menu, controller)
 
     self.keyBind:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_CENTER)
 
-    Wzu.ClipSequence(self, self.keyBind, "Disabled", {
+    Util.ClipSequence(self, self.keyBind, "Disabled", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.keyBind, "Enabled", {
+    Util.ClipSequence(self, self.keyBind, "Enabled", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.keyBind, "EnabledGamepad", {
+    Util.ClipSequence(self, self.keyBind, "EnabledGamepad", {
         {
             duration = 0,
             setAlpha = 1
@@ -136,17 +136,17 @@ function Warzone.ButtonPrompt.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Enabled")
+                Util.AnimateSequence(self, "Enabled")
             end
         },
         Disabled = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Disabled")
+                Util.AnimateSequence(self, "Disabled")
             end
         },
         EnabledGamepad = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "EnabledGamepad")
+                Util.AnimateSequence(self, "EnabledGamepad")
             end
         }
     }

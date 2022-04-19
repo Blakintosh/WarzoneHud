@@ -19,63 +19,63 @@ function Warzone.HighResolutionContainer.new(menu, controller)
     -- ===============================================================
 
     -- Ammo Widget
-    self.ammo = Wzu.CreateContainedHudElement(menu, controller, Warzone.Ammo)
+    self.ammo = Util.CreateContainedHudElement(menu, controller, Warzone.Ammo)
     self.ammo:setScaledLeftRight(false, true, -357, 0)
     self.ammo:setScaledTopBottom(false, true, -117, 0)
 
     self:addElement(self.ammo)
 
     -- Squad/Score Widget
-    self.squad = Wzu.CreateContainedHudElement(menu, controller, Warzone.Squad)
+    self.squad = Util.CreateContainedHudElement(menu, controller, Warzone.Squad)
     self.squad:setScaledLeftRight(true, false, 0, 400)
     self.squad:setScaledTopBottom(false, true, -400, 0)
 
     self:addElement(self.squad)
 
     -- Round Widget
-    self.round = Wzu.CreateContainedHudElement(menu, controller, Warzone.RoundCounter)
+    self.round = Util.CreateContainedHudElement(menu, controller, Warzone.RoundCounter)
     self.round:setScaledLeftRight(true, false, 19, 92)
     self.round:setScaledTopBottom(true, false, 16, 89)
 
     self:addElement(self.round)
 
     -- Cursorhint
-    self.cursorHint = Wzu.CreateContainedHudElement(menu, controller, Warzone.CursorHint)
+    self.cursorHint = Util.CreateContainedHudElement(menu, controller, Warzone.CursorHint)
     self.cursorHint:setScaledLeftRight(true, false, 631, 958)
     self.cursorHint:setScaledTopBottom(true, false, 451, 499)
 
     self:addElement(self.cursorHint)
 
     -- Out of bounds
-    self.oob = Wzu.CreateContainedHudElement(menu, controller, Warzone.OutOfBounds)
+    self.oob = Util.CreateContainedHudElement(menu, controller, Warzone.OutOfBounds)
     self.oob:setScaledLeftRight(true, true, 0, 0)
     self.oob:setScaledTopBottom(true, true, 0, 0)
 
     self:addElement(self.oob)
 
     -- Powerups
-    self.powerups = Wzu.CreateContainedHudElement(menu, controller, Warzone.PowerupsList)
+    self.powerups = Util.CreateContainedHudElement(menu, controller, Warzone.PowerupsList)
     self.powerups:setScaledLeftRight(false, false, -400, 400)
     self.powerups:setScaledTopBottom(true, false, 70, 110)
 
     self:addElement(self.powerups)
 
     -- Notification
-    self.notification = Wzu.CreateContainedHudElement(menu, controller, Warzone.Notification)
+    self.notification = Util.CreateContainedHudElement(menu, controller, Warzone.Notification)
     self.notification:setScaledLeftRight(false, false, -640, 640)
     self.notification:setScaledTopBottom(true, false, 130, 190)
 
     self:addElement(self.notification)
 
     -- "Reload"
-    self.reload = Wzu.CreateContainedHudElement(menu, controller, Warzone.ReloadPrompt)
+    self.reload = Util.CreateContainedHudElement(menu, controller, Warzone.ReloadPrompt)
     self.reload:setScaledLeftRight(false, false, -640, 640)
     self.reload:setScaledTopBottom(true, false, 420, 470)
 
     self:addElement(self.reload)
 
     -- Scoreboard
-    self.scoreboard = Wzu.CreateContainedScoreboardElement(menu, controller, Warzone.Scoreboard)
+    self.scoreboard = Util.CreateContainedScoreboardElement(menu, controller, Warzone.Scoreboard)
     self.scoreboard:setScaledLeftRight(false, false, -485, 485)
     self.scoreboard:setScaledTopBottom(true, false, 150, 330)
 
@@ -96,7 +96,7 @@ function Warzone.HighResolutionContainer.new(menu, controller)
     self:addElement(self.hitmarker)
 
     -- Watermark
-    self.watermark = Wzu.TextElement(Wzu.Fonts.KillstreakRegular, Wzu.Swatches.HUDMain)
+    self.watermark = Util.TextElement(Util.Fonts.KillstreakRegular, Util.Swatches.HUDMain)
     self.watermark:setScaledLeftRight(false, true, -300, 0)
     self.watermark:setScaledTopBottom(true, false, 0, 12)
     self.watermark:setText("karelia "..VERSION_WATERMARK)

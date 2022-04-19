@@ -19,19 +19,19 @@ Warzone.TwoOptionOverlayBody.new = function (menu, controller)
     self.onlyChildrenFocusable = true
 	self.anyChildUsesUpdateState = true
 
-    self.title = Wzu.TextElement(Wzu.Fonts.MainLight, Wzu.Swatches.PopupTitleTxt, false)
+    self.title = Util.TextElement(Util.Fonts.MainLight, Util.Swatches.PopupTitleTxt, false)
     self.title:setScaledLeftRight(false, false, -160, 160)
     self.title:setScaledTopBottom(true, false, 6, 46)
 
-    Wzu.LinkToWidgetText(self.title, self, "title", true)
+    Util.LinkToWidgetText(self.title, self, "title", true)
 
     self:addElement(self.title)
 
-    self.desc = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Colors.Grey191, false)
+    self.desc = Util.TextElement(Util.Fonts.MainRegular, Util.Colors.Grey191, false)
     self.desc:setScaledLeftRight(false, false, -160, 160)
     self.desc:setScaledTopBottom(true, false, 46, 60)
 
-    Wzu.LinkToWidgetText(self.desc, self, "description")
+    Util.LinkToWidgetText(self.desc, self, "description")
 
     self:addElement(self.desc)
 

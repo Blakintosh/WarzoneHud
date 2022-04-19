@@ -22,13 +22,13 @@ function Warzone.ReloadButtonPrompt.new(menu, controller)
     self.button:setButtonPrompt("reload", "usereload")
     --self.button.keyBind:setText(Engine.Localize("[{+reload}]"))
 
-    Wzu.ClipSequence(self, self.button, "Reload", {
+    Util.ClipSequence(self, self.button, "Reload", {
         {
             duration = 0,
             setAlpha = 1
         }
     })
-    Wzu.ClipSequence(self, self.button, "DefaultState", {
+    Util.ClipSequence(self, self.button, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0
@@ -37,30 +37,30 @@ function Warzone.ReloadButtonPrompt.new(menu, controller)
 
     self:addElement(self.button)
 
-    self.prompt = Wzu.ContainedShadowTextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain)
+    self.prompt = Util.ContainedShadowTextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain)
     self.prompt:setScaledLeftRight(true, false, 0, 64)
     self.prompt:setScaledTopBottom(true, false, -1, 17)
 
     self.prompt.text:setText(Engine.Localize("RELOAD"))
 
-    Wzu.ClipSequence(self, self.prompt, "DefaultState", {
+    Util.ClipSequence(self, self.prompt, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0,
             exec = function()
                 self.prompt.text:setText(Engine.Localize("RELOAD"))
             end,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain)
         }
     })
-    Wzu.ClipSequence(self, self.prompt, "Reload", {
+    Util.ClipSequence(self, self.prompt, "Reload", {
         {
             duration = 0,
             setAlpha = 1,
             exec = function()
                 self.prompt.text:setText(Engine.Localize("RELOAD"))
             end,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain)
         }
     })
 
@@ -69,22 +69,22 @@ function Warzone.ReloadButtonPrompt.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
             end
         },
         Reload = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Reload")
+                Util.AnimateSequence(self, "Reload")
             end
         },
         Low = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
             end
         },
         No = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
             end
         }
     }
@@ -128,10 +128,10 @@ function Warzone.ReloadButtonPrompt.new(menu, controller)
         }
     })
 
-    Wzu.SubState(controller, menu, self, "currentWeapon.weapon")
-    Wzu.SubState(controller, menu, self, "currentWeapon.ammoInDWClip")
-    Wzu.SubState(controller, menu, self, "currentWeapon.ammoInClip")
-    Wzu.SubState(controller, menu, self, "currentWeapon.ammoStock")
+    Util.SubState(controller, menu, self, "currentWeapon.weapon")
+    Util.SubState(controller, menu, self, "currentWeapon.ammoInDWClip")
+    Util.SubState(controller, menu, self, "currentWeapon.ammoInClip")
+    Util.SubState(controller, menu, self, "currentWeapon.ammoStock")
 
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)

@@ -12,53 +12,53 @@ function Warzone.LowAmmoPrompt.new(menu, controller)
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
 
-    self.prompt = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, true)
+    self.prompt = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, true)
     self.prompt:setScaledLeftRight(false, false, -240, 240)
     self.prompt:setScaledTopBottom(true, false, -1, 17)
 
     self.prompt:setText(Engine.Localize("LOW AMMO"))
 
-    Wzu.ClipSequence(self, self.prompt, "DefaultState", {
+    Util.ClipSequence(self, self.prompt, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0,
             setText = Engine.Localize("NO AMMO"),
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain)
         }
     })
-    Wzu.ClipSequence(self, self.prompt, "Low", {
+    Util.ClipSequence(self, self.prompt, "Low", {
         {
             duration = 0,
             setAlpha = 1,
             setText = Engine.Localize("LOW AMMO"),
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDCaution)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDCaution)
         }
     })
-    Wzu.ClipSequence(self, self.prompt, "No", {
+    Util.ClipSequence(self, self.prompt, "No", {
         {
             duration = 0,
             setAlpha = 1,
             setText = Engine.Localize("NO AMMO"),
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDWarning)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDWarning)
         }
     })
 
-    Wzu.AddShadowedElement(self, self.prompt)
+    Util.AddShadowedElement(self, self.prompt)
 
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
             end
         },
         Low = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Low")
+                Util.AnimateSequence(self, "Low")
             end
         },
         No = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "No")
+                Util.AnimateSequence(self, "No")
             end
         }
     }
@@ -92,10 +92,10 @@ function Warzone.LowAmmoPrompt.new(menu, controller)
         }
     })
 
-    Wzu.SubState(controller, menu, self, "currentWeapon.weapon")
-    Wzu.SubState(controller, menu, self, "currentWeapon.ammoInDWClip")
-    Wzu.SubState(controller, menu, self, "currentWeapon.ammoInClip")
-    Wzu.SubState(controller, menu, self, "currentWeapon.ammoStock")
+    Util.SubState(controller, menu, self, "currentWeapon.weapon")
+    Util.SubState(controller, menu, self, "currentWeapon.ammoInDWClip")
+    Util.SubState(controller, menu, self, "currentWeapon.ammoInClip")
+    Util.SubState(controller, menu, self, "currentWeapon.ammoStock")
 
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)

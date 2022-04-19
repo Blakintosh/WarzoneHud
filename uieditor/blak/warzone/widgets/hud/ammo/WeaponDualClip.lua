@@ -12,50 +12,50 @@ function Warzone.WeaponDualClip.new(menu, controller)
     self.soundSet = "default"
     self.anyChildUsesUpdateState = true
 
-    self.ammoClip = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, true)
+    self.ammoClip = Util.TextElement(Util.Fonts.MainBold, Util.Swatches.HUDMain, true)
     self.ammoClip:setScaledLeftRight(false, true, -20, 0)
     self.ammoClip:setScaledTopBottom(true, true, 0, 0)
 
-    Wzu.SubscribeToText(self.ammoClip, controller, "currentWeapon.ammoInDWClip")
+    Util.SubscribeToText(self.ammoClip, controller, "currentWeapon.ammoInDWClip")
 
-    Wzu.ClipSequence(self, self.ammoClip, "DefaultState", {
+    Util.ClipSequence(self, self.ammoClip, "DefaultState", {
         {
             duration = 0,
             setAlpha = 1,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain)
         }
     })
-    Wzu.ClipSequence(self, self.ammoClip, "LowAmmo", {
+    Util.ClipSequence(self, self.ammoClip, "LowAmmo", {
         {
             duration = 0,
             setAlpha = 1,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDWarning)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDWarning)
         }
     })
-    Wzu.ClipSequence(self, self.ammoClip, "UnlimitedAmmo", {
+    Util.ClipSequence(self, self.ammoClip, "UnlimitedAmmo", {
         {
             duration = 0,
             setAlpha = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain)
         }
     })
     
-    Wzu.AddShadowedElement(self, self.ammoClip)
+    Util.AddShadowedElement(self, self.ammoClip)
 
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
             end
         },
         LowAmmo = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "LowAmmo")
+                Util.AnimateSequence(self, "LowAmmo")
             end
         },
         UnlimitedAmmo = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "UnlimitedAmmo")
+                Util.AnimateSequence(self, "UnlimitedAmmo")
             end
         }
     }
@@ -75,8 +75,8 @@ function Warzone.WeaponDualClip.new(menu, controller)
         }
     })
 
-    Wzu.SubState(controller, menu, self, "currentWeapon.weapon")
-    Wzu.SubState(controller, menu, self, "currentWeapon.ammoInDWClip")
+    Util.SubState(controller, menu, self, "currentWeapon.weapon")
+    Util.SubState(controller, menu, self, "currentWeapon.ammoInDWClip")
 
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)

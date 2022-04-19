@@ -28,14 +28,14 @@ function Warzone.KeypadMenuCodeFragments.new(menu, controller)
 
     self:addElement(self.background)
 
-    self.title = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.title = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.title:setScaledLeftRight(true, true, 4, -4)
     self.title:setScaledTopBottom(true, false, 6, 20)
     self.title:setText("Laptop Code Fragments")
 
     self:addElement(self.title)
 
-    self.code = Wzu.TextElement(Wzu.Fonts.KillstreakRegular, Wzu.Swatches.HUDMain, false)
+    self.code = Util.TextElement(Util.Fonts.KillstreakRegular, Util.Swatches.HUDMain, false)
     self.code:setScaledLeftRight(true, true, 4, -4)
     self.code:setScaledTopBottom(true, false, 16, 50)
     self.code:setText("-- -- --")

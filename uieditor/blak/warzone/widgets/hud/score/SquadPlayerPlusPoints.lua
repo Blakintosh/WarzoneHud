@@ -32,13 +32,13 @@ function Warzone.SquadPlayerPlusPoints.new(menu, controller)
     self.plusPoints:setScaledTopBottom(false, true, -18, -4)
     self.plusPoints:setPriority(4)
 
-    Wzu.ClipSequence(self, self.plusPoints, "HasPerks", {
+    Util.ClipSequence(self, self.plusPoints, "HasPerks", {
         {
             duration = 0,
             setScaledTopBottom = {false, true, -16, -2}
         }
     })
-    Wzu.ClipSequence(self, self.plusPoints, "DefaultState", {
+    Util.ClipSequence(self, self.plusPoints, "DefaultState", {
         {
             duration = 0,
             setScaledTopBottom = {false, true, -18, -4}
@@ -50,12 +50,12 @@ function Warzone.SquadPlayerPlusPoints.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
             end
         },
         HasPerks = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "HasPerks")
+                Util.AnimateSequence(self, "HasPerks")
             end
         }
     }
@@ -69,7 +69,7 @@ function Warzone.SquadPlayerPlusPoints.new(menu, controller)
         }
     })
     
-    Wzu.SubState(controller, menu, self, "hudItems.perkListUpdated")
+    Util.SubState(controller, menu, self, "hudItems.perkListUpdated")
 
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(Sender)
         Sender.plusPoints:close()

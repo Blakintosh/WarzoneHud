@@ -20,7 +20,7 @@ function Warzone.ScoreboardRow.new(menu, controller)
     self.leftBorder:setScaledLeftRight(true, false, 0, 4)
     self.leftBorder:setScaledTopBottom(true, true, 0, 0)
     self.leftBorder:setAlpha(0.4)
-    Wzu.SetRGBFromTable(self.leftBorder, Wzu.Swatches.GlobalKeyColorMid)
+    Util.SetRGBFromTable(self.leftBorder, Util.Swatches.GlobalKeyColorMid)
 
     self:addElement(self.leftBorder)
 
@@ -28,7 +28,7 @@ function Warzone.ScoreboardRow.new(menu, controller)
     self.rightBorder:setScaledLeftRight(false, true, -4, 0)
     self.rightBorder:setScaledTopBottom(true, true, 0, 0)
     self.rightBorder:setAlpha(0.4)
-    Wzu.SetRGBFromTable(self.rightBorder, Wzu.Swatches.GlobalKeyColorMid)
+    Util.SetRGBFromTable(self.rightBorder, Util.Swatches.GlobalKeyColorMid)
 
     self:addElement(self.rightBorder)
 
@@ -36,15 +36,15 @@ function Warzone.ScoreboardRow.new(menu, controller)
     self.focusBg:setScaledLeftRight(true, true, 4, -4)
     self.focusBg:setScaledTopBottom(true, true, 0, 0)
     self.focusBg:setAlpha(0)
-    Wzu.SetRGBFromTable(self.focusBg, Wzu.Colors.Black)
+    Util.SetRGBFromTable(self.focusBg, Util.Colors.Black)
 
-    Wzu.ClipSequence(self, self.focusBg, "DefaultClip", {
+    Util.ClipSequence(self, self.focusBg, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.focusBg, "Focus", {
+    Util.ClipSequence(self, self.focusBg, "Focus", {
         {
             duration = 0,
             setAlpha = 0.8
@@ -59,15 +59,15 @@ function Warzone.ScoreboardRow.new(menu, controller)
     self.focusBg2:setMaterial(LUI.UIImage.GetCachedMaterial("uie_pixel_grid"))
     self.focusBg2:setShaderVector(0, 2, 2, 1, 1)
     self.focusBg2:setAlpha(0)
-    Wzu.SetRGBFromTable(self.focusBg2, Wzu.Swatches.FriendlyTeam)
+    Util.SetRGBFromTable(self.focusBg2, Util.Swatches.FriendlyTeam)
 
-    Wzu.ClipSequence(self, self.focusBg2, "DefaultClip", {
+    Util.ClipSequence(self, self.focusBg2, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.focusBg2, "Focus", {
+    Util.ClipSequence(self, self.focusBg2, "Focus", {
         {
             duration = 0,
             setAlpha = 0.5
@@ -80,15 +80,15 @@ function Warzone.ScoreboardRow.new(menu, controller)
     self.focusBorderTop:setScaledLeftRight(true, true, 4, -4)
     self.focusBorderTop:setScaledTopBottom(true, false, 0, 1)
     self.focusBorderTop:setAlpha(0)
-    Wzu.SetRGBFromTable(self.focusBorderTop, Wzu.Swatches.FriendlyTeam)
+    Util.SetRGBFromTable(self.focusBorderTop, Util.Swatches.FriendlyTeam)
 
-    Wzu.ClipSequence(self, self.focusBorderTop, "DefaultClip", {
+    Util.ClipSequence(self, self.focusBorderTop, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.focusBorderTop, "Focus", {
+    Util.ClipSequence(self, self.focusBorderTop, "Focus", {
         {
             duration = 0,
             setAlpha = 0.8
@@ -101,15 +101,15 @@ function Warzone.ScoreboardRow.new(menu, controller)
     self.focusBorderBottom:setScaledLeftRight(true, true, 4, -4)
     self.focusBorderBottom:setScaledTopBottom(false, true, -1, 0)
     self.focusBorderBottom:setAlpha(0)
-    Wzu.SetRGBFromTable(self.focusBorderBottom, Wzu.Swatches.FriendlyTeam)
+    Util.SetRGBFromTable(self.focusBorderBottom, Util.Swatches.FriendlyTeam)
 
-    Wzu.ClipSequence(self, self.focusBorderBottom, "DefaultClip", {
+    Util.ClipSequence(self, self.focusBorderBottom, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.focusBorderBottom, "Focus", {
+    Util.ClipSequence(self, self.focusBorderBottom, "Focus", {
         {
             duration = 0,
             setAlpha = 0.8
@@ -125,15 +125,15 @@ function Warzone.ScoreboardRow.new(menu, controller)
     self.gradientTop:setShaderVector(0, 2, 2, 1, 1)
     self.gradientTop:setAlpha(0)
     self.gradientTop:setImage(RegisterImage("widg_gradient_bottom_to_top"))
-    Wzu.SetRGBFromTable(self.gradientTop, Wzu.Swatches.GlobalKeyColorMid)
+    Util.SetRGBFromTable(self.gradientTop, Util.Swatches.GlobalKeyColorMid)
 
-    Wzu.ClipSequence(self, self.gradientTop, "DefaultClip", {
+    Util.ClipSequence(self, self.gradientTop, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.gradientTop, "Focus", {
+    Util.ClipSequence(self, self.gradientTop, "Focus", {
         {
             duration = 0,
             setAlpha = 0.4
@@ -150,15 +150,15 @@ function Warzone.ScoreboardRow.new(menu, controller)
     self.gradientBottom:setAlpha(0)
     self.gradientBottom:setImage(RegisterImage("widg_gradient_bottom_to_top"))
     self.gradientBottom:setZRot(180)
-    Wzu.SetRGBFromTable(self.gradientBottom, Wzu.Swatches.GlobalKeyColorMid)
+    Util.SetRGBFromTable(self.gradientBottom, Util.Swatches.GlobalKeyColorMid)
 
-    Wzu.ClipSequence(self, self.gradientBottom, "DefaultClip", {
+    Util.ClipSequence(self, self.gradientBottom, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.gradientBottom, "Focus", {
+    Util.ClipSequence(self, self.gradientBottom, "Focus", {
         {
             duration = 0,
             setAlpha = 0.4
@@ -167,150 +167,150 @@ function Warzone.ScoreboardRow.new(menu, controller)
 
     self:addElement(self.gradientBottom)
 
-    self.username = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.username = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.username:setScaledLeftRight(true, false, 24, 50)
     self.username:setScaledTopBottom(true, false, 8, 22)
 
-    Wzu.LinkToWidget(self.username, self, "clientNum", function(modelValue)
+    Util.LinkToWidget(self.username, self, "clientNum", function(modelValue)
         self.username:setText(GetClientNameAndClanTag(controller, modelValue))
     end)
 
-    Wzu.ClipSequence(self, self.username, "DefaultClip", {
+    Util.ClipSequence(self, self.username, "DefaultClip", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain)
         }
     })
-    Wzu.ClipSequence(self, self.username, "Focus", {
+    Util.ClipSequence(self, self.username, "Focus", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.PlayerTeam)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.PlayerTeam)
         }
     })
 
     self:addElement(self.username)
 
-    self.col0 = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.col0 = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.col0:setScaledLeftRight(false, true, -468, -418)
     self.col0:setScaledTopBottom(true, false, 8, 22)
     self.col0:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_CENTER)
 
-    Wzu.LinkToWidget(self.col0, self, "clientNum", function(modelValue)
+    Util.LinkToWidget(self.col0, self, "clientNum", function(modelValue)
         self.col0:setText(Engine.Localize(GetScoreboardPlayerScoreColumn(controller, 0, modelValue)))
     end)
 
-    Wzu.ClipSequence(self, self.col0, "DefaultClip", {
+    Util.ClipSequence(self, self.col0, "DefaultClip", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain)
         }
     })
-    Wzu.ClipSequence(self, self.col0, "Focus", {
+    Util.ClipSequence(self, self.col0, "Focus", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.PlayerTeam)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.PlayerTeam)
         }
     })
 
     self:addElement(self.col0)
 
-    self.col1 = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.col1 = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.col1:setScaledLeftRight(false, true, -388, -338)
     self.col1:setScaledTopBottom(true, false, 8, 22)
     self.col1:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_CENTER)
 
-    Wzu.LinkToWidget(self.col1, self, "clientNum", function(modelValue)
+    Util.LinkToWidget(self.col1, self, "clientNum", function(modelValue)
         self.col1:setText(Engine.Localize(GetScoreboardPlayerScoreColumn(controller, 1, modelValue)))
     end)
 
-    Wzu.ClipSequence(self, self.col1, "DefaultClip", {
+    Util.ClipSequence(self, self.col1, "DefaultClip", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain)
         }
     })
-    Wzu.ClipSequence(self, self.col1, "Focus", {
+    Util.ClipSequence(self, self.col1, "Focus", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.PlayerTeam)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.PlayerTeam)
         }
     })
 
     self:addElement(self.col1)
 
-    self.col2 = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.col2 = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.col2:setScaledLeftRight(false, true, -308, -258)
     self.col2:setScaledTopBottom(true, false, 8, 22)
     self.col2:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_CENTER)
 
-    Wzu.LinkToWidget(self.col2, self, "clientNum", function(modelValue)
+    Util.LinkToWidget(self.col2, self, "clientNum", function(modelValue)
         self.col2:setText(Engine.Localize(GetScoreboardPlayerScoreColumn(controller, 2, modelValue)))
     end)
 
-    Wzu.ClipSequence(self, self.col2, "DefaultClip", {
+    Util.ClipSequence(self, self.col2, "DefaultClip", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain)
         }
     })
-    Wzu.ClipSequence(self, self.col2, "Focus", {
+    Util.ClipSequence(self, self.col2, "Focus", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.PlayerTeam)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.PlayerTeam)
         }
     })
 
     self:addElement(self.col2)
 
-    self.col3 = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.col3 = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.col3:setScaledLeftRight(false, true, -228, -178)
     self.col3:setScaledTopBottom(true, false, 8, 22)
     self.col3:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_CENTER)
 
-    Wzu.LinkToWidget(self.col3, self, "clientNum", function(modelValue)
+    Util.LinkToWidget(self.col3, self, "clientNum", function(modelValue)
         self.col3:setText(Engine.Localize(GetScoreboardPlayerScoreColumn(controller, 3, modelValue)))
     end)
 
-    Wzu.ClipSequence(self, self.col3, "DefaultClip", {
+    Util.ClipSequence(self, self.col3, "DefaultClip", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain)
         }
     })
-    Wzu.ClipSequence(self, self.col3, "Focus", {
+    Util.ClipSequence(self, self.col3, "Focus", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.PlayerTeam)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.PlayerTeam)
         }
     })
 
     self:addElement(self.col3)
 
-    self.col4 = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.col4 = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.col4:setScaledLeftRight(false, true, -148, -88)
     self.col4:setScaledTopBottom(true, false, 8, 22)
     self.col4:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_CENTER)
 
-    Wzu.LinkToWidget(self.col4, self, "clientNum", function(modelValue)
+    Util.LinkToWidget(self.col4, self, "clientNum", function(modelValue)
         self.col4:setText(Engine.Localize(GetScoreboardPlayerScoreColumn(controller, 4, modelValue)))
     end)
 
-    Wzu.ClipSequence(self, self.col4, "DefaultClip", {
+    Util.ClipSequence(self, self.col4, "DefaultClip", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain)
         }
     })
-    Wzu.ClipSequence(self, self.col4, "Focus", {
+    Util.ClipSequence(self, self.col4, "Focus", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.PlayerTeam)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.PlayerTeam)
         }
     })
 
     self:addElement(self.col4)
 
-    self.ping = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.ping = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.ping:setScaledLeftRight(false, true, -58, -8)
     self.ping:setScaledTopBottom(true, false, 8, 22)
     self.ping:setAlignment(Enum.LUIAlignment.LUI_ALIGNMENT_CENTER)
@@ -322,16 +322,16 @@ function Warzone.ScoreboardRow.new(menu, controller)
 		end
 	end)
 
-    Wzu.ClipSequence(self, self.ping, "DefaultClip", {
+    Util.ClipSequence(self, self.ping, "DefaultClip", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain)
         }
     })
-    Wzu.ClipSequence(self, self.ping, "Focus", {
+    Util.ClipSequence(self, self.ping, "Focus", {
         {
             duration = 0,
-            setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.PlayerTeam)
+            setRGB = Util.ConvertColorToTable(Util.Swatches.PlayerTeam)
         }
     })
 
@@ -340,10 +340,10 @@ function Warzone.ScoreboardRow.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultClip")
+                Util.AnimateSequence(self, "DefaultClip")
             end,
             Focus = function()
-                Wzu.AnimateSequence(self, "Focus")
+                Util.AnimateSequence(self, "Focus")
             end
         }
     }

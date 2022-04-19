@@ -26,13 +26,13 @@ function Warzone.Ammo.new(menu, controller)
     self.weaponIcon:setScaledTopBottom(true, false, 22, 95)
     self:addElement(self.weaponIcon)
 
-    Wzu.ClipSequence(self, self.weaponIcon, "Default", {
+    Util.ClipSequence(self, self.weaponIcon, "Default", {
         {
             duration = 0,
             setScaledLeftRight = {true, false, -1, 174}
         }
     })
-    Wzu.ClipSequence(self, self.weaponIcon, "DualWield", {
+    Util.ClipSequence(self, self.weaponIcon, "DualWield", {
         {
             duration = 0,
             setScaledLeftRight = {true, false, -27, 148}
@@ -74,12 +74,12 @@ function Warzone.Ammo.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Default")
+                Util.AnimateSequence(self, "Default")
             end
         },
         DualWield = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DualWield")
+                Util.AnimateSequence(self, "DualWield")
             end
         }
     }
@@ -93,7 +93,7 @@ function Warzone.Ammo.new(menu, controller)
         }
     })
 
-    Wzu.SubState(controller, menu, self, "currentWeapon.ammoInDWClip")
+    Util.SubState(controller, menu, self, "currentWeapon.ammoInDWClip")
     
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(Sender)
         Sender.weaponIcon:close()

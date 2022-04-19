@@ -24,13 +24,13 @@ Warzone.WheelButtonImages.new = function ( menu, controller )
 	self.slice:setScaledTopBottom(false, false, -168, 172)
 	self.slice:setImage(RegisterImage("radial_8slice_available"))
 
-	Wzu.ClipSequence(self, self.slice, "DefaultUp", {
+	Util.ClipSequence(self, self.slice, "DefaultUp", {
 		{
 			duration = 0,
 			setAlpha = 0.8
 		}
 	})
-	Wzu.ClipSequence(self, self.slice, "DefaultOver", {
+	Util.ClipSequence(self, self.slice, "DefaultOver", {
 		{
 			duration = 0,
 			setAlpha = 0.8
@@ -45,28 +45,28 @@ Warzone.WheelButtonImages.new = function ( menu, controller )
 	self.selectedSlice:setImage(RegisterImage("radial_8slice_selected_available"))
 	self.selectedSlice:setAlpha(1)
 
-	Wzu.ClipSequence(self, self.selectedSlice, "DefaultUp", {
+	Util.ClipSequence(self, self.selectedSlice, "DefaultUp", {
 		{
 			duration = 0,
 			setAlpha = 0,
 			setImage = RegisterImage("radial_8slice_selected_available")
 		}
 	})
-	Wzu.ClipSequence(self, self.selectedSlice, "DefaultOver", {
+	Util.ClipSequence(self, self.selectedSlice, "DefaultOver", {
 		{
 			duration = 0,
 			setAlpha = 1,
 			setImage = RegisterImage("radial_8slice_selected_available")
 		}
 	})
-	Wzu.ClipSequence(self, self.selectedSlice, "DisabledUp", {
+	Util.ClipSequence(self, self.selectedSlice, "DisabledUp", {
 		{
 			duration = 0,
 			setAlpha = 0,
 			setImage = RegisterImage("radial_8slice_selected_unavailable")
 		}
 	})
-	Wzu.ClipSequence(self, self.selectedSlice, "DisabledOver", {
+	Util.ClipSequence(self, self.selectedSlice, "DisabledOver", {
 		{
 			duration = 0,
 			setAlpha = 1,
@@ -80,32 +80,32 @@ Warzone.WheelButtonImages.new = function ( menu, controller )
 	self.icon:setScaledLeftRight(false, false, -30, 30)
 	self.icon:setScaledTopBottom(false, false, -155, -95)
 	self.icon:setImage(RegisterImage("hud_icon_equipment_flashlight"))
-	Wzu.LinkToWidget(self.icon, self, "icon", function(modelValue)
+	Util.LinkToWidget(self.icon, self, "icon", function(modelValue)
 		self.icon:setImage(RegisterImage(modelValue))
 	end)
 
-	Wzu.ClipSequence(self, self.icon, "DefaultUp", {
+	Util.ClipSequence(self, self.icon, "DefaultUp", {
 		{
 			duration = 0,
-			setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+			setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain)
 		}
 	})
-	Wzu.ClipSequence(self, self.icon, "DefaultOver", {
+	Util.ClipSequence(self, self.icon, "DefaultOver", {
 		{
 			duration = 0,
-			setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.HUDMain)
+			setRGB = Util.ConvertColorToTable(Util.Swatches.HUDMain)
 		}
 	})
-	Wzu.ClipSequence(self, self.icon, "DisabledUp", {
+	Util.ClipSequence(self, self.icon, "DisabledUp", {
 		{
 			duration = 0,
-			setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ScorestreakButtonUnavailable)
+			setRGB = Util.ConvertColorToTable(Util.Swatches.ScorestreakButtonUnavailable)
 		}
 	})
-	Wzu.ClipSequence(self, self.icon, "DisabledOver", {
+	Util.ClipSequence(self, self.icon, "DisabledOver", {
 		{
 			duration = 0,
-			setRGB = Wzu.ConvertColorToTable(Wzu.Swatches.ScorestreakButtonUnavailable)
+			setRGB = Util.ConvertColorToTable(Util.Swatches.ScorestreakButtonUnavailable)
 		}
 	})
 
@@ -114,18 +114,18 @@ Warzone.WheelButtonImages.new = function ( menu, controller )
 	self.clipsPerState = {
 		DefaultState = {
 			DefaultClip = function ()
-				Wzu.AnimateSequence(self, "DefaultUp")
+				Util.AnimateSequence(self, "DefaultUp")
 			end,
 			Focus = function ()
-				Wzu.AnimateSequence(self, "DefaultOver")
+				Util.AnimateSequence(self, "DefaultOver")
 			end,
 		},
 		Inactive = {
 			DefaultClip = function ()
-				Wzu.AnimateSequence(self, "DisabledUp")
+				Util.AnimateSequence(self, "DisabledUp")
 			end,
 			Focus = function ()
-				Wzu.AnimateSequence(self, "DisabledOver")
+				Util.AnimateSequence(self, "DisabledOver")
 			end,
 		}
 	}

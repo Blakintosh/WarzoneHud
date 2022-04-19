@@ -15,7 +15,7 @@ function Warzone.OverclockMenuUpgradeButtons.new(menu, controller)
     self.onlyChildrenFocusable = true]]
     self.anyChildUsesUpdateState = true
 
-    self.caliberLabel = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.caliberLabel = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.caliberLabel:setScaledLeftRight(true, false, 100, 160)
     self.caliberLabel:setScaledTopBottom(true, false, 24, 38)
     self.caliberLabel:setText("Calibers:")

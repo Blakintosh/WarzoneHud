@@ -25,13 +25,13 @@ function Warzone.OutOfBounds.new(menu, controller)
     self.bg1:setRGB(0, 0, 0)
     self.bg1:setAlpha(0)
 
-    Wzu.ClipSequence(self, self.bg1, "DefaultState", {
+    Util.ClipSequence(self, self.bg1, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.bg1, "Show", {
+    Util.ClipSequence(self, self.bg1, "Show", {
         {
             duration = 0,
             setAlpha = 0.2
@@ -46,13 +46,13 @@ function Warzone.OutOfBounds.new(menu, controller)
     self.bg2:setRGB(0.7333, 0.0353, 0)
     self.bg2:setAlpha(0)
 
-    Wzu.ClipSequence(self, self.bg2, "DefaultState", {
+    Util.ClipSequence(self, self.bg2, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.bg2, "Show", {
+    Util.ClipSequence(self, self.bg2, "Show", {
         {
             duration = 0,
             setAlpha = 0.1
@@ -69,13 +69,13 @@ function Warzone.OutOfBounds.new(menu, controller)
     self.bg3:setAlpha(0)
     self.bg3:setShaderVector(0, 3.0, 3.0, 1.0, 1.0)
 
-    Wzu.ClipSequence(self, self.bg3, "DefaultState", {
+    Util.ClipSequence(self, self.bg3, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.bg3, "Show", {
+    Util.ClipSequence(self, self.bg3, "Show", {
         {
             duration = 0,
             setAlpha = 0.2
@@ -89,13 +89,13 @@ function Warzone.OutOfBounds.new(menu, controller)
     self.prompt:setScaledTopBottom(true, false, 290, 495)
     self.prompt:setAlpha(0)
 
-    Wzu.ClipSequence(self, self.prompt, "DefaultState", {
+    Util.ClipSequence(self, self.prompt, "DefaultState", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
-    Wzu.ClipSequence(self, self.prompt, "Show", {
+    Util.ClipSequence(self, self.prompt, "Show", {
         {
             duration = 0,
             setAlpha = 1
@@ -104,7 +104,7 @@ function Warzone.OutOfBounds.new(menu, controller)
 
     self:addElement(self.prompt)
 
-    Wzu.ScriptNotify(controller, self, "karelia_outOfBoundsTime", function(NotifyData)
+    Util.ScriptNotify(controller, self, "karelia_outOfBoundsTime", function(NotifyData)
         if NotifyData[1] then
             Engine.SetModelValue(Engine.GetModel(Engine.GetModelForController(controller), "karelia.outOfBoundsTime"), NotifyData[1])
         end
@@ -113,12 +113,12 @@ function Warzone.OutOfBounds.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultState")
+                Util.AnimateSequence(self, "DefaultState")
             end
         },
         Show = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "Show")
+                Util.AnimateSequence(self, "Show")
             end
         }
     }
@@ -131,7 +131,7 @@ function Warzone.OutOfBounds.new(menu, controller)
             end
         }
     })
-    Wzu.SubState(controller, menu, self, "karelia.outOfBoundsTime")
+    Util.SubState(controller, menu, self, "karelia.outOfBoundsTime")
 
     if PostLoadFunc then
         PostLoadFunc(HudRef, InstanceRef)

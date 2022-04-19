@@ -28,7 +28,7 @@ local function PreLoadFunc(menu, controller)
 
     local ModelTable = { "name", "description", "cost", "available", "comment" }
 
-    Wzu.ScriptNotify(controller, menu, "zm_overclockMenu", function(NotifyData)
+    Util.ScriptNotify(controller, menu, "zm_overclockMenu", function(NotifyData)
         if NotifyData[1] then
             local TreeNumber = NotifyData[1] + 1
 

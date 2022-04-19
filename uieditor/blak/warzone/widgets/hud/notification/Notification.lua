@@ -22,14 +22,14 @@ function Warzone.Notification.new(menu, controller)
     self.stripes:setScaledLeftRight(true, true, 0, 0)
     self.stripes:setScaledTopBottom(true, true, 0, 0)
 
-    Wzu.ClipSequence(self, self.stripes, "DefaultClip", {
+    Util.ClipSequence(self, self.stripes, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
 
-    Wzu.ClipSequence(self, self.stripes, "NotifBlueStripes", {
+    Util.ClipSequence(self, self.stripes, "NotifBlueStripes", {
         {
             duration = 0,
             setAlpha = 0
@@ -59,9 +59,9 @@ function Warzone.Notification.new(menu, controller)
     self.background2:setScaledTopBottom(true, true, 0, 0)
     self.background2:setImage(RegisterImage("widg_gradient_center_out"))
     self.background2:setMaterial(LUI.UIImage.GetCachedMaterial("ui_multiply"))
-    Wzu.SetRGBFromTable(self.background2, Wzu.Swatches.FriendlyTeamDark)
+    Util.SetRGBFromTable(self.background2, Util.Swatches.FriendlyTeamDark)
 
-    Wzu.ClipSequence(self, self.background2, "DefaultClip", {
+    Util.ClipSequence(self, self.background2, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0,
@@ -69,7 +69,7 @@ function Warzone.Notification.new(menu, controller)
         }
     })
 
-    Wzu.ClipSequence(self, self.background2, "NotifBlueStripes", {
+    Util.ClipSequence(self, self.background2, "NotifBlueStripes", {
         {
             duration = 0,
             setAlpha = 0,
@@ -82,7 +82,7 @@ function Warzone.Notification.new(menu, controller)
         },
         {
             duration = 300,
-            interpolation = Wzu.TweenGraphs.outQuad,
+            interpolation = Util.TweenGraphs.outQuad,
             setAlpha = 0.7,
             setScaledLeftRight = {false, false, -1601, 1601}
         },
@@ -102,16 +102,16 @@ function Warzone.Notification.new(menu, controller)
     self.background:setScaledLeftRight(false, false, -850, 850)
     self.background:setScaledTopBottom(true, true, 0, 0)
     self.background:setImage(RegisterImage("widg_gradient_center_out"))
-    Wzu.SetRGBFromTable(self.background, Wzu.Swatches.FriendlyTeam)
+    Util.SetRGBFromTable(self.background, Util.Swatches.FriendlyTeam)
 
-    Wzu.ClipSequence(self, self.background, "DefaultClip", {
+    Util.ClipSequence(self, self.background, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
 
-    Wzu.ClipSequence(self, self.background, "NotifBlueStripes", {
+    Util.ClipSequence(self, self.background, "NotifBlueStripes", {
         {
             duration = 0,
             setAlpha = 0
@@ -136,20 +136,20 @@ function Warzone.Notification.new(menu, controller)
 
     self:addElement(self.background)
     
-    self.message = Wzu.TextElement(Wzu.Fonts.MainBold, Wzu.Swatches.HUDMain, true)
+    self.message = Util.TextElement(Util.Fonts.MainBold, Util.Swatches.HUDMain, true)
     self.message:setScaledLeftRight(false, false, -150, 150)
     self.message:setScaledTopBottom(true, false, 9, 51)
     self.message:setText("MAX AMMO!")
-    Wzu.SetRGBFromTable(self.message, Wzu.Swatches.FriendlyTeamTextHighlight)
+    Util.SetRGBFromTable(self.message, Util.Swatches.FriendlyTeamTextHighlight)
 
-    Wzu.ClipSequence(self, self.message, "DefaultClip", {
+    Util.ClipSequence(self, self.message, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
 
-    Wzu.ClipSequence(self, self.message, "NotifBlueStripes", {
+    Util.ClipSequence(self, self.message, "NotifBlueStripes", {
         {
             duration = 0,
             setAlpha = 0
@@ -172,22 +172,22 @@ function Warzone.Notification.new(menu, controller)
         }
     })
 
-    Wzu.AddShadowedElement(self, self.message)
+    Util.AddShadowedElement(self, self.message)
 
     self.arrowL = Warzone.NotificationArrow.new(menu, controller)
     self.arrowL:setScaledLeftRight(true, false, 250, 350)
     self.arrowL:setScaledTopBottom(true, true, 0, 0)
     self.arrowL.image:setZRot(270)
-    Wzu.SetRGBFromTable(self.arrowL, Wzu.Swatches.FriendlyTeamTextHighlight)
+    Util.SetRGBFromTable(self.arrowL, Util.Swatches.FriendlyTeamTextHighlight)
 
-    Wzu.ClipSequence(self, self.arrowL, "DefaultClip", {
+    Util.ClipSequence(self, self.arrowL, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
 
-    Wzu.ClipSequence(self, self.arrowL, "NotifBlueStripes", {
+    Util.ClipSequence(self, self.arrowL, "NotifBlueStripes", {
         {
             duration = 0,
             setAlpha = 0
@@ -216,16 +216,16 @@ function Warzone.Notification.new(menu, controller)
     self.arrowR:setScaledLeftRight(false, true, -350, -250)
     self.arrowR:setScaledTopBottom(true, true, 0, 0)
     self.arrowR.image:setZRot(90)
-    Wzu.SetRGBFromTable(self.arrowR, Wzu.Swatches.FriendlyTeamTextHighlight)
+    Util.SetRGBFromTable(self.arrowR, Util.Swatches.FriendlyTeamTextHighlight)
 
-    Wzu.ClipSequence(self, self.arrowR, "DefaultClip", {
+    Util.ClipSequence(self, self.arrowR, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
 
-    Wzu.ClipSequence(self, self.arrowR, "NotifBlueStripes", {
+    Util.ClipSequence(self, self.arrowR, "NotifBlueStripes", {
         {
             duration = 0,
             setAlpha = 0
@@ -255,14 +255,14 @@ function Warzone.Notification.new(menu, controller)
     self.imageL:setScaledTopBottom(false, false, -25, 25)
     self.imageL:setImage(RegisterImage("hud_icon_ammo_resupply"))
 
-    Wzu.ClipSequence(self, self.imageL, "DefaultClip", {
+    Util.ClipSequence(self, self.imageL, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
 
-    Wzu.ClipSequence(self, self.imageL, "NotifBlueStripes", {
+    Util.ClipSequence(self, self.imageL, "NotifBlueStripes", {
         {
             duration = 0,
             setAlpha = 0
@@ -292,14 +292,14 @@ function Warzone.Notification.new(menu, controller)
     self.imageR:setScaledTopBottom(false, false, -25, 25)
     self.imageR:setImage(RegisterImage("hud_icon_ammo_resupply"))
 
-    Wzu.ClipSequence(self, self.imageR, "DefaultClip", {
+    Util.ClipSequence(self, self.imageR, "DefaultClip", {
         {
             duration = 0,
             setAlpha = 0
         }
     })
 
-    Wzu.ClipSequence(self, self.imageR, "NotifBlueStripes", {
+    Util.ClipSequence(self, self.imageR, "NotifBlueStripes", {
         {
             duration = 0,
             setAlpha = 0
@@ -327,10 +327,10 @@ function Warzone.Notification.new(menu, controller)
     self.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                Wzu.AnimateSequence(self, "DefaultClip")
+                Util.AnimateSequence(self, "DefaultClip")
             end,
             NotifBlueStripes = function()
-                Wzu.AnimateSequence(self, "NotifBlueStripes")
+                Util.AnimateSequence(self, "NotifBlueStripes")
             end
         }
     }
@@ -382,7 +382,7 @@ function Warzone.Notification.new(menu, controller)
         [1] = RegisterImage("icon_killstreak_tablet_airstrike")
     }
     
-    Wzu.ScriptNotify(controller, self, "zombie_notification", function(notifyData)
+    Util.ScriptNotify(controller, self, "zombie_notification", function(notifyData)
         self:appendNotification({
             clip = "NotifBlueStripes",
             title = LocalizeToUpperString(Engine.GetIString(notifyData[1], "CS_LOCALIZED_STRINGS")),

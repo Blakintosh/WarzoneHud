@@ -93,7 +93,7 @@ function Warzone.StartMenuHighResContainer.new(menu, controller)
 
     self:addElement(self.footer)
 
-    self.version = Wzu.TextElement(Wzu.Fonts.MainRegular, Wzu.Swatches.HUDMain, false)
+    self.version = Util.TextElement(Util.Fonts.MainRegular, Util.Swatches.HUDMain, false)
     self.version:setScaledLeftRight(false, true, -200, -16)
     self.version:setScaledTopBottom(false, true, -22, -8)
     self.version:setAlpha(0.5)
