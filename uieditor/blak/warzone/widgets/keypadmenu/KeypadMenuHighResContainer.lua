@@ -17,7 +17,7 @@ DataSources.KeypadPinDigits = DataSourceHelpers.ListSetup("KeypadPinDigits", fun
 end, true)
 
 local function Keypad_InputKey(controller, digit)
-    Engine.SendMenuResponse(controller, "MWRKeypadMenu", digit)
+    Engine.SendMenuResponse(controller, "KeypadMenu", digit)
 
     for i = 1, 6 do
         local ModelRef = Engine.GetModel(Engine.GetModelForController(controller), "keypadMenu.inputDigit" .. tostring(i))
@@ -30,7 +30,7 @@ local function Keypad_InputKey(controller, digit)
 end
 
 local function Keypad_Backspace(controller)
-    Engine.SendMenuResponse(controller, "MWRKeypadMenu", "backspace")
+    Engine.SendMenuResponse(controller, "KeypadMenu", "backspace")
 
     for i = 6, 1, -1 do
         local ModelRef = Engine.GetModel(Engine.GetModelForController(controller), "keypadMenu.inputDigit" .. tostring(i))
