@@ -110,7 +110,7 @@ Util.AnimateNextSegment = function(parent, self, event, sequenceData, lastSequen
             for k,value in pairs(sequence) do
                 if k == "exec" then
                     value()
-                elseif type(value) == "function" and k ~= "interpolation" then
+                elseif type(value) == "function" and k ~= "interpolation" and k ~= "duration" then
                     self[k](self, value())
                 end
             end
