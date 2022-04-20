@@ -58,7 +58,9 @@ Warzone.GunshipWeaponName.new = function (menu, controller)
 			setShaderVector = {0, 1, 0, 0, 0}
 		},
 		{
-			duration = (self.reloadTime * 1000),
+			duration = function()
+				return (self.reloadTime * 1000)
+			end,
 			setShaderVector = {0, 0, 0, 0, 0}
 		}
 	})

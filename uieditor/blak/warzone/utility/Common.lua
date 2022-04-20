@@ -1,3 +1,18 @@
+EnableGlobals()
+if not Console then
+	Console = {}
+
+	Console.Print = function()
+	end
+	Console.PrintWarning = function()
+	end
+	Console.PrintInfo = function()
+	end
+	Console.PrintError = function()
+	end
+end
+DisableGlobals()
+
 Util.Colors = {
     Black = { r = 0, g = 0, b = 0 },
     White = { r = 1, g = 1, b = 1 },
