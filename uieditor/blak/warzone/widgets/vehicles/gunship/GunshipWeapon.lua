@@ -30,7 +30,7 @@ Warzone.GunshipWeapon.new = function (menu, controller)
     self.ammo:setScaledLeftRight(false, true, -100, -55)
     self.ammo:setScaledTopBottom(true, false, 34, 58)
 
-    self.ammo:setGlowText("0")
+    self.ammo:setGlowText("1")
 
     Util.LinkToWidget(self.ammo, self, "ammoModel", function(modelValue)
 		Util.Subscribe(self.ammo, controller, modelValue, function(modelValue2)

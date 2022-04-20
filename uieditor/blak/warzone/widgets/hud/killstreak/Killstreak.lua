@@ -94,6 +94,8 @@ Warzone.Killstreak.new = function (menu, controller)
 			end
 		}
 	})
+	
+	Util.SubState(controller, menu, self, "hudItems.showDpadRight")
 
 	if PostLoadFunc then
 		PostLoadFunc(self, controller, menu)

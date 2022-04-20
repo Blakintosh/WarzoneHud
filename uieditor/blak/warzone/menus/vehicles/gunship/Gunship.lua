@@ -81,10 +81,6 @@ LUI.createMenu.Gunship = function (controller)
 	menu:addElement(menu.container)
 
 	-- UI Model subscriptions
-	Util.LinkWidgetToUIModel(menu, controller, "105_ammo", "ac130.0.ammo")
-	Util.LinkWidgetToUIModel(menu, controller, "40_ammo", "ac130.1.ammo")
-	Util.LinkWidgetToUIModel(menu, controller, "25_ammo", "ac130.2.ammo")
-
 	Util.LinkWidgetToUIModel(menu, controller, "105_reloading", "ac130.0.reloading")
 	Util.LinkWidgetToUIModel(menu, controller, "40_reloading", "ac130.1.reloading")
 	Util.LinkWidgetToUIModel(menu, controller, "25_reloading", "ac130.2.reloading")

@@ -46,6 +46,8 @@ Warzone.GunshipWeaponName.new = function (menu, controller)
     self.reloadBar:setShaderVector(2, 1, 0, 0, 0)
     self.reloadBar:setShaderVector(3, 0, 0, 0, 0)
 
+	self.reloadTime = 4
+
 	Util.ClipSequence(self.reloadBarContainer, self.reloadBar, "DefaultState", {
 		{
 			duration = 0,
