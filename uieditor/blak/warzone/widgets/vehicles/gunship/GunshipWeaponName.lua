@@ -46,57 +46,34 @@ Warzone.GunshipWeaponName.new = function (menu, controller)
     self.reloadBar:setShaderVector(2, 1, 0, 0, 0)
     self.reloadBar:setShaderVector(3, 0, 0, 0, 0)
 
+	Util.ClipSequence(self.reloadBarContainer, self.reloadBar, "DefaultState", {
+		{
+			duration = 0,
+			setShaderVector = {0, 0, 0, 0, 0}
+		}
+	})
+	Util.ClipSequence(self.reloadBarContainer, self.reloadBar, "Reloading", {
+		{
+			duration = 0,
+			setShaderVector = {0, 1, 0, 0, 0}
+		},
+		{
+			duration = (self.reloadTime * 1000),
+			setShaderVector = {0, 0, 0, 0, 0}
+		}
+	})
+
     self.reloadBarContainer:addElement(self.reloadBar)
 
-    self.left = LUI.UIImage.new()
-    self.left:setScaledLeftRight(true, false, -0.5, 0.5)
-    self.left:setScaledTopBottom(true, true, 0, 0)
-    self.left:setRGB(0.7, 0.7, 0.7)
-
-    self:addElement(self.left)
-
-    self.right = LUI.UIImage.new()
-    self.right:setScaledLeftRight(false, true, -0.5, 0.5)
-    self.right:setScaledTopBottom(true, true, 0, 0)
-    self.right:setRGB(0.7, 0.7, 0.7)
-
-    self:addElement(self.right)
-
-    self.reloadBarContainer.clipsPerState = {
+	self.reloadBarContainer.clipsPerState = {
         DefaultState = {
             DefaultClip = function()
-                self.reloadBarContainer:setupElementClipCounter(1)
-
-                self.reloadBar:completeAnimation()
-                self.reloadBar:setShaderVector(0, 0, 0, 0, 0)
-
-                self.reloadBarContainer.clipFinished(self.reloadBar, {})
+                Util.AnimateSequence(self.reloadBarContainer, "DefaultState")
             end
         },
         Reloading = {
             DefaultClip = function()
-                self.reloadBarContainer:setupElementClipCounter(1)
-
-                self.reloadBar:completeAnimation()
-                self.reloadBar:setShaderVector(0, 1, 0, 0, 0)
-                
-                local ModelVal = Engine.GetModelValue(Engine.GetModel(self:getModel(), "reloadTime"))
-
-                local ReloadTimeVal = nil
-                if ModelVal then
-                    ReloadTimeVal = Engine.GetModelValue(Engine.GetModel(Engine.GetModelForController(controller), ModelVal))
-                end
-
-                if ReloadTimeVal then
-                    self.reloadBar:beginAnimation("keyframe", ReloadTimeVal * 1000, false, false, CoD.TweenType.Linear)
-                end
-                self.reloadBar:setShaderVector(0, 0, 0, 0, 0)
-
-                if ReloadTimeVal then
-                    self.reloadBar:registerEventHandler("transition_complete_keyframe", self.reloadBarContainer.clipFinished)
-                else
-                    self.reloadBarContainer.clipFinished(self.reloadBar, {})
-                end
+                Util.AnimateSequence(self.reloadBarContainer, "Reloading")
             end
         }
     }
@@ -114,21 +91,25 @@ Warzone.GunshipWeaponName.new = function (menu, controller)
         }
     })
 
-    self.reloadBarContainer:linkToElementModel(self, "reloading", true, function(ModelRef)
-        local ModelVal = Engine.GetModelValue(ModelRef)
-        if ModelVal then
-            self.reloadBarContainer:subscribeToModel(Engine.GetModel(Engine.GetModelForController(controller), ModelVal), function(ModelRef2)
-                menu:updateElementState(self.reloadBarContainer, {
-                    name = "model_validation",
-                    menu = menu,
-                    modelValue = Engine.GetModelValue(ModelRef2),
-                    modelName = ModelVal
-                })
-            end)
-        end
-    end)
+    Util.LinkToWidget(self.reloadBarContainer, self, "reloading", function(modelValue)
+		Util.SubState(controller, menu, self.reloadBarContainer, modelValue)
+	end)
 
     self:addElement(self.reloadBarContainer)
+
+    self.left = LUI.UIImage.new()
+    self.left:setScaledLeftRight(true, false, -0.5, 0.5)
+    self.left:setScaledTopBottom(true, true, 0, 0)
+    self.left:setRGB(0.7, 0.7, 0.7)
+
+    self:addElement(self.left)
+
+    self.right = LUI.UIImage.new()
+    self.right:setScaledLeftRight(false, true, -0.5, 0.5)
+    self.right:setScaledTopBottom(true, true, 0, 0)
+    self.right:setRGB(0.7, 0.7, 0.7)
+
+    self:addElement(self.right)
 
     self.weaponName = LUI.UIText.new()
     self.weaponName:setScaledLeftRight(false, false, -50, 50)
@@ -137,17 +118,9 @@ Warzone.GunshipWeaponName.new = function (menu, controller)
     self.weaponName:setText("105MM")
     self.weaponName:setTTF("fonts/main_regular.ttf")
 
-    self.weaponName:linkToElementModel(self, "name", true, function(ModelRef)
-        local ModelVal = Engine.GetModelValue(ModelRef)
-        if ModelVal then
-            self.weaponName:subscribeToModel(Engine.GetModel(Engine.GetModelForController(controller), ModelVal), function(ModelRef2)
-                local ModelVal2 = Engine.GetModelValue(ModelRef2)
-                if ModelVal2 then
-                    self.weaponName:setText(LocalizeToUpperString(ModelVal2))
-                end
-            end)
-        end
-    end)
+    Util.LinkToWidget(self.weaponName, self, "active", function(modelValue)
+		Util.SubscribeToText_ToUpper(self.weaponName, controller, modelValue)
+	end)
 
     self:addElement(self.weaponName)
 
@@ -220,27 +193,20 @@ Warzone.GunshipWeaponName.new = function (menu, controller)
             condition = function(HudRef, ItemRef, StateTable)
                 local ActiveMdl = Engine.GetModelValue(Engine.GetModel(self:getModel(), "active"))
                 if ActiveMdl then
-                    return IsModelValueEqualTo(controller, ActiveMdl, 1)
+                    return IsModelValueTrue(controller, ActiveMdl)
                 end
                 return false
             end
         }
     })
 
-    --SubscribeToModelAndUpdateState()
-    self:linkToElementModel(self, "active", true, function(ModelRef)
-        local ModelVal = Engine.GetModelValue(ModelRef)
-        if ModelVal then
-            self:subscribeToModel(Engine.GetModel(Engine.GetModelForController(controller), ModelVal), function(ModelRef2)
-                menu:updateElementState(self, {
-                    name = "model_validation",
-                    menu = menu,
-                    modelValue = Engine.GetModelValue(ModelRef2),
-                    modelName = ModelVal
-                })
-            end)
-        end
-    end)
+	Util.LinkToWidget(self, self, "active", function(modelValue)
+		Util.SubState(controller, menu, self, modelValue)
+	end)
+
+	Util.LinkToWidget(self, self, "reloadTime", function(modelValue)
+		self.reloadTime = modelValue
+	end)
     
     if PostLoadFunc then
 		PostLoadFunc(self, controller, menu)

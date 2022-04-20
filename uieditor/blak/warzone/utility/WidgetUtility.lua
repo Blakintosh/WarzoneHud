@@ -179,6 +179,12 @@ Util.SubscribeToImage = function(self, controller, modelName)
     end)
 end
 
+Util.LinkWidgetToUIModel = function(self, controller, selfModelName, targetModelName)
+	Util.LinkToWidget(self, self, selfModelName, function(modelVal)
+		Engine.SetModelValue(Engine.GetModel(Engine.GetModelForController(controller), targetModelName), modelVal)
+	end)
+end
+
 --- Subscribes a parent to a Script Notify event.
 ---@param controller number The controller index of the client
 ---@param self userdata parent to link the notify to

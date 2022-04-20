@@ -2,13 +2,6 @@ Warzone.GunshipCrosshair = InheritFrom(LUI.UIElement)
 
 local function PreLoadFunc(self, controller)
     -- Incase this game is being stupid (so most likely)
-    Engine.CreateModel(Engine.GetModelForController(controller), "ac130")
-
-	for i = 0, 2 do
-		Engine.CreateModel(Engine.GetModelForController(controller), "ac130."..tostring(i))
-		Engine.CreateModel(Engine.GetModelForController(controller), "ac130."..tostring(i)..".active")
-    end
-
     Engine.CreateModel(Engine.GetModelForController(controller), "vehicle.pulseWeaponFired")
 end
 
@@ -170,20 +163,19 @@ Warzone.GunshipCrosshair.new = function (menu, controller)
         {
             stateName = "OoF",
             condition = function(HudRef, ItemRef, StateTable)
-                --return AlwaysTrue()
-                return IsModelValueEqualTo(controller, "ac130.0.active", 1)
+                return IsModelValueTrue(controller, "ac130.0.active")
             end
         },
         {
             stateName = "Frty",
             condition = function(HudRef, ItemRef, StateTable)
-                return IsModelValueEqualTo(controller, "ac130.1.active", 1)
+                return IsModelValueTrue(controller, "ac130.1.active")
             end
         },
         {
             stateName = "TwFv",
             condition = function(HudRef, ItemRef, StateTable)
-                return IsModelValueEqualTo(controller, "ac130.2.active", 1)
+                return IsModelValueTrue(controller, "ac130.2.active")
             end
         }
     })

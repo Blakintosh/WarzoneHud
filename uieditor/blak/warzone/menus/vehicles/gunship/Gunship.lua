@@ -3,20 +3,39 @@ require("ui.uieditor.blak.warzone.widgets.vehicles.gunship.GunshipHighResContain
 DataSources.GunshipWeapons = DataSourceHelpers.ListSetup("GunshipWeapons", function(InstanceRef)
 	local dataTable = {}
 
-	for i = 0, 2 do
-		local WorkingModel = "ac130."..tostring(i).."."
-
-		table.insert(dataTable, {
-			models = {
-				reloadTime = WorkingModel.."reloadTime",
-				reloading = WorkingModel.."reloading",
-				active = WorkingModel.."active",
-				name = WorkingModel.."name",
-				ammo = WorkingModel.."ammo", --Otherwise it won't refresh when we gert a script notify!
-				capacity = WorkingModel.."capacity",
-			}
-		})
-	end
+	-- 105MM
+	table.insert(dataTable, {
+		models = {
+			reloadTime = 6,
+			name = "105MM",
+			capacity = 1,
+			reloadingModel = "ac130.0.reloading",
+			activeModel = "ac130.0.active",
+			ammoModel = "ac130.0.ammo"
+		}
+	})
+	-- 40MM
+	table.insert(dataTable, {
+		models = {
+			reloadTime = 4,
+			name = "40MM",
+			capacity = 5,
+			reloadingModel = "ac130.1.reloading",
+			activeModel = "ac130.1.active",
+			ammoModel = "ac130.1.ammo"
+		}
+	})
+	-- 25MM
+	table.insert(dataTable, {
+		models = {
+			reloadTime = 2,
+			name = "25MM",
+			capacity = 30,
+			reloadingModel = "ac130.2.reloading",
+			activeModel = "ac130.2.active",
+			ammoModel = "ac130.2.ammo"
+		}
+	})
 
     return dataTable
 end)
@@ -31,29 +50,13 @@ local PreLoadFunc = function(HudRef, InstanceRef)
 
 	Engine.CreateModel(Engine.GetModelForController(InstanceRef), "ac130")
 
+	-- Create UIModel definitions
 	for i = 0, 2 do
 		Engine.CreateModel(Engine.GetModelForController(InstanceRef), "ac130."..tostring(i))
-		Engine.CreateModel(Engine.GetModelForController(InstanceRef), "ac130."..tostring(i)..".reloadTime")
 		Engine.CreateModel(Engine.GetModelForController(InstanceRef), "ac130."..tostring(i)..".reloading")
 		Engine.CreateModel(Engine.GetModelForController(InstanceRef), "ac130."..tostring(i)..".active")
-		Engine.CreateModel(Engine.GetModelForController(InstanceRef), "ac130."..tostring(i)..".name")
 		Engine.CreateModel(Engine.GetModelForController(InstanceRef), "ac130."..tostring(i)..".ammo")
-		--[[local ScriptNotifyModel = Engine.CreateModel(Engine.GetModelForController(InstanceRef), "ac130."..tostring(i)..".scriptNotify")
-
-		-- This should hopefully mean the script notify is not lost whenever the data source gets refreshed
-		HudRef:subscribeToModel(ScriptNotifyModel, function(ModelRef)
-			local ModelVal = Engine.GetModelValue(ModelRef)
-			if ModelVal then
-				LinkModelToScriptNotify(InstanceRef, HudRef, "ac130."..tostring(i)..".ammo", ModelVal)
-			end
-		end)]]
-
-		Engine.CreateModel(Engine.GetModelForController(InstanceRef), "ac130."..tostring(i)..".capacity")
 	end
-	
-    --[[LinkModelToScriptNotify(InstanceRef, HudRef, "ac130.0.ammo", "105_ammo")
-    LinkModelToScriptNotify(InstanceRef, HudRef, "ac130.1.ammo", "40_ammo")
-    LinkModelToScriptNotify(InstanceRef, HudRef, "ac130.2.ammo", "25_ammo")]]
 end
 
 LUI.createMenu.Gunship = function (controller)
@@ -76,6 +79,21 @@ LUI.createMenu.Gunship = function (controller)
 	menu.container:setScale(1 / _ResolutionScalar)
 
 	menu:addElement(menu.container)
+
+	-- UI Model subscriptions
+	Util.LinkWidgetToUIModel(menu, controller, "105_ammo", "ac130.0.ammo")
+	Util.LinkWidgetToUIModel(menu, controller, "40_ammo", "ac130.1.ammo")
+	Util.LinkWidgetToUIModel(menu, controller, "25_ammo", "ac130.2.ammo")
+
+	Util.LinkWidgetToUIModel(menu, controller, "105_reloading", "ac130.0.reloading")
+	Util.LinkWidgetToUIModel(menu, controller, "40_reloading", "ac130.1.reloading")
+	Util.LinkWidgetToUIModel(menu, controller, "25_reloading", "ac130.2.reloading")
+
+	Util.LinkToWidget(menu, menu, "active_weapon", function(modelVal)
+		for i = 0, 2 do
+			Engine.SetModelValue(Engine.GetModel(Engine.GetModelForController(controller), "ac130."..i..".active"), (i == modelVal))
+		end
+	end)
 	
 	menu:processEvent({name = "menu_loaded", controller = controller})
 	menu:processEvent({name = "update_state", menu = menu})
