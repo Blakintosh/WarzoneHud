@@ -54,6 +54,10 @@ Util.AnimateNextSegment = function(parent, self, event, sequenceData, lastSequen
     end
 
     local sequence = sequenceTable[index]
+	local duration = sequence.duration
+	if type(duration) == "function" then
+		duration = duration()
+	end
 
     if sequence.repeat_start == true then
         Util.AnimateNextSegment(parent, self, {}, sequenceData, lastSequence, sequenceTable, index + 1, sequence.repeat_count, extraData)
@@ -70,13 +74,13 @@ Util.AnimateNextSegment = function(parent, self, event, sequenceData, lastSequen
         end
         Util.AnimateNextSegment(parent, self, {}, sequenceData, lastSequence, sequenceTable, goingTo + 1, repeatCount, extraData)
     else
-        if sequence.duration > 0 then
+        if duration > 0 then
             local tweenType = Util.TweenGraphs.linear
             if sequence.interpolation then
                 tweenType = sequence.interpolation
             end
 
-            Util.Tween.interpolate(self, sequence.duration, tweenType, function(progress)
+            Util.Tween.interpolate(self, duration, tweenType, function(progress)
                 -- Iterate through the sequence table to interpolate to desired values
                 for k,value in pairs(sequence) do
                     if k ~= "interpolation" and k ~= "duration" and k ~= "exec" and type(value) ~= "function" then
@@ -126,7 +130,7 @@ Util.AnimateNextSegment = function(parent, self, event, sequenceData, lastSequen
             end
         end
 
-        if sequence.duration > 0 then
+        if duration > 0 then
             self:registerEventHandler("tween_complete", function(self, event)
                 Util.AnimateNextSegment(parent, self, event, sequenceData, sequence, sequenceTable, index + 1, repeatCount, extraData)
             end)
@@ -155,10 +159,14 @@ Util.AnimateSequence = function(self, identifier, extraData)
         v.widget:completeAnimation()
 
         local sequence = v.sequences[1]
+		local duration = sequence.duration
+		if type(duration) == "function" then
+			duration = duration()
+		end
         if sequence.repeat_start == true then
             Util.AnimateNextSegment(self, v.widget, {}, SequenceData, {}, v.sequences, 2, sequence.repeat_count, extraData)
         else
-            if sequence.duration > 0 then
+            if duration > 0 then
                 error("Bad Sequence code. Script needs a 0 duration initial clip to get start values.")
             end
 
@@ -176,7 +184,7 @@ Util.AnimateSequence = function(self, identifier, extraData)
                 end
             end
 
-            if sequence.duration > 0 then
+            if duration > 0 then
                 error("Bad Sequence Code.")
                 v.widget:registerEventHandler("tween_complete", function(widget, event)
                     Util.AnimateNextSegment(self, v.widget, event, SequenceData, sequence, v.sequences, 2, 0, extraData)

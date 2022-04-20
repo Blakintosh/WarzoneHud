@@ -52,7 +52,7 @@ function Warzone.GunshipHighResContainer.new(menu, controller)
 	self:addElement(self.crosshair)
     
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(self)
-        self.weapons:close()
+        --self.weapons:close()
         self.crosshair:close()
         self.visionLabel:close()
     end)

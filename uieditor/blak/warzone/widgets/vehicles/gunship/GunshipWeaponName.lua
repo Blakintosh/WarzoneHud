@@ -84,7 +84,7 @@ Warzone.GunshipWeaponName.new = function (menu, controller)
         {
             stateName = "Reloading",
             condition = function(HudRef, ItemRef, StateTable)
-                local ReloadingMdl = Engine.GetModelValue(Engine.GetModel(self:getModel(), "reloading"))
+                local ReloadingMdl = Engine.GetModelValue(Engine.GetModel(self:getModel(), "reloadingModel"))
                 if ReloadingMdl then
                     return IsModelValueEqualTo(controller, ReloadingMdl, 1)
                 end
@@ -93,7 +93,7 @@ Warzone.GunshipWeaponName.new = function (menu, controller)
         }
     })
 
-    Util.LinkToWidget(self.reloadBarContainer, self, "reloading", function(modelValue)
+    Util.LinkToWidget(self.reloadBarContainer, self, "reloadingModel", function(modelValue)
 		Util.SubState(controller, menu, self.reloadBarContainer, modelValue)
 	end)
 
@@ -120,9 +120,7 @@ Warzone.GunshipWeaponName.new = function (menu, controller)
     self.weaponName:setText("105MM")
     self.weaponName:setTTF("fonts/main_regular.ttf")
 
-    Util.LinkToWidget(self.weaponName, self, "active", function(modelValue)
-		Util.SubscribeToText_ToUpper(self.weaponName, controller, modelValue)
-	end)
+	Util.LinkToWidgetText(self.weaponName, self, "name", true)
 
     self:addElement(self.weaponName)
 
@@ -193,7 +191,7 @@ Warzone.GunshipWeaponName.new = function (menu, controller)
         {
             stateName = "Active",
             condition = function(HudRef, ItemRef, StateTable)
-                local ActiveMdl = Engine.GetModelValue(Engine.GetModel(self:getModel(), "active"))
+                local ActiveMdl = Engine.GetModelValue(Engine.GetModel(self:getModel(), "activeModel"))
                 if ActiveMdl then
                     return IsModelValueTrue(controller, ActiveMdl)
                 end
@@ -202,7 +200,7 @@ Warzone.GunshipWeaponName.new = function (menu, controller)
         }
     })
 
-	Util.LinkToWidget(self, self, "active", function(modelValue)
+	Util.LinkToWidget(self, self, "activeModel", function(modelValue)
 		Util.SubState(controller, menu, self, modelValue)
 	end)
 

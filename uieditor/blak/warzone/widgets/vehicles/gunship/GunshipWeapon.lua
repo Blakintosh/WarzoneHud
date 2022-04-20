@@ -32,7 +32,7 @@ Warzone.GunshipWeapon.new = function (menu, controller)
 
     self.ammo:setGlowText("0")
 
-    Util.LinkToWidget(self.ammo, self, "ammo", function(modelValue)
+    Util.LinkToWidget(self.ammo, self, "ammoModel", function(modelValue)
 		Util.Subscribe(self.ammo, controller, modelValue, function(modelValue2)
 			self.ammo:setGlowText(modelValue2)
 		end)
@@ -62,7 +62,7 @@ Warzone.GunshipWeapon.new = function (menu, controller)
 
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function (sender)
 		sender.ammo:close()
-        sender.caliberLabel:close()
+        --sender.caliberLabel:close()
 	end)
     
     if PostLoadFunc then
