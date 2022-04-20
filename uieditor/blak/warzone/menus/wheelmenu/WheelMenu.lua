@@ -64,7 +64,7 @@ local PostLoadFunc = function ( menu, controller )
     menu.disableBlur = true
 	menu.currentFocusWidget = nil
 	menu.previousFocusWidget = nil
-	menu.currentAbilitySelected = nil
+	menu.currentOptionSelected = nil
 	menu.degrees = 0
 	menu.length = 0
 
@@ -82,8 +82,7 @@ local PostLoadFunc = function ( menu, controller )
 	
 	menu.updateButtonStates = function ( buttonIndex, requestedType, confirmAsSelected )
 		if requestedType == nil then
-			local model = Engine.GetModelValue( Engine.GetModel( Engine.GetModelForController( controller ), "hudItems.cybercomRequestedType" ) ) or 0
-			requestedType = model + 1
+			requestedType = 1
 		end
 
 		local newIndex = false
@@ -95,7 +94,7 @@ local PostLoadFunc = function ( menu, controller )
 		if buttonIndex == nil then
 			if Engine.GetModelValue( selectedModel ) == nil then
 				local f5_local4 = 1
-				for f5_local5 = 1, CoD.CACUtility.maxAbilityWheelItems, 1 do
+				for f5_local5 = 1, 8, 1 do
 					if CoD.SafeGetModelValue( wheelMenuModel, "WheelMenuOptions." .. f5_local5 .. ".enabled" ) then
 						f5_local4 = f5_local5
 						break
@@ -109,11 +108,12 @@ local PostLoadFunc = function ( menu, controller )
 		end
 
 		local f5_local4 = Engine.GetModel( wheelMenuModel, "WheelMenuOptions." .. buttonIndex )
+
+		-- This was a check for if enabled, reinstate if you don't want disabled elements to show any name label
 		if true then
-		--if CoD.SafeGetModelValue( f5_local4, "enabled" ) == true then
 			menu.currentFocusWidget = menu.container["wheelButton" .. buttonIndex]
 			if confirmAsSelected == nil then
-				menu.currentAbilitySelected = menu.currentFocusWidget
+				menu.currentOptionSelected = menu.currentFocusWidget
 				Engine.SetModelValue( selectedModel, buttonIndex )
 			end
 		end
@@ -122,8 +122,8 @@ local PostLoadFunc = function ( menu, controller )
 		if menu.currentFocusWidget ~= menu.previousFocusWidget or newIndex then
 			if f5_local4 ~= nil then
 				local SelectedName = Engine.GetModel( f5_local4, "name" )
-				if SelectedName then
-					Engine.SetModelValue(Engine.GetModel( wheelMenuModel, "focusedName" ), Engine.GetModelValue(SelectedName) or "")
+				if SelectedName and Engine.GetModel( wheelMenuModel, "focusedName" ) then
+					Engine.SetModelValue(Engine.GetModel( wheelMenuModel, "focusedName" ), (Engine.GetModelValue(SelectedName) or ""))
 				end
 			end
 
@@ -168,23 +168,23 @@ local PostLoadFunc = function ( menu, controller )
 		end
 	end )
 
-	-- Plays the close clip & sends script the selected ability once menu gets shut
+	-- Plays the close clip & sends script the selected option once menu gets shut
 	local CloseOriginal = menu.close
 	menu.close = function ( menu )
-		local selectedAbility = menu.currentAbilitySelected
+		local selectedOption = menu.currentOptionSelected
 
-		if selectedAbility then
-			selectedAbility = menu.currentAbilitySelected:getModel( controller, "name" )
+		if selectedOption then
+			selectedOption = menu.currentOptionSelected:getModel( controller, "name" )
 		end
 
-		if selectedAbility ~= nil then
-			Engine.SendMenuResponse( controller, "WheelMenu", Engine.GetModelValue( selectedAbility ) .. "," .. menu.currentAbilitySelected.buttonNum )
+		if selectedOption ~= nil then
+			Engine.SendMenuResponse( controller, "WheelMenu", Engine.GetModelValue( selectedOption ) .. "," .. menu.currentOptionSelected.buttonNum )
 		else
-			Engine.SendMenuResponse( controller, "WheelMenu", "noAbilitySelected" )
+			Engine.SendMenuResponse( controller, "WheelMenu", "noOptionSelected" )
 		end
 
 		if CoD.isPC then
-			Engine.SendClientScriptEntityNotify( controller, "tactical_menu_close" )
+			Engine.SendClientScriptEntityNotify( controller, "wheel_menu_close" )
 		end
 
 		menu.m_inputDisabled = true
@@ -205,25 +205,26 @@ local PostLoadFunc = function ( menu, controller )
 		
 		menu.onMouseAction = function ( focusedButton, event )
 			if event.isMouse and focusedButton.buttonNum and Engine.GetModelValue( Engine.GetModel( Engine.GetModel( Engine.GetModel( Engine.GetModelForController( controller ), "WheelMenu" ), "WheelMenuOptions." .. focusedButton.buttonNum ), "enabled" ) ) == true then
-				menu.currentAbilitySelected = focusedButton
+				menu.currentOptionSelected = focusedButton
 
-				-- Sets the ability model to the specified button's
-				--Engine.SetModelValue( Engine.GetModel( Engine.GetModelForController( controller ), "WheelMenu.Selected" .. Engine.GetModelValue( Engine.GetModel( Engine.GetModelForController( controller ), "hudItems.cybercomActiveType" ) ) + 1 ), focusedButton.buttonNum )
-				
-				menu:close()
+				focusedButton.decor:setState("Pulse")
+
+				focusedButton.decor:registerEventHandler("clip_over", function(sender, event)
+					menu:close()
+				end)
 			end
 		end
 	end
 
-	-- Assigns indexes to each of the individual ability buttons.
+	-- Assigns indexes to each of the individual wheel buttons.
 	for i = 1, 8, 1 do
-		local abilityButton = menu.container["wheelButton" .. i]
-		if not abilityButton then return end
-		abilityButton.navigation = {}
+		local wheelButton = menu.container["wheelButton" .. i]
+		if not wheelButton then return end
+		wheelButton.navigation = {}
 		if CoD.useMouse then
-			abilityButton.buttonNum = i
-			abilityButton:registerEventHandler( "gain_focus", menu.onMouseFocus )
-			abilityButton:registerEventHandler( "button_action", menu.onMouseAction )
+			wheelButton.buttonNum = i
+			wheelButton:registerEventHandler( "gain_focus", menu.onMouseFocus )
+			wheelButton:registerEventHandler( "button_action", menu.onMouseAction )
 		end
 	end
 end
@@ -247,31 +248,6 @@ LUI.createMenu.WheelMenu = function ( controller )
 	menu.container:setScale(1 / _ResolutionScalar)
 	menu.container.id = "container"
 	menu:addElement(menu.container)
-	
-	--[[local Description = CoD.AbilityWheel_Description.new( menu, controller )
-	Description:setLeftRight( false, false, -116.5, 116.5 )
-	Description:setTopBottom( false, false, -171, 277 )
-	Description:setRFTMaterial( LUI.UIImage.GetCachedMaterial( "ui_add" ) )
-	Description:subscribeToGlobalModel( controller, "WheelMenu", "selectedAbilityDisplayDesc", function ( modelRef )
-		local selectedAbilityDisplayDesc = Engine.GetModelValue( modelRef )
-		if selectedAbilityDisplayDesc then
-			Description.AbilityWheelDescriptionBottom.TextDesc:setText( Engine.Localize( selectedAbilityDisplayDesc ) )
-		end
-	end )
-	Description:subscribeToGlobalModel( controller, "WheelMenu", "selectedAbilityDisplayName", function ( modelRef )
-		local selectedAbilityDisplayName = Engine.GetModelValue( modelRef )
-		if selectedAbilityDisplayName then
-			Description.AbilityWheelDescriptionText.TextName:setText( Engine.Localize( selectedAbilityDisplayName ) )
-		end
-	end )
-	Description:subscribeToGlobalModel( controller, "WheelMenu", "selectedAbilityDisplayIcon", function ( modelRef )
-		local selectedAbilityDisplayIcon = Engine.GetModelValue( modelRef )
-		if selectedAbilityDisplayIcon then
-			Description.AbilityWheelEnemyTypeIcon:setImage( RegisterImage( selectedAbilityDisplayIcon ) )
-		end
-	end )
-	menu:addElement( Description )
-	menu.Description = Description]]
 
 	menu.clipsPerState = {
 		DefaultState = {
@@ -298,44 +274,6 @@ LUI.createMenu.WheelMenu = function ( controller )
 
 		return element:dispatchEventToChildren( event )
 	end )
-
-	-- Cycle one to the left
-	--[[menu:AddButtonCallbackFunction( menu, controller, Enum.LUIButton.LUI_KEY_LB, nil, function ( self, menu, controller, parent )
-		if IsMulticoreActivated( controller ) then
-			ChangeAbilityWheelItems( controller, menu, -1 )
-			PlaySoundSetSound( menu, "left_bumper" )
-			UpdateMenuState( menu, event )
-			return true
-		else
-			
-		end
-	end, function ( self, menu, controller )
-		CoD.Menu.SetButtonLabel( menu, Enum.LUIButton.LUI_KEY_LB, "" )
-		if IsMulticoreActivated( controller ) then
-			return false
-		else
-			return false
-		end
-	end, false )
-
-	-- Cycle one to the right
-	menu:AddButtonCallbackFunction( menu, controller, Enum.LUIButton.LUI_KEY_RB, nil, function ( self, menu, controller, parent )
-		if IsMulticoreActivated( controller ) then
-			ChangeAbilityWheelItems( controller, menu, 1 )
-			PlaySoundSetSound( menu, "right_bumper" )
-			UpdateMenuState( menu, event )
-			return true
-		else
-			
-		end
-	end, function ( self, menu, controller )
-		CoD.Menu.SetButtonLabel( menu, Enum.LUIButton.LUI_KEY_RB, "" )
-		if IsMulticoreActivated( controller ) then
-			return false
-		else
-			return false
-		end
-	end, false )]]
 
 	-- Close
 	menu:AddButtonCallbackFunction( menu, controller, Enum.LUIButton.LUI_KEY_XBB_PSCIRCLE, nil, function ( sender, menu, controller, parent )

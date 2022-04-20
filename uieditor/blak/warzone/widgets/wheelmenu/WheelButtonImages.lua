@@ -1,12 +1,5 @@
 Warzone.WheelButtonImages = InheritFrom( LUI.UIElement )
 
-local function PostLoadFunc(self, controller, menu)
-	self.setWheelRotation = function(self, angle)
-		self:setZRot(angle)
-		self.icon:setZRot(-angle)
-	end
-end
-
 Warzone.WheelButtonImages.new = function ( menu, controller )
 	local self = LUI.UIElement.new()
 	if PreLoadFunc then
@@ -18,6 +11,38 @@ Warzone.WheelButtonImages.new = function ( menu, controller )
 	self.soundSet = "none"
 	self:makeFocusable()
 	self.anyChildUsesUpdateState = true
+
+	self.expanded = LUI.UIImage.new()
+	self.expanded:setScaledLeftRight(false, false, -100, 100)
+	self.expanded:setScaledTopBottom(false, false, -280, -72)
+	self.expanded:setImage(RegisterImage("radial_expanded_kbm_8"))
+
+	Util.ClipSequence(self, self.expanded, "DefaultUp", {
+		{
+			duration = 0,
+			setAlpha = 0
+		}
+	})
+	Util.ClipSequence(self, self.expanded, "DefaultOver", {
+		{
+			duration = 0,
+			setAlpha = 1
+		}
+	})
+	Util.ClipSequence(self, self.expanded, "DisabledUp", {
+		{
+			duration = 0,
+			setAlpha = 0
+		}
+	})
+	Util.ClipSequence(self, self.expanded, "DisabledOver", {
+		{
+			duration = 0,
+			setAlpha = 1
+		}
+	})
+
+	self:addElement(self.expanded)
 
 	self.slice = LUI.UIImage.new()
 	self.slice:setScaledLeftRight(false, false, -170, 170)
@@ -108,6 +133,36 @@ Warzone.WheelButtonImages.new = function ( menu, controller )
 			setRGB = Util.ConvertColorToTable(Util.Swatches.ScorestreakButtonUnavailable)
 		}
 	})
+	Util.ClipSequence(self, self.icon, "Pulse", {
+		{
+			duration = 0,
+			setAlpha = 1
+		},
+		{
+			duration = 30,
+			setAlpha = 0
+		},
+		{
+			duration = 30,
+			setAlpha = 1
+		},
+		{
+			duration = 30,
+			setAlpha = 0
+		},
+		{
+			duration = 30,
+			setAlpha = 1
+		},
+		{
+			duration = 30,
+			setAlpha = 0
+		},
+		{
+			duration = 30,
+			setAlpha = 1
+		}
+	})
 
 	self:addElement(self.icon)
 	
@@ -118,7 +173,7 @@ Warzone.WheelButtonImages.new = function ( menu, controller )
 			end,
 			Focus = function ()
 				Util.AnimateSequence(self, "DefaultOver")
-			end,
+			end
 		},
 		Inactive = {
 			DefaultClip = function ()
@@ -126,7 +181,12 @@ Warzone.WheelButtonImages.new = function ( menu, controller )
 			end,
 			Focus = function ()
 				Util.AnimateSequence(self, "DisabledOver")
-			end,
+			end
+		},
+		Pulse = {
+			DefaultClip = function()
+				Util.AnimateSequence(self, "Pulse")
+			end
 		}
 	}
 	self:mergeStateConditions( {

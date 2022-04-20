@@ -25,6 +25,13 @@ function Warzone.HighResolutionContainer.new(menu, controller)
 
     self:addElement(self.ammo)
 
+	-- Killstreak
+	self.killstreak = Util.CreateContainedHudElement(menu, controller, Warzone.Killstreak)
+	self.killstreak:setScaledLeftRight(false, true, -95, -18)
+	self.killstreak:setScaledTopBottom(false, true, -217, -175)
+
+	self:addElement(self.killstreak)
+
     -- Squad/Score Widget
     self.squad = Util.CreateContainedHudElement(menu, controller, Warzone.Squad)
     self.squad:setScaledLeftRight(true, false, 0, 400)
