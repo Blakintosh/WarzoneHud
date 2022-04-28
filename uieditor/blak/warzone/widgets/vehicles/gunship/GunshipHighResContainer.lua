@@ -50,6 +50,26 @@ function Warzone.GunshipHighResContainer.new(menu, controller)
 	self.crosshair:setScaledTopBottom(true, false, 100, 620)
 
 	self:addElement(self.crosshair)
+
+	self.test = LUI.UIImage.new()
+	self.test:setScaledLeftRight(true, false, 300, 364)
+	self.test:setScaledTopBottom(true, false, 300, 364)
+
+	--Util.SubscribeToImage(self.test, controller, "VehicleController.left_stick_button_image")
+	self.test:subscribeToGlobalModel(controller, "VehicleController", "mouse_wheelup_button_image", function (ModelRef)
+		local ModelValue = Engine.GetModelValue(ModelRef)
+		if ModelValue then
+			self.test:setImage(RegisterImage(ModelValue))
+		end
+	end)
+
+	self:addElement(self.test)
+
+	self.footer = Warzone.MenuFooter.new(menu, controller)
+    self.footer:setScaledLeftRight(true, true, 0, 0)
+    self.footer:setScaledTopBottom(false, true, -48, 0)
+
+    self:addElement(self.footer)
     
     LUI.OverrideFunction_CallOriginalSecond(self, "close", function(self)
         --self.weapons:close()

@@ -1,4 +1,5 @@
 require("ui.uieditor.blak.warzone.widgets.wheelmenu.WheelButton")
+require("ui.uieditor.blak.warzone.widgets.userinterface.layout.MenuFooter")
 
 Warzone.WheelMenuHighResContainer = InheritFrom(LUI.UIElement)
 
@@ -171,6 +172,12 @@ function Warzone.WheelMenuHighResContainer.new(menu, controller)
 	}
 
 	CoD.Menu.AddNavigationHandler( menu, self, controller )
+
+	self.footer = Warzone.MenuFooter.new(menu, controller)
+    self.footer:setScaledLeftRight(true, true, 0, 0)
+    self.footer:setScaledTopBottom(false, true, -48, 0)
+
+    self:addElement(self.footer)
 
     self:registerEventHandler("gain_focus", function (Sender, Event)
 		if Sender.m_focusable then

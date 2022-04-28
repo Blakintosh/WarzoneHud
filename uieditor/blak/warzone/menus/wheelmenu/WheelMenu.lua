@@ -275,21 +275,40 @@ LUI.createMenu.WheelMenu = function ( controller )
 		return element:dispatchEventToChildren( event )
 	end )
 
-	-- Close
-	menu:AddButtonCallbackFunction( menu, controller, Enum.LUIButton.LUI_KEY_XBB_PSCIRCLE, nil, function ( sender, menu, controller, parent )
-		if not IsGamepad( controller ) then
-			Close( menu, controller )
+	-- Button action
+	menu:AddButtonCallbackFunction( menu, controller, Enum.LUIButton.LUI_KEY_XBA_PSCROSS, nil, function ( sender, menu, controller, parent )
+		if IsGamepad( controller ) and 
+			menu.currentFocusWidget.buttonNum and 
+			Engine.GetModelValue( Engine.GetModel( Engine.GetModel( Engine.GetModel( Engine.GetModelForController( controller ), "WheelMenu" ), "WheelMenuOptions." .. menu.currentFocusWidget.buttonNum ), "enabled" ) ) == true 
+			then
+			menu.currentOptionSelected = menu.currentFocusWidget
+
+			menu.currentOptionSelected.decor:setState("Pulse")
+
+			menu.currentOptionSelected.decor:registerEventHandler("clip_over", function(sender, event)
+				menu:close()
+			end)
 			return true
-		else
-			
 		end
+		return false
 	end, function ( sender, menu, controller )
-		CoD.Menu.SetButtonLabel( menu, Enum.LUIButton.LUI_KEY_XBB_PSCIRCLE, "MENU_BACK" )
-		if not IsGamepad( controller ) then
+		CoD.Menu.SetButtonLabel( menu, Enum.LUIButton.LUI_KEY_XBA_PSCROSS, "MENU_SELECT" )
+		if IsGamepad( controller ) and
+			menu.currentFocusWidget.buttonNum and 
+			Engine.GetModelValue( Engine.GetModel( Engine.GetModel( Engine.GetModel( Engine.GetModelForController( controller ), "WheelMenu" ), "WheelMenuOptions." .. menu.currentFocusWidget.buttonNum ), "enabled" ) ) == true then
 			return true
 		else
 			return false
 		end
+	end, false )
+
+	-- Close
+	menu:AddButtonCallbackFunction( menu, controller, Enum.LUIButton.LUI_KEY_XBB_PSCIRCLE, nil, function ( sender, menu, controller, parent )
+		Close( menu, controller )
+		return true
+	end, function ( sender, menu, controller )
+		CoD.Menu.SetButtonLabel( menu, Enum.LUIButton.LUI_KEY_XBB_PSCIRCLE, "MENU_BACK" )
+		return true
 	end, false )
 	
 	menu:processEvent( {
