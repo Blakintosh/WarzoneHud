@@ -17,13 +17,13 @@ end
 
 local SetupWaypoint = function (Sender, Event)
     if Sender.objective.id then
-        --[[if Sender.objective.id == "zm_wz_weapon_prompt" then
+        if Sender.objective.id == "zm_wz_weapon_prompt" then
             Sender.gameTypeContainer = Warzone.WeaponPickupContainer.new(Sender.menu, Event.controller)
         elseif Sender.objective.id == "zm_wz_perk_prompt" then
             Sender.gameTypeContainer = Warzone.PerkPickupContainer.new(Sender.menu, Event.controller)
-        else]]
+        else
             Sender.gameTypeContainer = CoD.GenericWaypointContainer.new(Sender.menu, Event.controller)
-        --end
+        end
         Sender.gameTypeContainer:setLeftRight(true, true, 0, 0)
         Sender.gameTypeContainer:setTopBottom(true, true, 0, 0)
                     

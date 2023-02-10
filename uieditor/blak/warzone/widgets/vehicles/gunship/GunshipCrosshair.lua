@@ -1,7 +1,7 @@
 Warzone.GunshipCrosshair = InheritFrom(LUI.UIElement)
 
 local function PreLoadFunc(self, controller)
-    -- Incase this game is being stupid (so most likely)
+    -- Incase this game is being dumb
     Engine.CreateModel(Engine.GetModelForController(controller), "vehicle.pulseWeaponFired")
 end
 

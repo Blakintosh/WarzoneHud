@@ -8,7 +8,7 @@ DebugPrint = function(message)
     Blak.DebugUtils.Log(message)
 end
 
-VERSION_WATERMARK = "^1closed alpha ^7private build published on 11/04/2022"
+VERSION_WATERMARK = "^1alpha Jan 16 2023"
 
 require("ui.uieditor.blak.warzone.utility.Common")
 require("ui.uieditor.blak.warzone.utility.HudUtility")

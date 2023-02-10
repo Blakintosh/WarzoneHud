@@ -79,6 +79,7 @@ Blak.DebugUtils.SafeRunFunction = function(FunctionRef, Note, WriteToLogs)
                 Engine.ComError(Enum.errorCode.ERROR_UI, "Blak.DebugUtils.SafeRunFunction call failed. Error:\n"..result)
             else
                 Blak.DebugUtils.Log("Blak.DebugUtils.SafeRunFunction call failed. Error:\n"..result)
+				Console.PrintError("Blak.DebugUtils.SafeRunFunction call failed. Error:\n"..result)
             end
             
         else
@@ -86,6 +87,7 @@ Blak.DebugUtils.SafeRunFunction = function(FunctionRef, Note, WriteToLogs)
                 Engine.ComError(Enum.errorCode.ERROR_UI, "Blak.DebugUtils.SafeRunFunction call failed (Noted as: "..Note.."). Error:\n"..result)
             else
                 Blak.DebugUtils.Log("Blak.DebugUtils.SafeRunFunction call failed (Noted as: "..Note.."). Error:\n"..result)
+				Console.PrintError("Blak.DebugUtils.SafeRunFunction call failed (Noted as: "..Note.."). Error:\n"..result)
             end
         end
     elseif result then

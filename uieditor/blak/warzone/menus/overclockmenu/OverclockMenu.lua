@@ -39,20 +39,6 @@ local function PreLoadFunc(menu, controller)
             end
         end
     end)
-
-    -- This is a pretty ghetto solution to sending the weapon comment to the info widget, but I had a lot of trouble getting anything to work so even though I found the problem, I cba changing this
-    --[[menu.setWeaponInformation = function(menu, ModelRef)
-        local CommentVal = Engine.GetModelValue(Engine.GetModel(ModelRef, "comment"))
-
-        if CommentVal then
-            local CostVal = Engine.GetModelValue(Engine.GetModel(ModelRef, "cost"))
-            if CostVal then
-                menu.weaponInformation.comment:setText(Engine.Localize(Engine.GetIString(CommentVal, "CS_LOCALIZED_STRINGS"), CostVal))
-            else
-                menu.weaponInformation.comment:setText(Engine.Localize(Engine.GetIString(CommentVal, "CS_LOCALIZED_STRINGS")))
-            end
-        end
-    end]]
 end
 
 --LUI.hudMenuType.OverclockMenu = "hud"

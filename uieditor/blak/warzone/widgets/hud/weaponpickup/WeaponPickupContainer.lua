@@ -1,6 +1,7 @@
 require("ui.uieditor.blak.warzone.widgets.hud.weaponpickup.WeaponPickup")
 
 local SetupWaypointContainer = function (self, objective)
+	Blak.DebugUtils.SafeRunFunction(function()
 	if objective.objId then
 		self.objId = objective.objId
 
@@ -30,9 +31,11 @@ local SetupWaypointContainer = function (self, objective)
 
 		waypointWidget.WaypointText.text:setText(Engine.Localize(waypointWidget.waypoint_label_default))]]
 	end
+end, "SetupWaypointContainer")
 end
 
 local UpdateWaypoint = function (self, objective)
+	Blak.DebugUtils.SafeRunFunction(function()
 	self.Waypoint:update(objective)
 	--[[if objective.objState ~= nil then
 		if objective.objState == CoD.OBJECTIVESTATE_DONE then
@@ -46,9 +49,11 @@ local UpdateWaypoint = function (self, objective)
 			self:hide()
 		end
 	end]]
+end, "UpdateWaypoint")
 end
 
 local ShouldShowWaypoint = function (self, objective)
+	return Blak.DebugUtils.SafeRunFunction(function()
 	local objectiveController = objective.controller
 	local waypointWidget = self.Waypoint
 	local objectiveTeam = Engine.GetObjectiveTeam(objectiveController, self.objId)
@@ -57,6 +62,7 @@ local ShouldShowWaypoint = function (self, objective)
 	else
 		return waypointWidget:isOwnedByMyTeam(objectiveController)
 	end
+end, "ShouldShowWaypoint")
 end
 
 local PostLoadFunc = function (self)

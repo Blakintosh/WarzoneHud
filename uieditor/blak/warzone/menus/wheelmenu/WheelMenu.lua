@@ -118,7 +118,7 @@ local PostLoadFunc = function ( menu, controller )
 			end
 		end
 
-		-- What a mess [CBA]
+		-- Change focus
 		if menu.currentFocusWidget ~= menu.previousFocusWidget or newIndex then
 			if f5_local4 ~= nil then
 				local SelectedName = Engine.GetModel( f5_local4, "name" )

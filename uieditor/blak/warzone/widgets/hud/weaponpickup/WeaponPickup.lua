@@ -1,9 +1,10 @@
 require("ui.uieditor.blak.warzone.widgets.hud.weaponpickup.WeaponPickupMainBody")
 
 local SetupWaypoint = function (self, objective)
+	Blak.DebugUtils.SafeRunFunction(function()
 	if objective.objId then
-		self:setLeftRight(false, false, 0, 0)
-		self:setTopBottom(false, false, 0, 0)
+		self:setLeftRight(false, false, -160, 160)
+		self:setTopBottom(false, false, -70, 70)
 		self.objId = objective.objId
 		local objectiveId = self.objective.id
 		self.waypoint_label_default = self.objective.waypoint_text
@@ -77,6 +78,7 @@ local SetupWaypoint = function (self, objective)
 		end
 		--distanceIndicator:setupDistanceIndicator(objEnt, fadeWhenTargeted == nil, self.show_distance)
 
+		
 		self.snapToCenterWhenContested = true
 		self.snapToCenterForObjectiveTeam = true
 		self.snapToCenterForOtherTeams = true
@@ -117,6 +119,7 @@ local SetupWaypoint = function (self, objective)
 			--self.CaptureZoneNumberContainer.NumberShadow:setImage(RegisterImage("t7_zm_hd_num_" .. objSubstring .. "_shadow"))
 		end
 	end
+end, "SetupWaypoint", true)
 end
 
 local Unused_TeamShenanigans = function (self, probController)
@@ -132,6 +135,7 @@ local Unused_GetObjectiveTeam = function (self, controllerProbably)
 end
 
 local GetObjectivePlayerUsing = function (self, controller, f4_arg2, f4_arg3)
+	return Blak.DebugUtils.SafeRunFunction(function()
 	if Engine.IsPlayerInVehicle(controller) == true then
 		return false
 	elseif Engine.IsPlayerRemoteControlling(controller) == true then
@@ -141,55 +145,7 @@ local GetObjectivePlayerUsing = function (self, controller, f4_arg2, f4_arg3)
 	else
 		return Engine.ObjectiveIsPlayerUsing(controller, self.objId, Engine.GetPredictedClientNum(controller))
 	end
-end
-
-local f0_local6 = function (f5_arg0, f5_arg1)
-	f5_arg0.isClamped = true
-	f5_arg0.WaypointArrowContainer:setupEdgePointer(90)
-	f5_arg0.WaypointArrowContainer.WaypointArrowWidget:setState("DefaultState")
-	local f5_local0 = f5_arg0.WaypointText
-	local f5_local1
-	if f5_arg0.snapped then
-		f5_local1 = 1
-		if not f5_local1 then
-
-		else
-			f5_local0:setAlpha(f5_local1)
-			f5_arg0.WaypointDistanceIndicatorContainer:setAlpha(0)
-		end
-	end
-	f5_local1 = 0
-end
-
-local Unused_Unk = function (f6_arg0, f6_arg1)
-	f6_arg0.isClamped = false
-	f6_arg0.WaypointArrowContainer:setupUIElement()
-	f6_arg0.WaypointArrowContainer:setZRot(0)
-	f6_arg0.WaypointArrowContainer.WaypointArrowWidget:setState("DefaultState")
-	f6_arg0.WaypointText:setAlpha(1)
-	f6_arg0.WaypointDistanceIndicatorContainer:setAlpha(1)
-end
-
-local Unused_ObjectiveIconShenanigans = function (self, f7_arg1, f7_arg2, f7_arg3, color)
-	if f7_arg3 then
-		if color then
-			Engine.SetObjectiveIcon(f7_arg1, f7_arg2, self.mapIconType, f7_arg3, color.r, color.g, color.b)
-			Engine.SetObjectiveIcon(f7_arg1, f7_arg2, CoD.GametypeBase.shoutcasterMapIconType, f7_arg3, color.r, color.g, color.b)
-		else
-			Engine.SetObjectiveIcon(f7_arg1, f7_arg2, self.mapIconType, f7_arg3)
-			Engine.SetObjectiveIcon(f7_arg1, f7_arg2, CoD.GametypeBase.shoutcasterMapIconType, f7_arg3)
-		end
-		Engine.SetObjectiveIconPulse(f7_arg1, f7_arg2, self.mapIconType, self.pulse)
-	else
-		Engine.ClearObjectiveIcon(f7_arg1, f7_arg2, self.mapIconType)
-		Engine.ClearObjectiveIcon(f7_arg1, f7_arg2, CoD.GametypeBase.shoutcasterMapIconType)
-		Engine.SetObjectiveIconPulse(f7_arg1, f7_arg2, self.mapIconType, false)
-	end
-end
-
-local Unused_ClearObjectiveIcon = function (f8_arg0, f8_arg1, f8_arg2)
-	Engine.ClearObjectiveIcon(f8_arg1, f8_arg2, f8_arg0.mapIconType)
-	Engine.ClearObjectiveIcon(f8_arg1, f8_arg2, CoD.GametypeBase.shoutcasterMapIconType)
+	end, "GetObjectivePlayerUsing", true)
 end
 
 local UpdateProgress = function (self, possiblyController, unk, unk1)
@@ -197,6 +153,7 @@ local UpdateProgress = function (self, possiblyController, unk, unk1)
 end
 
 local UpdatePlayerUsing = function (self, objective, unk, unk1)
+	Blak.DebugUtils.SafeRunFunction(function()
 	local playerUsing = GetObjectivePlayerUsing(self, objective.controller, unk, unk1)
 	if self.playerUsing == playerUsing then
 		return 
@@ -221,9 +178,11 @@ local UpdatePlayerUsing = function (self, objective, unk, unk1)
 		--self.WaypointArrowContainer:setAlpha(1)
 	end
 	self.playerUsing = playerUsing
+end, "UpdatePlayerUsing", true)
 end
 
 local Update = function (self, objective)
+	Blak.DebugUtils.SafeRunFunction(function()
 	local waypointController = objective.controller
 	local objectiveId = self.objId
 	if Engine.GetObjectiveEntity(waypointController, objectiveId) and not ping then
@@ -250,37 +209,40 @@ local Update = function (self, objective)
 	local f11_local6 = Engine.ObjectiveIsAnyOtherTeamUsing(waypointController, objectiveId, f11_local4)
 	self:updatePlayerUsing(objective, f11_local5, f11_local6)
 	self:updateProgress(waypointController, f11_local5, f11_local6)
+	end, "Update", true)
 end
 
 -- May need editing
 local SetWaypointState = function (self, waypointState)
-	if self.animationState == waypointState then
-		return 
-	elseif waypointState == "waypoint_line_of_sight" then
-		self:setAlpha(1)
-		--[[self.WaypointArrowContainer.WaypointArrowWidget:setState("SolidArrowState")
-		local waypointText = self.WaypointText
-		local alphaValue
-		if self.snapped or not self.isClamped then
-			alphaValue = 1
-        else
-            alphaValue = 0
+	Blak.DebugUtils.SafeRunFunction(function()
+		if self.animationState == waypointState then
+			return 
+		elseif waypointState == "waypoint_line_of_sight" then
+			self:setAlpha(1)
+			--[[self.WaypointArrowContainer.WaypointArrowWidget:setState("SolidArrowState")
+			local waypointText = self.WaypointText
+			local alphaValue
+			if self.snapped or not self.isClamped then
+				alphaValue = 1
+			else
+				alphaValue = 0
+			end
+			waypointText:setAlpha(alphaValue)]]
+		elseif waypointState == "waypoint_out_of_line_of_sight" then
+			self:setAlpha(1)
+			--[[self.WaypointArrowContainer.WaypointArrowWidget:setState("DefaultState")
+			local waypointText = self.WaypointText
+			local alphaValue
+			if self.snapped or not self.isClamped then
+				alphaValue = 1
+			else
+				alphaValue = 0
+			end
+			waypointText:setAlpha(alphaValue)]]
+		elseif waypointState == "waypoint_distance_culled" then
+			self:setAlpha(0)
 		end
-        waypointText:setAlpha(alphaValue)]]
-	elseif waypointState == "waypoint_out_of_line_of_sight" then
-		self:setAlpha(1)
-		--[[self.WaypointArrowContainer.WaypointArrowWidget:setState("DefaultState")
-		local waypointText = self.WaypointText
-		local alphaValue
-		if self.snapped or not self.isClamped then
-			alphaValue = 1
-        else
-            alphaValue = 0
-		end
-        waypointText:setAlpha(alphaValue)]]
-	elseif waypointState == "waypoint_distance_culled" then
-		self:setAlpha(0)
-	end
+	end, "SetWaypointState", true)
 end
 
 local function PreLoadFunc(self, controller)

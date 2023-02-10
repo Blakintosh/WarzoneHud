@@ -13,6 +13,38 @@ if not Console then
 end
 DisableGlobals()
 
+CoD.Menu.DebugReload = function ( f41_arg0, f41_arg1 )
+	-- Hash: 3294566507
+	if f41_arg0.occludedBy then
+		return 
+	end
+	local f41_local0 = f41_arg0.m_ownerController --[[ @ 6]]
+	if not f41_local0 then
+		f41_local0 = Engine.GetPrimaryController() --[[ @ 16]]
+	end
+	local f41_local1 = f41_arg0:getNextSibling() --[[ @ 18]]
+	local f41_local2 = f41_arg0:getParent() --[[ @ 20]]
+	local f41_local3 = f41_arg0.m_ownerController --[[ @ 21]]
+	local f41_local4 = f41_arg0.occludedMenu --[[ @ 24]]
+	local f41_local5 = f41_arg0.previousMenuName --[[ @ 27]]
+	local f41_local6 = f41_arg0.menuName --[[ @ 30]]
+	CoD.Menu.DebugCloseMenu( f41_arg0 ) --[[ @ 41]]
+	f41_arg0 = nil --[[ @ 42]]
+	if f41_local6 == "MessageDialogBox" then
+		return 
+	end
+	local f41_local7 = CoD.Menu.safeCreateMenu( f41_local6, f41_local0 ) --[[ @ 55]]
+	f41_local7.m_ownerController = f41_local3 --[[ @ 56]]
+	f41_local7.occludedMenu = f41_local4 --[[ @ 57]]
+	f41_local7.previousMenuName = f41_local5 --[[ @ 58]]
+	if f41_local1 ~= nil then
+		f41_local7:addElementBefore( f41_local1 ) --[[ @ 63]]
+	else
+		f41_local2:addElement( f41_local7 ) --[[ @ 67]]
+	end
+	f41_local7:updateBlur() --[[ @ 69]]
+end
+
 Util.Colors = {
     Black = { r = 0, g = 0, b = 0 },
     White = { r = 1, g = 1, b = 1 },

@@ -28,7 +28,6 @@ Util.CopySequence = function(parent, source, target, previousIdentifier, identif
 	Console.PrintError("Unable to find a sequence for widget "..(source.id or "(no ID)").." using identifier "..previousIdentifier)
 end
 
--- Ricochet on deez nuts
 local function FindInitialValuesForProperty(lastSequence, property)
     for k, v in pairs(lastSequence) do
         if k == property then

@@ -344,10 +344,9 @@ function Warzone.Hitmarker.new(menu, controller)
         }
     }
     
-    Util.Subscribe(self, controller, "hudItems.zm_hitmarker", function(model)
-        local modelValue = Engine.GetModelValue(model)
+    Util.Subscribe(self, controller, "hudItems.zm_hitmarker", function(modelValue)
         if modelValue then
-            modelValue = math.abs(modelValue)
+            modelValue = math.abs(modelValue) - 1
             if modelValue == 0 then
                 PlayClip(self, "Hit", controller)
             elseif modelValue == 1 then
