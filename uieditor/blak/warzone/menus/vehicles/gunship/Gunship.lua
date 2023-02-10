@@ -92,7 +92,6 @@ LUI.createMenu.Gunship = function (controller)
 	end)
 
 	menu:AddButtonCallbackFunction(menu, controller, Enum.LUIButton.LUI_KEY_PCKEY_MWHEELUP, "MWHEELUP", function (widget, menu, controller, parent)
-		Console.Print("Yer")
 		return true
 	end, function (widget, menu, controller)
 		CoD.Menu.SetButtonLabel(menu, Enum.LUIButton.LUI_KEY_PCKEY_MWHEELUP, "MENU_SOCIAL")
