@@ -90,6 +90,14 @@ LUI.createMenu.Gunship = function (controller)
 			Engine.SetModelValue(Engine.GetModel(Engine.GetModelForController(controller), "ac130."..i..".active"), (i == modelVal))
 		end
 	end)
+
+	menu:AddButtonCallbackFunction(menu, controller, Enum.LUIButton.LUI_KEY_PCKEY_MWHEELUP, "MWHEELUP", function (widget, menu, controller, parent)
+		Console.Print("Yer")
+		return true
+	end, function (widget, menu, controller)
+		CoD.Menu.SetButtonLabel(menu, Enum.LUIButton.LUI_KEY_PCKEY_MWHEELUP, "MENU_SOCIAL")
+		return true
+	end, false)
 	
 	menu:processEvent({name = "menu_loaded", controller = controller})
 	menu:processEvent({name = "update_state", menu = menu})
